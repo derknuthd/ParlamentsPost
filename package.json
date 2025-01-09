@@ -1,0 +1,33 @@
+{
+  "name": "parlamentspost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss build frontend/styles.css -o frontend/output.css",
+    "start:backend": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derknuthd/ParlamentsPost.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/derknuthd/ParlamentsPost/issues"
+  },
+  "homepage": "https://github.com/derknuthd/ParlamentsPost#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

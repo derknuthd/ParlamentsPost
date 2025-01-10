@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParlamentsPost</title>
-  <link href="./output.css" rel="stylesheet">
+  <!-- Tailwind CSS einbinden -->
+  <link href="output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 font-sans">
-  <div class="container mx-auto text-center p-4">
-    <h1 class="text-3xl font-bold text-blue-500">ParlamentsPost</h1>
-    <p class="mt-2 text-gray-700">Erstelle Deinen Brief an Deinen Abgeordneten!</p>
-    <textarea
-      class="w-full border border-gray-300 rounded-lg p-2 mt-4"
-      rows="5"
-      placeholder="Schreibe hier Deinen Text..."
-    ></textarea>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2">Generieren</button>
-  </div>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Header wird hier geladen -->
+  <div id="header"></div>
+  
+  <!-- Hauptinhalt -->
+  <main class="flex-grow container mx-auto p-4">
+    <h2 class="text-xl font-semibold mb-4 text-blue-600">Willkommen bei ParlamentsPost</h2>
+    <p class="text-gray-700">Hier kannst du Briefe an deine Vertreterinnen und Vertreter im Deutschen Parlament senden.</p>
+    <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Jetzt starten</button>
+    <!-- Weitere Inhalte kommen hierhin -->
+  </main>
+  
+  <!-- Footer wird hier geladen -->
+  <div id="footer"></div>
+
+  <!-- JavaScript zum Laden der Komponenten -->
+  <script>
+    // Funktion zum Laden einer HTML-Komponente
+    async function loadComponent(id, url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP-Error! status: ${response.status}`);
+        }
+        const content = await response.text();
+        document.getElementById(id).innerHTML = content;
+      } catch (error) {
+        console.error(`Fehler beim Laden der Komponente ${url}:`, error);
+      }
+    }
+
+    // Komponenten laden
+    loadComponent('header', 'components/Header.html');
+    loadComponent('footer', 'components/Footer.html');
+  </script>
+  
 </body>
 </html>

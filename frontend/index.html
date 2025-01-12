@@ -1,3 +1,4 @@
+<!-- frontend/index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -16,14 +17,75 @@
   <main class="flex-grow container mx-auto p-4">
     <h2 class="text-xl font-semibold mb-4 text-blue-600">Willkommen bei ParlamentsPost</h2>
     <p class="text-gray-700">Hier kannst du Briefe an deine Vertreterinnen und Vertreter im Deutschen Parlament senden.</p>
-    <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Jetzt starten</button>
+    
+    <!-- Benutzerformular -->
+    <form id="user-form" class="mt-6 bg-white p-6 rounded shadow-md">
+      <!-- Name -->
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700">Name</label>
+        <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+      </div>
+      
+      <!-- Adresse -->
+      <div class="mb-4">
+        <label for="adresse" class="block text-gray-700">Adresse</label>
+        <textarea id="adresse" name="adresse" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
+      </div>
+      
+      <!-- E-Mail -->
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700">E-Mail</label>
+        <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+      </div>
+      
+      <!-- Abgeordnete auswählen -->
+      <div class="mb-4">
+        <label for="abgeordnete" class="block text-gray-700">Abgeordnete auswählen</label>
+        <select id="abgeordnete" name="abgeordnete" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+          <option value="">Bitte wählen</option>
+          <!-- Dynamisch gefüllte Optionen -->
+        </select>
+      </div>
+      
+      <!-- Themenblöcke -->
+      <div class="mb-4">
+        <label class="block text-gray-700">Themenblöcke</label>
+        <div class="mt-2 space-y-2">
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="themen[]" value="Umwelt" class="form-checkbox h-4 w-4 text-blue-600">
+            <span class="ml-2">Umwelt</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="themen[]" value="Bildung" class="form-checkbox h-4 w-4 text-blue-600">
+            <span class="ml-2">Bildung</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="checkbox" name="themen[]" value="Wirtschaft" class="form-checkbox h-4 w-4 text-blue-600">
+            <span class="ml-2">Wirtschaft</span>
+          </label>
+          <!-- Weitere Themen hinzufügen -->
+        </div>
+      </div>
+      
+      <!-- Freitextfeld -->
+      <div class="mb-4">
+        <label for="freitext" class="block text-gray-700">Eigener Text</label>
+        <textarea id="freitext" name="freitext" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+      </div>
+      
+      <!-- Brief generieren Button -->
+      <div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Brief generieren</button>
+      </div>
+    </form>
+    
     <!-- Weitere Inhalte kommen hierhin -->
   </main>
   
   <!-- Footer wird hier geladen -->
   <div id="footer"></div>
 
-  <!-- JavaScript zum Laden der Komponenten -->
+  <!-- JavaScript zum Laden der Komponenten und Dynamik -->
   <script>
     // Funktion zum Laden einer HTML-Komponente
     async function loadComponent(id, url) {
@@ -42,6 +104,25 @@
     // Komponenten laden
     loadComponent('header', 'components/Header.html');
     loadComponent('footer', 'components/Footer.html');
+    
+    // Dynamisch die Abgeordneten laden (beispielhaft)
+    document.addEventListener('DOMContentLoaded', function() {
+      const abgeordneteSelect = document.getElementById('abgeordnete');
+      // Beispiel-Daten, ersetze mit echten Daten oder API-Aufruf
+      const abgeordnete = [
+        { name: "Max Mustermann", id: 1 },
+        { name: "Erika Musterfrau", id: 2 },
+        { name: "John Doe", id: 3 },
+        // Weitere Abgeordnete hinzufügen
+      ];
+
+      abgeordnete.forEach(abgeordneter => {
+        const option = document.createElement('option');
+        option.value = abgeordneter.id;
+        option.textContent = abgeordneter.name;
+        abgeordneteSelect.appendChild(option);
+      });
+    });
   </script>
   
 </body>

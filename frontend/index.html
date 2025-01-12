@@ -26,10 +26,23 @@
         <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
       </div>
       
-      <!-- Adresse -->
+      <!-- Straße mit Hausnummer -->
       <div class="mb-4">
-        <label for="adresse" class="block text-gray-700">Adresse</label>
-        <textarea id="adresse" name="adresse" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
+        <label for="straße" class="block text-gray-700">Straße und Hausnummer</label>
+        <input type="text" id="straße" name="straße" placeholder="Beispiel: Musterstraße 1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+      </div>
+      
+      <!-- Postleitzahl (PLZ) -->
+      <div class="mb-4">
+        <label for="plz" class="block text-gray-700">Postleitzahl (PLZ)</label>
+        <input type="text" id="plz" name="plz" pattern="\d{5}" placeholder="Beispiel: 12345" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <small class="text-gray-500">Bitte geben Sie eine 5-stellige PLZ ein.</small>
+      </div>
+      
+      <!-- Ort (Gemeinde) -->
+      <div class="mb-4">
+        <label for="ort" class="block text-gray-700">Ort (Gemeinde)</label>
+        <input type="text" id="ort" name="ort" placeholder="Beispiel: Hannover" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
       </div>
       
       <!-- E-Mail -->
@@ -79,6 +92,13 @@
       </div>
     </form>
     
+    <!-- Briefvorschau (wird später implementiert) -->
+    <div id="briefvorschau" class="mt-6 bg-gray-100 p-6 rounded shadow-md hidden">
+      <h3 class="text-lg font-semibold mb-4">Briefvorschau</h3>
+      <div id="vorschau-inhalt"></div>
+      <button id="export-button" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Brief exportieren</button>
+    </div>
+    
     <!-- Weitere Inhalte kommen hierhin -->
   </main>
   
@@ -104,24 +124,105 @@
     // Komponenten laden
     loadComponent('header', 'components/Header.html');
     loadComponent('footer', 'components/Footer.html');
-    
-    // Dynamisch die Abgeordneten laden (beispielhaft)
-    document.addEventListener('DOMContentLoaded', function() {
-      const abgeordneteSelect = document.getElementById('abgeordnete');
-      // Beispiel-Daten, ersetze mit echten Daten oder API-Aufruf
-      const abgeordnete = [
-        { name: "Max Mustermann", id: 1 },
-        { name: "Erika Musterfrau", id: 2 },
-        { name: "John Doe", id: 3 },
-        // Weitere Abgeordnete hinzufügen
-      ];
 
-      abgeordnete.forEach(abgeordneter => {
-        const option = document.createElement('option');
-        option.value = abgeordneter.id;
-        option.textContent = abgeordneter.name;
-        abgeordneteSelect.appendChild(option);
-      });
+    // Funktion zum Abrufen und Einfügen der Abgeordneten basierend auf Adresse
+    async function populateAbgeordneteByAdresse(adresseObj) {
+      try {
+        const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(adresseObj)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Fehler beim Abrufen der Abgeordneten.');
+        }
+
+        const abgeordnete = await response.json();
+        const abgeordneteSelect = document.getElementById('abgeordnete');
+
+        // Leere das Dropdown vor dem Befüllen
+        abgeordneteSelect.innerHTML = '<option value="">Bitte wählen</option>';
+
+        abgeordnete.forEach(abgeordneter => {
+          const option = document.createElement('option');
+          option.value = abgeordneter.id;
+          option.textContent = `${abgeordneter.name} (${abgeordneter.partei})`;
+          abgeordneteSelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Abgeordneten:', error);
+        alert(`Fehler: ${error.message}`);
+      }
+    }
+
+    // Event Listener für das Formular
+    document.getElementById('user-form').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Verhindert das Standard-Formularverhalten
+
+      // Sammle die Formular-Daten
+      const formData = new FormData(event.target);
+      const data = {
+        name: formData.get('name'),
+        straße: formData.get('straße'),
+        plz: formData.get('plz'),
+        ort: formData.get('ort'),
+        email: formData.get('email'),
+        abgeordnete: formData.get('abgeordnete'),
+        themen: formData.getAll('themen[]'),
+        freitext: formData.get('freitext')
+      };
+
+      // Validierung der PLZ (optional)
+      const plzPattern = /^\d{5}$/;
+      if (!plzPattern.test(data.plz)) {
+        alert('Bitte geben Sie eine gültige 5-stellige PLZ ein.');
+        return;
+      }
+
+      // Erstelle ein Objekt für die Backend-Anfrage (nur ort)
+      const backendAdresseObj = {
+        ort: data.ort
+      };
+
+      // Hole die Abgeordneten basierend auf der Adresse
+      await populateAbgeordneteByAdresse(backendAdresseObj);
+    });
+
+    // Funktion zur Briefgenerierung
+    function generiereBrief(data) {
+      const vorschauInhalt = document.getElementById('vorschau-inhalt');
+      const briefvorschau = document.getElementById('briefvorschau');
+
+      // Finde den Namen der ausgewählten Abgeordneten
+      const abgeordneteOption = document.querySelector(`#abgeordnete option[value="${data.abgeordnete}"]`);
+      const abgeordneterName = abgeordneteOption ? abgeordneteOption.textContent : 'Unbekannt';
+
+      // Erstelle den Brieftext
+      const briefText = `
+Sehr geehrte/r Frau/Herr ${abgeordneterName.split(' (')[0]},
+
+mein Name ist ${data.name} und ich wohne in ${data.straße}, ${data.plz} ${data.ort}.
+Ich wende mich heute an Sie bezüglich folgender Themen: ${data.themen.join(', ')}.
+
+${data.freitext}
+
+Mit freundlichen Grüßen,
+${data.name}
+      `;
+
+      vorschauInhalt.textContent = briefText.trim();
+      briefvorschau.classList.remove('hidden');
+    }
+
+    // Event Listener für den Export-Button (zu implementieren)
+    document.getElementById('export-button').addEventListener('click', function() {
+      // Funktion zum Exportieren des Briefs als PDF, Word, ODT oder E-Mail
+      // Placeholder: Implementiere die gewünschte Export-Funktionalität
+      alert('Export-Funktion noch zu implementieren.');
     });
   </script>
   

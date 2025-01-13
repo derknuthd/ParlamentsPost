@@ -12,8 +12,6 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <script>
-    const API_BASE_URL = 'http://localhost:3000'; // Replace with your production URL or use an environment variable
-
     function parlamentspostApp() {
       return {
         name: '',
@@ -26,12 +24,10 @@
         abgeordnete: '',
         abgeordneteListe: [],
 
-        // Ruft das Backend auf, um die Abgeordneten basierend auf dem Ort zu holen
         async holeAbgeordnete() {
-          if (!this.ort.trim()) return; // Wenn kein Ort, Abbruch
-
+          if (!this.ort.trim()) return;
           try {
-            const response = await fetch(`${API_BASE_URL}/api/abgeordnete-by-adresse`, {
+            const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ ort: this.ort.trim() })
@@ -47,25 +43,18 @@
           }
         },
 
-        // Brief generieren
+        // Alte / manuelle Briefvorschau
         generiereBrief() {
-          // PLZ prüfen (Beispiel)
           const plzPattern = /^\d{5}$/;
           if (!plzPattern.test(this.plz)) {
             alert('Bitte eine gültige 5-stellige PLZ eingeben.');
             return;
           }
 
-          // Aktuell ausgewählter Abgeordneter
           const abgeordneter = this.abgeordneteListe.find(a => String(a.id) === this.abgeordnete);
-
-          // Wahlkreisbezeichnung + Name + Partei
           const wahlkreisBez = abgeordneter?.wkr_bezeichnung || 'Wahlkreis unbekannt';
-          const nameDesAbgeordneten = abgeordneter
-            ? `${abgeordneter.name} (${abgeordneter.partei})`
-            : 'Unbekannt';
+          const nameDesAbgeordneten = abgeordneter ? `${abgeordneter.name} (${abgeordneter.partei})` : 'Unbekannt';
 
-          // Erstelle den Brieftext
           const briefText = `
 Wahlkreis: ${wahlkreisBez}
 
@@ -80,7 +69,55 @@ Mit freundlichen Grüßen,
 ${this.name}
           `.trim();
 
-          // Vorschau
+          this.zeigeVorschau(briefText);
+        },
+
+        // NEU: KI-Variante
+        async generiereBriefMitKI() {
+          // Dieselbe Prüfung wie oben
+          const plzPattern = /^\d{5}$/;
+          if (!plzPattern.test(this.plz)) {
+            alert('Bitte eine gültige 5-stellige PLZ eingeben.');
+            return;
+          }
+
+          const abgeordneter = this.abgeordneteListe.find(a => String(a.id) === this.abgeordnete);
+          const nameDesAbgeordneten = abgeordneter ? `${abgeordneter.name} (${abgeordneter.partei})` : 'Unbekannt';
+
+          // Erstelle ein Objekt mit den nötigen Feldern
+          const userData = {
+            name: this.name,
+            straße: this.straße,
+            plz: this.plz,
+            ort: this.ort,
+            themen: this.themen,
+            freitext: this.freitext,
+            abgeordneteName: nameDesAbgeordneten
+          };
+
+          try {
+            // Ruf den neuen Endpoint an
+            const response = await fetch('http://localhost:3000/api/genai-brief', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ userData })
+            });
+            if (!response.ok) {
+              const err = await response.json();
+              throw new Error(err.error || 'Fehler bei der KI-Generierung.');
+            }
+            const data = await response.json();
+            const kiText = data.briefText || '(Kein KI-Text vorhanden)';
+
+            this.zeigeVorschau(kiText);
+          } catch (error) {
+            alert(`Fehler bei der KI-Abfrage: ${error.message}`);
+            console.error(error);
+          }
+        },
+
+        // Vorschau anzeigen
+        zeigeVorschau(briefText) {
           const vorschauInhalt = document.getElementById('vorschau-inhalt');
           vorschauInhalt.textContent = briefText;
           document.getElementById('briefvorschau').classList.remove('hidden');
@@ -102,7 +139,7 @@ ${this.name}
     <form
       id="user-form"
       class="mt-6 bg-white p-6 rounded shadow-md"
-      @submit.prevent="generiereBrief"
+      @submit.prevent="generiereBrief" 
     >
       <!-- Name -->
       <div class="mb-4">
@@ -135,6 +172,7 @@ ${this.name}
         <input
           type="text"
           id="plz"
+          pattern="\d{5}"
           placeholder="12345"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           x-model="plz"
@@ -152,7 +190,7 @@ ${this.name}
           placeholder="Hannover"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           x-model="ort"
-          @input.debounce.500ms="holeAbgeordnete"
+          @blur="holeAbgeordnete"
           required
         />
       </div>
@@ -179,9 +217,8 @@ ${this.name}
           required
         >
           <option value="">Bitte wählen</option>
-          <!-- Dynamische Optionen: "Wahlkreis-Bezeichnung: Vorname Nachname (Partei)" -->
           <template x-for="person in abgeordneteListe" :key="person.id">
-            <option
+            <option 
               :value="person.id"
               x-text="person.wkr_bezeichnung + ': ' + person.name + ' (' + person.partei + ')'"
             ></option>
@@ -234,13 +271,23 @@ ${this.name}
         ></textarea>
       </div>
 
-      <!-- Brief generieren Button -->
-      <div>
+      <!-- Buttons -->
+      <div class="flex gap-4">
+        <!-- Alter Knopf: Manuell generieren -->
         <button
           type="submit"
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Brief generieren
+          Brief generieren (manuell)
+        </button>
+
+        <!-- NEU: KI-Button -->
+        <button
+          type="button"
+          class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+          @click="generiereBriefMitKI"
+        >
+          Mit KI generieren
         </button>
       </div>
     </form>
@@ -261,7 +308,6 @@ ${this.name}
   <!-- Footer (per Fetch geladen) -->
   <div id="footer"></div>
 
-  <!-- Header/Footer über Fetch laden -->
   <script>
     async function loadComponent(id, url) {
       try {
@@ -278,7 +324,6 @@ ${this.name}
     loadComponent('header', 'components/Header.html');
     loadComponent('footer', 'components/Footer.html');
 
-    // Noch nicht implementierte Export-Funktion
     document.addEventListener('click', (e) => {
       if (e.target && e.target.id === 'export-button') {
         alert('Export-Funktion noch zu implementieren.');

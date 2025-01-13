@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DOCUMENT SYSTEM "MDB_STAMMDATEN.DTD">
+<!--Erstellt am: 09.08.2024 22:01:15--><DOCUMENT>
+  <VERSION>1723434311</VERSION>
+  <MDB>
+    <ID>11000756</ID>
+    <NAMEN>
+      <NAME>
+        <NACHNAME>Gysi</NACHNAME>
+        <VORNAME>Gregor</VORNAME>
+        <ORTSZUSATZ/>
+        <ADEL/>
+        <PRAEFIX/>
+        <ANREDE_TITEL>Dr.</ANREDE_TITEL>
+        <AKAD_TITEL>Dr.</AKAD_TITEL>
+        <HISTORIE_VON>03.10.1990</HISTORIE_VON>
+        <HISTORIE_BIS/>
+      </NAME>
+    </NAMEN>
+    <BIOGRAFISCHE_ANGABEN>
+      <GEBURTSDATUM>16.01.1948</GEBURTSDATUM>
+      <GEBURTSORT>Berlin</GEBURTSORT>
+      <GEBURTSLAND/>
+      <STERBEDATUM/>
+      <GESCHLECHT>männlich</GESCHLECHT>
+      <FAMILIENSTAND>geschieden, 3 Kinder</FAMILIENSTAND>
+      <RELIGION>konfessionslos</RELIGION>
+      <BERUF>Rechtsanwalt, Autor, Moderator</BERUF>
+      <PARTEI_KURZ>DIE LINKE.</PARTEI_KURZ>
+      <VITA_KURZ>1954/66 Schule. 1962/66 Ausbildung zum Facharbeiter für Rinderzucht, Abitur. 1966/70 Jurastudium, Dipl.-Jurist. Seit 1971 Rechtsanwalt, seit Ende 1989 Politiker. Dez. 1989/Jan. 1993 Vors. PDS, 1990 Fraktionsvors. in der Volkskammer. Jan/August 2002 Bürgermeister und Senator für Wirtschaft, Arbeit und Frauen in Berlin, Dez. 2016/Dez. 2019 Präsident der Europäischen Linken. Mitgl. bei ver.di. - MdB 1990/2002 und seit 2005; 1990/Okt. 2000 Fraktionsvors. der PDS, 2005/15 Fraktionsvors. Die Linke, seit 2020 außenpolitischer Sprecher der Fraktion bzw. der Gruppe DIE LINKE; Mitgl. der Gruppe Die Linke.</VITA_KURZ>
+      <VEROEFFENTLICHUNGSPFLICHTIGES/>
+    </BIOGRAFISCHE_ANGABEN>
+    <WAHLPERIODEN>
+      <WAHLPERIODE>
+        <WP>11</WP>
+        <MDBWP_VON>03.10.1990</MDBWP_VON>
+        <MDBWP_BIS>20.12.1990</MDBWP_BIS>
+        <WKR_NUMMER/>
+        <WKR_NAME/>
+        <WKR_LAND/>
+        <LISTE>***</LISTE>
+        <MANDATSART>Volkskammer</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Gruppe der Partei des Demokratischen Sozialismus</INS_LANG>
+            <MDBINS_VON>03.10.1990</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>12</WP>
+        <MDBWP_VON>20.12.1990</MDBWP_VON>
+        <MDBWP_BIS>10.11.1994</MDBWP_BIS>
+        <WKR_NUMMER>261</WKR_NUMMER>
+        <WKR_NAME/>
+        <WKR_LAND>BLN</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Gruppe der Partei des Demokratischen Sozialismus/Linke Liste</INS_LANG>
+            <MDBINS_VON>20.12.1990</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>13</WP>
+        <MDBWP_VON>10.11.1994</MDBWP_VON>
+        <MDBWP_BIS>26.10.1998</MDBWP_BIS>
+        <WKR_NUMMER>260</WKR_NUMMER>
+        <WKR_NAME>Berlin-Hellersdorf-Marzahn</WKR_NAME>
+        <WKR_LAND>BLN</WKR_LAND>
+        <LISTE>BLN</LISTE>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Gruppe der Partei des Demokratischen Sozialismus</INS_LANG>
+            <MDBINS_VON>10.11.1994</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>14</WP>
+        <MDBWP_VON>26.10.1998</MDBWP_VON>
+        <MDBWP_BIS>01.02.2002</MDBWP_BIS>
+        <WKR_NUMMER>260</WKR_NUMMER>
+        <WKR_NAME>Berlin-Hellersdorf-Marzahn</WKR_NAME>
+        <WKR_LAND>BLN</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion der Partei des Demokratischen Sozialismus</INS_LANG>
+            <MDBINS_VON>26.10.1998</MDBINS_VON>
+            <MDBINS_BIS>01.02.2002</MDBINS_BIS>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON>18.11.1998</FKTINS_VON>
+            <FKTINS_BIS>02.10.2000</FKTINS_BIS>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>16</WP>
+        <MDBWP_VON>18.10.2005</MDBWP_VON>
+        <MDBWP_BIS>27.10.2009</MDBWP_BIS>
+        <WKR_NUMMER>85</WKR_NUMMER>
+        <WKR_NAME>Berlin-Treptow - Köpenick</WKR_NAME>
+        <WKR_LAND>BLN</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion DIE LINKE.</INS_LANG>
+            <MDBINS_VON>18.10.2005</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON>18.10.2005</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>17</WP>
+        <MDBWP_VON>27.10.2009</MDBWP_VON>
+        <MDBWP_BIS>22.10.2013</MDBWP_BIS>
+        <WKR_NUMMER>85</WKR_NUMMER>
+        <WKR_NAME>Berlin-Treptow - Köpenick</WKR_NAME>
+        <WKR_LAND>BLN</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion DIE LINKE.</INS_LANG>
+            <MDBINS_VON>27.10.2009</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON>27.10.2009</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>18</WP>
+        <MDBWP_VON>22.10.2013</MDBWP_VON>
+        <MDBWP_BIS>24.10.2017</MDBWP_BIS>
+        <WKR_NUMMER>84</WKR_NUMMER>
+        <WKR_NAME>Berlin-Treptow-Köpenick</WKR_NAME>
+        <WKR_LAND>BE</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion DIE LINKE.</INS_LANG>
+            <MDBINS_VON>22.10.2013</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON>22.10.2013</FKTINS_VON>
+            <FKTINS_BIS>13.10.2015</FKTINS_BIS>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>19</WP>
+        <MDBWP_VON>24.10.2017</MDBWP_VON>
+        <MDBWP_BIS>26.10.2021</MDBWP_BIS>
+        <WKR_NUMMER>84</WKR_NUMMER>
+        <WKR_NAME>Berlin-Treptow-Köpenick</WKR_NAME>
+        <WKR_LAND>BE</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion DIE LINKE.</INS_LANG>
+            <MDBINS_VON>24.10.2017</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+      <WAHLPERIODE>
+        <WP>20</WP>
+        <MDBWP_VON>26.10.2021</MDBWP_VON>
+        <MDBWP_BIS/>
+        <WKR_NUMMER>84</WKR_NUMMER>
+        <WKR_NAME>Berlin-Treptow-Köpenick</WKR_NAME>
+        <WKR_LAND>BE</WKR_LAND>
+        <LISTE/>
+        <MANDATSART>Direktwahl</MANDATSART>
+        <INSTITUTIONEN>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktion DIE LINKE.</INS_LANG>
+            <MDBINS_VON>26.10.2021</MDBINS_VON>
+            <MDBINS_BIS>05.12.2023</MDBINS_BIS>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Ausschuss</INSART_LANG>
+            <INS_LANG>Auswärtiger Ausschuss</INS_LANG>
+            <MDBINS_VON>15.12.2021</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Ordentliches Mitglied</FKT_LANG>
+            <FKTINS_VON>15.12.2021</FKTINS_VON>
+            <FKTINS_BIS>05.12.2023</FKTINS_BIS>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Ausschuss</INSART_LANG>
+            <INS_LANG>Auswärtiger Ausschuss</INS_LANG>
+            <MDBINS_VON>15.12.2021</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Ordentliches Mitglied</FKT_LANG>
+            <FKTINS_VON>20.02.2024</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Ausschuss</INSART_LANG>
+            <INS_LANG>Auswärtiger Ausschuss</INS_LANG>
+            <MDBINS_VON>15.12.2021</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Obmann</FKT_LANG>
+            <FKTINS_VON>20.02.2024</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Ausschuss</INSART_LANG>
+            <INS_LANG>Auswärtiger Ausschuss</INS_LANG>
+            <MDBINS_VON>15.12.2021</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Beratendes Mitglied (§ 57 Abs 2 GOBT)</FKT_LANG>
+            <FKTINS_VON>05.12.2023</FKTINS_VON>
+            <FKTINS_BIS>20.02.2024</FKTINS_BIS>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Unterausschuss</INSART_LANG>
+            <INS_LANG>UA Abrüstung, Rüstungskontrolle und Nichtverbreitung</INS_LANG>
+            <MDBINS_VON>07.04.2022</MDBINS_VON>
+            <MDBINS_BIS>05.12.2023</MDBINS_BIS>
+            <FKT_LANG>Ordentliches Mitglied</FKT_LANG>
+            <FKTINS_VON>07.04.2022</FKTINS_VON>
+            <FKTINS_BIS>05.12.2023</FKTINS_BIS>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Parlamentariergruppen</INSART_LANG>
+            <INS_LANG>Deutsch-Nordische Parlamentariergruppe (Dänemark, Finnland, Island, Norwegen, Schweden)</INS_LANG>
+            <MDBINS_VON>18.11.2022</MDBINS_VON>
+            <MDBINS_BIS>12.01.2024</MDBINS_BIS>
+            <FKT_LANG>Vorsitzender</FKT_LANG>
+            <FKTINS_VON>18.11.2022</FKTINS_VON>
+            <FKTINS_BIS>12.01.2024</FKTINS_BIS>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Parlamentariergruppen</INSART_LANG>
+            <INS_LANG>Deutsch-Schweizerische Parlamentariergruppe</INS_LANG>
+            <MDBINS_VON>18.11.2022</MDBINS_VON>
+            <MDBINS_BIS>12.01.2024</MDBINS_BIS>
+            <FKT_LANG>Stellvertretender Vorsitzender</FKT_LANG>
+            <FKTINS_VON>18.11.2022</FKTINS_VON>
+            <FKTINS_BIS>12.01.2024</FKTINS_BIS>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Fraktionslos</INS_LANG>
+            <MDBINS_VON>06.12.2023</MDBINS_VON>
+            <MDBINS_BIS>02.02.2024</MDBINS_BIS>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Fraktion/Gruppe</INSART_LANG>
+            <INS_LANG>Gruppe Die Linke</INS_LANG>
+            <MDBINS_VON>02.02.2024</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG/>
+            <FKTINS_VON/>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Unterausschuss</INSART_LANG>
+            <INS_LANG>UA Vereinte Nationen, int. Organisationen und zivile Krisenprävention</INS_LANG>
+            <MDBINS_VON>20.02.2024</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Ordentliches Mitglied</FKT_LANG>
+            <FKTINS_VON>20.02.2024</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+          <INSTITUTION>
+            <INSART_LANG>Ausschuss</INSART_LANG>
+            <INS_LANG>Ausschuss für Ernährung und Landwirtschaft</INS_LANG>
+            <MDBINS_VON>20.02.2024</MDBINS_VON>
+            <MDBINS_BIS/>
+            <FKT_LANG>Stellvertretendes Mitglied</FKT_LANG>
+            <FKTINS_VON>20.02.2024</FKTINS_VON>
+            <FKTINS_BIS/>
+          </INSTITUTION>
+        </INSTITUTIONEN>
+      </WAHLPERIODE>
+    </WAHLPERIODEN>
+  </MDB>

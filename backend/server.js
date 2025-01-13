@@ -1,17 +1,20 @@
+// backend/server.js
 const express = require('express');
+const cors = require('cors'); // <--- Neu hinzugefügt
 const bodyParser = require('body-parser');
 const { findWahlkreisNummern } = require('./wahlkreisService');
 const { getFilteredAbgeordnete } = require('./abgeordneteService');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(cors());            // <--- Wichtig, damit deine Fetch-Anfragen funktionieren
 app.use(bodyParser.json());
 
 console.log('[DEBUG] [server.js] Express-App und Middleware eingerichtet.');
 
-// GET /api/wahlkreise - Gibt alle Wahlkreisnummern zurück
+// GET /api/wahlkreise
 app.get('/api/wahlkreise', async (req, res) => {
   try {
     console.log('[DEBUG] [server.js] Anfrage erhalten: GET /api/wahlkreise');
@@ -24,7 +27,7 @@ app.get('/api/wahlkreise', async (req, res) => {
   }
 });
 
-// POST /api/abgeordnete-by-adresse - Gibt Abgeordnete basierend auf der Adresse zurück
+// POST /api/abgeordnete-by-adresse
 app.post('/api/abgeordnete-by-adresse', async (req, res) => {
   try {
     console.log('[DEBUG] [server.js] Anfrage erhalten: POST /api/abgeordnete-by-adresse');

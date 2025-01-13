@@ -1,12 +1,16 @@
 // backend/wahlkreisService.js
+
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
 const { Transform } = require('stream');
 
-let cachedWahlkreisMapping = null;
+let cachedWahlkreisMapping = null; // Enthält später sowohl das gemeinde->wahlkreis Mapping als auch das wahlkreisNr->wahlkreisBez Mapping.
+let isLoading = false;
 
-// Eigene Funktion zur Entfernung des BOM
+/**
+ * Entfernt ein etwaiges BOM (Byte Order Mark).
+ */
 function removeBom() {
   let bomRemoved = false;
   return new Transform({
@@ -24,101 +28,133 @@ function removeBom() {
   });
 }
 
-// Funktion zum Laden und Parsen der CSV-Datei
-const loadWahlkreisMapping = () => {
+/**
+ * Lädt die CSV-Datei und befüllt:
+ * 1) ein Gemeindename->Wahlkreisnummern Mapping
+ * 2) ein Wahlkreisnummer->Wahlkreisbezeichnung Mapping
+ */
+function loadWahlkreisMapping() {
   return new Promise((resolve, reject) => {
     if (cachedWahlkreisMapping) {
-      console.log('Verwende gecachte Wahlkreis-Mapping.');
+      console.log('[DEBUG] Verwende gecachtes Wahlkreis-Mapping.');
       return resolve(cachedWahlkreisMapping);
     }
 
-    const mapping = {};
+    if (isLoading) {
+      // Falls bereits ein Ladevorgang läuft, warten wir kurz und versuchen es erneut
+      setTimeout(() => resolve(loadWahlkreisMapping()), 200);
+      return;
+    }
 
-    // Setze den Pfad zur echten CSV-Datei
+    isLoading = true;
+    const gemeindeToWkrMap = {};
+    const wkrBezMap = {};
+
+    // Pfad zur echten CSV-Datei
     const csvFilePath = path.join(__dirname, 'Wahlkreise', '20200415_btw21_wkr_gemeinden_utf8.csv');
-    console.log(`Versuche, CSV-Datei zu laden: ${csvFilePath}`);
+    console.log(`[DEBUG] Lade CSV-Datei: ${csvFilePath}`);
 
-    // Überprüfe, ob die Datei existiert
     if (!fs.existsSync(csvFilePath)) {
-      console.error(`CSV-Datei nicht gefunden: ${csvFilePath}`);
+      console.error(`[ERROR] CSV-Datei nicht gefunden: ${csvFilePath}`);
       return reject(new Error(`CSV-Datei nicht gefunden: ${csvFilePath}`));
     }
 
     fs.createReadStream(csvFilePath)
       .pipe(removeBom()) // Entferne BOM
-      .pipe(csv({ 
-        separator: ';'
-      }))
+      .pipe(csv({ separator: ';' }))
       .on('headers', (headers) => {
-        console.log('CSV headers:', headers);
-        // Überprüfe, ob die erforderlichen Header vorhanden sind
-        if (!headers.includes('Wahlkreis-Nr') || !headers.includes('Gemeindename')) {
-          const errorMsg = 'CSV-Datei fehlt erforderliche Header: "Wahlkreis-Nr" und/oder "Gemeindename"';
+        console.log('[DEBUG] CSV headers:', headers);
+        // Überprüfe, ob die benötigten Header existieren
+        if (!headers.includes('Wahlkreis-Nr') || !headers.includes('Gemeindename') || !headers.includes('Wahlkreis-Bez')) {
+          const errorMsg = 'CSV-Datei fehlt erforderlicher Header: "Wahlkreis-Nr", "Gemeindename" oder "Wahlkreis-Bez"';
           console.error(errorMsg);
           reject(new Error(errorMsg));
         }
       })
       .on('data', (row) => {
-        console.log('Gelesene Zeile:', row);
-        const gemeinde = row['Gemeindename'] ? row['Gemeindename'].trim().toLowerCase() : '';
-        const wkrNummer = row['Wahlkreis-Nr'] ? row['Wahlkreis-Nr'].trim() : '';
+        // Gemeindename und Wahlkreisnummer rausziehen
+        const gemeinde = (row['Gemeindename'] || '').trim().toLowerCase();
+        const wkrNummer = (row['Wahlkreis-Nr'] || '').trim().padStart(3, '0');
+        const wkrBez = (row['Wahlkreis-Bez'] || '').trim();
 
-        console.log(`Gemeinde: "${gemeinde}", Wahlkreis-Nr: "${wkrNummer}"`); // Zusätzliche Debug-Logs
+        // Debug-Log
+        // console.log(`Gemeinde: "${gemeinde}", WKR-Nr: "${wkrNummer}", WKR-Bez: "${wkrBez}"`);
 
-        // Validierung der Datenzeile
-        if (!gemeinde || !wkrNummer) {
-          console.warn('Ungültige Zeile übersprungen:', row);
-          return; // Überspringe ungültige Zeilen
+        // Ungültige Zeilen überspringen
+        if (!gemeinde || !wkrNummer) return;
+
+        // 1) Gemeindename->Set aus Wahlkreisnummern
+        if (!gemeindeToWkrMap[gemeinde]) {
+          gemeindeToWkrMap[gemeinde] = new Set();
         }
+        gemeindeToWkrMap[gemeinde].add(wkrNummer);
 
-        if (!mapping[gemeinde]) {
-          mapping[gemeinde] = new Set();
+        // 2) Wahlkreisnummer->Wahlkreisbezeichnung (merken wir uns für später)
+        if (!wkrBezMap[wkrNummer]) {
+          wkrBezMap[wkrNummer] = wkrBez;
         }
-        mapping[gemeinde].add(wkrNummer);
       })
       .on('end', () => {
         // Konvertiere die Sets zu Arrays
-        for (const gemeinde in mapping) {
-          mapping[gemeinde] = Array.from(mapping[gemeinde]);
+        for (const gemeindeKey in gemeindeToWkrMap) {
+          gemeindeToWkrMap[gemeindeKey] = Array.from(gemeindeToWkrMap[gemeindeKey]);
         }
-        cachedWahlkreisMapping = mapping;
-        console.log('CSV-Datei erfolgreich verarbeitet.');
-        console.log('Wahlkreis Mapping:', mapping); // Debug-Log
+
+        // In einem Objekt zwischenspeichern
+        cachedWahlkreisMapping = {
+          gemeindeToWkrMap,
+          wkrBezMap
+        };
+
+        isLoading = false;
+        console.log('[DEBUG] CSV-Datei erfolgreich verarbeitet.');
         resolve(cachedWahlkreisMapping);
       })
       .on('error', (error) => {
-        console.error('Fehler beim Parsen der CSV-Datei:', error);
+        isLoading = false;
+        console.error('[ERROR] Fehler beim Parsen der CSV-Datei:', error);
         reject(error);
       });
   });
-};
+}
 
-// Funktion zum Finden der Wahlkreisnummern basierend auf dem Gemeindennamen
-const findWahlkreisNummern = async (gemeindeName) => {
-  const mapping = await loadWahlkreisMapping();
+/**
+ * Findet alle Wahlkreisnummern für eine bestimmte Gemeinde.
+ */
+async function findWahlkreisNummern(gemeindeName) {
+  const { gemeindeToWkrMap } = await loadWahlkreisMapping();
 
-  // Normalisiere den Gemeindennamen: Kleinbuchstaben und entferne alles nach dem ersten Komma
-  const normalizedGemeinde = gemeindeName.split(',')[0].trim().toLowerCase().replace(/,\s*stadt$/, '');
-  console.log(`Suche nach Wahlkreisnummern für Gemeinde: "${normalizedGemeinde}"`);
+  // Normalisiere den Gemeindennamen
+  const normalized = gemeindeName.split(',')[0].trim().toLowerCase().replace(/,\s*stadt$/, '');
+  console.log(`[DEBUG] Suche Wahlkreisnummern für Gemeinde: "${normalized}"`);
 
-  // Suche nach exakter Übereinstimmung
-  if (mapping[normalizedGemeinde]) {
-    console.log(`Gefundene Wahlkreisnummern: ${mapping[normalizedGemeinde]}`);
-    return mapping[normalizedGemeinde];
+  // 1) Exakte Übereinstimmung
+  if (gemeindeToWkrMap[normalized]) {
+    return gemeindeToWkrMap[normalized];
   }
 
-  // Suche nach Teilübereinstimmungen (einfaches Substring Matching)
-  const matchingWkr = [];
-  for (const [gemeinde, wkrNummern] of Object.entries(mapping)) {
-    if (gemeinde.includes(normalizedGemeinde)) {
-      matchingWkr.push(...wkrNummern);
+  // 2) Teilübereinstimmung
+  const matching = [];
+  for (const [key, wkrNummern] of Object.entries(gemeindeToWkrMap)) {
+    if (key.includes(normalized)) {
+      matching.push(...wkrNummern);
     }
   }
 
-  console.log(`Teilübereinstimmungen gefunden: ${matchingWkr.length > 0 ? matchingWkr.join(',') : 'Keine'}`);
-  return matchingWkr.length > 0 ? Array.from(new Set(matchingWkr)) : [];
-};
+  return matching.length > 0 ? Array.from(new Set(matching)) : [];
+}
+
+/**
+ * Gibt die Wahlkreis-Bezeichnung für eine Wahlkreisnummer zurück.
+ */
+async function getWahlkreisBezeichnung(wkrNummer) {
+  const { wkrBezMap } = await loadWahlkreisMapping();
+
+  // Falls wir nichts finden, geben wir „Unbekannt“ zurück
+  return wkrBezMap[wkrNummer] || 'Unbekannter Wahlkreis';
+}
 
 module.exports = {
-  findWahlkreisNummern
+  findWahlkreisNummern,
+  getWahlkreisBezeichnung
 };

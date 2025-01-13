@@ -1,113 +1,268 @@
-<!-- frontend/index.html -->
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" x-data="parlamentspostApp()">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ParlamentsPost</title>
-  <!-- Tailwind CSS einbinden -->
-  <link href="output.css" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <link href="output.css" rel="stylesheet" />
+
+  <!-- Alpine.js per CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    const API_BASE_URL = 'http://localhost:3000'; // Replace with your production URL or use an environment variable
+
+    function parlamentspostApp() {
+      return {
+        name: '',
+        straße: '',
+        plz: '',
+        ort: '',
+        email: '',
+        themen: [],
+        freitext: '',
+        abgeordnete: '',
+        abgeordneteListe: [],
+
+        // Ruft das Backend auf, um die Abgeordneten basierend auf dem Ort zu holen
+        async holeAbgeordnete() {
+          if (!this.ort.trim()) return; // Wenn kein Ort, Abbruch
+
+          try {
+            const response = await fetch(`${API_BASE_URL}/api/abgeordnete-by-adresse`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ort: this.ort.trim() })
+            });
+            if (!response.ok) {
+              const err = await response.json();
+              throw new Error(err.error || 'Fehler beim Abrufen der Abgeordneten.');
+            }
+            this.abgeordneteListe = await response.json();
+          } catch (error) {
+            alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);
+            console.error(error);
+          }
+        },
+
+        // Brief generieren
+        generiereBrief() {
+          // PLZ prüfen (Beispiel)
+          const plzPattern = /^\d{5}$/;
+          if (!plzPattern.test(this.plz)) {
+            alert('Bitte eine gültige 5-stellige PLZ eingeben.');
+            return;
+          }
+
+          // Aktuell ausgewählter Abgeordneter
+          const abgeordneter = this.abgeordneteListe.find(a => String(a.id) === this.abgeordnete);
+
+          // Wahlkreisbezeichnung + Name + Partei
+          const wahlkreisBez = abgeordneter?.wkr_bezeichnung || 'Wahlkreis unbekannt';
+          const nameDesAbgeordneten = abgeordneter
+            ? `${abgeordneter.name} (${abgeordneter.partei})`
+            : 'Unbekannt';
+
+          // Erstelle den Brieftext
+          const briefText = `
+Wahlkreis: ${wahlkreisBez}
+
+Sehr geehrte/r Frau/Herr ${nameDesAbgeordneten.split(' (')[0]},
+
+mein Name ist ${this.name} und ich wohne in ${this.straße}, ${this.plz} ${this.ort}.
+Ich wende mich heute an Sie bezüglich folgender Themen: ${this.themen.join(', ')}.
+
+${this.freitext}
+
+Mit freundlichen Grüßen,
+${this.name}
+          `.trim();
+
+          // Vorschau
+          const vorschauInhalt = document.getElementById('vorschau-inhalt');
+          vorschauInhalt.textContent = briefText;
+          document.getElementById('briefvorschau').classList.remove('hidden');
+        }
+      };
+    }
+  </script>
 </head>
 <body class="flex flex-col min-h-screen">
-
-  <!-- Header wird hier geladen -->
+  <!-- Header (per Fetch geladen) -->
   <div id="header"></div>
-  
+
   <!-- Hauptinhalt -->
   <main class="flex-grow container mx-auto p-4">
     <h2 class="text-xl font-semibold mb-4 text-blue-600">Willkommen bei ParlamentsPost</h2>
     <p class="text-gray-700">Hier kannst du Briefe an deine Vertreterinnen und Vertreter im Deutschen Parlament senden.</p>
-    
-    <!-- Benutzerformular -->
-    <form id="user-form" class="mt-6 bg-white p-6 rounded shadow-md">
+
+    <!-- Formular -->
+    <form
+      id="user-form"
+      class="mt-6 bg-white p-6 rounded shadow-md"
+      @submit.prevent="generiereBrief"
+    >
       <!-- Name -->
       <div class="mb-4">
         <label for="name" class="block text-gray-700">Name</label>
-        <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <input
+          type="text"
+          id="name"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="name"
+          required
+        />
       </div>
-      
-      <!-- Straße mit Hausnummer -->
+
+      <!-- Straße und Hausnummer -->
       <div class="mb-4">
         <label for="straße" class="block text-gray-700">Straße und Hausnummer</label>
-        <input type="text" id="straße" name="straße" placeholder="Beispiel: Musterstraße 1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <input
+          type="text"
+          id="straße"
+          placeholder="Musterstraße 1"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="straße"
+          required
+        />
       </div>
-      
+
       <!-- Postleitzahl (PLZ) -->
       <div class="mb-4">
         <label for="plz" class="block text-gray-700">Postleitzahl (PLZ)</label>
-        <input type="text" id="plz" name="plz" pattern="\d{5}" placeholder="Beispiel: 12345" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-        <small class="text-gray-500">Bitte geben Sie eine 5-stellige PLZ ein.</small>
+        <input
+          type="text"
+          id="plz"
+          placeholder="12345"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="plz"
+          required
+        />
+        <small class="text-gray-500">Bitte 5-stellige PLZ eingeben.</small>
       </div>
-      
+
       <!-- Ort (Gemeinde) -->
       <div class="mb-4">
         <label for="ort" class="block text-gray-700">Ort (Gemeinde)</label>
-        <input type="text" id="ort" name="ort" placeholder="Beispiel: Hannover" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <input
+          type="text"
+          id="ort"
+          placeholder="Hannover"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="ort"
+          @input.debounce.500ms="holeAbgeordnete"
+          required
+        />
       </div>
-      
+
       <!-- E-Mail -->
       <div class="mb-4">
         <label for="email" class="block text-gray-700">E-Mail</label>
-        <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <input
+          type="email"
+          id="email"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="email"
+          required
+        />
       </div>
-      
+
       <!-- Abgeordnete auswählen -->
       <div class="mb-4">
         <label for="abgeordnete" class="block text-gray-700">Abgeordnete auswählen</label>
-        <select id="abgeordnete" name="abgeordnete" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+        <select
+          id="abgeordnete"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="abgeordnete"
+          required
+        >
           <option value="">Bitte wählen</option>
-          <!-- Dynamisch gefüllte Optionen -->
+          <!-- Dynamische Optionen: "Wahlkreis-Bezeichnung: Vorname Nachname (Partei)" -->
+          <template x-for="person in abgeordneteListe" :key="person.id">
+            <option
+              :value="person.id"
+              x-text="person.wkr_bezeichnung + ': ' + person.name + ' (' + person.partei + ')'"
+            ></option>
+          </template>
         </select>
       </div>
-      
+
       <!-- Themenblöcke -->
       <div class="mb-4">
         <label class="block text-gray-700">Themenblöcke</label>
         <div class="mt-2 space-y-2">
           <label class="inline-flex items-center">
-            <input type="checkbox" name="themen[]" value="Umwelt" class="form-checkbox h-4 w-4 text-blue-600">
+            <input
+              type="checkbox"
+              class="form-checkbox h-4 w-4 text-blue-600"
+              value="Umwelt"
+              x-model="themen"
+            />
             <span class="ml-2">Umwelt</span>
           </label>
           <label class="inline-flex items-center">
-            <input type="checkbox" name="themen[]" value="Bildung" class="form-checkbox h-4 w-4 text-blue-600">
+            <input
+              type="checkbox"
+              class="form-checkbox h-4 w-4 text-blue-600"
+              value="Bildung"
+              x-model="themen"
+            />
             <span class="ml-2">Bildung</span>
           </label>
           <label class="inline-flex items-center">
-            <input type="checkbox" name="themen[]" value="Wirtschaft" class="form-checkbox h-4 w-4 text-blue-600">
+            <input
+              type="checkbox"
+              class="form-checkbox h-4 w-4 text-blue-600"
+              value="Wirtschaft"
+              x-model="themen"
+            />
             <span class="ml-2">Wirtschaft</span>
           </label>
-          <!-- Weitere Themen hinzufügen -->
         </div>
       </div>
-      
-      <!-- Freitextfeld -->
+
+      <!-- Freitext -->
       <div class="mb-4">
         <label for="freitext" class="block text-gray-700">Eigener Text</label>
-        <textarea id="freitext" name="freitext" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+        <textarea
+          id="freitext"
+          rows="4"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          x-model="freitext"
+        ></textarea>
       </div>
-      
+
       <!-- Brief generieren Button -->
       <div>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Brief generieren</button>
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Brief generieren
+        </button>
       </div>
     </form>
-    
-    <!-- Briefvorschau (wird später implementiert) -->
+
+    <!-- Briefvorschau -->
     <div id="briefvorschau" class="mt-6 bg-gray-100 p-6 rounded shadow-md hidden">
       <h3 class="text-lg font-semibold mb-4">Briefvorschau</h3>
-      <div id="vorschau-inhalt"></div>
-      <button id="export-button" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Brief exportieren</button>
+      <div id="vorschau-inhalt" class="whitespace-pre-wrap"></div>
+      <button
+        id="export-button"
+        class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+      >
+        Brief exportieren
+      </button>
     </div>
-    
-    <!-- Weitere Inhalte kommen hierhin -->
   </main>
-  
-  <!-- Footer wird hier geladen -->
+
+  <!-- Footer (per Fetch geladen) -->
   <div id="footer"></div>
 
-  <!-- JavaScript zum Laden der Komponenten und Dynamik -->
+  <!-- Header/Footer über Fetch laden -->
   <script>
-    // Funktion zum Laden einer HTML-Komponente
     async function loadComponent(id, url) {
       try {
         const response = await fetch(url);
@@ -120,111 +275,15 @@
         console.error(`Fehler beim Laden der Komponente ${url}:`, error);
       }
     }
-
-    // Komponenten laden
     loadComponent('header', 'components/Header.html');
     loadComponent('footer', 'components/Footer.html');
 
-    // Funktion zum Abrufen und Einfügen der Abgeordneten basierend auf Adresse
-    async function populateAbgeordneteByAdresse(adresseObj) {
-      try {
-        const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(adresseObj)
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Fehler beim Abrufen der Abgeordneten.');
-        }
-
-        const abgeordnete = await response.json();
-        const abgeordneteSelect = document.getElementById('abgeordnete');
-
-        // Leere das Dropdown vor dem Befüllen
-        abgeordneteSelect.innerHTML = '<option value="">Bitte wählen</option>';
-
-        abgeordnete.forEach(abgeordneter => {
-          const option = document.createElement('option');
-          option.value = abgeordneter.id;
-          option.textContent = `${abgeordneter.name} (${abgeordneter.partei})`;
-          abgeordneteSelect.appendChild(option);
-        });
-      } catch (error) {
-        console.error('Fehler beim Abrufen der Abgeordneten:', error);
-        alert(`Fehler: ${error.message}`);
+    // Noch nicht implementierte Export-Funktion
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'export-button') {
+        alert('Export-Funktion noch zu implementieren.');
       }
-    }
-
-    // Event Listener für das Formular
-    document.getElementById('user-form').addEventListener('submit', async function(event) {
-      event.preventDefault(); // Verhindert das Standard-Formularverhalten
-
-      // Sammle die Formular-Daten
-      const formData = new FormData(event.target);
-      const data = {
-        name: formData.get('name'),
-        straße: formData.get('straße'),
-        plz: formData.get('plz'),
-        ort: formData.get('ort'),
-        email: formData.get('email'),
-        abgeordnete: formData.get('abgeordnete'),
-        themen: formData.getAll('themen[]'),
-        freitext: formData.get('freitext')
-      };
-
-      // Validierung der PLZ (optional)
-      const plzPattern = /^\d{5}$/;
-      if (!plzPattern.test(data.plz)) {
-        alert('Bitte geben Sie eine gültige 5-stellige PLZ ein.');
-        return;
-      }
-
-      // Erstelle ein Objekt für die Backend-Anfrage (nur ort)
-      const backendAdresseObj = {
-        ort: data.ort
-      };
-
-      // Hole die Abgeordneten basierend auf der Adresse
-      await populateAbgeordneteByAdresse(backendAdresseObj);
-    });
-
-    // Funktion zur Briefgenerierung
-    function generiereBrief(data) {
-      const vorschauInhalt = document.getElementById('vorschau-inhalt');
-      const briefvorschau = document.getElementById('briefvorschau');
-
-      // Finde den Namen der ausgewählten Abgeordneten
-      const abgeordneteOption = document.querySelector(`#abgeordnete option[value="${data.abgeordnete}"]`);
-      const abgeordneterName = abgeordneteOption ? abgeordneteOption.textContent : 'Unbekannt';
-
-      // Erstelle den Brieftext
-      const briefText = `
-Sehr geehrte/r Frau/Herr ${abgeordneterName.split(' (')[0]},
-
-mein Name ist ${data.name} und ich wohne in ${data.straße}, ${data.plz} ${data.ort}.
-Ich wende mich heute an Sie bezüglich folgender Themen: ${data.themen.join(', ')}.
-
-${data.freitext}
-
-Mit freundlichen Grüßen,
-${data.name}
-      `;
-
-      vorschauInhalt.textContent = briefText.trim();
-      briefvorschau.classList.remove('hidden');
-    }
-
-    // Event Listener für den Export-Button (zu implementieren)
-    document.getElementById('export-button').addEventListener('click', function() {
-      // Funktion zum Exportieren des Briefs als PDF, Word, ODT oder E-Mail
-      // Placeholder: Implementiere die gewünschte Export-Funktionalität
-      alert('Export-Funktion noch zu implementieren.');
     });
   </script>
-  
 </body>
 </html>

@@ -11,6 +11,12 @@
   <!-- Alpine.js per CDN -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+  <!-- html-docx-js Bibliothek über jsDelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+
+  <!-- jsPDF Bibliothek -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <script>
     function parlamentspostApp() {
       return {
@@ -26,17 +32,18 @@
 
         async holeAbgeordnete() {
           if (!this.ort.trim()) return;
+          console.log('Hole Abgeordnete für Ort:', this.ort.trim());
           try {
             const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ ort: this.ort.trim() })
             });
-            if (!response.ok) {
-              const err = await response.json();
-              throw new Error(err.error || 'Fehler beim Abrufen der Abgeordneten.');
-            }
-            this.abgeordneteListe = await response.json();
+            console.log('Antwort-Status:', response.status);
+            const text = await response.text();
+            console.log('Antwort-Inhalt:', text);
+            const data = JSON.parse(text);
+            this.abgeordneteListe = data;
           } catch (error) {
             alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);
             console.error(error);
@@ -102,17 +109,72 @@ ${this.name}
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ userData })
             });
-            if (!response.ok) {
-              const err = await response.json();
-              throw new Error(err.error || 'Fehler bei der KI-Generierung.');
-            }
-            const data = await response.json();
+            console.log('KI-Antwort-Status:', response.status);
+            const text = await response.text();
+            console.log('KI-Antwort-Inhalt:', text);
+            const data = JSON.parse(text);
             const kiText = data.briefText || '(Kein KI-Text vorhanden)';
 
             this.zeigeVorschau(kiText);
           } catch (error) {
             alert(`Fehler bei der KI-Abfrage: ${error.message}`);
             console.error(error);
+          }
+        },
+
+        // NEU: Exportiere Brief als DOCX mit html-docx-js
+        exportiereBriefAlsDocx() {
+          console.log('DOCX-Export gestartet');
+          const briefHtml = document.getElementById('vorschau-inhalt').innerHTML;
+          console.log('Brief HTML:', briefHtml);
+
+          if (!window.htmlDocx || !window.htmlDocx.asBlob) {
+            alert('html-docx-js-Bibliothek nicht geladen oder inkompatibel.');
+            return;
+          }
+
+          try {
+            const converted = window.htmlDocx.asBlob(briefHtml);
+            console.log('Converted Blob:', converted);
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(converted);
+            link.download = 'brief.docx';
+            link.click();
+            URL.revokeObjectURL(link.href);
+            console.log('DOCX-Export erfolgreich');
+          } catch (error) {
+            console.error('Fehler beim Erstellen des DOCX-Dokuments:', error);
+            alert('Fehler beim Exportieren des Briefs als DOCX.');
+          }
+        },
+
+        // NEU: Exportiere Brief als PDF mit jsPDF
+        exportiereBriefAlsPdf() {
+          console.log('PDF-Export gestartet');
+          const briefText = document.getElementById('vorschau-inhalt').textContent;
+          console.log('Brief Text:', briefText);
+
+          if (!window.jspdf || !window.jspdf.jsPDF) {
+            alert('jsPDF-Bibliothek nicht geladen oder inkompatibel.');
+            return;
+          }
+
+          try {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const lines = briefText.split('\n');
+            let y = 10;
+            lines.forEach(line => {
+              doc.text(line, 10, y);
+              y += 10;
+            });
+
+            doc.save('brief.pdf');
+            console.log('PDF-Export erfolgreich');
+          } catch (error) {
+            console.error('Fehler beim Erstellen des PDF-Dokuments:', error);
+            alert('Fehler beim Exportieren des Briefs als PDF.');
           }
         },
 
@@ -124,6 +186,22 @@ ${this.name}
         }
       };
     }
+
+    // Lade Komponenten (Header & Footer)
+    async function loadComponent(id, url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP-Error! status: ${response.status}`);
+        }
+        const content = await response.text();
+        document.getElementById(id).innerHTML = content;
+      } catch (error) {
+        console.error(`Fehler beim Laden der Komponente ${url}:`, error);
+      }
+    }
+    loadComponent('header', 'components/Header.html');
+    loadComponent('footer', 'components/Footer.html');
   </script>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -296,39 +374,29 @@ ${this.name}
     <div id="briefvorschau" class="mt-6 bg-gray-100 p-6 rounded shadow-md hidden">
       <h3 class="text-lg font-semibold mb-4">Briefvorschau</h3>
       <div id="vorschau-inhalt" class="whitespace-pre-wrap"></div>
-      <button
-        id="export-button"
-        class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      >
-        Brief exportieren
-      </button>
+      <div class="flex gap-4 mt-4">
+        <!-- Export DOCX Button -->
+        <button
+          id="export-docx-button"
+          class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          @click="exportiereBriefAlsDocx"
+        >
+          Brief exportieren (DOCX)
+        </button>
+
+        <!-- Export PDF Button -->
+        <button
+          id="export-pdf-button"
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          @click="exportiereBriefAlsPdf"
+        >
+          Brief exportieren (PDF)
+        </button>
+      </div>
     </div>
   </main>
 
   <!-- Footer (per Fetch geladen) -->
   <div id="footer"></div>
-
-  <script>
-    async function loadComponent(id, url) {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP-Error! status: ${response.status}`);
-        }
-        const content = await response.text();
-        document.getElementById(id).innerHTML = content;
-      } catch (error) {
-        console.error(`Fehler beim Laden der Komponente ${url}:`, error);
-      }
-    }
-    loadComponent('header', 'components/Header.html');
-    loadComponent('footer', 'components/Footer.html');
-
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.id === 'export-button') {
-        alert('Export-Funktion noch zu implementieren.');
-      }
-    });
-  </script>
 </body>
 </html>

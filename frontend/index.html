@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" x-data="parlamentspostApp()">
+<html lang="de" x-data="parlamentspostApp()" :class="{ 'dark': isDark }">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,10 +10,250 @@
 
   <!-- Alpine.js per CDN -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <!-- Dark Mode Toggle -->
+  <button
+    class="fixed top-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded focus:outline-none"
+    @click="toggleDarkMode"
+    aria-label="Dark Mode Toggle"
+  >
+    <!-- Sonnen-Icon (Light Mode) -->
+    <svg
+      x-show="!isDark"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-yellow-500"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      x-cloak
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 3v1m0 16v1m8.66-10.66l-.707-.707M4.05 19.95l-.707-.707M21 12h-1M4 12H3m16.66 4.66l-.707-.707M5.05 5.05l-.707-.707"
+      />
+    </svg>
+    
+    <!-- Mond-Icon (Dark Mode) -->
+    <svg
+      x-show="isDark"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-gray-300"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      x-cloak
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+      />
+    </svg>
+  </button>
 
+  <!-- Header (per Fetch geladen) -->
+  <div id="header"></div>
+
+  <!-- Hauptinhalt -->
+  <main class="flex-grow container mx-auto p-6">
+    <h2 class="text-3xl font-bold mb-4 text-blue-600">Willkommen bei ParlamentsPost</h2>
+    <p class="text-lg text-gray-700 mb-8">Hier kannst du Briefe an deine Vertreterinnen und Vertreter im Deutschen Parlament senden.</p>
+
+    <!-- Formular -->
+    <form
+      id="user-form"
+      class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md space-y-6"
+      @submit.prevent="generiereBrief"
+    >
+      <!-- Persönliche Informationen -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="name"
+            required
+          />
+        </div>
+
+        <!-- E-Mail -->
+        <div>
+          <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="email"
+            required
+          />
+        </div>
+
+        <!-- Straße und Hausnummer -->
+        <div>
+          <label for="straße" class="block text-gray-700 dark:text-gray-300 font-medium">Straße und Hausnummer</label>
+          <input
+            type="text"
+            id="straße"
+            placeholder="Musterstraße 1"
+            class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="straße"
+            required
+          />
+        </div>
+
+        <!-- Postleitzahl (PLZ) -->
+        <div>
+          <label for="plz" class="block text-gray-700 dark:text-gray-300 font-medium">Postleitzahl (PLZ)</label>
+          <input
+            type="text"
+            id="plz"
+            pattern="\d{5}"
+            placeholder="12345"
+            class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="plz"
+            required
+          />
+          <small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>
+        </div>
+
+        <!-- Ort (Gemeinde) -->
+        <div>
+          <label for="ort" class="block text-gray-700 dark:text-gray-300 font-medium">Ort (Gemeinde)</label>
+          <input
+            type="text"
+            id="ort"
+            placeholder="Hannover"
+            class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="ort"
+            @blur="holeAbgeordnete"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Abgeordnete auswählen -->
+      <div>
+        <label for="abgeordnete" class="block text-gray-700 dark:text-gray-300 font-medium">Abgeordnete auswählen</label>
+        <select
+          id="abgeordnete"
+          class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+          x-model="abgeordnete"
+          required
+        >
+          <option value="">Bitte wählen</option>
+          <template x-for="person in abgeordneteListe" :key="person.id">
+            <option :value="person.id" x-text="`${person.wkr_bezeichnung}: ${person.name} (${person.partei})`"></option>
+          </template>
+        </select>
+      </div>
+
+      <!-- Themenblöcke -->
+      <div>
+        <label class="block text-gray-700 dark:text-gray-300 font-medium">Themenblöcke</label>
+        <div class="mt-2 flex space-x-6">
+          <label class="inline-flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-blue-600 dark:text-blue-400"
+              value="Umwelt"
+              x-model="themen"
+            />
+            <span class="ml-2 text-gray-700 dark:text-gray-300">Umwelt</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-blue-600 dark:text-blue-400"
+              value="Bildung"
+              x-model="themen"
+            />
+            <span class="ml-2 text-gray-700 dark:text-gray-300">Bildung</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-blue-600 dark:text-blue-400"
+              value="Wirtschaft"
+              x-model="themen"
+            />
+            <span class="ml-2 text-gray-700 dark:text-gray-300">Wirtschaft</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Freitext -->
+      <div>
+        <label for="freitext" class="block text-gray-700 dark:text-gray-300 font-medium">Eigener Text</label>
+        <textarea
+          id="freitext"
+          rows="4"
+          class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
+          x-model="freitext"
+        ></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-4">
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          Brief generieren (manuell)
+        </button>
+        <button
+          type="button"
+          class="bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700 transition"
+          @click="generiereBriefMitKI"
+        >
+          Mit KI generieren
+        </button>
+      </div>
+    </form>
+
+    <!-- Briefvorschau -->
+    <div id="briefvorschau" class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md hidden">
+      <h3 class="text-2xl font-semibold mb-6 text-blue-600">Briefvorschau</h3>
+      <div id="vorschau-inhalt" class="whitespace-pre-wrap text-gray-800 dark:text-gray-100"></div>
+      <div class="mt-8 flex space-x-6">
+        <button
+          id="export-pdf-button"
+          class="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition"
+          @click="exportiereBriefAlsPdf"
+        >
+          Brief exportieren (PDF)
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (per Fetch geladen) -->
+  <div id="footer"></div>
+
+  <!-- JavaScript für Hamburger-Menü und Dark Mode -->
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuButton = document.getElementById('menu-button');
+      const mobileNav = document.getElementById('mobile-nav');
+
+      if (menuButton) {
+        menuButton.addEventListener('click', () => {
+          mobileNav.classList.toggle('hidden');
+        });
+      }
+    });
+
     function parlamentspostApp() {
       return {
+        // Dark Mode Zustand
+        isDark: false,
+
         name: '',
         straße: '',
         plz: '',
@@ -24,8 +264,19 @@
         abgeordnete: '',
         abgeordneteListe: [],
 
+        // Dark Mode Toggle Methode
+        toggleDarkMode() {
+          this.isDark = !this.isDark;
+          if (this.isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        },
+
         async holeAbgeordnete() {
           if (!this.ort.trim()) return;
+          this.isLoading = true; // Optional: Ladeindikator
           try {
             const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
               method: 'POST',
@@ -40,6 +291,8 @@
           } catch (error) {
             alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);
             console.error(error);
+          } finally {
+            this.isLoading = false; // Optional: Ladeindikator entfernen
           }
         },
 
@@ -95,6 +348,7 @@ ${this.name}
             abgeordneteName: nameDesAbgeordneten
           };
 
+          this.isLoading = true; // Optional: Ladeindikator
           try {
             // Ruf den neuen Endpoint an
             const response = await fetch('http://localhost:3000/api/genai-brief', {
@@ -113,202 +367,27 @@ ${this.name}
           } catch (error) {
             alert(`Fehler bei der KI-Abfrage: ${error.message}`);
             console.error(error);
+          } finally {
+            this.isLoading = false; // Optional: Ladeindikator entfernen
           }
         },
 
         // Vorschau anzeigen
         zeigeVorschau(briefText) {
           const vorschauInhalt = document.getElementById('vorschau-inhalt');
-          vorschauInhalt.textContent = briefText;
+          vorschauInhalt.innerHTML = briefText.replace(/\n/g, '<br>'); // Formatierung beibehalten
           document.getElementById('briefvorschau').classList.remove('hidden');
+        },
+
+        // Export-Funktionen (Nur PDF verbleibt)
+        exportiereBriefAlsPdf() {
+          // Implementierung hier hinzufügen
+          alert('PDF-Export noch zu implementieren.');
         }
       };
     }
-  </script>
-</head>
-<body class="flex flex-col min-h-screen">
-  <!-- Header (per Fetch geladen) -->
-  <div id="header"></div>
 
-  <!-- Hauptinhalt -->
-  <main class="flex-grow container mx-auto p-4">
-    <h2 class="text-xl font-semibold mb-4 text-blue-600">Willkommen bei ParlamentsPost</h2>
-    <p class="text-gray-700">Hier kannst du Briefe an deine Vertreterinnen und Vertreter im Deutschen Parlament senden.</p>
-
-    <!-- Formular -->
-    <form
-      id="user-form"
-      class="mt-6 bg-white p-6 rounded shadow-md"
-      @submit.prevent="generiereBrief" 
-    >
-      <!-- Name -->
-      <div class="mb-4">
-        <label for="name" class="block text-gray-700">Name</label>
-        <input
-          type="text"
-          id="name"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="name"
-          required
-        />
-      </div>
-
-      <!-- Straße und Hausnummer -->
-      <div class="mb-4">
-        <label for="straße" class="block text-gray-700">Straße und Hausnummer</label>
-        <input
-          type="text"
-          id="straße"
-          placeholder="Musterstraße 1"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="straße"
-          required
-        />
-      </div>
-
-      <!-- Postleitzahl (PLZ) -->
-      <div class="mb-4">
-        <label for="plz" class="block text-gray-700">Postleitzahl (PLZ)</label>
-        <input
-          type="text"
-          id="plz"
-          pattern="\d{5}"
-          placeholder="12345"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="plz"
-          required
-        />
-        <small class="text-gray-500">Bitte 5-stellige PLZ eingeben.</small>
-      </div>
-
-      <!-- Ort (Gemeinde) -->
-      <div class="mb-4">
-        <label for="ort" class="block text-gray-700">Ort (Gemeinde)</label>
-        <input
-          type="text"
-          id="ort"
-          placeholder="Hannover"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="ort"
-          @blur="holeAbgeordnete"
-          required
-        />
-      </div>
-
-      <!-- E-Mail -->
-      <div class="mb-4">
-        <label for="email" class="block text-gray-700">E-Mail</label>
-        <input
-          type="email"
-          id="email"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="email"
-          required
-        />
-      </div>
-
-      <!-- Abgeordnete auswählen -->
-      <div class="mb-4">
-        <label for="abgeordnete" class="block text-gray-700">Abgeordnete auswählen</label>
-        <select
-          id="abgeordnete"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="abgeordnete"
-          required
-        >
-          <option value="">Bitte wählen</option>
-          <template x-for="person in abgeordneteListe" :key="person.id">
-            <option 
-              :value="person.id"
-              x-text="person.wkr_bezeichnung + ': ' + person.name + ' (' + person.partei + ')'"
-            ></option>
-          </template>
-        </select>
-      </div>
-
-      <!-- Themenblöcke -->
-      <div class="mb-4">
-        <label class="block text-gray-700">Themenblöcke</label>
-        <div class="mt-2 space-y-2">
-          <label class="inline-flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-4 w-4 text-blue-600"
-              value="Umwelt"
-              x-model="themen"
-            />
-            <span class="ml-2">Umwelt</span>
-          </label>
-          <label class="inline-flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-4 w-4 text-blue-600"
-              value="Bildung"
-              x-model="themen"
-            />
-            <span class="ml-2">Bildung</span>
-          </label>
-          <label class="inline-flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-4 w-4 text-blue-600"
-              value="Wirtschaft"
-              x-model="themen"
-            />
-            <span class="ml-2">Wirtschaft</span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Freitext -->
-      <div class="mb-4">
-        <label for="freitext" class="block text-gray-700">Eigener Text</label>
-        <textarea
-          id="freitext"
-          rows="4"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          x-model="freitext"
-        ></textarea>
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex gap-4">
-        <!-- Alter Knopf: Manuell generieren -->
-        <button
-          type="submit"
-          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Brief generieren (manuell)
-        </button>
-
-        <!-- NEU: KI-Button -->
-        <button
-          type="button"
-          class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-          @click="generiereBriefMitKI"
-        >
-          Mit KI generieren
-        </button>
-      </div>
-    </form>
-
-    <!-- Briefvorschau -->
-    <div id="briefvorschau" class="mt-6 bg-gray-100 p-6 rounded shadow-md hidden">
-      <h3 class="text-lg font-semibold mb-4">Briefvorschau</h3>
-      <div id="vorschau-inhalt" class="whitespace-pre-wrap"></div>
-      <button
-        id="export-button"
-        class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      >
-        Brief exportieren
-      </button>
-    </div>
-  </main>
-
-  <!-- Footer (per Fetch geladen) -->
-  <div id="footer"></div>
-
-  <script>
+    // Lade Komponenten (Header & Footer)
     async function loadComponent(id, url) {
       try {
         const response = await fetch(url);
@@ -321,14 +400,8 @@ ${this.name}
         console.error(`Fehler beim Laden der Komponente ${url}:`, error);
       }
     }
-    loadComponent('header', 'components/Header.html');
-    loadComponent('footer', 'components/Footer.html');
-
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.id === 'export-button') {
-        alert('Export-Funktion noch zu implementieren.');
-      }
-    });
+    loadComponent('header', 'frontend/components/Header.html');
+    loadComponent('footer', 'frontend/components/Footer.html');
   </script>
 </body>
 </html>

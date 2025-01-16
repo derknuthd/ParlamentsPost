@@ -1,5 +1,5 @@
 <!-- frontend/components/Header.html -->
-<header class="bg-blue-600 text-white p-4">
+<header class="bg-blue-600 dark:bg-gray-800 text-white p-4">
   <div class="container mx-auto flex justify-between items-center">
     <!-- Logo -->
     <h1 class="text-2xl font-bold">
@@ -14,7 +14,7 @@
     </nav>
     
     <!-- Hamburger Menü für Mobile -->
-    <button id="menu-button" class="md:hidden focus:outline-none">
+    <button id="menu-button" class="md:hidden focus:outline-none" aria-label="Menü öffnen">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -22,17 +22,9 @@
   </div>
   
   <!-- Mobile Navigation -->
-  <nav id="mobile-nav" class="hidden md:hidden bg-blue-700 p-4 space-y-2">
+  <nav id="mobile-nav" class="hidden md:hidden bg-blue-700 dark:bg-gray-700 p-4 space-y-2">
     <a href="#" class="block hover:underline">Startseite</a>
     <a href="#" class="block hover:underline">Über uns</a>
     <a href="#" class="block hover:underline">Kontakt</a>
   </nav>
-  
-  <!-- JavaScript für Hamburger-Menü -->
-  <script>
-    document.getElementById('menu-button').addEventListener('click', function() {
-      const mobileNav = document.getElementById('mobile-nav');
-      mobileNav.classList.toggle('hidden');
-    });
-  </script>
 </header>

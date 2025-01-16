@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Versteckt Elemente mit x-cloak, bis Alpine.js sie verarbeitet */
+[x-cloak] { 
+  display: none !important; 
+}

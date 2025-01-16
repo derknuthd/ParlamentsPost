@@ -19,7 +19,7 @@ Thumbs.db
 .env
 
 # Output/Build-Dateien
-# frontend/output.css
+frontend/output.css
 
 # Editor/IDE-spezifische Dateien
 .vscode/

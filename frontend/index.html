@@ -382,11 +382,15 @@ ${this.name}
           }
         },
 
-        // Vorschau anzeigen
+        // Vorschau anzeigen und smooth scrollen
         zeigeVorschau(briefText) {
           const vorschauInhalt = document.getElementById('vorschau-inhalt');
           vorschauInhalt.innerHTML = briefText.replace(/\n/g, '<br>'); // Formatierung beibehalten
-          document.getElementById('briefvorschau').classList.remove('hidden');
+          const briefVorschau = document.getElementById('briefvorschau');
+          briefVorschau.classList.remove('hidden');
+
+          // Smooth Scroll zum Briefvorschau Bereich
+          briefVorschau.scrollIntoView({ behavior: 'smooth' });
         },
 
         // Export-Funktionen (Nur PDF verbleibt)

@@ -19,6 +19,7 @@ Thumbs.db
 .env
 
 # Output/Build-Dateien
+frontend/styles/output.css
 frontend/output.css
 
 # Editor/IDE-spezifische Dateien

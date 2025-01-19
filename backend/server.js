@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const rateLimit = require('express-rate-limit');
 
-const { findWahlkreisNummern } = require('./wahlkreisService');
-const { getFilteredAbgeordnete } = require('./abgeordneteService');
+const { findWahlkreisNummern } = require('./services/wahlkreisService');
+const { getFilteredAbgeordnete } = require('./services/abgeordneteService');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

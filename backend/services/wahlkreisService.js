@@ -1,4 +1,4 @@
-// backend/wahlkreisService.js
+// backend/services/wahlkreisService.js
 
 const fs = require('fs');
 const path = require('path');
@@ -51,7 +51,7 @@ function loadWahlkreisMapping() {
     const wkrBezMap = {};
 
     // Pfad zur echten CSV-Datei
-    const csvFilePath = path.join(__dirname, 'Wahlkreise', '20200415_btw21_wkr_gemeinden_utf8.csv');
+    const csvFilePath = path.join(__dirname, '../data/20200415_btw21_wkr_gemeinden_utf8.csv');
     console.log(`[DEBUG] Lade CSV-Datei: ${csvFilePath}`);
 
     if (!fs.existsSync(csvFilePath)) {

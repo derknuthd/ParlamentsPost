@@ -1,4 +1,4 @@
-// backend/abgeordneteService.js
+// backend/services/abgeordneteService.js
 
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ let lastModified = null;
 
 // Funktion zum Abrufen gefilterter Abgeordneten basierend auf Wahlkreisnummern
 const getFilteredAbgeordnete = async (wkrNummern = []) => {
-  const abgeordnetePath = path.join(__dirname, 'MdB-Stammdaten', 'MDB_STAMMDATEN.XML');
+  const abgeordnetePath = path.join(__dirname, '../data/MDB_STAMMDATEN.XML');
   const stats = fs.statSync(abgeordnetePath);
   const modifiedTime = stats.mtimeMs;
 

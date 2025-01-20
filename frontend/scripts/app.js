@@ -102,10 +102,10 @@ ${this.name}
 
         // Erstelle ein Objekt mit den nötigen Feldern
         const userData = {
-          name: this.name,
-          straße: this.straße,
-          plz: this.plz,
-          ort: this.ort,
+//          name: this.name,
+//          straße: this.straße,
+//          plz: this.plz,
+//          ort: this.ort,
           themen: this.themen,
           freitext: this.freitext,
           abgeordneteName: nameDesAbgeordneten

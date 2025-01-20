@@ -114,17 +114,14 @@ app.post('/api/genai-brief', genAiLimiter, async (req, res) => {
       return res.status(400).json({ error: 'Freitext oder userData fehlt.' });
     }
 
-    // Modell aus .env (Default: gpt-3.5-turbo)
-    const model = process.env.OPENAI_MODEL || 'gpt-3.5-turbo';
+    // Modell aus .env
+    const model = process.env.OPENAI_MODEL;
     // max_tokens aus .env (Default: 1200)
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || '1200', 10);
 
     // Prompt
     const prompt = `
 Du bist eine Hilfs-KI, die einen Brief an einen Abgeordneten schreiben soll.
-Informationen zum Absender:
-Name: ${userData.name || 'Anonym'}
-Adresse: ${userData.straße || '-'} ${userData.plz || '-'} ${userData.ort || '-'}
 Themen: ${Array.isArray(userData.themen) ? userData.themen.join(', ') : 'Keine'}
 Abgeordneter: ${userData.abgeordneteName || 'Unbekannt'}
 

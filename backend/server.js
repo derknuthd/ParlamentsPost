@@ -107,6 +107,8 @@ app.post('/api/abgeordnete-by-adresse', async (req, res) => {
  */
 app.post('/api/genai-brief', genAiLimiter, async (req, res) => {
   try {
+    console.log('DEBUG: Request Body:', req.body); // Debugging
+
     const { userData } = req.body;
     console.log('[DEBUG] [server.js] Anfrage erhalten: POST /api/genai-brief', userData);
 
@@ -121,16 +123,27 @@ app.post('/api/genai-brief', genAiLimiter, async (req, res) => {
 
     // Prompt
     const prompt = `
-Du bist eine Hilfs-KI, die einen Brief an einen Abgeordneten schreiben soll.
-Themen: ${Array.isArray(userData.themen) ? userData.themen.join(', ') : 'Keine'}
-Abgeordneter: ${userData.abgeordneteName || 'Unbekannt'}
+Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll. 
+Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens. 
+Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden:
+- Absender
+- Ort und Datum
+- Empfängerinformationen
+- Anrede (z. B. "Sehr geehrte/r Frau/Herr [Nachname]")
+- Grußformel (z. B. "Mit freundlichen Grüßen")
+- Unterschrift
+- Name unter der Unterschrift
+
+Das Rahmendokument enthält bereits die Anrede und die Grußformel. Dein Beitrag beginnt nach der Anrede und endet vor der Grußformel.
+
+Informationen zu den Themen:
+${Array.isArray(userData.themen) ? userData.themen.join(', ') : 'Keine spezifischen Themen angegeben.'}
 
 Freitext vom Nutzer:
-${userData.freitext}
+${userData.freitext || 'Kein zusätzlicher Freitext angegeben.'}
 
-Formuliere einen höflichen Brief mit diesen Infos.
-Achte auf eine formale, aber respektvolle Anrede.
-`;
+Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
+    `;
 
     // OpenAI-Aufruf
     const openaiResponse = await axios.post(

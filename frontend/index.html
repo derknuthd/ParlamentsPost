@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/icons/favicon.ico">
   <title>ParlamentsPost</title>
 
   <!-- Tailwind CSS -->
@@ -208,24 +208,28 @@
         ></textarea>
       </div>
 
-      <!-- Buttons -->
-      <div class="flex justify-end space-x-4">
-        <button
-          type="submit"
-          class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          :disabled="isLoading"
-        >
-          <span>Brief generieren (manuell)</span>
-        </button>
-        <button
-          type="button"
-          class="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          @click="generiereBriefMitKI"
-          :disabled="isLoading"
-        >
-          <span>Mit KI generieren</span>
-        </button>
-      </div>
+<!-- Buttons -->
+<div class="flex justify-end space-x-4">
+  <!-- Manuell generieren -->
+  <button
+    type="button"
+    class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+    @click="generiereBrief(false)"
+    :disabled="isLoading"
+  >
+    <span>Brief generieren (manuell)</span>
+  </button>
+
+  <!-- Mit KI generieren -->
+  <button
+    type="button"
+    class="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+    @click="generiereBrief(true)"
+    :disabled="isLoading"
+  >
+    <span>Mit KI generieren</span>
+  </button>
+</div>
     </form>
 
     <!-- Briefvorschau -->

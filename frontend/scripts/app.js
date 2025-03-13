@@ -43,7 +43,7 @@ function parlamentspostApp() {
         if (!this.ort.trim()) return;
         this.isLoading = true; // Ladeindikator aktivieren
         try {
-          const response = await fetch('http://localhost:3000/api/abgeordnete-by-adresse', {
+          const response = await fetch('/api/abgeordnete-by-adresse', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ort: this.ort.trim() })
@@ -97,7 +97,7 @@ function parlamentspostApp() {
 
               console.log('DEBUG: userData:', userData); // Debugging
           
-              const response = await fetch('http://localhost:3000/api/genai-brief', {
+              const response = await fetch('/api/genai-brief', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userData })

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css --watch",
     "start:backend": "nodemon backend/server.js",
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/server.js",
+    "build": "npm run build:css"
   },
   "repository": {
     "type": "git",

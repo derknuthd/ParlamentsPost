@@ -19,15 +19,5 @@
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "commands": [
-      {
-        "command": "npm run build:css"
-      }
-    ]
-  }
+  ]
 }

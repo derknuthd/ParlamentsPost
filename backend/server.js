@@ -27,8 +27,9 @@ if (process.env.ALLOWED_ORIGINS) {
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Kein Origin? (z.B. Postman) -> Erlauben
-      if (!origin) return callback(null, true);
+      // Kein Origin? (z.B. Postman) -> Blockieren
+      if (!origin)
+        return callback(new Error(`CORS Error: Origin not allowed!`));
 
       // Wenn in .env-Liste -> erlauben
       if (allowedOrigins.includes(origin)) return callback(null, true);

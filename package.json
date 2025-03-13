@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css",
+    "build:css:watch": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css --watch",
     "start:backend": "nodemon backend/server.js",
+    "dev": "concurrently \"npm run build:css:watch\" \"npm run start:backend\"",
     "start": "node backend/server.js",
     "build": "npm run build:css"
   },
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/derknuthd/ParlamentsPost#readme",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"

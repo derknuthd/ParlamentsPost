@@ -1,14 +1,14 @@
 // backend/server.js
-require('dotenv').config(); // Lädt die .env aus dem Projekt-Root
+require("dotenv").config(); // Lädt die .env aus dem Projekt-Root
 
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const rateLimit = require('express-rate-limit');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const axios = require("axios");
+const rateLimit = require("express-rate-limit");
 
-const { findWahlkreisNummern } = require('./services/wahlkreisService');
-const { getFilteredAbgeordnete } = require('./services/abgeordneteService');
+const { findWahlkreisNummern } = require("./services/wahlkreisService");
+const { getFilteredAbgeordnete } = require("./services/abgeordneteService");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,22 +20,24 @@ const PORT = process.env.PORT || 3000;
  */
 let allowedOrigins = [];
 if (process.env.ALLOWED_ORIGINS) {
-  allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
+  allowedOrigins = process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim());
 }
 
 // Falls ALLOWED_ORIGINS fehlt, lassen wir notfalls alles durch (oder blocken alles, je nach Wunsch)
-app.use(cors({
-  origin: (origin, callback) => {
-    // Kein Origin? (z.B. Postman) -> Erlauben
-    if (!origin) return callback(null, true);
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Kein Origin? (z.B. Postman) -> Erlauben
+      if (!origin) return callback(null, true);
 
-    // Wenn in .env-Liste -> erlauben
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+      // Wenn in .env-Liste -> erlauben
+      if (allowedOrigins.includes(origin)) return callback(null, true);
 
-    // Sonst blocken
-    callback(new Error(`CORS Error: Origin ${origin} not allowed!`));
-  }
-}));
+      // Sonst blocken
+      callback(new Error(`CORS Error: Origin ${origin} not allowed!`));
+    },
+  })
+);
 
 /**
  * ===========================
@@ -45,56 +47,72 @@ app.use(cors({
  * RATE_LIMIT_WINDOW_SECONDS=60
  * RATE_LIMIT_MAX=3
  */
-const windowSeconds = parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS || '60', 10);
-const maxRequests = parseInt(process.env.RATE_LIMIT_MAX || '3', 10);
+const windowSeconds = parseInt(
+  process.env.RATE_LIMIT_WINDOW_SECONDS || "60",
+  10
+);
+const maxRequests = parseInt(process.env.RATE_LIMIT_MAX || "3", 10);
 
 const genAiLimiter = rateLimit({
   windowMs: windowSeconds * 1000, // z.B. 60 Sekunden
-  max: maxRequests,               // z.B. 3 Requests pro Fenster
-  message: 'Too many requests. Bitte später erneut versuchen.'
+  max: maxRequests, // z.B. 3 Requests pro Fenster
+  message: "Too many requests. Bitte später erneut versuchen.",
 });
 
 // Middleware
 app.use(bodyParser.json());
 
-console.log('[DEBUG] [server.js] Express-App und Middleware eingerichtet.');
+console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
 
 // GET /api/wahlkreise
-app.get('/api/wahlkreise', async (req, res) => {
+app.get("/api/wahlkreise", async (req, res) => {
   try {
-    console.log('[DEBUG] [server.js] Anfrage erhalten: GET /api/wahlkreise');
-    const wahlkreise = await findWahlkreisNummern('');
-    console.log(`[DEBUG] [server.js] Gefundene Wahlkreise: ${wahlkreise.length}`);
+    console.log("[DEBUG] [server.js] Anfrage erhalten: GET /api/wahlkreise");
+    const wahlkreise = await findWahlkreisNummern("");
+    console.log(
+      `[DEBUG] [server.js] Gefundene Wahlkreise: ${wahlkreise.length}`
+    );
     res.json(wahlkreise);
   } catch (error) {
-    console.error('[ERROR] [server.js] Fehler bei GET /api/wahlkreise:', error);
-    res.status(500).json({ error: 'Interner Serverfehler' });
+    console.error("[ERROR] [server.js] Fehler bei GET /api/wahlkreise:", error);
+    res.status(500).json({ error: "Interner Serverfehler" });
   }
 });
 
 // POST /api/abgeordnete-by-adresse
-app.post('/api/abgeordnete-by-adresse', async (req, res) => {
+app.post("/api/abgeordnete-by-adresse", async (req, res) => {
   try {
-    console.log('[DEBUG] [server.js] Anfrage erhalten: POST /api/abgeordnete-by-adresse');
+    console.log(
+      "[DEBUG] [server.js] Anfrage erhalten: POST /api/abgeordnete-by-adresse"
+    );
     const { ort } = req.body;
 
     if (!ort) {
-      console.warn('[WARN] [server.js] Kein Ort angegeben.');
-      return res.status(400).json({ error: 'Ort ist erforderlich' });
+      console.warn("[WARN] [server.js] Kein Ort angegeben.");
+      return res.status(400).json({ error: "Ort ist erforderlich" });
     }
 
     const wahlkreisNummern = await findWahlkreisNummern(ort);
     if (wahlkreisNummern.length === 0) {
-      console.warn(`[WARN] [server.js] Kein Wahlkreis für Ort "${ort}" gefunden.`);
-      return res.status(404).json({ error: 'Kein Wahlkreis für die angegebene Adresse gefunden' });
+      console.warn(
+        `[WARN] [server.js] Kein Wahlkreis für Ort "${ort}" gefunden.`
+      );
+      return res
+        .status(404)
+        .json({ error: "Kein Wahlkreis für die angegebene Adresse gefunden" });
     }
 
     const abgeordnete = await getFilteredAbgeordnete(wahlkreisNummern);
-    console.log(`[DEBUG] [server.js] Anzahl der gefundenen Abgeordneten: ${abgeordnete.length}`);
+    console.log(
+      `[DEBUG] [server.js] Anzahl der gefundenen Abgeordneten: ${abgeordnete.length}`
+    );
     res.json(abgeordnete);
   } catch (error) {
-    console.error('[ERROR] [server.js] Fehler bei POST /api/abgeordnete-by-adresse:', error);
-    res.status(500).json({ error: 'Interner Serverfehler' });
+    console.error(
+      "[ERROR] [server.js] Fehler bei POST /api/abgeordnete-by-adresse:",
+      error
+    );
+    res.status(500).json({ error: "Interner Serverfehler" });
   }
 });
 
@@ -105,21 +123,24 @@ app.post('/api/abgeordnete-by-adresse', async (req, res) => {
  * - mit Rate-Limiter
  * - mit Modell und max_tokens aus .env
  */
-app.post('/api/genai-brief', genAiLimiter, async (req, res) => {
+app.post("/api/genai-brief", genAiLimiter, async (req, res) => {
   try {
-    console.log('DEBUG: Request Body:', req.body); // Debugging
+    console.log("DEBUG: Request Body:", req.body); // Debugging
 
     const { userData } = req.body;
-    console.log('[DEBUG] [server.js] Anfrage erhalten: POST /api/genai-brief', userData);
+    console.log(
+      "[DEBUG] [server.js] Anfrage erhalten: POST /api/genai-brief",
+      userData
+    );
 
     if (!userData || !userData.freitext) {
-      return res.status(400).json({ error: 'Freitext oder userData fehlt.' });
+      return res.status(400).json({ error: "Freitext oder userData fehlt." });
     }
 
     // Modell aus .env
     const model = process.env.OPENAI_MODEL;
     // max_tokens aus .env (Default: 1200)
-    const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || '1200', 10);
+    const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
     // Prompt
     const prompt = `
@@ -137,38 +158,47 @@ Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen 
 Das Rahmendokument enthält bereits die Anrede und die Grußformel. Dein Beitrag beginnt nach der Anrede und endet vor der Grußformel.
 
 Informationen zu den Themen:
-${Array.isArray(userData.themen) ? userData.themen.join(', ') : 'Keine spezifischen Themen angegeben.'}
+${
+  Array.isArray(userData.themen)
+    ? userData.themen.join(", ")
+    : "Keine spezifischen Themen angegeben."
+}
 
 Freitext vom Nutzer:
-${userData.freitext || 'Kein zusätzlicher Freitext angegeben.'}
+${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
 
 Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
     `;
 
     // OpenAI-Aufruf
     const openaiResponse = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
+      "https://api.openai.com/v1/chat/completions",
       {
         model,
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: maxTokens,  // Aus .env
-        temperature: 0.7
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: maxTokens, // Aus .env
+        temperature: 0.7,
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
 
-    const generatedText = openaiResponse.data.choices?.[0]?.message?.content || '(Konnte keinen Text generieren)';
-    console.log('[DEBUG] [server.js] KI-Text generiert.');
+    const generatedText =
+      openaiResponse.data.choices?.[0]?.message?.content ||
+      "(Konnte keinen Text generieren)";
+    console.log("[DEBUG] [server.js] KI-Text generiert.");
 
     return res.json({ briefText: generatedText });
   } catch (error) {
-    console.error('[ERROR] [server.js] Fehler bei POST /api/genai-brief:', error);
-    res.status(500).json({ error: 'Interner Serverfehler bei KI-Abfrage' });
+    console.error(
+      "[ERROR] [server.js] Fehler bei POST /api/genai-brief:",
+      error
+    );
+    res.status(500).json({ error: "Interner Serverfehler bei KI-Abfrage" });
   }
 });
 

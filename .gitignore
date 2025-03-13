@@ -27,3 +27,4 @@ frontend/output.css
 .idea/
 *.swp
 *.swo
+.vercel

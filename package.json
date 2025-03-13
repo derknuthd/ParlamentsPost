@@ -5,10 +5,10 @@
   "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:css": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css --watch",
+    "build:css": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css",
     "start:backend": "nodemon backend/server.js",
     "start": "nodemon backend/server.js",
-    "build": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css"
+    "build": "npm run build:css"
   },
   "repository": {
     "type": "git",

@@ -160,15 +160,15 @@ ${this.name}
       const vorschauInhalt = document.getElementById("vorschau-inhalt");
       vorschauInhalt.innerHTML = briefText.replace(/\n/g, "<br>"); // Formatierung beibehalten
       const briefVorschau = document.getElementById("briefvorschau");
-      briefVorschau.classList.remove("hidden");
-
+      const generierenButton = document.getElementById("export-pdf-button");
+      generierenButton.disabled = false; // Button aktivieren
       // Smooth Scroll zum Briefvorschau Bereich
       briefVorschau.scrollIntoView({ behavior: "smooth" });
     },
 
-    exportiereBriefAlsPdf() {
+    briefDrucken() {
       // Implementierung hier hinzufügen
-      alert("PDF-Export noch zu implementieren.");
+      window.print();
     },
   };
 }

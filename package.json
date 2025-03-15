@@ -8,9 +8,9 @@
     "build:css": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css",
     "build:css:watch": "tailwindcss -i ./frontend/styles/styles.css -o ./frontend/styles/output.css --watch",
     "start:backend": "nodemon backend/server.js",
-    "dev": "concurrently \"npm run build:css:watch\" \"npm run start:backend\"",
-    "start": "node backend/server.js",
-    "build": "npm run build:css"
+    "start:frontend": "vite",
+    "dev": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -24,13 +24,15 @@
   },
   "homepage": "https://github.com/derknuthd/ParlamentsPost#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.2.2"
   },
   "dependencies": {
+    "alpinejs": "^3.14.9",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "csv-parser": "^3.1.0",

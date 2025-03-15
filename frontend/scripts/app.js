@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function parlamentspostApp() {
+// Export the function for Alpine.js
+export function parlamentspostApp() {
   return {
     // Dark Mode Zustand
     isDark: localStorage.getItem("isDark") === "true",
@@ -43,7 +44,7 @@ function parlamentspostApp() {
       if (!this.ort.trim()) return;
       this.isLoading = true; // Ladeindikator aktivieren
       try {
-        const response = await fetch("/api/abgeordnete-by-adresse", {
+        const response = await fetch(`/api/abgeordnete-by-adresse`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ort: this.ort.trim() }),
@@ -61,7 +62,6 @@ function parlamentspostApp() {
       }
     },
 
-    // Alte / manuelle Briefvorschau
     async generiereBrief(kiGeneriert = false) {
       const plzPattern = /^\d{5}$/;
       if (!plzPattern.test(this.plz)) {
@@ -132,7 +132,7 @@ function parlamentspostApp() {
       Ich wende mich heute an Sie bezüglich folgender Themen: ${this.themen.join(
         ", "
       )}.
-      
+
       ${this.freitext}
           `.trim();
       }
@@ -156,7 +156,6 @@ ${this.name}
       this.zeigeVorschau(briefText);
     },
 
-    // Vorschau anzeigen und smooth scrollen
     zeigeVorschau(briefText) {
       const vorschauInhalt = document.getElementById("vorschau-inhalt");
       vorschauInhalt.innerHTML = briefText.replace(/\n/g, "<br>"); // Formatierung beibehalten
@@ -167,7 +166,6 @@ ${this.name}
       briefVorschau.scrollIntoView({ behavior: "smooth" });
     },
 
-    // Export-Funktionen (Nur PDF verbleibt)
     exportiereBriefAlsPdf() {
       // Implementierung hier hinzufügen
       alert("PDF-Export noch zu implementieren.");

@@ -1,16 +1,19 @@
 //frontend/loadComponents.js
-// Lade Komponenten (Header & Footer)
-async function loadComponent(id, url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP-Error! status: ${response.status}`);
-    }
-    const content = await response.text();
-    document.getElementById(id).innerHTML = content;
-  } catch (error) {
-    console.error(`Fehler beim Laden der Komponente ${url}:`, error);
-  }
-}
-loadComponent("header", "components/Header.html");
-loadComponent("footer", "components/Footer.html");
+// Load header and footer components
+document.addEventListener("DOMContentLoaded", () => {
+  // Load header
+  fetch("/components/header.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("header").innerHTML = data;
+    })
+    .catch((error) => console.error("Error loading header:", error));
+
+  // Load footer
+  fetch("/components/footer.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("footer").innerHTML = data;
+    })
+    .catch((error) => console.error("Error loading footer:", error));
+});

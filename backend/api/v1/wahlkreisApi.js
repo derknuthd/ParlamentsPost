@@ -22,16 +22,16 @@ function log(level, message) {
 // Middleware to parse JSON requests
 app.use(express.json());
 
-// Endpoint to get Wahlkreis-Nr by Gemeindename und Wahl
+// Endpoint to get Wahlkreis-Nr by Gemeindename oder Gemeindeverband und Wahl
 app.get("/api/v1/:wahl/wahlkreis", async (req, res) => {
   const { wahl } = req.params; // Wahl (z. B. "BTW25") aus der URL
-  const gemeindename = req.query.gemeindename;
+  const suchbegriff = req.query.suchbegriff; // Gemeindename oder Gemeindeverband
 
-  log("DEBUG", `Anfrage erhalten: Wahl=${wahl}, Gemeindename=${gemeindename}`);
+  log("DEBUG", `Anfrage erhalten: Wahl=${wahl}, Suchbegriff=${suchbegriff}`);
 
-  if (!gemeindename) {
-    log("ERROR", "Kein Gemeindename angegeben.");
-    return res.status(400).json({ error: "Gemeindename ist erforderlich" });
+  if (!suchbegriff) {
+    log("ERROR", "Kein Suchbegriff angegeben.");
+    return res.status(400).json({ error: "Suchbegriff ist erforderlich" });
   }
 
   // Dynamischer Pfad zur CSV-Datei basierend auf der Wahl
@@ -51,7 +51,7 @@ app.get("/api/v1/:wahl/wahlkreis", async (req, res) => {
   }
 
   try {
-    const results = [];
+    const results = new Set(); // Set für eindeutige Wahlkreisnummern
     log("INFO", "Beginne mit dem Einlesen der CSV-Datei...");
 
     const stream = fs
@@ -60,30 +60,34 @@ app.get("/api/v1/:wahl/wahlkreis", async (req, res) => {
       .on("data", (row) => {
         log("DEBUG", `Gelesene Zeile: ${JSON.stringify(row)}`);
 
-        // Prüfen, ob der Gemeindename teilweise übereinstimmt, aber mit Mindestlänge
-        if (
-          gemeindename.trim().length >= 3 && // Mindestlänge von 3 Zeichen
-          row["Gemeindename"]
-            ?.trim()
-            .toLowerCase()
-            .includes(gemeindename.trim().toLowerCase())
-        ) {
+        // Prüfen, ob der Suchbegriff im Gemeindename oder Gemeindeverband enthalten ist
+        const gemeindenameMatch = row["Gemeindename"]
+          ?.trim()
+          .toLowerCase()
+          .includes(suchbegriff.trim().toLowerCase());
+        const gemeindeverbandMatch = row["GemVerband-Name"]
+          ?.trim()
+          .toLowerCase()
+          .includes(suchbegriff.trim().toLowerCase());
+
+        if (gemeindenameMatch || gemeindeverbandMatch) {
           log("DEBUG", `Treffer gefunden: ${JSON.stringify(row)}`);
-          results.push(row["Wahlkreis-Nr"]?.trim()); // Trimmen des Werts
+          results.add(row["Wahlkreis-Nr"]?.trim()); // Wahlkreisnummer zum Set hinzufügen
         }
       })
       .on("end", () => {
         log("INFO", "Einlesen der CSV-Datei abgeschlossen.");
-        if (results.length > 0) {
-          log("INFO", `Ergebnisse gefunden: ${results}`);
-          res.json({ gemeindename, wahlkreisNr: results });
+        if (results.size > 0) {
+          const uniqueResults = Array.from(results); // Set in Array umwandeln
+          log("INFO", `Eindeutige Ergebnisse gefunden: ${uniqueResults}`);
+          res.json({ suchbegriff, wahlkreisNr: uniqueResults });
         } else {
           log(
             "WARN",
-            `Kein Wahlkreis für die Gemeinde "${gemeindename}" gefunden.`
+            `Kein Wahlkreis für den Suchbegriff "${suchbegriff}" gefunden.`
           );
           res.status(404).json({
-            error: `Kein Wahlkreis für die Gemeinde "${gemeindename}" gefunden.`,
+            error: `Kein Wahlkreis für den Suchbegriff "${suchbegriff}" gefunden.`,
           });
         }
       });

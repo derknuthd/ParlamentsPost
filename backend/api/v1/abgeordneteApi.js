@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const app = express();
+const router = express.Router(); // Ändere von `app` zu `router`
 
 // Log-Level aus der .env-Datei
 const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
@@ -22,7 +22,7 @@ function log(level, message, data = null) {
 }
 
 // API-Route
-app.get("/api/v1/:wahl/abgeordnete", (req, res) => {
+router.get("/:wahl/abgeordnete", (req, res) => {
   const { wahl } = req.params;
   const { wahlkreis, wohnort } = req.query;
 
@@ -32,7 +32,8 @@ app.get("/api/v1/:wahl/abgeordnete", (req, res) => {
   if (!wahlkreis && !wohnort) {
     log("WARN", "Wahlkreis- und Wohnort-Parameter fehlen");
     return res.status(400).json({
-      error: "Es muss mindestens ein Wahlkreis oder ein Wohnort angegeben werden.",
+      error:
+        "Es muss mindestens ein Wahlkreis oder ein Wohnort angegeben werden.",
     });
   }
 
@@ -57,6 +58,10 @@ app.get("/api/v1/:wahl/abgeordnete", (req, res) => {
     const rawData = fs.readFileSync(abgeordneteIndexPath, "utf8");
     abgeordneteIndex = JSON.parse(rawData);
     log("INFO", "JSON-Datei erfolgreich geladen");
+    log("DEBUG", "Geladene Daten", {
+      wahlkreise: Object.keys(abgeordneteIndex.wahlkreise || {}),
+      wohnorte: Object.keys(abgeordneteIndex.wohnorte || {}),
+    });
   } catch (error) {
     log("ERROR", "Fehler beim Laden der JSON-Datei", { error: error.message });
     return res
@@ -76,9 +81,14 @@ app.get("/api/v1/:wahl/abgeordnete", (req, res) => {
 
     wahlkreisIds.forEach((id) => {
       if (abgeordneteIndex.wahlkreise[id]) {
+        log("DEBUG", `Abgeordnete für Wahlkreis-ID "${id}" gefunden`, {
+          abgeordnete: abgeordneteIndex.wahlkreise[id],
+        });
         abgeordneteIndex.wahlkreise[id].forEach((abgeordneter) =>
           results.add(JSON.stringify(abgeordneter))
         );
+      } else {
+        log("WARN", `Keine Abgeordneten für Wahlkreis-ID "${id}" gefunden.`);
       }
     });
   }
@@ -90,9 +100,14 @@ app.get("/api/v1/:wahl/abgeordnete", (req, res) => {
 
     wohnorte.forEach((ort) => {
       if (abgeordneteIndex.wohnorte[ort]) {
+        log("DEBUG", `Abgeordnete für Wohnort "${ort}" gefunden`, {
+          abgeordnete: abgeordneteIndex.wohnorte[ort],
+        });
         abgeordneteIndex.wohnorte[ort].forEach((abgeordneter) =>
           results.add(JSON.stringify(abgeordneter))
         );
+      } else {
+        log("WARN", `Keine Abgeordneten für Wohnort "${ort}" gefunden.`);
       }
     });
   }
@@ -116,4 +131,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = app;
+module.exports = router;

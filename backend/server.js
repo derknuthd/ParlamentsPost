@@ -77,24 +77,15 @@ console.log("[DEBUG] [server.js] Rate-Limiter eingerichtet.");
 
 // Einbindung der separaten API-Routen
 app.use(
-  "/api/v1/:wahl/wahlkreis",
+  "/api/v1", // Präfix für alle API-Routen
   rateLimiter,
   (req, res, next) => {
-    console.log(`[DEBUG] Anfrage an /api/v1/${req.params.wahl}/wahlkreis`);
+    console.log(`[DEBUG] Anfrage an ${req.originalUrl}`);
     next();
-  },
-  wahlkreisApi
+  }
 );
-
-app.use(
-  "/api/v1/:wahl/abgeordnete",
-  rateLimiter,
-  (req, res, next) => {
-    console.log(`[DEBUG] Anfrage an /api/v1/${req.params.wahl}/abgeordnete`);
-    next();
-  },
-  abgeordneteApi
-);
+app.use("/api/v1", wahlkreisApi); // Binde den wahlkreisApi-Router ein
+app.use("/api/v1", abgeordneteApi); // Binde den abgeordneteApi-Router ein
 
 // POST /api/genai-brief
 app.post("/api/genai-brief", rateLimiter, async (req, res) => {

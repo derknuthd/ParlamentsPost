@@ -45,6 +45,8 @@ function formatFullName(personendaten) {
 function processKandidatenData(parsedData) {
   const wahlkreise = {};
   const wohnorte = {};
+  const idMap = new Map(); // Map zur Speicherung von IDs
+  let currentId = 1; // Start-ID
 
   // Kandidaten Array sicherstellen
   const kandidaten = parsedData.Kandidaten.Kandidat;
@@ -83,7 +85,21 @@ function processKandidatenData(parsedData) {
     const wohnort1 = personendaten.$.Wohnort1 || "ohneWohnort";
 
     // Abgeordneter-Daten extrahieren
+    const abgeordneterKey = `${formatFullName(
+      personendaten
+    )}|${partei}|${wahlkreisName}|${wohnort1}`;
+    let id;
+
+    // Prüfen, ob die Person bereits eine ID hat
+    if (idMap.has(abgeordneterKey)) {
+      id = idMap.get(abgeordneterKey);
+    } else {
+      id = currentId++;
+      idMap.set(abgeordneterKey, id);
+    }
+
     const abgeordneter = {
+      id,
       name: formatFullName(personendaten),
       partei,
       wahlkreis: wahlkreisName,

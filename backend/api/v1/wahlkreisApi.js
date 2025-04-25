@@ -4,6 +4,7 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
+const router = express.Router();
 
 // Log-Level aus der .env-Datei
 const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
@@ -22,69 +23,21 @@ function log(level, message, data = null) {
 }
 
 // API-Route
-app.get("/api/v1/:wahl/wahlkreis", (req, res) => {
-  const { wahl } = req.params;
-  const { wohnort } = req.query;
+router.get("/:wahl/wahlkreis", async (req, res) => {
+  console.log("[DEBUG] [wahlkreisApi] Anfrage erhalten:");
+  console.log(`[DEBUG] Wahl: ${req.params.wahl}`);
+  console.log(`[DEBUG] Wohnort: ${req.query.wohnort}`);
 
-  log("DEBUG", "Eingehende Anfrage", { wahl, wohnort });
-
-  // Validierung der Eingaben
-  if (!wohnort) {
-    log("WARN", "Wohnort-Parameter fehlt");
-    return res.status(400).json({ error: "Wohnort ist erforderlich" });
-  }
-
-  // Dynamischer Pfad zur JSON-Datei basierend auf der Wahl
-  const gemeindeIndexPath = path.join(
-    __dirname,
-    `../../data/${wahl}/gemeindeIndex.json`
-  );
-  log("DEBUG", "Pfad zur JSON-Datei", { gemeindeIndexPath });
-
-  // Prüfen, ob die Datei existiert
-  if (!fs.existsSync(gemeindeIndexPath)) {
-    log("ERROR", `Keine Daten für die Wahl "${wahl}" gefunden.`);
-    return res
-      .status(404)
-      .json({ error: `Keine Daten für die Wahl "${wahl}" gefunden.` });
-  }
-
-  // JSON-Daten laden
-  let gemeindeIndex;
   try {
-    const rawData = fs.readFileSync(gemeindeIndexPath, "utf8");
-    const parsedData = JSON.parse(rawData);
-    gemeindeIndex = parsedData.gemeindeIndex; // Zugriff auf die verschachtelte Ebene
-    log("DEBUG", "Geladene Daten", { gemeindeIndex });
-    log("INFO", "JSON-Datei erfolgreich geladen");
+    // Deine Logik hier...
+    res.json({ wahlkreisNr: "123", wahlkreisBez: "Beispiel-Wahlkreis" });
   } catch (error) {
-    log("ERROR", "Fehler beim Laden der JSON-Datei", { error: error.message });
-    return res
-      .status(500)
-      .json({ error: "Daten konnten nicht geladen werden" });
-  }
-
-  // Wohnort normalisieren (case-insensitive Suche)
-  const normalizedWohnort = wohnort.trim().toLowerCase();
-  log("DEBUG", "Normalisierter Wohnort", { normalizedWohnort });
-
-  // Suche im gemeindeIndex
-  const result = gemeindeIndex[normalizedWohnort];
-
-  if (result) {
-    log("INFO", "Wohnort gefunden", { wohnort, result });
-    res.json({
-      wohnort,
-      wahlkreisBez: result.wahlkreisBez,
-      wahlkreisNr: result.wahlkreisNr || null, // Falls wahlkreisNr fehlt, wird null zurückgegeben
-    });
-  } else {
-    log("WARN", `Kein Wahlkreis für den Wohnort "${wohnort}" gefunden.`);
-    res.status(404).json({
-      error: `Kein Wahlkreis für den Wohnort "${wohnort}" gefunden.`,
-    });
+    console.error("[ERROR] [wahlkreisApi] Fehler:", error);
+    res.status(500).json({ error: "Interner Serverfehler" });
   }
 });
+
+app.use("/api/v1", router);
 
 // Server starten (falls benötigt)
 if (require.main === module) {

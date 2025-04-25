@@ -44,19 +44,41 @@ export function parlamentspostApp() {
       if (!this.ort.trim()) return;
       this.isLoading = true; // Ladeindikator aktivieren
       try {
-        const response = await fetch(`/api/abgeordnete-by-adresse`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ort: this.ort.trim() }),
-        });
-        if (!response.ok) {
-          const err = await response.json();
+        // 1. Zuerst den Wahlkreis für den Ort abrufen
+        const wahlkreisResponse = await fetch(`/api/v1/BTW25/wahlkreis?wohnort=${encodeURIComponent(this.ort.trim())}`);
+        
+        if (!wahlkreisResponse.ok) {
+          const err = await wahlkreisResponse.json();
+          throw new Error(err.error || "Fehler beim Abrufen des Wahlkreises.");
+        }
+        
+        const wahlkreisData = await wahlkreisResponse.json();
+        
+        if (!wahlkreisData || !wahlkreisData.wahlkreisNr) {
+          throw new Error(`Kein Wahlkreis für "${this.ort}" gefunden.`);
+        }
+        
+        // 2. Mit der Wahlkreisnummer die Abgeordneten abrufen
+        const abgeordneteResponse = await fetch(`/api/v1/BTW25/abgeordnete?wahlkreis=${wahlkreisData.wahlkreisNr}&wohnort=${encodeURIComponent(this.ort.trim())}`);
+        
+        if (!abgeordneteResponse.ok) {
+          const err = await abgeordneteResponse.json();
           throw new Error(err.error || "Fehler beim Abrufen der Abgeordneten.");
         }
-        this.abgeordneteListe = await response.json();
+        
+        this.abgeordneteListe = await abgeordneteResponse.json();
+        
+        // Für die Anzeige im Format "WahlkreisName: Abgeordnete (Partei), wohnhaft in Wohnort"
+        // müssen wir sicherstellen, dass die Wahlkreisbezeichnung und der Wohnort vorhanden sind
+        this.abgeordneteListe = this.abgeordneteListe.map(abg => ({
+          ...abg,
+          wkr_bezeichnung: wahlkreisData.wahlkreisBez || "Unbekannter Wahlkreis"
+        }));
+        
       } catch (error) {
         alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);
         console.error(error);
+        this.abgeordneteListe = [];
       } finally {
         this.isLoading = false; // Ladeindikator deaktivieren
       }

@@ -64,16 +64,19 @@ function processKandidatenData(parsedData) {
 
     // Wahlkreis aus Verknüpfung holen
     let wahlkreisNummer = "ohneWahlkreis";
+    let wahlkreisName = "Unbekannt";
     if (
       wahldaten.Verknuepfung &&
       wahldaten.Verknuepfung.$.Gebietsart === "WAHLKREIS"
     ) {
       wahlkreisNummer = wahldaten.Verknuepfung.$.Gebietsnummer;
+      wahlkreisName = wahldaten.Verknuepfung.$.Gebietsname || "Unbekannt";
     } else if (
       wahldaten.Direkt &&
       wahldaten.Direkt.$.Gebietsart === "WAHLKREIS"
     ) {
       wahlkreisNummer = wahldaten.Direkt.$.Gebietsnummer;
+      wahlkreisName = wahldaten.Direkt.$.Gebietsname || "Unbekannt";
     }
 
     // Wohnort1 extrahieren
@@ -83,6 +86,8 @@ function processKandidatenData(parsedData) {
     const abgeordneter = {
       name: formatFullName(personendaten),
       partei,
+      wahlkreis: wahlkreisName,
+      wohnort: wohnort1,
     };
 
     // Nach Wahlkreis gruppieren

@@ -1,4 +1,3 @@
-// backend/server.js
 require("dotenv").config(); // Lädt die .env aus dem Projekt-Root
 
 const express = require("express");
@@ -7,7 +6,9 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 const rateLimit = require("express-rate-limit");
 
-const { findWahlkreisNummern } = require("./services/wahlkreisService");
+// Import der API-Logik aus wahlkreisApi.js
+const wahlkreisApi = require("./api/v1/wahlkreisApi");
+
 const { getFilteredAbgeordnete } = require("./services/abgeordneteService");
 
 const app = express();
@@ -23,18 +24,12 @@ if (process.env.ALLOWED_ORIGINS) {
   allowedOrigins = process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim());
 }
 
-// Falls ALLOWED_ORIGINS fehlt, lassen wir notfalls alles durch (oder blocken alles, je nach Wunsch)
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Kein Origin? (z.B. Postman) -> Blockieren
       if (!origin)
         return callback(new Error(`CORS Error: Origin not allowed!`));
-
-      // Wenn in .env-Liste -> erlauben
       if (allowedOrigins.includes(origin)) return callback(null, true);
-
-      // Sonst blocken
       callback(new Error(`CORS Error: Origin ${origin} not allowed!`));
     },
   })
@@ -42,46 +37,38 @@ app.use(
 
 /**
  * ===========================
- * 2) Rate-Limiter konfigurieren
+ * 2) Middleware
  * ===========================
- * Steht in .env:
- * RATE_LIMIT_WINDOW_SECONDS=60
- * RATE_LIMIT_MAX=3
  */
-const windowSeconds = parseInt(
-  process.env.RATE_LIMIT_WINDOW_SECONDS || "60",
-  10
-);
-const maxRequests = parseInt(process.env.RATE_LIMIT_MAX || "3", 10);
-
-const genAiLimiter = rateLimit({
-  windowMs: windowSeconds * 1000, // z.B. 60 Sekunden
-  max: maxRequests, // z.B. 3 Requests pro Fenster
-  message: "Too many requests. Bitte später erneut versuchen.",
-});
-
-// Middleware
 app.use(bodyParser.json());
 
 console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
 
-// GET /api/wahlkreise
-app.get("/api/wahlkreise", async (req, res) => {
-  try {
-    console.log("[DEBUG] [server.js] Anfrage erhalten: GET /api/wahlkreise");
-    const wahlkreise = await findWahlkreisNummern("");
-    console.log(
-      `[DEBUG] [server.js] Gefundene Wahlkreise: ${wahlkreise.length}`
-    );
-    res.json(wahlkreise);
-  } catch (error) {
-    console.error("[ERROR] [server.js] Fehler bei GET /api/wahlkreise:", error);
-    res.status(500).json({ error: "Interner Serverfehler" });
-  }
+/**
+ * ===========================
+ * 3) Rate-Limiter
+ * ===========================
+ */
+const rateLimiter = rateLimit({
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS || "60", 10) * 1000, // Zeitfenster in Millisekunden
+  max: parseInt(process.env.RATE_LIMIT_MAX || "10", 10), // Maximale Anfragen pro Zeitfenster
+  message: "Too many requests. Bitte später erneut versuchen.",
 });
 
+console.log("[DEBUG] [server.js] Rate-Limiter eingerichtet.");
+
+/**
+ * ===========================
+ * 4) API-Routen
+ * ===========================
+ */
+
+// Neue Route: /api/v1/:wahl/wahlkreis
+// Die Logik wird aus wahlkreisApi.js eingebunden
+app.use("/api/v1/:wahl/wahlkreis", rateLimiter, wahlkreisApi);
+
 // POST /api/abgeordnete-by-adresse
-app.post("/api/abgeordnete-by-adresse", async (req, res) => {
+app.post("/api/abgeordnete-by-adresse", rateLimiter, async (req, res) => {
   try {
     console.log(
       "[DEBUG] [server.js] Anfrage erhalten: POST /api/abgeordnete-by-adresse"
@@ -93,8 +80,33 @@ app.post("/api/abgeordnete-by-adresse", async (req, res) => {
       return res.status(400).json({ error: "Ort ist erforderlich" });
     }
 
-    const wahlkreisNummern = await findWahlkreisNummern(ort);
-    if (wahlkreisNummern.length === 0) {
+    // Standardwahl auf BTW25 setzen
+    const wahl = "BTW25";
+
+    // Funktionalität aus wahlkreisApi.js direkt nutzen
+    const gemeindeIndexPath = `./data/${wahl}/gemeindeIndex.json`;
+    const fs = require("fs");
+    const path = require("path");
+
+    if (!fs.existsSync(path.join(__dirname, gemeindeIndexPath))) {
+      console.warn(
+        `[WARN] [server.js] Datei nicht gefunden: ${gemeindeIndexPath}`
+      );
+      return res
+        .status(404)
+        .json({ error: `Daten für die Wahl "${wahl}" nicht gefunden.` });
+    }
+
+    const rawData = fs.readFileSync(
+      path.join(__dirname, gemeindeIndexPath),
+      "utf8"
+    );
+    const gemeindeIndex = JSON.parse(rawData).gemeindeIndex;
+
+    const normalizedWohnort = ort.trim().toLowerCase();
+    const result = gemeindeIndex[normalizedWohnort];
+
+    if (!result || !result.wahlkreisNr) {
       console.warn(
         `[WARN] [server.js] Kein Wahlkreis für Ort "${ort}" gefunden.`
       );
@@ -103,6 +115,9 @@ app.post("/api/abgeordnete-by-adresse", async (req, res) => {
         .json({ error: "Kein Wahlkreis für die angegebene Adresse gefunden" });
     }
 
+    const wahlkreisNummern = [result.wahlkreisNr];
+
+    // Abgeordnete basierend auf den Wahlkreisnummern filtern
     const abgeordnete = await getFilteredAbgeordnete(wahlkreisNummern);
     console.log(
       `[DEBUG] [server.js] Anzahl der gefundenen Abgeordneten: ${abgeordnete.length}`
@@ -117,14 +132,8 @@ app.post("/api/abgeordnete-by-adresse", async (req, res) => {
   }
 });
 
-/**
- * ===========================
- * 3) POST /api/genai-brief
- * ===========================
- * - mit Rate-Limiter
- * - mit Modell und max_tokens aus .env
- */
-app.post("/api/genai-brief", genAiLimiter, async (req, res) => {
+// POST /api/genai-brief
+app.post("/api/genai-brief", rateLimiter, async (req, res) => {
   try {
     console.log("DEBUG: Request Body:", req.body); // Debugging
 
@@ -138,12 +147,9 @@ app.post("/api/genai-brief", genAiLimiter, async (req, res) => {
       return res.status(400).json({ error: "Freitext oder userData fehlt." });
     }
 
-    // Modell aus .env
     const model = process.env.OPENAI_MODEL;
-    // max_tokens aus .env (Default: 1200)
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
-    // Prompt
     const prompt = `
 Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll. 
 Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens. 
@@ -169,15 +175,91 @@ Freitext vom Nutzer:
 ${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
 
 Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
-    `;
+      `;
 
-    // OpenAI-Aufruf
     const openaiResponse = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
         model,
         messages: [{ role: "user", content: prompt }],
-        max_tokens: maxTokens, // Aus .env
+        max_tokens: maxTokens,
+        temperature: 0.7,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const generatedText =
+      openaiResponse.data.choices?.[0]?.message?.content ||
+      "(Konnte keinen Text generieren)";
+    console.log("[DEBUG] [server.js] KI-Text generiert.");
+
+    return res.json({ briefText: generatedText });
+  } catch (error) {
+    console.error(
+      "[ERROR] [server.js] Fehler bei POST /api/genai-brief:",
+      error
+    );
+    res.status(500).json({ error: "Interner Serverfehler bei KI-Abfrage" });
+  }
+});
+
+//
+// POST /api/genai-brief
+app.post("/api/genai-brief", rateLimiter, async (req, res) => {
+  try {
+    console.log("DEBUG: Request Body:", req.body); // Debugging
+
+    const { userData } = req.body;
+    console.log(
+      "[DEBUG] [server.js] Anfrage erhalten: POST /api/genai-brief",
+      userData
+    );
+
+    if (!userData || !userData.freitext) {
+      return res.status(400).json({ error: "Freitext oder userData fehlt." });
+    }
+
+    const model = process.env.OPENAI_MODEL;
+    const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
+
+    const prompt = `
+Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll. 
+Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens. 
+Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden:
+- Absender
+- Ort und Datum
+- Empfängerinformationen
+- Anrede (z. B. "Sehr geehrte/r Frau/Herr [Nachname]")
+- Grußformel (z. B. "Mit freundlichen Grüßen")
+- Unterschrift
+- Name unter der Unterschrift
+
+Das Rahmendokument enthält bereits die Anrede und die Grußformel. Dein Beitrag beginnt nach der Anrede und endet vor der Grußformel.
+
+Informationen zu den Themen:
+${
+  Array.isArray(userData.themen)
+    ? userData.themen.join(", ")
+    : "Keine spezifischen Themen angegeben."
+}
+
+Freitext vom Nutzer:
+${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
+
+Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
+      `;
+
+    const openaiResponse = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model,
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: maxTokens,
         temperature: 0.7,
       },
       {

@@ -3,14 +3,17 @@
 const fs = require("fs");
 const path = require("path");
 const { XMLParser } = require("fast-xml-parser");
-const { getWahlkreisBezeichnung } = require("./wahlkreisService");
+// const { getWahlkreisBezeichnung } = require("./wahlkreisService"); // Auskommentiert, da nicht mehr benötigt
 
 let cachedAbgeordnete = null;
 let lastModified = null;
 
 // Funktion zum Abrufen gefilterter Abgeordneten basierend auf Wahlkreisnummern
 const getFilteredAbgeordnete = async (wkrNummern = []) => {
-  const abgeordnetePath = path.join(__dirname, "../data/MDB_STAMMDATEN.XML");
+  const abgeordnetePath = path.join(
+    __dirname,
+    "../data/BTW21/MDB_STAMMDATEN.XML"
+  );
   const stats = fs.statSync(abgeordnetePath);
   const modifiedTime = stats.mtimeMs;
 
@@ -70,7 +73,7 @@ const getFilteredAbgeordnete = async (wkrNummern = []) => {
     `[DEBUG] [getFilteredAbgeordnete] Anzahl der Abgeordneten in Wahlperiode 20: ${gefilterteAbgeordnete.length}`
   );
 
-  // Daten bereinigen und Wahlkreisbezeichnung holen
+  // Daten bereinigen und Wahlkreisbezeichnung entfernen
   const bereinigteAbgeordnete = [];
   for (const abg of gefilterteAbgeordnete) {
     const namen = abg.NAMEN.NAME;
@@ -94,17 +97,18 @@ const getFilteredAbgeordnete = async (wkrNummern = []) => {
       wkr_nummer = String(wahlperiode20.WKR_NUMMER).padStart(3, "0");
     }
 
-    let wkr_bezeichnung = "Wahlkreis unbekannt";
-    if (wkr_nummer) {
-      wkr_bezeichnung = await getWahlkreisBezeichnung(wkr_nummer);
-    }
+    // Wahlkreisbezeichnung wird nicht mehr geholt
+    // let wkr_bezeichnung = "Wahlkreis unbekannt";
+    // if (wkr_nummer) {
+    //   wkr_bezeichnung = await getWahlkreisBezeichnung(wkr_nummer);
+    // }
 
     bereinigteAbgeordnete.push({
       id,
       name,
       partei,
       wkr_nummer,
-      wkr_bezeichnung,
+      // wkr_bezeichnung, // Auskommentiert, da nicht mehr benötigt
     });
   }
 

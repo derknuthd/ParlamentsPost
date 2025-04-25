@@ -5,10 +5,10 @@ const xml2js = require("xml2js");
 // Pfad zur XML-Datei
 const xmlFilePath = path.join(__dirname, "../data/BTW25/gewaehlte_02.xml");
 
-// Pfad zur Ausgabe-JSON-Datei
+// Neuer Pfad zur Ausgabe-JSON-Datei
 const outputJsonPath = path.join(
   __dirname,
-  "../data/BTW25/processedGewaehlt.json"
+  "../data/BTW25/abgeordneteIndex.json"
 );
 
 // Funktion, um die XML-Daten zu parsen
@@ -25,25 +25,35 @@ function parseXmlToJson(xmlData) {
 // Funktion, um den vollständigen Namen zu formatieren
 function formatFullName(personendaten) {
   const titel = personendaten.$.Titel ? `${personendaten.$.Titel} ` : "";
-  const rufname = personendaten.$.Rufname ? `"${personendaten.$.Rufname}" ` : "";
   const vorname = personendaten.$.Vorname || "";
+  const rufname = personendaten.$.Rufname || "";
+  const namensbestandteile = personendaten.$.Namensbestandteile
+    ? `${personendaten.$.Namensbestandteile} `
+    : "";
   const name = personendaten.$.Name || "Unbekannt";
-  return `${titel}${rufname}${vorname} ${name}`.trim();
+
+  // Prüfen, ob der Rufname eine Teilmenge des Vornamens ist
+  const rufnameAusgabe =
+    rufname && !vorname.toLowerCase().includes(rufname.toLowerCase())
+      ? `"${rufname}" `
+      : "";
+
+  return `${titel}${rufnameAusgabe}${vorname} ${namensbestandteile}${name}`.trim();
 }
 
 // Funktion, um die Daten zu verarbeiten
 function processKandidatenData(parsedData) {
   const wahlkreise = {};
-  const ohneWahlkreis = []; // Sammlung für Abgeordnete ohne Wahlkreis
-  
+  const wohnorte = {};
+
   // Kandidaten Array sicherstellen
   const kandidaten = parsedData.Kandidaten.Kandidat;
   const kandidatenArray = Array.isArray(kandidaten) ? kandidaten : [kandidaten];
-  
-  kandidatenArray.forEach((kandidat, index) => {
+
+  kandidatenArray.forEach((kandidat) => {
     const personendaten = kandidat.Personendaten;
     const wahldaten = kandidat.Wahldaten;
-    
+
     // Partei aus Liste holen, falls vorhanden
     let partei = "Unbekannt";
     if (wahldaten.Liste) {
@@ -51,42 +61,52 @@ function processKandidatenData(parsedData) {
     } else if (wahldaten.Direkt) {
       partei = wahldaten.Direkt.$.Gruppenname;
     }
-    
+
     // Wahlkreis aus Verknüpfung holen
-    let wahlkreisNummer = "ohne";
-    if (wahldaten.Verknuepfung && 
-        wahldaten.Verknuepfung.$.Gebietsart === "WAHLKREIS") {
+    let wahlkreisNummer = "ohneWahlkreis";
+    if (
+      wahldaten.Verknuepfung &&
+      wahldaten.Verknuepfung.$.Gebietsart === "WAHLKREIS"
+    ) {
       wahlkreisNummer = wahldaten.Verknuepfung.$.Gebietsnummer;
-    } else if (wahldaten.Direkt && 
-               wahldaten.Direkt.$.Gebietsart === "WAHLKREIS") {
+    } else if (
+      wahldaten.Direkt &&
+      wahldaten.Direkt.$.Gebietsart === "WAHLKREIS"
+    ) {
       wahlkreisNummer = wahldaten.Direkt.$.Gebietsnummer;
     }
-    
-    // Debugging-Log für jeden Kandidaten
-    console.log(`Verarbeite Kandidat ${index + 1}:`, 
-                personendaten.$.Name, 
-                "Wahlkreis:", wahlkreisNummer, 
-                "Partei:", partei);
-    
+
+    // Wohnort1 extrahieren
+    const wohnort1 = personendaten.$.Wohnort1 || "ohneWohnort";
+
     // Abgeordneter-Daten extrahieren
     const abgeordneter = {
       name: formatFullName(personendaten),
       partei,
     };
-    
-    // Abgeordnete ohne Wahlkreis sammeln
-    if (wahlkreisNummer === "ohne") {
-      ohneWahlkreis.push(abgeordneter);
-    } else {
-      // Abgeordnete nach Wahlkreis gruppieren
-      if (!wahlkreise[wahlkreisNummer]) {
-        wahlkreise[wahlkreisNummer] = [];
-      }
-      wahlkreise[wahlkreisNummer].push(abgeordneter);
+
+    // Nach Wahlkreis gruppieren
+    if (!wahlkreise[wahlkreisNummer]) {
+      wahlkreise[wahlkreisNummer] = [];
     }
+    wahlkreise[wahlkreisNummer].push(abgeordneter);
+
+    // Nach Wohnort gruppieren
+    if (!wohnorte[wohnort1]) {
+      wohnorte[wohnort1] = [];
+    }
+    wohnorte[wohnort1].push(abgeordneter);
   });
-  
-  return { wahlkreise, ohneWahlkreis };
+
+  // Wohnorte alphabetisch sortieren
+  const sortedWohnorte = Object.keys(wohnorte)
+    .sort((a, b) => a.localeCompare(b, "de", { sensitivity: "base" }))
+    .reduce((acc, key) => {
+      acc[key] = wohnorte[key];
+      return acc;
+    }, {});
+
+  return { wahlkreise, wohnorte: sortedWohnorte };
 }
 
 // Hauptfunktion
@@ -94,16 +114,15 @@ async function main() {
   try {
     console.log("Lese XML-Datei ein...");
     const xmlData = fs.readFileSync(xmlFilePath, "utf8");
-    
+
     console.log("Parsen der XML-Daten...");
     const parsedData = await parseXmlToJson(xmlData);
-    
+
     console.log("Verarbeite Kandidaten-Daten...");
     const processedData = processKandidatenData(parsedData);
-    
+
     console.log("Speichere JSON-Datei...");
     fs.writeFileSync(outputJsonPath, JSON.stringify(processedData, null, 2));
-    
     console.log(`JSON-Datei gespeichert unter: ${outputJsonPath}`);
   } catch (error) {
     console.error("Fehler:", error.message);

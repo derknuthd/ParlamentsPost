@@ -1,0 +1,6494 @@
+{
+  "wahlkreise": {
+    "1": [
+      {
+        "name": "Lorenz Gösta Beutin",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Stefan Seidler",
+        "partei": "Südschleswigscher Wählerverband"
+      },
+      {
+        "name": "Robert Habeck",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "2": [
+      {
+        "name": "Kurt Klaus Kleinschmidt",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Denise Loop",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Truels Reichardt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Leif Erik Bodin",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "3": [
+      {
+        "name": "Mark Helfrich",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "4": [
+      {
+        "name": "Gereon Martin Bollmann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Johann David Walter Rudolf Wadephul",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "5": [
+      {
+        "name": "Tamara Ursula Katharina Mazzi",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Luise Amtsberg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "6": [
+      {
+        "name": "Sandra Carstensen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "7": [
+      {
+        "name": "Dr. Ralf Alexander Stegner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Daniel Kölbl",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "8": [
+      {
+        "name": "Melanie Bernstein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Sven Wendorf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "9": [
+      {
+        "name": "Bettina Hagedorn",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Ralf Volker Schnurrbusch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sebastian Schmidt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "10": [
+      {
+        "name": "Dr. Nina Scheer",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Konstantin von Notz",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Henri Schmidt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "11": [
+      {
+        "name": "Kerstin Przygodda",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Tim Klüssendorf",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "12": [
+      {
+        "name": "Reem Alabali-Radovan",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Leif-Erik Holm",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Ina Latendorf",
+        "partei": "Die Linke"
+      }
+    ],
+    "13": [
+      {
+        "name": "Simone Borchardt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Frank Michael Junge",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Christoph Herbert Walter Grimm",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "14": [
+      {
+        "name": "Dr. Dietmar Gerhard Bartsch",
+        "partei": "Die Linke"
+      }
+    ],
+    "15": [
+      {
+        "name": "Claudia Heike Müller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Georg Günther",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dario Seifert",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "16": [
+      {
+        "name": "Philipp Amthor",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Enrico Komning",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "17": [
+      {
+        "name": "Ulrike Schielke-Ziesing",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "18": [
+      {
+        "name": "Falko Droßmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Christoph Bernhard de Vries",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "19": [
+      {
+        "name": "Dr. Bernd Baumann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Linda Heitmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "20": [
+      {
+        "name": "Dr. Alexander Herbert Wolf",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Till Benjamin Steffen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "21": [
+      {
+        "name": "Katharina Barbara Maria Beck",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Christoph Johannes Ploß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "22": [
+      {
+        "name": "Franziska Christina Brigitte Hoppermann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Saliha Aydan Özoğuz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "23": [
+      {
+        "name": "Metin Hakverdi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "24": [
+      {
+        "name": "Johann Saathoff",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "25": [
+      {
+        "name": "Gitta Connemann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Anja Gerlinde Troff-Schaffarzyk",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Martina Uhr",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "26": [
+      {
+        "name": "Martin Johannes Sichert",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Siemtje Victoria Regine Ilse Santjer Möller",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Anne Janssen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "27": [
+      {
+        "name": "Dennis Rohde",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Andreas Michael Paul",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Alaa Alhamwi",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Stephan Theodor Johannes Albani",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "28": [
+      {
+        "name": "Bastian Alfons Ernst",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "29": [
+      {
+        "name": "Christoph Frauenpreiß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "30": [
+      {
+        "name": "Vanessa-Kim Zobel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "31": [
+      {
+        "name": "Danny Meiners",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Albert Stegeman",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "32": [
+      {
+        "name": "Silvia Maria Breher",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "33": [
+      {
+        "name": "Axel Knoerig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "34": [
+      {
+        "name": "Dr. Lena Maria Gumnior",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Andreas Mattfeldt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "35": [
+      {
+        "name": "Vivian Tauschwitz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Lars Klingbeil",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "36": [
+      {
+        "name": "Svenja Stadler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Cornell-Anette Babendererde",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "37": [
+      {
+        "name": "Dr. Julia Maria Kornelia Verlinden",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jakob Blankenburg",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "38": [
+      {
+        "name": "Filiz Polat",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Marcel Queckemeyer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Lutz Brinkmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "39": [
+      {
+        "name": "Heidi Reichinnek",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Mathias Middelberg",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "40": [
+      {
+        "name": "Rocco Kever",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Marja-Liisa Völlers",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Anne-Mieke Bremer",
+        "partei": "Die Linke"
+      }
+    ],
+    "41": [
+      {
+        "name": "Jörn Harald König",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Adis Ahmetović",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Timon Michele Dzienus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "42": [
+      {
+        "name": "Micha Sebastian Fehre",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Swantje Henrike Michaelsen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Maren Kaminski",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Boris Ludwig Pistorius",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "43": [
+      {
+        "name": "Dirk Brandes",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Hendrik Hoppenstedt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "44": [
+      {
+        "name": "Henning Rudolf Helmut Otte",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "45": [
+      {
+        "name": "Wolfgang-Hubertus Ernst Ulrich Heil",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "46": [
+      {
+        "name": "Helge Stefan Limburg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Mareike Lotte Wulf",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Johannes Schraps",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "47": [
+      {
+        "name": "Stefan Henze",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Tilman Moritz Kuban",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Matthias Miersch",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "48": [
+      {
+        "name": "Maik Herbert Brückner",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Daniela Rump",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "49": [
+      {
+        "name": "Cem Hamit Ince",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Angela Rudzka",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dunja Eleonore Angelika Kreiser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "50": [
+      {
+        "name": "Mirco Karsten Hanker",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Carsten Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Christos Pantazis",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "51": [
+      {
+        "name": "Alexander Jordan",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "52": [
+      {
+        "name": "Karoline Otte",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Frauke Heiligenstadt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "53": [
+      {
+        "name": "Fritz Güntzler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "54": [
+      {
+        "name": "Sergej Minich",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Thomas Röwekamp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Kirsten Kappert-Gonther",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Doris Maria Achelwilm",
+        "partei": "Die Linke"
+      }
+    ],
+    "55": [
+      {
+        "name": "Uwe Schmidt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "56": [
+      {
+        "name": "Dr. Götz Gerald Ulrich Frömming",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sebastian Steineke",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "57": [
+      {
+        "name": "Hannes Gnauck",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Stefan Zierke",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Michael Kellner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "58": [
+      {
+        "name": "Uwe Wolfgang Werner Feiler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "59": [
+      {
+        "name": "René Springer",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "60": [
+      {
+        "name": "Dr. Saskia Ludwig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Christin Willnat",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Arne Onni Raue",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sonja Katharina Eichwede",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "61": [
+      {
+        "name": "Annalena Charlotte Alma Baerbock",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Olaf Scholz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Isabelle Vandre",
+        "partei": "Die Linke"
+      }
+    ],
+    "62": [
+      {
+        "name": "Steffen Kotré",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "63": [
+      {
+        "name": "Rainer Herbert Galla",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "64": [
+      {
+        "name": "Maja Scarlett Wallstein",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Christian Görke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Lars Schieske",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "65": [
+      {
+        "name": "Knut Friedrich Alexander Abraham",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Birgit Irene Bessin",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "66": [
+      {
+        "name": "Thomas Korell",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "67": [
+      {
+        "name": "Anna Elisabeth Christine Sophie Aeikens",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Franziska Kersten",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "David Schliesing",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Jan Wenzel Schmidt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "68": [
+      {
+        "name": "Dr. Christina Baum",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "69": [
+      {
+        "name": "Martin Kröber",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Tino Sorge",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Claudia Weiss",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "70": [
+      {
+        "name": "Sepp Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Steffi Lemke",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Volker Klaus Bernd Scheurell",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "71": [
+      {
+        "name": "Janina Böttger",
+        "partei": "Die Linke"
+      }
+    ],
+    "72": [
+      {
+        "name": "Dieter Stier",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Martin Reichardt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "73": [
+      {
+        "name": "Kay-Uwe Ziegler",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "74": [
+      {
+        "name": "Hanna Skrollan Steinmüller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Annika Gisela Klose",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Ottavia Stella Merendino",
+        "partei": "Die Linke"
+      }
+    ],
+    "75": [
+      {
+        "name": "Julia Schneider",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ronald Karl Gläser",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "76": [
+      {
+        "name": "Marvin Schulz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Sebastian Maack",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "77": [
+      {
+        "name": "Helmut Heinrich Kleebank",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "78": [
+      {
+        "name": "Ruppert Fritz Johannes Stüwe",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Adrian Grasse",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "79": [
+      {
+        "name": "Elisabeth Maria Paus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Lukas Albrecht Krieger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "80": [
+      {
+        "name": "Dr. Jan-Marco Luczak",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Moritz Sebastian Heuberger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "81": [
+      {
+        "name": "Dr. Ottilie Paola Klein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ferat Koçak",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Hakan Demir",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Andreas Audretsch",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "82": [
+      {
+        "name": "Pascal Meiser",
+        "partei": "Die Linke"
+      }
+    ],
+    "83": [
+      {
+        "name": "Dr. Gregor Florian Gysi",
+        "partei": "Die Linke"
+      }
+    ],
+    "84": [
+      {
+        "name": "Gottfried Justus Immanuel Curio",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Katalin Gennburg",
+        "partei": "Die Linke"
+      }
+    ],
+    "85": [
+      {
+        "name": "Beatrix Amelie Ehrengard Eilika von Storch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Ines Schwerdtner",
+        "partei": "Die Linke"
+      }
+    ],
+    "86": [
+      {
+        "name": "Dr. Fabian Fahl",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Armin Laschet",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Lukas Benner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "87": [
+      {
+        "name": "Catarina dos Santos-Wintz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Claudia Moll",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "88": [
+      {
+        "name": "Wilfried Oellers",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "89": [
+      {
+        "name": "Thomas Walther Rachel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Daniel Walter",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "90": [
+      {
+        "name": "Dr. Rudolf Georg Kippels",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "91": [
+      {
+        "name": "Hans Rüdiger Lucassen",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Detlef Seif",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "92": [
+      {
+        "name": "Serap Güler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Fabian Jacobi",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sanae Abdi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "93": [
+      {
+        "name": "Lea Valeska Anissia Reisner",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Sven Lehmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "94": [
+      {
+        "name": "Dr. Rolf Heinrich Mützenich",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Katharina Dröge",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jochen Haug",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "95": [
+      {
+        "name": "Katrin Babette Uhlig",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Hendrik Streeck",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "96": [
+      {
+        "name": "Tobias Ebenberger",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sebastian Hartmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Elisabeth Winkelmeier-Becker",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "97": [
+      {
+        "name": "Dr. Norbert Alois Röttgen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "98": [
+      {
+        "name": "Dr. Carsten Brodesser",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jan Tobias Köstering",
+        "partei": "Die Linke"
+      }
+    ],
+    "99": [
+      {
+        "name": "Caroline Bosbach",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "100": [
+      {
+        "name": "Dr. Karl Wilhelm Lauterbach",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Nyke Slawik",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "101": [
+      {
+        "name": "Helge Frederik Lindh",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "102": [
+      {
+        "name": "Jürgen Hardt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "103": [
+      {
+        "name": "Martin Erwin Renner",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Klaus Wiener",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "104": [
+      {
+        "name": "Kerstin Griese",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Ophelia Johanna Nick",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Peter Beyer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "105": [
+      {
+        "name": "Thomas Jarzombek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "106": [
+      {
+        "name": "Johannes Winkel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Sara Nanni",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "107": [
+      {
+        "name": "Carl-Philipp Martin Gerhard Sassenrath",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Daniel Rinkert",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "108": [
+      {
+        "name": "Dr. Günter Krings",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "109": [
+      {
+        "name": "Ansgar Guido Karl Johannes Heveling",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "110": [
+      {
+        "name": "Kay Gottschalk",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Martin Plum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "111": [
+      {
+        "name": "Stefan Rouenhoff",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "112": [
+      {
+        "name": "Sascha van Beek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Adam Peter Balten",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "113": [
+      {
+        "name": "Ursula Schauws",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Kerstin Christiane Radomski",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Hauke Horst Ernst Hans Finger",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Jan Ulrich Dieren",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "114": [
+      {
+        "name": "Mirze Edis",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Bärbel Bas",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Lamya Kaddor",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "115": [
+      {
+        "name": "Sascha Lensing",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Felix Banaszak",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Mahmut Özdemir",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "116": [
+      {
+        "name": "Sascha Heribert Wagner",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dirk Vöpel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "117": [
+      {
+        "name": "Sebastian Fiedler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Astrid Timmermann-Fechter",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "118": [
+      {
+        "name": "Ingo Vogel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "119": [
+      {
+        "name": "Matthias Hauer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Stefan Keuter",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "120": [
+      {
+        "name": "Frank Schwabe",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Anna Leonore Labitzke Rathert",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "121": [
+      {
+        "name": "Lars Andre Ehm",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "122": [
+      {
+        "name": "Dr. Irene Mihalic",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Markus Töns",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "123": [
+      {
+        "name": "Jens Georg Spahn",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Mareike Hermeier",
+        "partei": "Die Linke"
+      }
+    ],
+    "124": [
+      {
+        "name": "Nicklas Kappe",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Uwe Foullong",
+        "partei": "Die Linke"
+      }
+    ],
+    "125": [
+      {
+        "name": "Dr. Michael Espendiller",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Nadine Heselhaus",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Anne König",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "126": [
+      {
+        "name": "Marc Henrichmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "127": [
+      {
+        "name": "Ulrich Thoden",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Jan-Niclas Gesenhues",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jürgen Coße",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Anja Maria-Antonia Karliczek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "128": [
+      {
+        "name": "Sylvia Rietenberg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Svenja Schulze",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Kathrin Gebel",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Stefan Nacke",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "129": [
+      {
+        "name": "Henning Rehbaum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "130": [
+      {
+        "name": "Ralph Brinkhaus",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "131": [
+      {
+        "name": "Dr. Wiebke Esdar",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Britta Maria Haßelmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Maximilian Kneller",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "132": [
+      {
+        "name": "Joachim Simon Ebmeyer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Stefan Schwartze",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "133": [
+      {
+        "name": "Schahina Gambir",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Oliver Vogt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "134": [
+      {
+        "name": "Kerstin Vieregge",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Udo Theodor Hemmelgarn",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Robin Till Nils Johannes Wagener",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "135": [
+      {
+        "name": "Christian Karl Friedhelm Haase",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "136": [
+      {
+        "name": "Dr. Carsten Linnemann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Charlotte Antonia Neuhäuser",
+        "partei": "Die Linke"
+      }
+    ],
+    "137": [
+      {
+        "name": "Tijen Ataoğlu",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "138": [
+      {
+        "name": "Dr. Katja Strauss-Köster",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Janosch Dahmen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "139": [
+      {
+        "name": "Cansin Köktürk",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Knuth Hans-Peter Meyer-Soltau",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Max Lucks",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Serdar Yüksel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "140": [
+      {
+        "name": "Dr. Daniel Zerbin",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Hendrik Bollmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "141": [
+      {
+        "name": "Jens Peick",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "142": [
+      {
+        "name": "Sabine Poschmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Sonja Janet Lemke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Matthias Helferich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "143": [
+      {
+        "name": "Oliver Kaczmarek",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "144": [
+      {
+        "name": "Michael Eckhardt Thews",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Georg Paul Schroeter",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "145": [
+      {
+        "name": "Oliver Reinhold Pöpsel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ulrich von Zons",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Jens Behrens",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "146": [
+      {
+        "name": "Joachim-Friedrich Martin Josef Merz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dirk Wiese",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Sandra Stein",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "147": [
+      {
+        "name": "Christian Zaum",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Katrin Fey",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Benedikt Büdenbender",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "148": [
+      {
+        "name": "Florian Matthias Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "149": [
+      {
+        "name": "Paul Ziemiak",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Bettina Lugk",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "150": [
+      {
+        "name": "Dr. Christiane Schenderlein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "René Bochmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "151": [
+      {
+        "name": "Jens Lehmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Holger Mann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "152": [
+      {
+        "name": "Dr. Paula Piechotta",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Sören Pellmann",
+        "partei": "Die Linke"
+      }
+    ],
+    "153": [
+      {
+        "name": "Edgar Naujok",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "154": [
+      {
+        "name": "Christian Reck",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "155": [
+      {
+        "name": "Susanne Kathrin Michel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Caren Nicole Lay",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Karsten Hilse",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "156": [
+      {
+        "name": "Florian Oest",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Tino Chrupalla",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "157": [
+      {
+        "name": "Steffen Janich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "158": [
+      {
+        "name": "Dr. Markus Alexander Reichel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Rasha Nasr",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Thomas Max Ladzinski",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Kassem Taher Saleh",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "159": [
+      {
+        "name": "Lars Rohwer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Clara Anne Bünger",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Matthias Rentzsch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "160": [
+      {
+        "name": "Carolin Bachmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "161": [
+      {
+        "name": "Nora Seitz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Eberhardt Alexander Gauland",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "162": [
+      {
+        "name": "Dr. Maximilian Eugen Krah",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "163": [
+      {
+        "name": "Thomas Eckhard Dietz",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "164": [
+      {
+        "name": "Carsten Körber",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Matthias Moosdorf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "165": [
+      {
+        "name": "Mathias Weiser",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "166": [
+      {
+        "name": "Jan-Wilhelm Pohlmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jan Ralf Nolte",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Esther Dilcher",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "167": [
+      {
+        "name": "Daniel Bettermann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Violetta Bock",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Boris Mijatović",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "168": [
+      {
+        "name": "Wilhelm Gebhard",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Awet Tesfaiesus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "169": [
+      {
+        "name": "Dr. Philipp Rottwilm",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "170": [
+      {
+        "name": "Julian Schmidt",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sören Bartol",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "171": [
+      {
+        "name": "Dagmar Schmidt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Johannes Volkmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "172": [
+      {
+        "name": "Robin Jünger",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Felix Maximilian Döring",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Frederik Bouffier",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Desiree Becker",
+        "partei": "Die Linke"
+      }
+    ],
+    "173": [
+      {
+        "name": "Pierre Lamely",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Michael Karl Brand",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "174": [
+      {
+        "name": "Johannes Thomas Maria Wiegelmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "175": [
+      {
+        "name": "Markus Benjamin Koob",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "176": [
+      {
+        "name": "Natalie Pawlik",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Thomas Pauls",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "177": [
+      {
+        "name": "Jan Hendrik Feser",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Martin Hermann Rabanus",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Klaus-Peter Willsch",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ayse Asar",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "178": [
+      {
+        "name": "Dr. Stefan Korbach",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "179": [
+      {
+        "name": "Pascal Reddig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "180": [
+      {
+        "name": "Dr. Anna Lührmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Nancy Faeser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Christian Douglas",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Norbert Maria Altenkamp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "181": [
+      {
+        "name": "Janine Natalie Wißler",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Armand Zorn",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Deborah Saskia Düring",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "182": [
+      {
+        "name": "Omid Nouripour",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "183": [
+      {
+        "name": "Jörg Cezanne",
+        "partei": "Die Linke"
+      }
+    ],
+    "184": [
+      {
+        "name": "Tarek Al-Wazir",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Björn Manuel Simon",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "186": [
+      {
+        "name": "Patricia Ingrid Lips",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "187": [
+      {
+        "name": "Thomas Norbert Fetsch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Michael Günther Meister",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "188": [
+      {
+        "name": "Donata Katharina Rebecca Vogtschmidt",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "David Gregosz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Christopher Drößler",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "189": [
+      {
+        "name": "Christian Hirte",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Stefan Möller",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "190": [
+      {
+        "name": "Stefan Falko Schröder",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "191": [
+      {
+        "name": "Marcus Bühl",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "192": [
+      {
+        "name": "Carsten Schneider",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Michael Hose",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Katrin Dagmar Göring-Eckardt",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Bodo Ramelow",
+        "partei": "Die Linke"
+      }
+    ],
+    "193": [
+      {
+        "name": "Elisabeth Kaiser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Stephan Günther Brandner",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "194": [
+      {
+        "name": "Diana Herbstreuth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Mandy Eißing",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Prof. Dr. Michael Heinz Kaufmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "195": [
+      {
+        "name": "Robert Teske",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "196": [
+      {
+        "name": "Ellen Demuth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Andreas Bleck",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "197": [
+      {
+        "name": "Mechthild Heil",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "198": [
+      {
+        "name": "Dr. Thorsten Rudolph",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Josef Oster",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "199": [
+      {
+        "name": "Jörg Zirwes",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Julian-Béla Joswig",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Marlon Andreas Paul Bröhr",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "200": [
+      {
+        "name": "Nicole Höchst",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Julia Klöckner",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "201": [
+      {
+        "name": "Patrick Schnieder",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "202": [
+      {
+        "name": "Verena Ute Hubertz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Corinna Martina Rüffer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "203": [
+      {
+        "name": "Dr. Tanja Machalet",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Harald Stefan Orthey",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "204": [
+      {
+        "name": "Gerhard Max Trabert",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Daniel Baldy",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "205": [
+      {
+        "name": "Julia-Christina Stange",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Jan Metzler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "206": [
+      {
+        "name": "Dr. Armin Jürgen Grau",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "207": [
+      {
+        "name": "Isabel Larissa Mackensen-Geis",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Thomas Stephan",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Misbah Sabeen Khan",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Johannes Eberhard Steiniger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "208": [
+      {
+        "name": "Sebastian Münzenmaier",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Matthias David Mieves",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "209": [
+      {
+        "name": "Angelika Glöckner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Iris Nieland",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Florian Bilic",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "210": [
+      {
+        "name": "Bernd Hans Schattner",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Thomas Gebhart",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "211": [
+      {
+        "name": "Stephan Mayer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "212": [
+      {
+        "name": "Dr. Andreas Lenz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "213": [
+      {
+        "name": "Leon Eckert",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Christian Anton Moser",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "214": [
+      {
+        "name": "Katrin Staffler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Michael Schrodi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "215": [
+      {
+        "name": "Sarah Vollath",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Lukas Rehm",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Reinhard Brandl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "216": [
+      {
+        "name": "Dr. Hans Diogenes Theiss",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "217": [
+      {
+        "name": "Tobias Daniel Teich",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Wolfgang Dieter Stefinger",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "218": [
+      {
+        "name": "Jamila Anna Schäfer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Wolfgang Wiehle",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sebastian Jörg Roloff",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "219": [
+      {
+        "name": "Nicole Stephanie Gohlke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Stephan Nikolaus Pilsinger",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "220": [
+      {
+        "name": "Gerold Joachim Otten",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Florian Peter Hahn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Dr. Anton Hofreiter",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "221": [
+      {
+        "name": "Victoria Broßart",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ates Nils Gürpinar",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Daniela Ludwig",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "222": [
+      {
+        "name": "Dr. Ingo Jochen Hahn",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Alexander Gamal Radwan",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Karl Bär",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "223": [
+      {
+        "name": "Michael Hannes Kießling",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Carmen Wegge",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "224": [
+      {
+        "name": "Dr. Bärbel Kofler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Siegfried Sebastian Walch",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Dr. Christoph Birghan",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "225": [
+      {
+        "name": "Rose Gerrit Huy",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Alexander Dobrindt",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "226": [
+      {
+        "name": "Thomas Maximilian Erndl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "227": [
+      {
+        "name": "Florian Oßner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "228": [
+      {
+        "name": "Luke Rolf Hoß",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Johannes Schätzl",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Johann Georg Koller",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Erhard Josef Brucker",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "229": [
+      {
+        "name": "Stephan Protschka",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Marlene Edeltraud Schönberger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Günter Baumgartner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "230": [
+      {
+        "name": "Alois Georg Josef Rainer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "231": [
+      {
+        "name": "Peter Christian Pascal Boehringer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Susanne Hierl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "232": [
+      {
+        "name": "Carina Schießl",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Carolin Wagner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Peter Aumer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Stefan Schmidt",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "233": [
+      {
+        "name": "Tina Winklmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Martina Englhardt-Kopf",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Reinhard Wilhelm Mixl",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "234": [
+      {
+        "name": "Manfred Leonhard Schiller",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Albert Robert Rupprecht",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "235": [
+      {
+        "name": "Lisa Hildegard Badum",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Thomas Silberhorn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Andreas Schwarz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "236": [
+      {
+        "name": "Tobias Matthias Peterka",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Anette Kramme",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Silke Launert",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "237": [
+      {
+        "name": "Johannes Wagner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Jonas Alexander Tecumseh Geissler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "238": [
+      {
+        "name": "Heiko Hain",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "239": [
+      {
+        "name": "Emmi Zeulner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "240": [
+      {
+        "name": "Artur Friedrich Auernhammer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "241": [
+      {
+        "name": "Dr. Konrad Körner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "242": [
+      {
+        "name": "Carsten Dietmar Träger",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Bastian Treuheit",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Tobias Winkler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "243": [
+      {
+        "name": "Rebecca Lenhard",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Gabriela Heinrich",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "244": [
+      {
+        "name": "Sascha Müller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Michael Edwin Frieser",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "245": [
+      {
+        "name": "Evelyn Schötz",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Ralph René Edelhäußer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "246": [
+      {
+        "name": "Niklas Wagener",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Andrea Lindholz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "247": [
+      {
+        "name": "Sabine Dittmar",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dorothee Gisela Renate Maria Bär",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "248": [
+      {
+        "name": "Bernd Ferdinand Rützel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Alexander Hoffmann",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "249": [
+      {
+        "name": "Bernd Willi Karl Schuhmann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Anja Weisgerber",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Agnes Maria Conrad",
+        "partei": "Die Linke"
+      }
+    ],
+    "250": [
+      {
+        "name": "Aaron Valent",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Hülya Düber",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "251": [
+      {
+        "name": "Claudia Benedikta Roth",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Raimond Christian Scheirich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "252": [
+      {
+        "name": "Hansjörg Durz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Heike Heubach",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "253": [
+      {
+        "name": "Andreas Mayer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Christoph Florian Schmid",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Ulrich Josef Lange",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "254": [
+      {
+        "name": "Alexander Karl Engelhard",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "255": [
+      {
+        "name": "Dr. Florian Johannes Dorn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "256": [
+      {
+        "name": "Dr. Rainer Rothfuß",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Mechthilde Wittmann",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "257": [
+      {
+        "name": "Stephan Stracke",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "258": [
+      {
+        "name": "Simone Fischer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Luigi Pantisano",
+        "partei": "Die Linke"
+      }
+    ],
+    "260": [
+      {
+        "name": "Marc Josef Biadacz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Markus-Cornel Frohnmaier",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Jasmina Hostert",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "261": [
+      {
+        "name": "Dr. David Sebastian Preisendanz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Sebastian Schäfer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "262": [
+      {
+        "name": "Dr. Nils Hermann Schmid",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Matthias Fabian Hiller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Matthias Michael Gastel",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "263": [
+      {
+        "name": "Hermann Klaus Färber",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Hans-Jürgen Hilmar Goßner",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "264": [
+      {
+        "name": "Christina Daniela Stumpp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Lars Haise",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "265": [
+      {
+        "name": "Martin Alexander Hess",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Steffen Rudi Bilger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Sandra Detzer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Macit Karaahmetoğlu",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "266": [
+      {
+        "name": "Fabian Benedikt Meinrad Gramling",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "267": [
+      {
+        "name": "Alexander Richard Throm",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jürgen Kögel",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "268": [
+      {
+        "name": "Christian Alexander Freiherr von Stetten",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Harald Ebner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "269": [
+      {
+        "name": "Ricarda Lang",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ruben Nicolas Benjamin Rupp",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Ingeborg Gabriele Gräßle",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "270": [
+      {
+        "name": "Roderich Kiesewetter",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "271": [
+      {
+        "name": "Marc Albert Bernhard",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Zoe Mayer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Parsa Marvi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Marcel Karl Bernhard Bauer",
+        "partei": "Die Linke"
+      }
+    ],
+    "272": [
+      {
+        "name": "Nicolas Benjamin Zippelius",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "273": [
+      {
+        "name": "Kai Thorsten Whittaker",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Alexander Arpaschi",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "274": [
+      {
+        "name": "Sahra Mirow",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Franziska Katharina Brantner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Malte Kaufmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "275": [
+      {
+        "name": "Gökay Akbulut",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Isabel Andrea Cademartori Dujisin",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Heinrich Friedrich Koch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "276": [
+      {
+        "name": "Nina Ingrid Warken",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Johann Martel",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "277": [
+      {
+        "name": "Achim Köhler",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Lars Dietmar Castellucci",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "278": [
+      {
+        "name": "Olav Steffen Gutting",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "279": [
+      {
+        "name": "Katja Wilma Mast",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Diana Zimmer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Gunther Krichbaum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "280": [
+      {
+        "name": "Saskia Christina Esken",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Klaus Jürgen Mack",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "281": [
+      {
+        "name": "Vinzenz Hans Glaser",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Chantal Johanna Siglinde Kopf",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Martina Rose-Marie Kempf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "283": [
+      {
+        "name": "Dr. Johannes Fechner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Yannick Bury",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Michael Joachim Blos",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "284": [
+      {
+        "name": "Johannes Rothenberger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "285": [
+      {
+        "name": "Joachim Ralf Josef Bloch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Maria-Lena Weiss",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "286": [
+      {
+        "name": "Thorsten Frei",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Derya Türk-Nachbaur",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "287": [
+      {
+        "name": "Andreas Jung",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Lina Seitzl",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "288": [
+      {
+        "name": "Rita Berta Schwarzelühr-Sutter",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Felix Schreiner",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "289": [
+      {
+        "name": "Anne Theresa Zerr",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Michael Donth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "291": [
+      {
+        "name": "Marcel Emmerich",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ronja Helene Kemmer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "292": [
+      {
+        "name": "Martin Gerster",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Anja Margrit Reinalter",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Wolfgang Jochen Dahler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "293": [
+      {
+        "name": "Dr. Alice Elisabeth Weidel",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Volker Fred Mayer-Lay",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "294": [
+      {
+        "name": "Agnes Monika Brugger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Axel Karl Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "295": [
+      {
+        "name": "Thomas Bareiß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "296": [
+      {
+        "name": "Josephine Loulou Ortleb",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Jeanne Marie Aline Dillschneider",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Boris Gamanov",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "297": [
+      {
+        "name": "Carsten Roland Becker",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Philip Maria Albert Hoffmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "298": [
+      {
+        "name": "Roland Theis",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "299": [
+      {
+        "name": "Esra-Leon Ruben Limbacher",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Michael Rudi Arndt",
+        "partei": "Die Linke"
+      }
+    ],
+    "ohneWahlkreis": [
+      {
+        "name": "Zada Salihović",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Jan Paul van Aken",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Cansu Özdemir",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Uwe Schulz",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Nicole Claudia Hess",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Peter Felser",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Karl Rudolf Rainer Groß",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Rainer Detlef Kraft",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Olaf Hilmer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Jorrit Lucca Bosch",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Otto Winfried Strauß",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Markus Matzerath",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Peter Bohnhof",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Denis Pauli",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Manuel Johannes Krauthausen",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Torben Braga",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Christian Friedrich Wirth",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sieghard Knodel",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Paul Schmidt",
+        "partei": "Alternative für Deutschland"
+      }
+    ]
+  },
+  "wohnorte": {
+    "Aachen": [
+      {
+        "name": "Dr. Fabian Fahl",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Armin Laschet",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Lukas Benner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Aalen": [
+      {
+        "name": "Roderich Kiesewetter",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Adlkofen": [
+      {
+        "name": "Marlene Edeltraud Schönberger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Ahaus": [
+      {
+        "name": "Jens Georg Spahn",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Alerheim": [
+      {
+        "name": "Christoph Florian Schmid",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Alpen": [
+      {
+        "name": "Sascha van Beek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Alsdorf": [
+      {
+        "name": "Markus Matzerath",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Altdorf": [
+      {
+        "name": "Bernd Hans Schattner",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Altenburg": [
+      {
+        "name": "Mandy Eißing",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Torben Braga",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Altleiningen": [
+      {
+        "name": "Iris Nieland",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Altmärkische Höhe": [
+      {
+        "name": "Dr. Franziska Kersten",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Altrip": [
+      {
+        "name": "Dr. Armin Jürgen Grau",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Andernach": [
+      {
+        "name": "Mechthild Heil",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Angelburg": [
+      {
+        "name": "Julian Schmidt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Angern": [
+      {
+        "name": "David Schliesing",
+        "partei": "Die Linke"
+      }
+    ],
+    "Arnsberg": [
+      {
+        "name": "Joachim-Friedrich Martin Josef Merz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Otto Winfried Strauß",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Arzfeld": [
+      {
+        "name": "Patrick Schnieder",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Aschaffenburg": [
+      {
+        "name": "Niklas Wagener",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Augsburg": [
+      {
+        "name": "Claudia Benedikta Roth",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Raimond Christian Scheirich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bad Camberg": [
+      {
+        "name": "Ayse Asar",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Bad Düben": [
+      {
+        "name": "René Bochmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bad Dürkheim": [
+      {
+        "name": "Isabel Larissa Mackensen-Geis",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Johannes Eberhard Steiniger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Dürrheim": [
+      {
+        "name": "Derya Türk-Nachbaur",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bad Grönenbach": [
+      {
+        "name": "Dr. Florian Johannes Dorn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Bad Hönningen": [
+      {
+        "name": "Andreas Bleck",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bad Kreuznach": [
+      {
+        "name": "Julia Klöckner",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Laasphe": [
+      {
+        "name": "Christian Zaum",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bad Nauheim": [
+      {
+        "name": "Natalie Pawlik",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bad Salzuflen": [
+      {
+        "name": "Robin Till Nils Johannes Wagener",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Denis Pauli",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bad Salzungen": [
+      {
+        "name": "Christian Hirte",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Soden am Taunus": [
+      {
+        "name": "Norbert Maria Altenkamp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Soden-Salmünster": [
+      {
+        "name": "Johannes Thomas Maria Wiegelmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Wildbad": [
+      {
+        "name": "Klaus Jürgen Mack",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bad Zwischenahn": [
+      {
+        "name": "Stephan Theodor Johannes Albani",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Baden-Baden": [
+      {
+        "name": "Kai Thorsten Whittaker",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Alexander Arpaschi",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Balingen": [
+      {
+        "name": "Thomas Bareiß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Barsbüttel": [
+      {
+        "name": "Henri Schmidt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Barsinghausen": [
+      {
+        "name": "Tilman Moritz Kuban",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bautzen": [
+      {
+        "name": "Caren Nicole Lay",
+        "partei": "Die Linke"
+      }
+    ],
+    "Bayerbach": [
+      {
+        "name": "Günter Baumgartner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Bayreuth": [
+      {
+        "name": "Tobias Matthias Peterka",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Anette Kramme",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Silke Launert",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Bedburg": [
+      {
+        "name": "Dr. Rudolf Georg Kippels",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bensheim": [
+      {
+        "name": "Dr. Michael Günther Meister",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Berg b.Neumarkt i.d.OPf.": [
+      {
+        "name": "Susanne Hierl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Bergen": [
+      {
+        "name": "Henning Rudolf Helmut Otte",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bergisch Gladbach": [
+      {
+        "name": "Caroline Bosbach",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Berlin": [
+      {
+        "name": "Clara Anne Bünger",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Steffi Lemke",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Hanna Skrollan Steinmüller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Beatrix Amelie Ehrengard Eilika von Storch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Jan-Marco Luczak",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ruppert Fritz Johannes Stüwe",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Elisabeth Maria Paus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Marvin Schulz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Adrian Grasse",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Julia Schneider",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Helmut Heinrich Kleebank",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Lukas Albrecht Krieger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ronald Karl Gläser",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sebastian Maack",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Gregor Florian Gysi",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Pascal Meiser",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Ines Schwerdtner",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Gottfried Justus Immanuel Curio",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Ottilie Paola Klein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Moritz Sebastian Heuberger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ferat Koçak",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Hakan Demir",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Annika Gisela Klose",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Andreas Audretsch",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Katalin Gennburg",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Ottavia Stella Merendino",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Matthias Helferich",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Kay Gottschalk",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Hans Rüdiger Lucassen",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Michael Espendiller",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Stefan Keuter",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Janosch Dahmen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Alice Elisabeth Weidel",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Markus-Cornel Frohnmaier",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Martin Alexander Hess",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Sebastian Schäfer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Bernburg (Saale)": [
+      {
+        "name": "Claudia Weiss",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Beverungen": [
+      {
+        "name": "Christian Karl Friedhelm Haase",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Biberach an der Riß": [
+      {
+        "name": "Martin Gerster",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bielefeld": [
+      {
+        "name": "Dr. Wiebke Esdar",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Britta Maria Haßelmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Maximilian Kneller",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bippen": [
+      {
+        "name": "Marcel Queckemeyer",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bispingen": [
+      {
+        "name": "Vivian Tauschwitz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bitterfeld-Wolfen": [
+      {
+        "name": "Kay-Uwe Ziegler",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Blankenrath": [
+      {
+        "name": "Jörg Zirwes",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Böblingen": [
+      {
+        "name": "Marc Josef Biadacz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jasmina Hostert",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bochum": [
+      {
+        "name": "Cansin Köktürk",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Knuth Hans-Peter Meyer-Soltau",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Max Lucks",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Serdar Yüksel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Böhmenkirch": [
+      {
+        "name": "Hermann Klaus Färber",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bonn": [
+      {
+        "name": "Katrin Babette Uhlig",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Hendrik Streeck",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Boppard": [
+      {
+        "name": "Julian-Béla Joswig",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Bordesholm": [
+      {
+        "name": "Dr. Ralf Alexander Stegner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Borken": [
+      {
+        "name": "Anne König",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bornheim": [
+      {
+        "name": "Sebastian Hartmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bornhöved": [
+      {
+        "name": "Melanie Bernstein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bottrop": [
+      {
+        "name": "Uwe Foullong",
+        "partei": "Die Linke"
+      }
+    ],
+    "Bramsche": [
+      {
+        "name": "Filiz Polat",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Brandenburg an der Havel": [
+      {
+        "name": "Christin Willnat",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Sonja Katharina Eichwede",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Braunschweig": [
+      {
+        "name": "Mirco Karsten Hanker",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Carsten Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jorrit Lucca Bosch",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Christos Pantazis",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Brehme": [
+      {
+        "name": "David Gregosz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Breisach am Rhein": [
+      {
+        "name": "Martina Rose-Marie Kempf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Bremen": [
+      {
+        "name": "Sergej Minich",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Thomas Röwekamp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Kirsten Kappert-Gonther",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Doris Maria Achelwilm",
+        "partei": "Die Linke"
+      }
+    ],
+    "Bremerhaven": [
+      {
+        "name": "Uwe Schmidt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Bremervörde": [
+      {
+        "name": "Vanessa-Kim Zobel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Brilon": [
+      {
+        "name": "Dirk Wiese",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Burgwedel": [
+      {
+        "name": "Dr. Hendrik Hoppenstedt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Bürstadt": [
+      {
+        "name": "Thomas Norbert Fetsch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Calw": [
+      {
+        "name": "Saskia Christina Esken",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Chemnitz": [
+      {
+        "name": "Nora Seitz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Coburg": [
+      {
+        "name": "Johannes Wagner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Cottbus": [
+      {
+        "name": "Maja Scarlett Wallstein",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Lars Schieske",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Cuxhaven": [
+      {
+        "name": "Christoph Frauenpreiß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Dägeling": [
+      {
+        "name": "Mark Helfrich",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Dallgow-Döberitz": [
+      {
+        "name": "Steffen Kotré",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Damshagen": [
+      {
+        "name": "Christoph Herbert Walter Grimm",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Dinslaken": [
+      {
+        "name": "Sascha Heribert Wagner",
+        "partei": "Die Linke"
+      }
+    ],
+    "Dittelsheim-Heßloch": [
+      {
+        "name": "Jan Metzler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Dohma": [
+      {
+        "name": "Steffen Janich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Donaueschingen": [
+      {
+        "name": "Thorsten Frei",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Dorsten": [
+      {
+        "name": "Nicklas Kappe",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Daniel Zerbin",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Dortmund": [
+      {
+        "name": "Sabine Poschmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Sonja Janet Lemke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Jens Peick",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Peter Bohnhof",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Dresden": [
+      {
+        "name": "Lars Rohwer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Markus Alexander Reichel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Rasha Nasr",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Maximilian Eugen Krah",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Matthias Rentzsch",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Thomas Max Ladzinski",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Kassem Taher Saleh",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Zada Salihović",
+        "partei": "Die Linke"
+      }
+    ],
+    "Drolshagen": [
+      {
+        "name": "Florian Matthias Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Duisburg": [
+      {
+        "name": "Mirze Edis",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Sascha Lensing",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Felix Banaszak",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Bärbel Bas",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Mahmut Özdemir",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Lamya Kaddor",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Düren": [
+      {
+        "name": "Thomas Walther Rachel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Daniel Walter",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Düsseldorf": [
+      {
+        "name": "Thomas Jarzombek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Johannes Winkel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Sara Nanni",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Ebelsbach": [
+      {
+        "name": "Dorothee Gisela Renate Maria Bär",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Eberswalde": [
+      {
+        "name": "René Springer",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Eching": [
+      {
+        "name": "Leon Eckert",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Eckstedt": [
+      {
+        "name": "Stefan Falko Schröder",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Eilsleben": [
+      {
+        "name": "Anna Elisabeth Christine Sophie Aeikens",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Eitensheim": [
+      {
+        "name": "Dr. Reinhard Brandl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Eltville am Rhein": [
+      {
+        "name": "Jan Hendrik Feser",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Emmendingen": [
+      {
+        "name": "Dr. Johannes Fechner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Emmerthal": [
+      {
+        "name": "Mareike Lotte Wulf",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Emsdetten": [
+      {
+        "name": "Dr. Jan-Niclas Gesenhues",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Enger": [
+      {
+        "name": "Joachim Simon Ebmeyer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Eppingen": [
+      {
+        "name": "Jürgen Kögel",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Eppstein": [
+      {
+        "name": "Christian Douglas",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Erbach": [
+      {
+        "name": "Ronja Helene Kemmer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Erfurt": [
+      {
+        "name": "Donata Katharina Rebecca Vogtschmidt",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Carsten Schneider",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Stefan Möller",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Michael Hose",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Bodo Ramelow",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Robert Teske",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Eschweiler": [
+      {
+        "name": "Catarina dos Santos-Wintz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Claudia Moll",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Manuel Johannes Krauthausen",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Espelkamp": [
+      {
+        "name": "Dr. Oliver Vogt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Essen": [
+      {
+        "name": "Ingo Vogel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Matthias Hauer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Evessen": [
+      {
+        "name": "Dunja Eleonore Angelika Kreiser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Extertal": [
+      {
+        "name": "Kerstin Vieregge",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Filderstadt": [
+      {
+        "name": "Matthias Michael Gastel",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Flensburg": [
+      {
+        "name": "Stefan Seidler",
+        "partei": "Südschleswigscher Wählerverband"
+      },
+      {
+        "name": "Robert Habeck",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Forchheim": [
+      {
+        "name": "Lisa Hildegard Badum",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Frankfurt am Main": [
+      {
+        "name": "Dr. Eberhardt Alexander Gauland",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Omid Nouripour",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Janine Natalie Wißler",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Armand Zorn",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Deborah Saskia Düring",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Frauenneuharting": [
+      {
+        "name": "Dr. Andreas Lenz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Freiburg im Breisgau": [
+      {
+        "name": "Vinzenz Hans Glaser",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Chantal Johanna Siglinde Kopf",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Friedberg (Hessen)": [
+      {
+        "name": "Dr. Thomas Pauls",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Fuhlendorf": [
+      {
+        "name": "Claudia Heike Müller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Fulda": [
+      {
+        "name": "Pierre Lamely",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Michael Karl Brand",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Fürth": [
+      {
+        "name": "Carsten Dietmar Träger",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Gablenz": [
+      {
+        "name": "Tino Chrupalla",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Gauting": [
+      {
+        "name": "Dr. Ingo Jochen Hahn",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Karl Rudolf Rainer Groß",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Geeste": [
+      {
+        "name": "Danny Meiners",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Geesthacht": [
+      {
+        "name": "Dr. Nina Scheer",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Geisenfeld": [
+      {
+        "name": "Tobias Daniel Teich",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Gelsenkirchen": [
+      {
+        "name": "Dr. Irene Mihalic",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Markus Töns",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Gemünden a.Main": [
+      {
+        "name": "Bernd Ferdinand Rützel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Gera": [
+      {
+        "name": "Elisabeth Kaiser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Stephan Günther Brandner",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Gerlingen": [
+      {
+        "name": "Macit Karaahmetoğlu",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Gießen": [
+      {
+        "name": "Felix Maximilian Döring",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Frederik Bouffier",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Desiree Becker",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Nicole Claudia Hess",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Goch": [
+      {
+        "name": "Stefan Rouenhoff",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Goldbach": [
+      {
+        "name": "Andrea Lindholz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Göppingen": [
+      {
+        "name": "Hans-Jürgen Hilmar Goßner",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Görlitz": [
+      {
+        "name": "Florian Oest",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Göttingen": [
+      {
+        "name": "Fritz Güntzler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Gräfenhainichen": [
+      {
+        "name": "Sepp Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Grevenbroich": [
+      {
+        "name": "Daniel Rinkert",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Gröditz": [
+      {
+        "name": "Christian Reck",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Groß Teetzleben": [
+      {
+        "name": "Ulrike Schielke-Ziesing",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Großenlüder": [
+      {
+        "name": "Jan Ralf Nolte",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Grünheide (Mark)": [
+      {
+        "name": "Rainer Herbert Galla",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Haan": [
+      {
+        "name": "Martin Erwin Renner",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Klaus Wiener",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Haibach": [
+      {
+        "name": "Alois Georg Josef Rainer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Halle (Saale)": [
+      {
+        "name": "Janina Böttger",
+        "partei": "Die Linke"
+      }
+    ],
+    "Hamburg": [
+      {
+        "name": "Katharina Barbara Maria Beck",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jan Paul van Aken",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Cansu Özdemir",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Franziska Christina Brigitte Hoppermann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Bernd Baumann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Alexander Herbert Wolf",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Falko Droßmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Christoph Bernhard de Vries",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Christoph Johannes Ploß",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Metin Hakverdi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Saliha Aydan Özoğuz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Till Benjamin Steffen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Linda Heitmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Hameln": [
+      {
+        "name": "Johannes Schraps",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Hamm": [
+      {
+        "name": "Georg Paul Schroeter",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Hamminkeln": [
+      {
+        "name": "Adam Peter Balten",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Hanau": [
+      {
+        "name": "Pascal Reddig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Hannover": [
+      {
+        "name": "Jörn Harald König",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Micha Sebastian Fehre",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Adis Ahmetović",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Timon Michele Dzienus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Swantje Henrike Michaelsen",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Maren Kaminski",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Boris Ludwig Pistorius",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Harsewinkel": [
+      {
+        "name": "Udo Theodor Hemmelgarn",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Hartenstein": [
+      {
+        "name": "Carsten Körber",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Haßloch": [
+      {
+        "name": "Thomas Stephan",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Hattert": [
+      {
+        "name": "Harald Stefan Orthey",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Havelaue": [
+      {
+        "name": "Uwe Wolfgang Werner Feiler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Heide": [
+      {
+        "name": "Denise Loop",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Heidelberg": [
+      {
+        "name": "Sahra Mirow",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Franziska Katharina Brantner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Sandra Detzer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Heilbronn": [
+      {
+        "name": "Alexander Richard Throm",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Heinsberg": [
+      {
+        "name": "Wilfried Oellers",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Herdecke": [
+      {
+        "name": "Dr. Katja Strauss-Köster",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Herne": [
+      {
+        "name": "Hendrik Bollmann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Herzogenaurach": [
+      {
+        "name": "Dr. Konrad Körner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Hesel": [
+      {
+        "name": "Gitta Connemann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Hilchenbach": [
+      {
+        "name": "Katrin Fey",
+        "partei": "Die Linke"
+      }
+    ],
+    "Hildesheim": [
+      {
+        "name": "Maik Herbert Brückner",
+        "partei": "Die Linke"
+      }
+    ],
+    "Hirschaid": [
+      {
+        "name": "Thomas Silberhorn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Hofgeismar": [
+      {
+        "name": "Esther Dilcher",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Hofheim am Taunus": [
+      {
+        "name": "Dr. Anna Lührmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Hohe Börde": [
+      {
+        "name": "Martin Reichardt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Hohenstein": [
+      {
+        "name": "Klaus-Peter Willsch",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Holzkirchen": [
+      {
+        "name": "Karl Bär",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Holzminden": [
+      {
+        "name": "Helge Stefan Limburg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Homburg": [
+      {
+        "name": "Esra-Leon Ruben Limbacher",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Michael Rudi Arndt",
+        "partei": "Die Linke"
+      }
+    ],
+    "Hürth": [
+      {
+        "name": "Serap Güler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Illingen": [
+      {
+        "name": "Roland Theis",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ilmenau": [
+      {
+        "name": "Marcus Bühl",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Ingolstadt": [
+      {
+        "name": "Lukas Rehm",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Inning a.Ammersee": [
+      {
+        "name": "Rose Gerrit Huy",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Inzell": [
+      {
+        "name": "Siegfried Sebastian Walch",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Irsee": [
+      {
+        "name": "Stephan Stracke",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Iserlohn": [
+      {
+        "name": "Paul Ziemiak",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Bettina Lugk",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Jena": [
+      {
+        "name": "Katrin Dagmar Göring-Eckardt",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Jockgrim": [
+      {
+        "name": "Dr. Thomas Gebhart",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Jüterbog": [
+      {
+        "name": "Arne Onni Raue",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Kaiserslautern": [
+      {
+        "name": "Matthias David Mieves",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Kamenz": [
+      {
+        "name": "Susanne Kathrin Michel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Karlsruhe": [
+      {
+        "name": "Marc Albert Bernhard",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Zoe Mayer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Parsa Marvi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Marcel Karl Bernhard Bauer",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Paul Schmidt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Kasseedorf": [
+      {
+        "name": "Bettina Hagedorn",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Kassel": [
+      {
+        "name": "Daniel Bettermann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Violetta Bock",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Awet Tesfaiesus",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Boris Mijatović",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Kastellaun": [
+      {
+        "name": "Dr. Marlon Andreas Paul Bröhr",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Katlenburg-Lindau": [
+      {
+        "name": "Frauke Heiligenstadt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Kempten (Allgäu)": [
+      {
+        "name": "Mechthilde Wittmann",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Kiel": [
+      {
+        "name": "Tamara Ursula Katharina Mazzi",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Lorenz Gösta Beutin",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Gereon Martin Bollmann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Luise Amtsberg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Kirchberg an der Jagst": [
+      {
+        "name": "Harald Ebner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Kirchdorf": [
+      {
+        "name": "Axel Knoerig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Kirkel": [
+      {
+        "name": "Dr. Christian Friedrich Wirth",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Klötze": [
+      {
+        "name": "Thomas Korell",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Koblenz": [
+      {
+        "name": "Dr. Thorsten Rudolph",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Josef Oster",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Kolbermoor": [
+      {
+        "name": "Daniela Ludwig",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Köln": [
+      {
+        "name": "Dr. Rolf Heinrich Mützenich",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Lea Valeska Anissia Reisner",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Katharina Dröge",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jochen Haug",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Fabian Jacobi",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Sanae Abdi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Sven Lehmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Königslutter am Elm": [
+      {
+        "name": "Alexander Jordan",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Königswinter": [
+      {
+        "name": "Dr. Norbert Alois Röttgen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Konstanz": [
+      {
+        "name": "Andreas Jung",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Dr. Lina Seitzl",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Korbach": [
+      {
+        "name": "Jan-Wilhelm Pohlmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Korschenbroich": [
+      {
+        "name": "Ansgar Guido Karl Johannes Heveling",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Kranichfeld": [
+      {
+        "name": "Diana Herbstreuth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Krefeld": [
+      {
+        "name": "Ursula Schauws",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Kerstin Christiane Radomski",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Hauke Horst Ernst Hans Finger",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Kronach": [
+      {
+        "name": "Dr. Jonas Alexander Tecumseh Geissler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Krummhörn": [
+      {
+        "name": "Johann Saathoff",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Küllstedt": [
+      {
+        "name": "Christopher Drößler",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Künzelsau": [
+      {
+        "name": "Christian Alexander Freiherr von Stetten",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Künzing": [
+      {
+        "name": "Thomas Maximilian Erndl",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Laatzen": [
+      {
+        "name": "Dr. Matthias Miersch",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Lahnau": [
+      {
+        "name": "Johannes Volkmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lahr/Schwarzwald": [
+      {
+        "name": "Dr. Yannick Bury",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lamspringe": [
+      {
+        "name": "Angela Rudzka",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Landsberg am Lech": [
+      {
+        "name": "Michael Hannes Kießling",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Langwedel": [
+      {
+        "name": "Andreas Mattfeldt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Langweid a.Lech": [
+      {
+        "name": "Dr. Rainer Detlef Kraft",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Lappersdorf": [
+      {
+        "name": "Dr. Carolin Wagner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Lauchringen": [
+      {
+        "name": "Rita Berta Schwarzelühr-Sutter",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Felix Schreiner",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lauda-Königshofen": [
+      {
+        "name": "Dr. Christina Baum",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Laupheim": [
+      {
+        "name": "Dr. Anja Margrit Reinalter",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Leck": [
+      {
+        "name": "Kurt Klaus Kleinschmidt",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Leif Erik Bodin",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lehrte": [
+      {
+        "name": "Stefan Henze",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Leinzell": [
+      {
+        "name": "Ruben Nicolas Benjamin Rupp",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Leipzig": [
+      {
+        "name": "Jens Lehmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Holger Mann",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Paula Piechotta",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Sören Pellmann",
+        "partei": "Die Linke"
+      }
+    ],
+    "Lemberg": [
+      {
+        "name": "Angelika Glöckner",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Leverkusen": [
+      {
+        "name": "Dr. Karl Wilhelm Lauterbach",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Nyke Slawik",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Lichtenfels": [
+      {
+        "name": "Emmi Zeulner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Lindau (Bodensee)": [
+      {
+        "name": "Dr. Rainer Rothfuß",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Lindern (Oldenburg)": [
+      {
+        "name": "Silvia Maria Breher",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lindlar": [
+      {
+        "name": "Dr. Carsten Brodesser",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Linz am Rhein": [
+      {
+        "name": "Ellen Demuth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lippetal": [
+      {
+        "name": "Oliver Reinhold Pöpsel",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lippstadt": [
+      {
+        "name": "Ulrich von Zons",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Jens Behrens",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Lohmar": [
+      {
+        "name": "Tobias Ebenberger",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Lohsa": [
+      {
+        "name": "Karsten Hilse",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Lübeck": [
+      {
+        "name": "Tim Klüssendorf",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Ludwigsburg": [
+      {
+        "name": "Steffen Rudi Bilger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Lugau/Erzgeb.": [
+      {
+        "name": "Thomas Eckhard Dietz",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Lüneburg": [
+      {
+        "name": "Dr. Julia Maria Kornelia Verlinden",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Jakob Blankenburg",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Lünen": [
+      {
+        "name": "Michael Eckhardt Thews",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Magdeburg": [
+      {
+        "name": "Martin Kröber",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Tino Sorge",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mainz": [
+      {
+        "name": "Daniel Baldy",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Malente": [
+      {
+        "name": "Kerstin Przygodda",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Mamming": [
+      {
+        "name": "Stephan Protschka",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Mannheim": [
+      {
+        "name": "Gökay Akbulut",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Isabel Andrea Cademartori Dujisin",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Heinrich Friedrich Koch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Marburg": [
+      {
+        "name": "Sören Bartol",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Markranstädt": [
+      {
+        "name": "Edgar Naujok",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Maßbach": [
+      {
+        "name": "Sabine Dittmar",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Meckenheim": [
+      {
+        "name": "Misbah Sabeen Khan",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Merzig": [
+      {
+        "name": "Philip Maria Albert Hoffmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mettmann": [
+      {
+        "name": "Dr. Ophelia Johanna Nick",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Meudt": [
+      {
+        "name": "Dr. Tanja Machalet",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Mildstedt": [
+      {
+        "name": "Truels Reichardt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Minden": [
+      {
+        "name": "Schahina Gambir",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Moers": [
+      {
+        "name": "Jan Ulrich Dieren",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Molfsee": [
+      {
+        "name": "Dr. Johann David Walter Rudolf Wadephul",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mölln": [
+      {
+        "name": "Dr. Konstantin von Notz",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Mönchengladbach": [
+      {
+        "name": "Dr. Günter Krings",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mörfelden-Walldorf": [
+      {
+        "name": "Jörg Cezanne",
+        "partei": "Die Linke"
+      }
+    ],
+    "Moringen": [
+      {
+        "name": "Karoline Otte",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Mühbrook": [
+      {
+        "name": "Sandra Carstensen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mühlhausen": [
+      {
+        "name": "Dr. Malte Kaufmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Mühlheim an der Donau": [
+      {
+        "name": "Dr. Maria-Lena Weiss",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Mulda/Sa.": [
+      {
+        "name": "Carolin Bachmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Mülheim an der Ruhr": [
+      {
+        "name": "Sebastian Fiedler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Astrid Timmermann-Fechter",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "München": [
+      {
+        "name": "Jamila Anna Schäfer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Nicole Stephanie Gohlke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Peter Christian Pascal Boehringer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Wolfgang Dieter Stefinger",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Dr. Stephan Nikolaus Pilsinger",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Dr. Hans Diogenes Theiss",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Sebastian Jörg Roloff",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Anton Hofreiter",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Carmen Wegge",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Munster": [
+      {
+        "name": "Lars Klingbeil",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Münster": [
+      {
+        "name": "Sylvia Rietenberg",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Marc Henrichmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Ulrich Thoden",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Svenja Schulze",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Stefan Nacke",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Netphen": [
+      {
+        "name": "Benedikt Büdenbender",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Neubrandenburg": [
+      {
+        "name": "Enrico Komning",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Neuenkirchen": [
+      {
+        "name": "Lutz Brinkmann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Jürgen Coße",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Neuental": [
+      {
+        "name": "Dr. Philipp Rottwilm",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Neuötting": [
+      {
+        "name": "Stephan Mayer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Neuruppin": [
+      {
+        "name": "Sebastian Steineke",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Neusäß": [
+      {
+        "name": "Hansjörg Durz",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Neuss": [
+      {
+        "name": "Carl-Philipp Martin Gerhard Sassenrath",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Neustadt am Rübenberge": [
+      {
+        "name": "Rocco Kever",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Nienburg (Weser)": [
+      {
+        "name": "Anne-Mieke Bremer",
+        "partei": "Die Linke"
+      }
+    ],
+    "Norderstedt": [
+      {
+        "name": "Sven Wendorf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Nordhorn": [
+      {
+        "name": "Martina Uhr",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Nördlingen": [
+      {
+        "name": "Ulrich Josef Lange",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Nordstemmen": [
+      {
+        "name": "Daniela Rump",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Nümbrecht": [
+      {
+        "name": "Jan Tobias Köstering",
+        "partei": "Die Linke"
+      }
+    ],
+    "Nürnberg": [
+      {
+        "name": "Sascha Müller",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Rebecca Lenhard",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Gabriela Heinrich",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Michael Edwin Frieser",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Nürtingen": [
+      {
+        "name": "Dr. Matthias Fabian Hiller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ober-Olm": [
+      {
+        "name": "Sebastian Münzenmaier",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Oberhausen": [
+      {
+        "name": "Dirk Vöpel",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Oberhausen-Rheinhausen": [
+      {
+        "name": "Olav Steffen Gutting",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Oberkirch": [
+      {
+        "name": "Johannes Rothenberger",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Obertshausen": [
+      {
+        "name": "Björn Manuel Simon",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Oberuckersee": [
+      {
+        "name": "Michael Kellner",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Oberursel (Taunus)": [
+      {
+        "name": "Markus Benjamin Koob",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Oer-Erkenschwick": [
+      {
+        "name": "Kathrin Gebel",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Lars Andre Ehm",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Offenbach am Main": [
+      {
+        "name": "Tarek Al-Wazir",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Olching": [
+      {
+        "name": "Michael Schrodi",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Oldenburg (Oldenburg)": [
+      {
+        "name": "Siemtje Victoria Regine Ilse Santjer Möller",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dennis Rohde",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Bastian Alfons Ernst",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Andreas Michael Paul",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Alaa Alhamwi",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Osnabrück": [
+      {
+        "name": "Heidi Reichinnek",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Mathias Middelberg",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ostfildern": [
+      {
+        "name": "Dr. David Sebastian Preisendanz",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ottobrunn": [
+      {
+        "name": "Wolfgang Wiehle",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Florian Peter Hahn",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Paderborn": [
+      {
+        "name": "Dr. Carsten Linnemann",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Charlotte Antonia Neuhäuser",
+        "partei": "Die Linke"
+      }
+    ],
+    "Passau": [
+      {
+        "name": "Luke Rolf Hoß",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Johannes Schätzl",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Peine": [
+      {
+        "name": "Wolfgang-Hubertus Ernst Ulrich Heil",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Peißenberg": [
+      {
+        "name": "Alexander Dobrindt",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Pfaffenhofen a.d.Ilm": [
+      {
+        "name": "Christian Anton Moser",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Pforzheim": [
+      {
+        "name": "Diana Zimmer",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Gunther Krichbaum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Pirmasens": [
+      {
+        "name": "Florian Bilic",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Plate": [
+      {
+        "name": "Ina Latendorf",
+        "partei": "Die Linke"
+      }
+    ],
+    "Plauen": [
+      {
+        "name": "Mathias Weiser",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Pohlheim": [
+      {
+        "name": "Robin Jünger",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Uwe Schulz",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Potsdam": [
+      {
+        "name": "Annalena Charlotte Alma Baerbock",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Christian Görke",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Olaf Scholz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Saskia Ludwig",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      },
+      {
+        "name": "Isabelle Vandre",
+        "partei": "Die Linke"
+      }
+    ],
+    "Prenzlau": [
+      {
+        "name": "Stefan Zierke",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Prerow": [
+      {
+        "name": "Dr. Dietmar Gerhard Bartsch",
+        "partei": "Die Linke"
+      }
+    ],
+    "Putzbrunn": [
+      {
+        "name": "Gerold Joachim Otten",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Raesfeld": [
+      {
+        "name": "Nadine Heselhaus",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Rastatt": [
+      {
+        "name": "Katja Wilma Mast",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Ratingen": [
+      {
+        "name": "Kerstin Griese",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Peter Beyer",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ravensburg": [
+      {
+        "name": "Agnes Monika Brugger",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Recklinghausen": [
+      {
+        "name": "Frank Schwabe",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Dr. Anna Leonore Labitzke Rathert",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Regensburg": [
+      {
+        "name": "Stefan Schmidt",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Erhard Josef Brucker",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Regenstauf": [
+      {
+        "name": "Peter Aumer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Rehburg-Loccum": [
+      {
+        "name": "Marja-Liisa Völlers",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Reutlingen": [
+      {
+        "name": "Dr. Nils Hermann Schmid",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Rheda-Wiedenbrück": [
+      {
+        "name": "Ralph Brinkhaus",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Rheinfelden (Baden)": [
+      {
+        "name": "Dr. Michael Joachim Blos",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Ringe": [
+      {
+        "name": "Albert Stegeman",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Rödermark": [
+      {
+        "name": "Patricia Ingrid Lips",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Römerstein": [
+      {
+        "name": "Michael Donth",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Rosenheim": [
+      {
+        "name": "Victoria Broßart",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Ates Nils Gürpinar",
+        "partei": "Die Linke"
+      }
+    ],
+    "Roßtal": [
+      {
+        "name": "Tobias Winkler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Roth": [
+      {
+        "name": "Ralph René Edelhäußer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Rottach-Egern": [
+      {
+        "name": "Alexander Gamal Radwan",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Rudolstadt": [
+      {
+        "name": "Prof. Dr. Michael Heinz Kaufmann",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Saarbrücken": [
+      {
+        "name": "Josephine Loulou Ortleb",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Jeanne Marie Aline Dillschneider",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Boris Gamanov",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Saarlouis": [
+      {
+        "name": "Carsten Roland Becker",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Salzgitter": [
+      {
+        "name": "Cem Hamit Ince",
+        "partei": "Die Linke"
+      }
+    ],
+    "Saulheim": [
+      {
+        "name": "Julia-Christina Stange",
+        "partei": "Die Linke"
+      }
+    ],
+    "Schönewalde": [
+      {
+        "name": "Knut Friedrich Alexander Abraham",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Schönwalde am Bungsberg": [
+      {
+        "name": "Ralf Volker Schnurrbusch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Schönwalde-Glien": [
+      {
+        "name": "Dr. Götz Gerald Ulrich Frömming",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Schwäbisch Gmünd": [
+      {
+        "name": "Ricarda Lang",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Dr. Ingeborg Gabriele Gräßle",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Schwaig b.Nürnberg": [
+      {
+        "name": "Evelyn Schötz",
+        "partei": "Die Linke"
+      }
+    ],
+    "Schwalbach am Taunus": [
+      {
+        "name": "Nancy Faeser",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Schwandorf": [
+      {
+        "name": "Tina Winklmann",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Martina Englhardt-Kopf",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      },
+      {
+        "name": "Reinhard Wilhelm Mixl",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Schwarzenfeld": [
+      {
+        "name": "Carina Schießl",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Schwebheim": [
+      {
+        "name": "Bernd Willi Karl Schuhmann",
+        "partei": "Alternative für Deutschland"
+      },
+      {
+        "name": "Dr. Anja Weisgerber",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Schweinfurt": [
+      {
+        "name": "Agnes Maria Conrad",
+        "partei": "Die Linke"
+      }
+    ],
+    "Schwerin": [
+      {
+        "name": "Reem Alabali-Radovan",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Leif-Erik Holm",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Seevetal": [
+      {
+        "name": "Svenja Stadler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Selzen": [
+      {
+        "name": "Gerhard Max Trabert",
+        "partei": "Die Linke"
+      }
+    ],
+    "Sendenhorst": [
+      {
+        "name": "Henning Rehbaum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Siegburg": [
+      {
+        "name": "Elisabeth Winkelmeier-Becker",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Sonthofen": [
+      {
+        "name": "Peter Felser",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Speyer": [
+      {
+        "name": "Nicole Höchst",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "St. Leon-Rot": [
+      {
+        "name": "Achim Köhler",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Stadtbergen": [
+      {
+        "name": "Heike Heubach",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Steinfurt": [
+      {
+        "name": "Mareike Hermeier",
+        "partei": "Die Linke"
+      }
+    ],
+    "Steinheim an der Murr": [
+      {
+        "name": "Fabian Benedikt Meinrad Gramling",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Steinhöring": [
+      {
+        "name": "Dr. Christoph Birghan",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Stockelsdorf": [
+      {
+        "name": "Sebastian Schmidt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Stralsund": [
+      {
+        "name": "Dario Seifert",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Strullendorf": [
+      {
+        "name": "Andreas Schwarz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Stuttgart": [
+      {
+        "name": "Simone Fischer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      },
+      {
+        "name": "Luigi Pantisano",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Lars Haise",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Süderholz": [
+      {
+        "name": "Georg Günther",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Suhlendorf": [
+      {
+        "name": "Olaf Hilmer",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Sundern (Sauerland)": [
+      {
+        "name": "Sandra Stein",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Tauberbischofsheim": [
+      {
+        "name": "Nina Ingrid Warken",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Taucha": [
+      {
+        "name": "Dr. Christiane Schenderlein",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Taunusstein": [
+      {
+        "name": "Martin Hermann Rabanus",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Tecklenburg": [
+      {
+        "name": "Anja Maria-Antonia Karliczek",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Thyrnau": [
+      {
+        "name": "Johann Georg Koller",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Tornesch": [
+      {
+        "name": "Daniel Kölbl",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Traunstein": [
+      {
+        "name": "Dr. Bärbel Kofler",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Trebbin": [
+      {
+        "name": "Birgit Irene Bessin",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Trier": [
+      {
+        "name": "Verena Ute Hubertz",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Corinna Martina Rüffer",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Trochtelfingen": [
+      {
+        "name": "Sieghard Knodel",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Tübingen": [
+      {
+        "name": "Anne Theresa Zerr",
+        "partei": "Die Linke"
+      }
+    ],
+    "Türkenfeld": [
+      {
+        "name": "Katrin Staffler",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Tuttlingen": [
+      {
+        "name": "Joachim Ralf Josef Bloch",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Überlingen": [
+      {
+        "name": "Volker Fred Mayer-Lay",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Uckerfelde": [
+      {
+        "name": "Hannes Gnauck",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Ueckermünde": [
+      {
+        "name": "Philipp Amthor",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Ulm": [
+      {
+        "name": "Marcel Emmerich",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Unna": [
+      {
+        "name": "Oliver Kaczmarek",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Uplengen": [
+      {
+        "name": "Anja Gerlinde Troff-Schaffarzyk",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Uttenweiler": [
+      {
+        "name": "Wolfgang Jochen Dahler",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Velden": [
+      {
+        "name": "Florian Oßner",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Verden (Aller)": [
+      {
+        "name": "Dr. Lena Maria Gumnior",
+        "partei": "BÜNDNIS 90/DIE GRÜNEN"
+      }
+    ],
+    "Viersen": [
+      {
+        "name": "Dr. Martin Plum",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Vlotho": [
+      {
+        "name": "Stefan Schwartze",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Waiblingen": [
+      {
+        "name": "Christina Daniela Stumpp",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Waldthurn": [
+      {
+        "name": "Albert Robert Rupprecht",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Walldürn": [
+      {
+        "name": "Johann Martel",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Walting": [
+      {
+        "name": "Sarah Vollath",
+        "partei": "Die Linke"
+      }
+    ],
+    "Wanfried": [
+      {
+        "name": "Wilhelm Gebhard",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wanzleben-Börde": [
+      {
+        "name": "Jan Wenzel Schmidt",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Warnow": [
+      {
+        "name": "Simone Borchardt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wedemark": [
+      {
+        "name": "Dirk Brandes",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Weiden i.d.OPf.": [
+      {
+        "name": "Manfred Leonhard Schiller",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Weilerswist": [
+      {
+        "name": "Detlef Seif",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Weingarten": [
+      {
+        "name": "Axel Karl Müller",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Weingarten (Baden)": [
+      {
+        "name": "Nicolas Benjamin Zippelius",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Weißdorf": [
+      {
+        "name": "Heiko Hain",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Weißenburg i.Bay.": [
+      {
+        "name": "Artur Friedrich Auernhammer",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Weißenfels": [
+      {
+        "name": "Dieter Stier",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Weißenhorn": [
+      {
+        "name": "Alexander Karl Engelhard",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Wermsdorf": [
+      {
+        "name": "Matthias Moosdorf",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Wetzlar": [
+      {
+        "name": "Dagmar Schmidt",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Wiesbaden": [
+      {
+        "name": "Dr. Stefan Korbach",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wiesloch": [
+      {
+        "name": "Dr. Lars Dietmar Castellucci",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Winsen (Luhe)": [
+      {
+        "name": "Dr. Cornell-Anette Babendererde",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wipperfürth": [
+      {
+        "name": "Tijen Ataoğlu",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wismar": [
+      {
+        "name": "Frank Michael Junge",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      }
+    ],
+    "Wittenberg": [
+      {
+        "name": "Volker Klaus Bernd Scheurell",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Wittmund": [
+      {
+        "name": "Anne Janssen",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Wolfertschwenden": [
+      {
+        "name": "Andreas Mayer",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Wuppertal": [
+      {
+        "name": "Helge Frederik Lindh",
+        "partei": "Sozialdemokratische Partei Deutschlands"
+      },
+      {
+        "name": "Jürgen Hardt",
+        "partei": "Christlich Demokratische Union Deutschlands"
+      }
+    ],
+    "Würzburg": [
+      {
+        "name": "Aaron Valent",
+        "partei": "Die Linke"
+      },
+      {
+        "name": "Dr. Hülya Düber",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Zellingen": [
+      {
+        "name": "Alexander Hoffmann",
+        "partei": "Christlich-Soziale Union in Bayern e.V."
+      }
+    ],
+    "Zetel": [
+      {
+        "name": "Martin Johannes Sichert",
+        "partei": "Alternative für Deutschland"
+      }
+    ],
+    "Zirndorf": [
+      {
+        "name": "Bastian Treuheit",
+        "partei": "Alternative für Deutschland"
+      }
+    ]
+  }
+}

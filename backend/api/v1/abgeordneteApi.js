@@ -8,6 +8,13 @@ const router = express.Router(); // Ändere von `app` zu `router`
 // Log-Level aus der .env-Datei
 const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
 
+// Konstante zum Aktivieren/Deaktivieren des Filters
+const FILTER_PARTEIEN = true; // Setze auf `false`, um den Filter zu deaktivieren
+
+// Liste der Parteien, die gefiltert werden sollen
+//const GEFILTERTE_PARTEIEN = ["Alternative für Deutschland", "Die Partei"];
+const GEFILTERTE_PARTEIEN = ["Alternative für Deutschland"];
+
 // Logging-Funktion
 const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
 function log(level, message, data = null) {
@@ -114,8 +121,23 @@ router.get("/:wahl/abgeordnete", (req, res) => {
 
   // Antwort zurückgeben
   if (results.size > 0) {
-    const uniqueResults = Array.from(results).map((item) => JSON.parse(item));
-    log("INFO", "Abgeordnete gefunden", { count: uniqueResults.length });
+    // Ergebnisse in ein Array umwandeln
+    let uniqueResults = Array.from(results).map((item) => JSON.parse(item));
+
+    // Filter anwenden, falls aktiviert
+    if (FILTER_PARTEIEN) {
+      uniqueResults = uniqueResults.filter(
+        (person) => !GEFILTERTE_PARTEIEN.includes(person.partei)
+      );
+      log(
+        "INFO",
+        `Filter angewendet: ${GEFILTERTE_PARTEIEN.join(", ")} ausgeschlossen`
+      );
+    }
+
+    log("INFO", "Abgeordnete gefunden (nach Filterung)", {
+      count: uniqueResults.length,
+    });
     res.json(uniqueResults);
   } else {
     log("WARN", "Keine Abgeordneten gefunden");

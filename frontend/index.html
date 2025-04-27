@@ -10,6 +10,68 @@
     />
     <title>ParlamentsPost</title>
     <script type="module" src="/main.js"></script>
+    <style>
+      @media print {
+        @page {
+          size: A4;
+          margin: 0; /* Keine Seitenränder über @page */
+        }
+
+        /* Grundlegende Print-Styles */
+        html, body {
+          background: white !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          width: 100% !important;
+        }
+
+        /* Verstecke alle nicht-druckbaren Elemente */
+        .print:hidden,
+        #header,
+        #footer,
+        button,
+        form,
+        header,
+        nav {
+          display: none !important;
+        }
+
+        /* Briefvorschau-Styles */
+        #briefvorschau {
+          background: white !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-shadow: none !important;
+          width: 100% !important;
+        }
+
+        #vorschau-inhalt {
+          max-width: none !important;
+          width: 100% !important;
+          padding: 2.54cm !important; /* Margen stattdessen hier definieren */
+          margin: 0 !important;
+          background: white !important;
+          box-shadow: none !important;
+          box-sizing: border-box !important;
+          page-break-inside: avoid !important;
+        }
+
+        /* Entferne Grid-Layout im Druckmodus */
+        main {
+          display: block !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          width: 100% !important;
+        }
+
+        /* Weitere Safari-spezifische Fixes */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
   </head>
   <body
     class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500"
@@ -309,7 +371,7 @@
           <p>Nutze das Formular um einen Brief zu generieren.</p>
           <p>Hier erscheint danach die Vorschau Deines Briefs.</p>
         </div>
-        <div class="mt-8">
+        <div class="mt-8 print:hidden">
           <button
             id="export-pdf-button"
             class="bg-teal-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300"

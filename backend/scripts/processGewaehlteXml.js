@@ -23,22 +23,16 @@ function parseXmlToJson(xmlData) {
 }
 
 // Funktion, um den vollständigen Namen zu formatieren
-function formatFullName(personendaten) {
-  const titel = personendaten.$.Titel ? `${personendaten.$.Titel} ` : "";
-  const vorname = personendaten.$.Vorname || "";
-  const rufname = personendaten.$.Rufname || "";
-  const namensbestandteile = personendaten.$.Namensbestandteile
-    ? `${personendaten.$.Namensbestandteile} `
+function formatFullName(titel, rufname, vorname, namensbestandteile, name) {
+  const titelTeil = titel ? `${titel} ` : "";
+  const namensbestandteileTeil = namensbestandteile
+    ? `${namensbestandteile} `
     : "";
-  const name = personendaten.$.Name || "Unbekannt";
-
-  // Prüfen, ob der Rufname eine Teilmenge des Vornamens ist
-  const rufnameAusgabe =
+  const rufnameTeil =
     rufname && !vorname.toLowerCase().includes(rufname.toLowerCase())
       ? `"${rufname}" `
       : "";
-
-  return `${titel}${rufnameAusgabe}${vorname} ${namensbestandteile}${name}`.trim();
+  return `${titelTeil}${rufnameTeil}${vorname} ${namensbestandteileTeil}${name}`.trim();
 }
 
 // Funktion, um die Daten zu verarbeiten
@@ -84,10 +78,27 @@ function processKandidatenData(parsedData) {
     // Wohnort1 extrahieren
     const wohnort1 = personendaten.$.Wohnort1 || "ohneWohnort";
 
+    // Geschlecht extrahieren
+    const geschlecht = personendaten.$.Geschlecht || "unbekannt";
+
+    // Titel, Rufname, Vorname, Namensbestandteile und Name extrahieren
+    const titel = personendaten.$.Titel || "";
+    const rufname = personendaten.$.Rufname || "";
+    const vorname = personendaten.$.Vorname || "";
+    const namensbestandteile = personendaten.$.Namensbestandteile || "";
+    const name = personendaten.$.Name || "Unbekannt";
+
+    // Voller Name zusammensetzen
+    const vollerName = formatFullName(
+      titel,
+      rufname,
+      vorname,
+      namensbestandteile,
+      name
+    );
+
     // Abgeordneter-Daten extrahieren
-    const abgeordneterKey = `${formatFullName(
-      personendaten
-    )}|${partei}|${wahlkreisName}|${wohnort1}`;
+    const abgeordneterKey = `${titel}|${rufname}|${vorname}|${namensbestandteile}|${name}|${partei}|${wahlkreisName}|${wohnort1}`;
     let id;
 
     // Prüfen, ob die Person bereits eine ID hat
@@ -100,10 +111,16 @@ function processKandidatenData(parsedData) {
 
     const abgeordneter = {
       id,
-      name: formatFullName(personendaten),
+      titel,
+      rufname,
+      vorname,
+      namensbestandteile,
+      name,
+      vollerName, // Voller Name hinzufügen
       partei,
       wahlkreis: wahlkreisName,
       wohnort: wohnort1,
+      geschlecht,
     };
 
     // Nach Wahlkreis gruppieren

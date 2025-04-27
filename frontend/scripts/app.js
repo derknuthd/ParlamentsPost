@@ -190,9 +190,10 @@ export function parlamentspostApp() {
       );
       const wahlkreisBez =
         abgeordneter?.wkr_bezeichnung || "Wahlkreis unbekannt";
-      const nameDesAbgeordneten = abgeordneter
-        ? `${abgeordneter.name} (${abgeordneter.partei})`
-        : "Unbekannt";
+
+      // Verwende "vollerName" und "partei" aus der JSON-Datei
+      const vollerNameDesAbgeordneten = abgeordneter?.vollerName || "Unbekannt";
+      const parteiDesAbgeordneten = abgeordneter?.partei || "Unbekannte Partei";
 
       // Validierung von Freitext und Themen
       if (!this.freitext.trim() && this.themen.length === 0) {
@@ -208,7 +209,9 @@ export function parlamentspostApp() {
           const userData = {
             ...(this.themen.length > 0 && { themen: this.themen }),
             ...(this.freitext.trim() && { freitext: this.freitext.trim() }),
-            abgeordneteName: nameDesAbgeordneten,
+            // Verwende "vollerName" und "partei" für die KI
+            abgeordneteName: vollerNameDesAbgeordneten,
+            abgeordnetePartei: parteiDesAbgeordneten,
           };
 
           log("DEBUG", "Daten für KI-Generierung", userData);
@@ -248,19 +251,27 @@ export function parlamentspostApp() {
       }
 
       // Brieftext zusammenstellen
+      const anrede =
+        abgeordneter?.geschlecht === "m"
+          ? "Sehr geehrter Herr"
+          : abgeordneter?.geschlecht === "w"
+          ? "Sehr geehrte Frau"
+          : "Hallo";
+
+      // Verwende "name" für die Anrede
       const briefText = `
-${absender}
+    ${absender}
 
-${ortUndDatum}
+    ${ortUndDatum}
 
-Wahlkreis: ${wahlkreisBez}
+    Wahlkreis: ${wahlkreisBez}
 
-Sehr geehrte/r Frau/Herr ${nameDesAbgeordneten.split(" (")[0]},
+    ${anrede} ${abgeordneter?.name || "Unbekannt"},
 
-${inhalt}
+    ${inhalt}
 
-Mit freundlichen Grüßen,
-${this.name}
+    Mit freundlichen Grüßen,
+    ${this.name}
         `.trim();
 
       log("INFO", "Brieftext erstellt", { briefText });

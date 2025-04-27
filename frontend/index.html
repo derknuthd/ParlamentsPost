@@ -210,7 +210,7 @@
             <template x-for="person in abgeordneteListe" :key="person.id">
               <option
                 :value="person.id"
-                x-text="`${person.wahlkreis}: ${person.name} (${person.partei}) - Wohnort: ${person.wohnort}`"
+                x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"
               ></option>
             </template>
           </select>

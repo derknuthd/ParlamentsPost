@@ -1,8 +1,10 @@
 //frontend/scipts/app.js
-// Logging-Funktion
+// Globale Konfigurationen
 const LOG_LEVEL = "DEBUG"; // Direkt definierter Log-Level (DEBUG, INFO, WARN, ERROR)
-const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
+const parlament = "Bundestag"; // Zentral definierte Konstante für das Parlament
 
+// Logging-Funktion
+const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
 function log(level, message, data = null) {
   if (logLevels.indexOf(level) >= logLevels.indexOf(LOG_LEVEL)) {
     const logMessage = `[${level}] ${message}`;
@@ -195,6 +197,18 @@ export function parlamentspostApp() {
       const vollerNameDesAbgeordneten = abgeordneter?.vollerName || "Unbekannt";
       const parteiDesAbgeordneten = abgeordneter?.partei || "Unbekannte Partei";
 
+      // Adresse des Adressaten (abhängig vom Parlament)
+      let empfänger = "";
+
+      if (parlament === "Bundestag") {
+        empfänger = `
+${vollerNameDesAbgeordneten}
+Deutscher Bundestag
+Platz der Republik 1
+11011 Berlin
+        `.trim();
+      }
+
       // Validierung von Freitext und Themen
       if (!this.freitext.trim() && this.themen.length === 0) {
         log("WARN", "Kein Freitext oder Thema angegeben");
@@ -261,6 +275,8 @@ export function parlamentspostApp() {
       // Verwende "name" für die Anrede
       const briefText = `
     ${absender}
+
+    ${empfänger}
 
     ${ortUndDatum}
 

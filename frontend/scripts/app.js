@@ -168,15 +168,25 @@ export function parlamentspostApp() {
       }
     },
 
-    async generiereBrief(kiGeneriert = false) {
-      log("INFO", "Starte Briefgenerierung", { kiGeneriert });
-
-      const plzPattern = /^\d{5}$/;
-      if (!plzPattern.test(this.plz)) {
-        log("WARN", "Ungültige PLZ eingegeben", { plz: this.plz });
-        alert("Bitte eine gültige 5-stellige PLZ eingeben.");
+    validateAndSubmit(event) {
+      // Prüft, ob das Formular gültig ist
+      if (!event.target.checkValidity()) {
+        // Wenn nicht gültig, zeigt Browser die Fehlermeldungen an
+        event.preventDefault();
         return;
       }
+      
+      // Formular ist gültig, rufen Sie generiereBrief auf
+      // Bestimmen der Methode basierend auf dem geklickten Button
+      const isAiGenerated = event.submitter.classList.contains('ai-button');
+      this.generiereBrief(isAiGenerated);
+      
+      // Verhindert das tatsächliche Absenden des Formulars
+      event.preventDefault();
+    },
+
+    async generiereBrief(kiGeneriert = false) {
+      log("INFO", "Starte Briefgenerierung", { kiGeneriert });
 
       // Absender, Ort/Datum und Wahlkreis
       const absender = `${this.name}\n${this.straße}\n${this.plz} ${this.ort}`;

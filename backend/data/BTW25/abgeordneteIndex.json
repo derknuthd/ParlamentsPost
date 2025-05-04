@@ -8784,7 +8784,7 @@
     ]
   },
   "wohnorte": {
-    "Aachen": [
+    "aachen": [
       {
         "id": 470,
         "titel": "Dr.",
@@ -8825,7 +8825,7 @@
         "geschlecht": "m"
       }
     ],
-    "Aalen": [
+    "aalen": [
       {
         "id": 564,
         "titel": "",
@@ -8840,7 +8840,7 @@
         "geschlecht": "m"
       }
     ],
-    "Adlkofen": [
+    "adlkofen": [
       {
         "id": 297,
         "titel": "",
@@ -8855,7 +8855,7 @@
         "geschlecht": "w"
       }
     ],
-    "Ahaus": [
+    "ahaus": [
       {
         "id": 463,
         "titel": "",
@@ -8870,7 +8870,7 @@
         "geschlecht": "m"
       }
     ],
-    "Alerheim": [
+    "alerheim": [
       {
         "id": 283,
         "titel": "",
@@ -8885,7 +8885,7 @@
         "geschlecht": "m"
       }
     ],
-    "Alpen": [
+    "alpen": [
       {
         "id": 415,
         "titel": "",
@@ -8900,7 +8900,7 @@
         "geschlecht": "m"
       }
     ],
-    "Alsdorf": [
+    "alsdorf": [
       {
         "id": 482,
         "titel": "",
@@ -8915,7 +8915,7 @@
         "geschlecht": "m"
       }
     ],
-    "Altdorf": [
+    "altdorf": [
       {
         "id": 12,
         "titel": "",
@@ -8930,7 +8930,7 @@
         "geschlecht": "m"
       }
     ],
-    "Altenburg": [
+    "altenburg": [
       {
         "id": 126,
         "titel": "",
@@ -8958,7 +8958,7 @@
         "geschlecht": "m"
       }
     ],
-    "Altleiningen": [
+    "altleiningen": [
       {
         "id": 10,
         "titel": "",
@@ -8973,7 +8973,7 @@
         "geschlecht": "w"
       }
     ],
-    "Altmärkische Höhe": [
+    "altmärkische höhe": [
       {
         "id": 143,
         "titel": "Dr.",
@@ -8988,7 +8988,7 @@
         "geschlecht": "w"
       }
     ],
-    "Altrip": [
+    "altrip": [
       {
         "id": 19,
         "titel": "Dr.",
@@ -9003,7 +9003,7 @@
         "geschlecht": "m"
       }
     ],
-    "Andernach": [
+    "andernach": [
       {
         "id": 21,
         "titel": "",
@@ -9018,7 +9018,7 @@
         "geschlecht": "w"
       }
     ],
-    "Angelburg": [
+    "angelburg": [
       {
         "id": 206,
         "titel": "",
@@ -9033,7 +9033,7 @@
         "geschlecht": "m"
       }
     ],
-    "Angern": [
+    "angern": [
       {
         "id": 145,
         "titel": "",
@@ -9048,7 +9048,7 @@
         "geschlecht": "m"
       }
     ],
-    "Arnsberg": [
+    "arnsberg": [
       {
         "id": 413,
         "titel": "",
@@ -9076,7 +9076,7 @@
         "geschlecht": "m"
       }
     ],
-    "Arzfeld": [
+    "arzfeld": [
       {
         "id": 25,
         "titel": "",
@@ -9091,7 +9091,7 @@
         "geschlecht": "m"
       }
     ],
-    "Aschaffenburg": [
+    "aschaffenburg": [
       {
         "id": 244,
         "titel": "",
@@ -9106,7 +9106,7 @@
         "geschlecht": "m"
       }
     ],
-    "Augsburg": [
+    "augsburg": [
       {
         "id": 245,
         "titel": "",
@@ -9134,7 +9134,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Camberg": [
+    "bad camberg": [
       {
         "id": 607,
         "titel": "",
@@ -9149,7 +9149,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bad Düben": [
+    "bad düben": [
       {
         "id": 45,
         "titel": "",
@@ -9164,7 +9164,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Dürkheim": [
+    "bad dürkheim": [
       {
         "id": 5,
         "titel": "",
@@ -9192,7 +9192,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Dürrheim": [
+    "bad dürrheim": [
       {
         "id": 596,
         "titel": "",
@@ -9207,7 +9207,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bad Grönenbach": [
+    "bad grönenbach": [
       {
         "id": 330,
         "titel": "Dr.",
@@ -9222,7 +9222,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Hönningen": [
+    "bad hönningen": [
       {
         "id": 6,
         "titel": "",
@@ -9237,7 +9237,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Kreuznach": [
+    "bad kreuznach": [
       {
         "id": 24,
         "titel": "",
@@ -9252,7 +9252,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bad Laasphe": [
+    "bad laasphe": [
       {
         "id": 436,
         "titel": "",
@@ -9267,7 +9267,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Nauheim": [
+    "bad nauheim": [
       {
         "id": 224,
         "titel": "",
@@ -9282,7 +9282,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bad Salzuflen": [
+    "bad salzuflen": [
       {
         "id": 496,
         "titel": "",
@@ -9310,7 +9310,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Salzungen": [
+    "bad salzungen": [
       {
         "id": 121,
         "titel": "",
@@ -9325,7 +9325,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Soden am Taunus": [
+    "bad soden am taunus": [
       {
         "id": 233,
         "titel": "",
@@ -9340,7 +9340,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Soden-Salmünster": [
+    "bad soden-salmünster": [
       {
         "id": 226,
         "titel": "",
@@ -9355,7 +9355,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Wildbad": [
+    "bad wildbad": [
       {
         "id": 582,
         "titel": "",
@@ -9370,7 +9370,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bad Zwischenahn": [
+    "bad zwischenahn": [
       {
         "id": 603,
         "titel": "",
@@ -9385,7 +9385,7 @@
         "geschlecht": "m"
       }
     ],
-    "Baden-Baden": [
+    "baden-baden": [
       {
         "id": 570,
         "titel": "",
@@ -9413,7 +9413,7 @@
         "geschlecht": "m"
       }
     ],
-    "Balingen": [
+    "balingen": [
       {
         "id": 629,
         "titel": "",
@@ -9428,7 +9428,7 @@
         "geschlecht": "m"
       }
     ],
-    "Barsbüttel": [
+    "barsbüttel": [
       {
         "id": 83,
         "titel": "",
@@ -9443,7 +9443,7 @@
         "geschlecht": "m"
       }
     ],
-    "Barsinghausen": [
+    "barsinghausen": [
       {
         "id": 368,
         "titel": "",
@@ -9458,7 +9458,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bautzen": [
+    "bautzen": [
       {
         "id": 44,
         "titel": "",
@@ -9473,7 +9473,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bayerbach": [
+    "bayerbach": [
       {
         "id": 314,
         "titel": "",
@@ -9488,7 +9488,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bayreuth": [
+    "bayreuth": [
       {
         "id": 267,
         "titel": "",
@@ -9529,7 +9529,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bedburg": [
+    "bedburg": [
       {
         "id": 535,
         "titel": "Dr.",
@@ -9544,7 +9544,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bensheim": [
+    "bensheim": [
       {
         "id": 236,
         "titel": "Dr.",
@@ -9559,7 +9559,7 @@
         "geschlecht": "m"
       }
     ],
-    "Berg b.Neumarkt i.d.OPf.": [
+    "berg b.neumarkt i.d.opf.": [
       {
         "id": 299,
         "titel": "",
@@ -9574,7 +9574,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bergen": [
+    "bergen": [
       {
         "id": 397,
         "titel": "",
@@ -9589,7 +9589,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bergisch Gladbach": [
+    "bergisch gladbach": [
       {
         "id": 534,
         "titel": "",
@@ -9604,7 +9604,7 @@
         "geschlecht": "w"
       }
     ],
-    "Berlin": [
+    "berlin": [
       {
         "id": 43,
         "titel": "",
@@ -10074,7 +10074,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bernburg (Saale)": [
+    "bernburg (saale)": [
       {
         "id": 148,
         "titel": "",
@@ -10089,7 +10089,7 @@
         "geschlecht": "w"
       }
     ],
-    "Beverungen": [
+    "beverungen": [
       {
         "id": 458,
         "titel": "",
@@ -10104,7 +10104,7 @@
         "geschlecht": "m"
       }
     ],
-    "Biberach an der Riß": [
+    "biberach an der riß": [
       {
         "id": 556,
         "titel": "",
@@ -10119,7 +10119,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bielefeld": [
+    "bielefeld": [
       {
         "id": 409,
         "titel": "Dr.",
@@ -10160,7 +10160,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bippen": [
+    "bippen": [
       {
         "id": 359,
         "titel": "",
@@ -10175,7 +10175,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bispingen": [
+    "bispingen": [
       {
         "id": 366,
         "titel": "",
@@ -10190,7 +10190,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bitterfeld-Wolfen": [
+    "bitterfeld-wolfen": [
       {
         "id": 151,
         "titel": "",
@@ -10205,7 +10205,7 @@
         "geschlecht": "m"
       }
     ],
-    "Blankenrath": [
+    "blankenrath": [
       {
         "id": 15,
         "titel": "",
@@ -10220,7 +10220,7 @@
         "geschlecht": "m"
       }
     ],
-    "Böblingen": [
+    "böblingen": [
       {
         "id": 540,
         "titel": "",
@@ -10248,7 +10248,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bochum": [
+    "bochum": [
       {
         "id": 426,
         "titel": "",
@@ -10302,7 +10302,7 @@
         "geschlecht": "m"
       }
     ],
-    "Böhmenkirch": [
+    "böhmenkirch": [
       {
         "id": 546,
         "titel": "",
@@ -10317,7 +10317,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bonn": [
+    "bonn": [
       {
         "id": 451,
         "titel": "",
@@ -10345,7 +10345,7 @@
         "geschlecht": "m"
       }
     ],
-    "Boppard": [
+    "boppard": [
       {
         "id": 18,
         "titel": "",
@@ -10360,7 +10360,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bordesholm": [
+    "bordesholm": [
       {
         "id": 64,
         "titel": "Dr.",
@@ -10375,7 +10375,7 @@
         "geschlecht": "m"
       }
     ],
-    "Borken": [
+    "borken": [
       {
         "id": 464,
         "titel": "",
@@ -10390,7 +10390,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bornheim": [
+    "bornheim": [
       {
         "id": 442,
         "titel": "",
@@ -10405,7 +10405,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bornhöved": [
+    "bornhöved": [
       {
         "id": 79,
         "titel": "",
@@ -10420,7 +10420,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bottrop": [
+    "bottrop": [
       {
         "id": 469,
         "titel": "",
@@ -10435,7 +10435,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bramsche": [
+    "bramsche": [
       {
         "id": 345,
         "titel": "",
@@ -10450,7 +10450,7 @@
         "geschlecht": "w"
       }
     ],
-    "Brandenburg an der Havel": [
+    "brandenburg an der havel": [
       {
         "id": 101,
         "titel": "",
@@ -10478,7 +10478,7 @@
         "geschlecht": "w"
       }
     ],
-    "Braunschweig": [
+    "braunschweig": [
       {
         "id": 361,
         "titel": "",
@@ -10532,7 +10532,7 @@
         "geschlecht": "m"
       }
     ],
-    "Brehme": [
+    "brehme": [
       {
         "id": 122,
         "titel": "",
@@ -10547,7 +10547,7 @@
         "geschlecht": "m"
       }
     ],
-    "Breisach am Rhein": [
+    "breisach am rhein": [
       {
         "id": 621,
         "titel": "",
@@ -10562,7 +10562,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bremen": [
+    "bremen": [
       {
         "id": 152,
         "titel": "",
@@ -10616,7 +10616,7 @@
         "geschlecht": "w"
       }
     ],
-    "Bremerhaven": [
+    "bremerhaven": [
       {
         "id": 156,
         "titel": "",
@@ -10631,7 +10631,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bremervörde": [
+    "bremervörde": [
       {
         "id": 384,
         "titel": "",
@@ -10646,7 +10646,7 @@
         "geschlecht": "w"
       }
     ],
-    "Brilon": [
+    "brilon": [
       {
         "id": 448,
         "titel": "",
@@ -10661,7 +10661,7 @@
         "geschlecht": "m"
       }
     ],
-    "Burgwedel": [
+    "burgwedel": [
       {
         "id": 398,
         "titel": "Dr.",
@@ -10676,7 +10676,7 @@
         "geschlecht": "m"
       }
     ],
-    "Bürstadt": [
+    "bürstadt": [
       {
         "id": 217,
         "titel": "",
@@ -10691,7 +10691,7 @@
         "geschlecht": "m"
       }
     ],
-    "Calw": [
+    "calw": [
       {
         "id": 538,
         "titel": "",
@@ -10706,7 +10706,7 @@
         "geschlecht": "w"
       }
     ],
-    "Chemnitz": [
+    "chemnitz": [
       {
         "id": 32,
         "titel": "",
@@ -10721,7 +10721,7 @@
         "geschlecht": "w"
       }
     ],
-    "Coburg": [
+    "coburg": [
       {
         "id": 242,
         "titel": "",
@@ -10736,7 +10736,7 @@
         "geschlecht": "m"
       }
     ],
-    "Cottbus": [
+    "cottbus": [
       {
         "id": 89,
         "titel": "",
@@ -10764,7 +10764,7 @@
         "geschlecht": "m"
       }
     ],
-    "Cuxhaven": [
+    "cuxhaven": [
       {
         "id": 378,
         "titel": "",
@@ -10779,7 +10779,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dägeling": [
+    "dägeling": [
       {
         "id": 85,
         "titel": "",
@@ -10794,7 +10794,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dallgow-Döberitz": [
+    "dallgow-döberitz": [
       {
         "id": 105,
         "titel": "",
@@ -10809,7 +10809,7 @@
         "geschlecht": "m"
       }
     ],
-    "Damshagen": [
+    "damshagen": [
       {
         "id": 166,
         "titel": "",
@@ -10824,7 +10824,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dinslaken": [
+    "dinslaken": [
       {
         "id": 407,
         "titel": "",
@@ -10839,7 +10839,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dittelsheim-Heßloch": [
+    "dittelsheim-heßloch": [
       {
         "id": 27,
         "titel": "",
@@ -10854,7 +10854,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dohma": [
+    "dohma": [
       {
         "id": 51,
         "titel": "",
@@ -10869,7 +10869,7 @@
         "geschlecht": "m"
       }
     ],
-    "Donaueschingen": [
+    "donaueschingen": [
       {
         "id": 594,
         "titel": "",
@@ -10884,7 +10884,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dorsten": [
+    "dorsten": [
       {
         "id": 420,
         "titel": "",
@@ -10912,7 +10912,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dortmund": [
+    "dortmund": [
       {
         "id": 412,
         "titel": "",
@@ -10966,7 +10966,7 @@
         "geschlecht": "m"
       }
     ],
-    "Dresden": [
+    "dresden": [
       {
         "id": 34,
         "titel": "",
@@ -11072,7 +11072,7 @@
         "geschlecht": "w"
       }
     ],
-    "Drolshagen": [
+    "drolshagen": [
       {
         "id": 518,
         "titel": "",
@@ -11087,7 +11087,7 @@
         "geschlecht": "m"
       }
     ],
-    "Duisburg": [
+    "duisburg": [
       {
         "id": 422,
         "titel": "",
@@ -11167,7 +11167,7 @@
         "geschlecht": "w"
       }
     ],
-    "Düren": [
+    "düren": [
       {
         "id": 427,
         "titel": "",
@@ -11195,7 +11195,7 @@
         "geschlecht": "m"
       }
     ],
-    "Düsseldorf": [
+    "düsseldorf": [
       {
         "id": 416,
         "titel": "",
@@ -11236,7 +11236,7 @@
         "geschlecht": "w"
       }
     ],
-    "Ebelsbach": [
+    "ebelsbach": [
       {
         "id": 324,
         "titel": "",
@@ -11251,7 +11251,7 @@
         "geschlecht": "w"
       }
     ],
-    "Eberswalde": [
+    "eberswalde": [
       {
         "id": 98,
         "titel": "",
@@ -11266,7 +11266,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eching": [
+    "eching": [
       {
         "id": 241,
         "titel": "",
@@ -11281,7 +11281,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eckstedt": [
+    "eckstedt": [
       {
         "id": 135,
         "titel": "",
@@ -11296,7 +11296,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eilsleben": [
+    "eilsleben": [
       {
         "id": 141,
         "titel": "",
@@ -11311,7 +11311,7 @@
         "geschlecht": "w"
       }
     ],
-    "Eitensheim": [
+    "eitensheim": [
       {
         "id": 274,
         "titel": "Dr.",
@@ -11326,7 +11326,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eltville am Rhein": [
+    "eltville am rhein": [
       {
         "id": 218,
         "titel": "",
@@ -11341,7 +11341,7 @@
         "geschlecht": "m"
       }
     ],
-    "Emmendingen": [
+    "emmendingen": [
       {
         "id": 568,
         "titel": "Dr.",
@@ -11356,7 +11356,7 @@
         "geschlecht": "m"
       }
     ],
-    "Emmerthal": [
+    "emmerthal": [
       {
         "id": 369,
         "titel": "",
@@ -11371,7 +11371,7 @@
         "geschlecht": "w"
       }
     ],
-    "Emsdetten": [
+    "emsdetten": [
       {
         "id": 453,
         "titel": "Dr.",
@@ -11386,7 +11386,7 @@
         "geschlecht": "m"
       }
     ],
-    "Enger": [
+    "enger": [
       {
         "id": 455,
         "titel": "",
@@ -11401,7 +11401,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eppingen": [
+    "eppingen": [
       {
         "id": 563,
         "titel": "",
@@ -11416,7 +11416,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eppstein": [
+    "eppstein": [
       {
         "id": 213,
         "titel": "",
@@ -11431,7 +11431,7 @@
         "geschlecht": "m"
       }
     ],
-    "Erbach": [
+    "erbach": [
       {
         "id": 622,
         "titel": "",
@@ -11446,7 +11446,7 @@
         "geschlecht": "w"
       }
     ],
-    "Erfurt": [
+    "erfurt": [
       {
         "id": 119,
         "titel": "",
@@ -11526,7 +11526,7 @@
         "geschlecht": "m"
       }
     ],
-    "Eschweiler": [
+    "eschweiler": [
       {
         "id": 474,
         "titel": "",
@@ -11567,7 +11567,7 @@
         "geschlecht": "m"
       }
     ],
-    "Espelkamp": [
+    "espelkamp": [
       {
         "id": 502,
         "titel": "Dr.",
@@ -11582,7 +11582,7 @@
         "geschlecht": "m"
       }
     ],
-    "Essen": [
+    "essen": [
       {
         "id": 421,
         "titel": "",
@@ -11610,7 +11610,7 @@
         "geschlecht": "m"
       }
     ],
-    "Evessen": [
+    "evessen": [
       {
         "id": 396,
         "titel": "",
@@ -11625,7 +11625,7 @@
         "geschlecht": "w"
       }
     ],
-    "Extertal": [
+    "extertal": [
       {
         "id": 457,
         "titel": "",
@@ -11640,7 +11640,7 @@
         "geschlecht": "w"
       }
     ],
-    "Filderstadt": [
+    "filderstadt": [
       {
         "id": 616,
         "titel": "",
@@ -11655,7 +11655,7 @@
         "geschlecht": "m"
       }
     ],
-    "Flensburg": [
+    "flensburg": [
       {
         "id": 67,
         "titel": "",
@@ -11683,7 +11683,7 @@
         "geschlecht": "m"
       }
     ],
-    "Forchheim": [
+    "forchheim": [
       {
         "id": 296,
         "titel": "",
@@ -11698,7 +11698,7 @@
         "geschlecht": "w"
       }
     ],
-    "Frankfurt am Main": [
+    "frankfurt am main": [
       {
         "id": 46,
         "titel": "Dr.",
@@ -11765,7 +11765,7 @@
         "geschlecht": "w"
       }
     ],
-    "Frauenneuharting": [
+    "frauenneuharting": [
       {
         "id": 271,
         "titel": "Dr.",
@@ -11780,7 +11780,7 @@
         "geschlecht": "m"
       }
     ],
-    "Freiburg im Breisgau": [
+    "freiburg im breisgau": [
       {
         "id": 579,
         "titel": "",
@@ -11808,7 +11808,7 @@
         "geschlecht": "w"
       }
     ],
-    "Friedberg (Hessen)": [
+    "friedberg (hessen)": [
       {
         "id": 229,
         "titel": "Dr.",
@@ -11823,7 +11823,7 @@
         "geschlecht": "m"
       }
     ],
-    "Fuhlendorf": [
+    "fuhlendorf": [
       {
         "id": 162,
         "titel": "",
@@ -11838,7 +11838,7 @@
         "geschlecht": "w"
       }
     ],
-    "Fulda": [
+    "fulda": [
       {
         "id": 209,
         "titel": "",
@@ -11866,7 +11866,7 @@
         "geschlecht": "m"
       }
     ],
-    "Fürth": [
+    "fürth": [
       {
         "id": 277,
         "titel": "",
@@ -11881,7 +11881,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gablenz": [
+    "gablenz": [
       {
         "id": 49,
         "titel": "",
@@ -11896,7 +11896,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gauting": [
+    "gauting": [
       {
         "id": 262,
         "titel": "Dr.",
@@ -11924,7 +11924,7 @@
         "geschlecht": "m"
       }
     ],
-    "Geeste": [
+    "geeste": [
       {
         "id": 353,
         "titel": "",
@@ -11939,7 +11939,7 @@
         "geschlecht": "m"
       }
     ],
-    "Geesthacht": [
+    "geesthacht": [
       {
         "id": 66,
         "titel": "Dr.",
@@ -11954,7 +11954,7 @@
         "geschlecht": "w"
       }
     ],
-    "Geisenfeld": [
+    "geisenfeld": [
       {
         "id": 258,
         "titel": "",
@@ -11969,7 +11969,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gelsenkirchen": [
+    "gelsenkirchen": [
       {
         "id": 452,
         "titel": "Dr.",
@@ -11997,7 +11997,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gemünden a.Main": [
+    "gemünden a.main": [
       {
         "id": 282,
         "titel": "",
@@ -12012,7 +12012,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gera": [
+    "gera": [
       {
         "id": 128,
         "titel": "",
@@ -12040,7 +12040,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gerlingen": [
+    "gerlingen": [
       {
         "id": 588,
         "titel": "",
@@ -12055,7 +12055,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gießen": [
+    "gießen": [
       {
         "id": 208,
         "titel": "",
@@ -12109,7 +12109,7 @@
         "geschlecht": "w"
       }
     ],
-    "Goch": [
+    "goch": [
       {
         "id": 511,
         "titel": "",
@@ -12124,7 +12124,7 @@
         "geschlecht": "m"
       }
     ],
-    "Goldbach": [
+    "goldbach": [
       {
         "id": 325,
         "titel": "",
@@ -12139,7 +12139,7 @@
         "geschlecht": "w"
       }
     ],
-    "Göppingen": [
+    "göppingen": [
       {
         "id": 560,
         "titel": "",
@@ -12154,7 +12154,7 @@
         "geschlecht": "m"
       }
     ],
-    "Görlitz": [
+    "görlitz": [
       {
         "id": 33,
         "titel": "",
@@ -12169,7 +12169,7 @@
         "geschlecht": "m"
       }
     ],
-    "Göttingen": [
+    "göttingen": [
       {
         "id": 403,
         "titel": "",
@@ -12184,7 +12184,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gräfenhainichen": [
+    "gräfenhainichen": [
       {
         "id": 137,
         "titel": "",
@@ -12199,7 +12199,7 @@
         "geschlecht": "m"
       }
     ],
-    "Grevenbroich": [
+    "grevenbroich": [
       {
         "id": 447,
         "titel": "",
@@ -12214,7 +12214,7 @@
         "geschlecht": "m"
       }
     ],
-    "Gröditz": [
+    "gröditz": [
       {
         "id": 58,
         "titel": "",
@@ -12229,7 +12229,7 @@
         "geschlecht": "m"
       }
     ],
-    "Groß Teetzleben": [
+    "groß teetzleben": [
       {
         "id": 169,
         "titel": "",
@@ -12244,7 +12244,7 @@
         "geschlecht": "w"
       }
     ],
-    "Großenlüder": [
+    "großenlüder": [
       {
         "id": 196,
         "titel": "",
@@ -12259,7 +12259,7 @@
         "geschlecht": "m"
       }
     ],
-    "Grünheide (Mark)": [
+    "grünheide (mark)": [
       {
         "id": 104,
         "titel": "",
@@ -12274,7 +12274,7 @@
         "geschlecht": "m"
       }
     ],
-    "Haan": [
+    "haan": [
       {
         "id": 443,
         "titel": "",
@@ -12302,7 +12302,7 @@
         "geschlecht": "m"
       }
     ],
-    "Haibach": [
+    "haibach": [
       {
         "id": 313,
         "titel": "",
@@ -12317,7 +12317,7 @@
         "geschlecht": "m"
       }
     ],
-    "Halle (Saale)": [
+    "halle (saale)": [
       {
         "id": 140,
         "titel": "",
@@ -12332,7 +12332,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hamburg": [
+    "hamburg": [
       {
         "id": 106,
         "titel": "",
@@ -12503,7 +12503,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hameln": [
+    "hameln": [
       {
         "id": 400,
         "titel": "",
@@ -12518,7 +12518,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hamm": [
+    "hamm": [
       {
         "id": 523,
         "titel": "",
@@ -12533,7 +12533,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hamminkeln": [
+    "hamminkeln": [
       {
         "id": 528,
         "titel": "",
@@ -12548,7 +12548,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hanau": [
+    "hanau": [
       {
         "id": 232,
         "titel": "",
@@ -12563,7 +12563,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hannover": [
+    "hannover": [
       {
         "id": 344,
         "titel": "",
@@ -12656,7 +12656,7 @@
         "geschlecht": "m"
       }
     ],
-    "Harsewinkel": [
+    "harsewinkel": [
       {
         "id": 484,
         "titel": "",
@@ -12671,7 +12671,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hartenstein": [
+    "hartenstein": [
       {
         "id": 35,
         "titel": "",
@@ -12686,7 +12686,7 @@
         "geschlecht": "m"
       }
     ],
-    "Haßloch": [
+    "haßloch": [
       {
         "id": 9,
         "titel": "",
@@ -12701,7 +12701,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hattert": [
+    "hattert": [
       {
         "id": 26,
         "titel": "",
@@ -12716,7 +12716,7 @@
         "geschlecht": "m"
       }
     ],
-    "Havelaue": [
+    "havelaue": [
       {
         "id": 87,
         "titel": "",
@@ -12731,7 +12731,7 @@
         "geschlecht": "m"
       }
     ],
-    "Heide": [
+    "heide": [
       {
         "id": 74,
         "titel": "",
@@ -12746,7 +12746,7 @@
         "geschlecht": "w"
       }
     ],
-    "Heidelberg": [
+    "heidelberg": [
       {
         "id": 539,
         "titel": "",
@@ -12787,7 +12787,7 @@
         "geschlecht": "w"
       }
     ],
-    "Heilbronn": [
+    "heilbronn": [
       {
         "id": 558,
         "titel": "",
@@ -12802,7 +12802,7 @@
         "geschlecht": "m"
       }
     ],
-    "Heinsberg": [
+    "heinsberg": [
       {
         "id": 475,
         "titel": "",
@@ -12817,7 +12817,7 @@
         "geschlecht": "m"
       }
     ],
-    "Herdecke": [
+    "herdecke": [
       {
         "id": 459,
         "titel": "Dr.",
@@ -12832,7 +12832,7 @@
         "geschlecht": "w"
       }
     ],
-    "Herne": [
+    "herne": [
       {
         "id": 505,
         "titel": "",
@@ -12847,7 +12847,7 @@
         "geschlecht": "m"
       }
     ],
-    "Herzogenaurach": [
+    "herzogenaurach": [
       {
         "id": 317,
         "titel": "Dr.",
@@ -12862,7 +12862,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hesel": [
+    "hesel": [
       {
         "id": 346,
         "titel": "",
@@ -12877,7 +12877,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hilchenbach": [
+    "hilchenbach": [
       {
         "id": 471,
         "titel": "",
@@ -12892,7 +12892,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hildesheim": [
+    "hildesheim": [
       {
         "id": 387,
         "titel": "",
@@ -12907,7 +12907,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hirschaid": [
+    "hirschaid": [
       {
         "id": 302,
         "titel": "",
@@ -12922,7 +12922,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hofgeismar": [
+    "hofgeismar": [
       {
         "id": 214,
         "titel": "",
@@ -12937,7 +12937,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hofheim am Taunus": [
+    "hofheim am taunus": [
       {
         "id": 194,
         "titel": "Dr.",
@@ -12952,7 +12952,7 @@
         "geschlecht": "w"
       }
     ],
-    "Hohe Börde": [
+    "hohe börde": [
       {
         "id": 150,
         "titel": "",
@@ -12967,7 +12967,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hohenstein": [
+    "hohenstein": [
       {
         "id": 230,
         "titel": "",
@@ -12982,7 +12982,7 @@
         "geschlecht": "m"
       }
     ],
-    "Holzkirchen": [
+    "holzkirchen": [
       {
         "id": 295,
         "titel": "",
@@ -12997,7 +12997,7 @@
         "geschlecht": "m"
       }
     ],
-    "Holzminden": [
+    "holzminden": [
       {
         "id": 351,
         "titel": "",
@@ -13012,7 +13012,7 @@
         "geschlecht": "m"
       }
     ],
-    "Homburg": [
+    "homburg": [
       {
         "id": 338,
         "titel": "",
@@ -13040,7 +13040,7 @@
         "geschlecht": "m"
       }
     ],
-    "Hürth": [
+    "hürth": [
       {
         "id": 433,
         "titel": "",
@@ -13055,7 +13055,7 @@
         "geschlecht": "w"
       }
     ],
-    "Illingen": [
+    "illingen": [
       {
         "id": 337,
         "titel": "",
@@ -13070,7 +13070,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ilmenau": [
+    "ilmenau": [
       {
         "id": 130,
         "titel": "",
@@ -13085,7 +13085,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ingolstadt": [
+    "ingolstadt": [
       {
         "id": 256,
         "titel": "",
@@ -13100,7 +13100,7 @@
         "geschlecht": "m"
       }
     ],
-    "Inning a.Ammersee": [
+    "inning a.ammersee": [
       {
         "id": 264,
         "titel": "",
@@ -13115,7 +13115,7 @@
         "geschlecht": "w"
       }
     ],
-    "Inzell": [
+    "inzell": [
       {
         "id": 292,
         "titel": "",
@@ -13130,7 +13130,7 @@
         "geschlecht": "m"
       }
     ],
-    "Irsee": [
+    "irsee": [
       {
         "id": 332,
         "titel": "",
@@ -13145,7 +13145,7 @@
         "geschlecht": "m"
       }
     ],
-    "Iserlohn": [
+    "iserlohn": [
       {
         "id": 468,
         "titel": "",
@@ -13173,7 +13173,7 @@
         "geschlecht": "w"
       }
     ],
-    "Jena": [
+    "jena": [
       {
         "id": 129,
         "titel": "",
@@ -13188,7 +13188,7 @@
         "geschlecht": "w"
       }
     ],
-    "Jockgrim": [
+    "jockgrim": [
       {
         "id": 31,
         "titel": "Dr.",
@@ -13203,7 +13203,7 @@
         "geschlecht": "m"
       }
     ],
-    "Jüterbog": [
+    "jüterbog": [
       {
         "id": 103,
         "titel": "",
@@ -13218,7 +13218,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kaiserslautern": [
+    "kaiserslautern": [
       {
         "id": 29,
         "titel": "",
@@ -13233,7 +13233,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kamenz": [
+    "kamenz": [
       {
         "id": 40,
         "titel": "",
@@ -13248,7 +13248,7 @@
         "geschlecht": "w"
       }
     ],
-    "Karlsruhe": [
+    "karlsruhe": [
       {
         "id": 552,
         "titel": "",
@@ -13315,7 +13315,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kasseedorf": [
+    "kasseedorf": [
       {
         "id": 65,
         "titel": "",
@@ -13330,7 +13330,7 @@
         "geschlecht": "w"
       }
     ],
-    "Kassel": [
+    "kassel": [
       {
         "id": 198,
         "titel": "",
@@ -13384,7 +13384,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kastellaun": [
+    "kastellaun": [
       {
         "id": 23,
         "titel": "Dr.",
@@ -13399,7 +13399,7 @@
         "geschlecht": "m"
       }
     ],
-    "Katlenburg-Lindau": [
+    "katlenburg-lindau": [
       {
         "id": 402,
         "titel": "",
@@ -13414,7 +13414,7 @@
         "geschlecht": "w"
       }
     ],
-    "Kempten (Allgäu)": [
+    "kempten (allgäu)": [
       {
         "id": 331,
         "titel": "",
@@ -13429,7 +13429,7 @@
         "geschlecht": "w"
       }
     ],
-    "Kiel": [
+    "kiel": [
       {
         "id": 62,
         "titel": "",
@@ -13483,7 +13483,7 @@
         "geschlecht": "w"
       }
     ],
-    "Kirchberg an der Jagst": [
+    "kirchberg an der jagst": [
       {
         "id": 597,
         "titel": "",
@@ -13498,7 +13498,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kirchdorf": [
+    "kirchdorf": [
       {
         "id": 389,
         "titel": "",
@@ -13513,7 +13513,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kirkel": [
+    "kirkel": [
       {
         "id": 612,
         "titel": "Dr.",
@@ -13528,7 +13528,7 @@
         "geschlecht": "m"
       }
     ],
-    "Klötze": [
+    "klötze": [
       {
         "id": 136,
         "titel": "",
@@ -13543,7 +13543,7 @@
         "geschlecht": "m"
       }
     ],
-    "Koblenz": [
+    "koblenz": [
       {
         "id": 17,
         "titel": "Dr.",
@@ -13571,7 +13571,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kolbermoor": [
+    "kolbermoor": [
       {
         "id": 288,
         "titel": "",
@@ -13586,7 +13586,7 @@
         "geschlecht": "w"
       }
     ],
-    "Köln": [
+    "köln": [
       {
         "id": 408,
         "titel": "Dr.",
@@ -13679,7 +13679,7 @@
         "geschlecht": "m"
       }
     ],
-    "Königslutter am Elm": [
+    "königslutter am elm": [
       {
         "id": 405,
         "titel": "",
@@ -13694,7 +13694,7 @@
         "geschlecht": "m"
       }
     ],
-    "Königswinter": [
+    "königswinter": [
       {
         "id": 478,
         "titel": "Dr.",
@@ -13709,7 +13709,7 @@
         "geschlecht": "m"
       }
     ],
-    "Konstanz": [
+    "konstanz": [
       {
         "id": 595,
         "titel": "",
@@ -13737,7 +13737,7 @@
         "geschlecht": "w"
       }
     ],
-    "Korbach": [
+    "korbach": [
       {
         "id": 195,
         "titel": "",
@@ -13752,7 +13752,7 @@
         "geschlecht": "m"
       }
     ],
-    "Korschenbroich": [
+    "korschenbroich": [
       {
         "id": 419,
         "titel": "",
@@ -13767,7 +13767,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kranichfeld": [
+    "kranichfeld": [
       {
         "id": 120,
         "titel": "",
@@ -13782,7 +13782,7 @@
         "geschlecht": "w"
       }
     ],
-    "Krefeld": [
+    "krefeld": [
       {
         "id": 450,
         "titel": "",
@@ -13823,7 +13823,7 @@
         "geschlecht": "m"
       }
     ],
-    "Kronach": [
+    "kronach": [
       {
         "id": 304,
         "titel": "Dr.",
@@ -13838,7 +13838,7 @@
         "geschlecht": "m"
       }
     ],
-    "Krummhörn": [
+    "krummhörn": [
       {
         "id": 343,
         "titel": "",
@@ -13853,7 +13853,7 @@
         "geschlecht": "m"
       }
     ],
-    "Küllstedt": [
+    "küllstedt": [
       {
         "id": 124,
         "titel": "",
@@ -13868,7 +13868,7 @@
         "geschlecht": "m"
       }
     ],
-    "Künzelsau": [
+    "künzelsau": [
       {
         "id": 559,
         "titel": "",
@@ -13883,7 +13883,7 @@
         "geschlecht": "m"
       }
     ],
-    "Künzing": [
+    "künzing": [
       {
         "id": 293,
         "titel": "",
@@ -13898,7 +13898,7 @@
         "geschlecht": "m"
       }
     ],
-    "Laatzen": [
+    "laatzen": [
       {
         "id": 401,
         "titel": "Dr.",
@@ -13913,7 +13913,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lahnau": [
+    "lahnau": [
       {
         "id": 215,
         "titel": "",
@@ -13928,7 +13928,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lahr/Schwarzwald": [
+    "lahr/schwarzwald": [
       {
         "id": 587,
         "titel": "Dr.",
@@ -13943,7 +13943,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lamspringe": [
+    "lamspringe": [
       {
         "id": 356,
         "titel": "",
@@ -13958,7 +13958,7 @@
         "geschlecht": "w"
       }
     ],
-    "Landsberg am Lech": [
+    "landsberg am lech": [
       {
         "id": 290,
         "titel": "",
@@ -13973,7 +13973,7 @@
         "geschlecht": "m"
       }
     ],
-    "Langwedel": [
+    "langwedel": [
       {
         "id": 386,
         "titel": "",
@@ -13988,7 +13988,7 @@
         "geschlecht": "m"
       }
     ],
-    "Langweid a.Lech": [
+    "langweid a.lech": [
       {
         "id": 307,
         "titel": "Dr.",
@@ -14003,7 +14003,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lappersdorf": [
+    "lappersdorf": [
       {
         "id": 280,
         "titel": "Dr.",
@@ -14018,7 +14018,7 @@
         "geschlecht": "w"
       }
     ],
-    "Lauchringen": [
+    "lauchringen": [
       {
         "id": 548,
         "titel": "",
@@ -14046,7 +14046,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lauda-Königshofen": [
+    "lauda-königshofen": [
       {
         "id": 147,
         "titel": "Dr.",
@@ -14061,7 +14061,7 @@
         "geschlecht": "w"
       }
     ],
-    "Laupheim": [
+    "laupheim": [
       {
         "id": 623,
         "titel": "Dr.",
@@ -14076,7 +14076,7 @@
         "geschlecht": "w"
       }
     ],
-    "Leck": [
+    "leck": [
       {
         "id": 70,
         "titel": "",
@@ -14104,7 +14104,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lehrte": [
+    "lehrte": [
       {
         "id": 358,
         "titel": "",
@@ -14119,7 +14119,7 @@
         "geschlecht": "m"
       }
     ],
-    "Leinzell": [
+    "leinzell": [
       {
         "id": 555,
         "titel": "",
@@ -14134,7 +14134,7 @@
         "geschlecht": "m"
       }
     ],
-    "Leipzig": [
+    "leipzig": [
       {
         "id": 36,
         "titel": "",
@@ -14188,7 +14188,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lemberg": [
+    "lemberg": [
       {
         "id": 3,
         "titel": "",
@@ -14203,7 +14203,7 @@
         "geschlecht": "w"
       }
     ],
-    "Leverkusen": [
+    "leverkusen": [
       {
         "id": 428,
         "titel": "Dr.",
@@ -14231,7 +14231,7 @@
         "geschlecht": "w"
       }
     ],
-    "Lichtenfels": [
+    "lichtenfels": [
       {
         "id": 318,
         "titel": "",
@@ -14246,7 +14246,7 @@
         "geschlecht": "w"
       }
     ],
-    "Lindau (Bodensee)": [
+    "lindau (bodensee)": [
       {
         "id": 263,
         "titel": "Dr.",
@@ -14261,7 +14261,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lindern (Oldenburg)": [
+    "lindern (oldenburg)": [
       {
         "id": 382,
         "titel": "",
@@ -14276,7 +14276,7 @@
         "geschlecht": "w"
       }
     ],
-    "Lindlar": [
+    "lindlar": [
       {
         "id": 430,
         "titel": "Dr.",
@@ -14291,7 +14291,7 @@
         "geschlecht": "m"
       }
     ],
-    "Linz am Rhein": [
+    "linz am rhein": [
       {
         "id": 4,
         "titel": "",
@@ -14306,7 +14306,7 @@
         "geschlecht": "w"
       }
     ],
-    "Lippetal": [
+    "lippetal": [
       {
         "id": 508,
         "titel": "",
@@ -14321,7 +14321,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lippstadt": [
+    "lippstadt": [
       {
         "id": 529,
         "titel": "",
@@ -14349,7 +14349,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lohmar": [
+    "lohmar": [
       {
         "id": 440,
         "titel": "",
@@ -14364,7 +14364,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lohsa": [
+    "lohsa": [
       {
         "id": 50,
         "titel": "",
@@ -14379,7 +14379,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lübeck": [
+    "lübeck": [
       {
         "id": 81,
         "titel": "",
@@ -14394,7 +14394,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ludwigsburg": [
+    "ludwigsburg": [
       {
         "id": 551,
         "titel": "",
@@ -14409,7 +14409,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lugau/Erzgeb.": [
+    "lugau/erzgeb.": [
       {
         "id": 59,
         "titel": "",
@@ -14424,7 +14424,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lüneburg": [
+    "lüneburg": [
       {
         "id": 373,
         "titel": "Dr.",
@@ -14452,7 +14452,7 @@
         "geschlecht": "m"
       }
     ],
-    "Lünen": [
+    "lünen": [
       {
         "id": 507,
         "titel": "",
@@ -14467,7 +14467,7 @@
         "geschlecht": "m"
       }
     ],
-    "Magdeburg": [
+    "magdeburg": [
       {
         "id": 139,
         "titel": "",
@@ -14495,7 +14495,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mainz": [
+    "mainz": [
       {
         "id": 8,
         "titel": "",
@@ -14510,7 +14510,7 @@
         "geschlecht": "m"
       }
     ],
-    "Malente": [
+    "malente": [
       {
         "id": 69,
         "titel": "",
@@ -14525,7 +14525,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mamming": [
+    "mamming": [
       {
         "id": 237,
         "titel": "",
@@ -14540,7 +14540,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mannheim": [
+    "mannheim": [
       {
         "id": 566,
         "titel": "",
@@ -14581,7 +14581,7 @@
         "geschlecht": "m"
       }
     ],
-    "Marburg": [
+    "marburg": [
       {
         "id": 211,
         "titel": "",
@@ -14596,7 +14596,7 @@
         "geschlecht": "m"
       }
     ],
-    "Markranstädt": [
+    "markranstädt": [
       {
         "id": 57,
         "titel": "",
@@ -14611,7 +14611,7 @@
         "geschlecht": "m"
       }
     ],
-    "Maßbach": [
+    "maßbach": [
       {
         "id": 286,
         "titel": "",
@@ -14626,7 +14626,7 @@
         "geschlecht": "w"
       }
     ],
-    "Meckenheim": [
+    "meckenheim": [
       {
         "id": 11,
         "titel": "",
@@ -14641,7 +14641,7 @@
         "geschlecht": "w"
       }
     ],
-    "Merzig": [
+    "merzig": [
       {
         "id": 336,
         "titel": "",
@@ -14656,7 +14656,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mettmann": [
+    "mettmann": [
       {
         "id": 498,
         "titel": "Dr.",
@@ -14671,7 +14671,7 @@
         "geschlecht": "w"
       }
     ],
-    "Meudt": [
+    "meudt": [
       {
         "id": 16,
         "titel": "Dr.",
@@ -14686,7 +14686,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mildstedt": [
+    "mildstedt": [
       {
         "id": 75,
         "titel": "",
@@ -14701,7 +14701,7 @@
         "geschlecht": "m"
       }
     ],
-    "Minden": [
+    "minden": [
       {
         "id": 499,
         "titel": "",
@@ -14716,7 +14716,7 @@
         "geschlecht": "w"
       }
     ],
-    "Moers": [
+    "moers": [
       {
         "id": 489,
         "titel": "",
@@ -14731,7 +14731,7 @@
         "geschlecht": "m"
       }
     ],
-    "Molfsee": [
+    "molfsee": [
       {
         "id": 84,
         "titel": "Dr.",
@@ -14746,7 +14746,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mölln": [
+    "mölln": [
       {
         "id": 73,
         "titel": "Dr.",
@@ -14761,7 +14761,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mönchengladbach": [
+    "mönchengladbach": [
       {
         "id": 514,
         "titel": "Dr.",
@@ -14776,7 +14776,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mörfelden-Walldorf": [
+    "mörfelden-walldorf": [
       {
         "id": 204,
         "titel": "",
@@ -14791,7 +14791,7 @@
         "geschlecht": "m"
       }
     ],
-    "Moringen": [
+    "moringen": [
       {
         "id": 376,
         "titel": "",
@@ -14806,7 +14806,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mühbrook": [
+    "mühbrook": [
       {
         "id": 76,
         "titel": "",
@@ -14821,7 +14821,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mühlhausen": [
+    "mühlhausen": [
       {
         "id": 583,
         "titel": "Dr.",
@@ -14836,7 +14836,7 @@
         "geschlecht": "m"
       }
     ],
-    "Mühlheim an der Donau": [
+    "mühlheim an der donau": [
       {
         "id": 593,
         "titel": "Dr.",
@@ -14851,7 +14851,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mulda/Sa.": [
+    "mulda/sa.": [
       {
         "id": 47,
         "titel": "",
@@ -14866,7 +14866,7 @@
         "geschlecht": "w"
       }
     ],
-    "Mülheim an der Ruhr": [
+    "mülheim an der ruhr": [
       {
         "id": 517,
         "titel": "",
@@ -14894,7 +14894,7 @@
         "geschlecht": "w"
       }
     ],
-    "München": [
+    "münchen": [
       {
         "id": 240,
         "titel": "",
@@ -15013,7 +15013,7 @@
         "geschlecht": "w"
       }
     ],
-    "Munster": [
+    "munster": [
       {
         "id": 391,
         "titel": "",
@@ -15028,7 +15028,7 @@
         "geschlecht": "m"
       }
     ],
-    "Münster": [
+    "münster": [
       {
         "id": 406,
         "titel": "",
@@ -15095,7 +15095,7 @@
         "geschlecht": "m"
       }
     ],
-    "Netphen": [
+    "netphen": [
       {
         "id": 509,
         "titel": "",
@@ -15110,7 +15110,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neubrandenburg": [
+    "neubrandenburg": [
       {
         "id": 168,
         "titel": "",
@@ -15125,7 +15125,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neuenkirchen": [
+    "neuenkirchen": [
       {
         "id": 380,
         "titel": "",
@@ -15153,7 +15153,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neuental": [
+    "neuental": [
       {
         "id": 618,
         "titel": "Dr.",
@@ -15168,7 +15168,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neuötting": [
+    "neuötting": [
       {
         "id": 238,
         "titel": "",
@@ -15183,7 +15183,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neuruppin": [
+    "neuruppin": [
       {
         "id": 96,
         "titel": "",
@@ -15198,7 +15198,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neusäß": [
+    "neusäß": [
       {
         "id": 321,
         "titel": "",
@@ -15213,7 +15213,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neuss": [
+    "neuss": [
       {
         "id": 418,
         "titel": "",
@@ -15228,7 +15228,7 @@
         "geschlecht": "m"
       }
     ],
-    "Neustadt am Rübenberge": [
+    "neustadt am rübenberge": [
       {
         "id": 362,
         "titel": "",
@@ -15243,7 +15243,7 @@
         "geschlecht": "m"
       }
     ],
-    "Nienburg (Weser)": [
+    "nienburg (weser)": [
       {
         "id": 388,
         "titel": "",
@@ -15258,7 +15258,7 @@
         "geschlecht": "w"
       }
     ],
-    "Norderstedt": [
+    "norderstedt": [
       {
         "id": 613,
         "titel": "",
@@ -15273,7 +15273,7 @@
         "geschlecht": "m"
       }
     ],
-    "Nordhorn": [
+    "nordhorn": [
       {
         "id": 394,
         "titel": "",
@@ -15288,7 +15288,7 @@
         "geschlecht": "w"
       }
     ],
-    "Nördlingen": [
+    "nördlingen": [
       {
         "id": 328,
         "titel": "",
@@ -15303,7 +15303,7 @@
         "geschlecht": "m"
       }
     ],
-    "Nordstemmen": [
+    "nordstemmen": [
       {
         "id": 395,
         "titel": "",
@@ -15318,7 +15318,7 @@
         "geschlecht": "w"
       }
     ],
-    "Nümbrecht": [
+    "nümbrecht": [
       {
         "id": 520,
         "titel": "",
@@ -15333,7 +15333,7 @@
         "geschlecht": "m"
       }
     ],
-    "Nürnberg": [
+    "nürnberg": [
       {
         "id": 239,
         "titel": "",
@@ -15387,7 +15387,7 @@
         "geschlecht": "m"
       }
     ],
-    "Nürtingen": [
+    "nürtingen": [
       {
         "id": 545,
         "titel": "Dr.",
@@ -15402,7 +15402,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ober-Olm": [
+    "ober-olm": [
       {
         "id": 7,
         "titel": "",
@@ -15417,7 +15417,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oberhausen": [
+    "oberhausen": [
       {
         "id": 466,
         "titel": "",
@@ -15432,7 +15432,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oberhausen-Rheinhausen": [
+    "oberhausen-rheinhausen": [
       {
         "id": 577,
         "titel": "",
@@ -15447,7 +15447,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oberkirch": [
+    "oberkirch": [
       {
         "id": 590,
         "titel": "",
@@ -15462,7 +15462,7 @@
         "geschlecht": "m"
       }
     ],
-    "Obertshausen": [
+    "obertshausen": [
       {
         "id": 234,
         "titel": "",
@@ -15477,7 +15477,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oberuckersee": [
+    "oberuckersee": [
       {
         "id": 100,
         "titel": "",
@@ -15492,7 +15492,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oberursel (Taunus)": [
+    "oberursel (taunus)": [
       {
         "id": 228,
         "titel": "",
@@ -15507,7 +15507,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oer-Erkenschwick": [
+    "oer-erkenschwick": [
       {
         "id": 472,
         "titel": "",
@@ -15535,7 +15535,7 @@
         "geschlecht": "m"
       }
     ],
-    "Offenbach am Main": [
+    "offenbach am main": [
       {
         "id": 216,
         "titel": "",
@@ -15550,7 +15550,7 @@
         "geschlecht": "m"
       }
     ],
-    "Olching": [
+    "olching": [
       {
         "id": 285,
         "titel": "",
@@ -15565,7 +15565,7 @@
         "geschlecht": "m"
       }
     ],
-    "Oldenburg (Oldenburg)": [
+    "oldenburg (oldenburg)": [
       {
         "id": 349,
         "titel": "",
@@ -15632,7 +15632,7 @@
         "geschlecht": "m"
       }
     ],
-    "Osnabrück": [
+    "osnabrück": [
       {
         "id": 347,
         "titel": "",
@@ -15660,7 +15660,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ostfildern": [
+    "ostfildern": [
       {
         "id": 543,
         "titel": "Dr.",
@@ -15675,7 +15675,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ottobrunn": [
+    "ottobrunn": [
       {
         "id": 260,
         "titel": "",
@@ -15703,7 +15703,7 @@
         "geschlecht": "m"
       }
     ],
-    "Paderborn": [
+    "paderborn": [
       {
         "id": 410,
         "titel": "Dr.",
@@ -15731,7 +15731,7 @@
         "geschlecht": "w"
       }
     ],
-    "Passau": [
+    "passau": [
       {
         "id": 248,
         "titel": "",
@@ -15759,7 +15759,7 @@
         "geschlecht": "m"
       }
     ],
-    "Peine": [
+    "peine": [
       {
         "id": 399,
         "titel": "",
@@ -15774,7 +15774,7 @@
         "geschlecht": "m"
       }
     ],
-    "Peißenberg": [
+    "peißenberg": [
       {
         "id": 291,
         "titel": "",
@@ -15789,7 +15789,7 @@
         "geschlecht": "m"
       }
     ],
-    "Pfaffenhofen a.d.Ilm": [
+    "pfaffenhofen a.d.ilm": [
       {
         "id": 272,
         "titel": "",
@@ -15804,7 +15804,7 @@
         "geschlecht": "m"
       }
     ],
-    "Pforzheim": [
+    "pforzheim": [
       {
         "id": 569,
         "titel": "",
@@ -15832,7 +15832,7 @@
         "geschlecht": "m"
       }
     ],
-    "Pirmasens": [
+    "pirmasens": [
       {
         "id": 30,
         "titel": "",
@@ -15847,7 +15847,7 @@
         "geschlecht": "m"
       }
     ],
-    "Plate": [
+    "plate": [
       {
         "id": 163,
         "titel": "",
@@ -15862,7 +15862,7 @@
         "geschlecht": "w"
       }
     ],
-    "Plauen": [
+    "plauen": [
       {
         "id": 61,
         "titel": "",
@@ -15877,7 +15877,7 @@
         "geschlecht": "m"
       }
     ],
-    "Pohlheim": [
+    "pohlheim": [
       {
         "id": 200,
         "titel": "",
@@ -15905,7 +15905,7 @@
         "geschlecht": "m"
       }
     ],
-    "Potsdam": [
+    "potsdam": [
       {
         "id": 90,
         "titel": "",
@@ -15972,7 +15972,7 @@
         "geschlecht": "w"
       }
     ],
-    "Prenzlau": [
+    "prenzlau": [
       {
         "id": 99,
         "titel": "",
@@ -15987,7 +15987,7 @@
         "geschlecht": "m"
       }
     ],
-    "Prerow": [
+    "prerow": [
       {
         "id": 157,
         "titel": "Dr.",
@@ -16002,7 +16002,7 @@
         "geschlecht": "m"
       }
     ],
-    "Putzbrunn": [
+    "putzbrunn": [
       {
         "id": 257,
         "titel": "",
@@ -16017,7 +16017,7 @@
         "geschlecht": "m"
       }
     ],
-    "Raesfeld": [
+    "raesfeld": [
       {
         "id": 446,
         "titel": "",
@@ -16032,7 +16032,7 @@
         "geschlecht": "w"
       }
     ],
-    "Rastatt": [
+    "rastatt": [
       {
         "id": 562,
         "titel": "",
@@ -16047,7 +16047,7 @@
         "geschlecht": "w"
       }
     ],
-    "Ratingen": [
+    "ratingen": [
       {
         "id": 495,
         "titel": "",
@@ -16075,7 +16075,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ravensburg": [
+    "ravensburg": [
       {
         "id": 557,
         "titel": "",
@@ -16090,7 +16090,7 @@
         "geschlecht": "w"
       }
     ],
-    "Recklinghausen": [
+    "recklinghausen": [
       {
         "id": 461,
         "titel": "",
@@ -16118,7 +16118,7 @@
         "geschlecht": "w"
       }
     ],
-    "Regensburg": [
+    "regensburg": [
       {
         "id": 600,
         "titel": "",
@@ -16146,7 +16146,7 @@
         "geschlecht": "m"
       }
     ],
-    "Regenstauf": [
+    "regenstauf": [
       {
         "id": 319,
         "titel": "",
@@ -16161,7 +16161,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rehburg-Loccum": [
+    "rehburg-loccum": [
       {
         "id": 365,
         "titel": "",
@@ -16176,7 +16176,7 @@
         "geschlecht": "w"
       }
     ],
-    "Reutlingen": [
+    "reutlingen": [
       {
         "id": 541,
         "titel": "Dr.",
@@ -16191,7 +16191,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rheda-Wiedenbrück": [
+    "rheda-wiedenbrück": [
       {
         "id": 456,
         "titel": "",
@@ -16206,7 +16206,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rheinfelden (Baden)": [
+    "rheinfelden (baden)": [
       {
         "id": 592,
         "titel": "Dr.",
@@ -16221,7 +16221,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ringe": [
+    "ringe": [
       {
         "id": 383,
         "titel": "",
@@ -16236,7 +16236,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rödermark": [
+    "rödermark": [
       {
         "id": 235,
         "titel": "",
@@ -16251,7 +16251,7 @@
         "geschlecht": "w"
       }
     ],
-    "Römerstein": [
+    "römerstein": [
       {
         "id": 605,
         "titel": "",
@@ -16266,7 +16266,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rosenheim": [
+    "rosenheim": [
       {
         "id": 247,
         "titel": "",
@@ -16294,7 +16294,7 @@
         "geschlecht": "m"
       }
     ],
-    "Roßtal": [
+    "roßtal": [
       {
         "id": 310,
         "titel": "",
@@ -16309,7 +16309,7 @@
         "geschlecht": "m"
       }
     ],
-    "Roth": [
+    "roth": [
       {
         "id": 323,
         "titel": "",
@@ -16324,7 +16324,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rottach-Egern": [
+    "rottach-egern": [
       {
         "id": 289,
         "titel": "",
@@ -16339,7 +16339,7 @@
         "geschlecht": "m"
       }
     ],
-    "Rudolstadt": [
+    "rudolstadt": [
       {
         "id": 133,
         "titel": "Prof. Dr.",
@@ -16354,7 +16354,7 @@
         "geschlecht": "m"
       }
     ],
-    "Saarbrücken": [
+    "saarbrücken": [
       {
         "id": 334,
         "titel": "",
@@ -16395,7 +16395,7 @@
         "geschlecht": "m"
       }
     ],
-    "Saarlouis": [
+    "saarlouis": [
       {
         "id": 335,
         "titel": "",
@@ -16410,7 +16410,7 @@
         "geschlecht": "m"
       }
     ],
-    "Salzgitter": [
+    "salzgitter": [
       {
         "id": 355,
         "titel": "",
@@ -16425,7 +16425,7 @@
         "geschlecht": "m"
       }
     ],
-    "Saulheim": [
+    "saulheim": [
       {
         "id": 1,
         "titel": "",
@@ -16440,7 +16440,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schönewalde": [
+    "schönewalde": [
       {
         "id": 86,
         "titel": "",
@@ -16455,7 +16455,7 @@
         "geschlecht": "m"
       }
     ],
-    "Schönwalde am Bungsberg": [
+    "schönwalde am bungsberg": [
       {
         "id": 71,
         "titel": "",
@@ -16470,7 +16470,7 @@
         "geschlecht": "m"
       }
     ],
-    "Schönwalde-Glien": [
+    "schönwalde-glien": [
       {
         "id": 88,
         "titel": "Dr.",
@@ -16485,7 +16485,7 @@
         "geschlecht": "m"
       }
     ],
-    "Schwäbisch Gmünd": [
+    "schwäbisch gmünd": [
       {
         "id": 549,
         "titel": "",
@@ -16513,7 +16513,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schwaig b.Nürnberg": [
+    "schwaig b.nürnberg": [
       {
         "id": 252,
         "titel": "",
@@ -16528,7 +16528,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schwalbach am Taunus": [
+    "schwalbach am taunus": [
       {
         "id": 210,
         "titel": "",
@@ -16543,7 +16543,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schwandorf": [
+    "schwandorf": [
       {
         "id": 243,
         "titel": "",
@@ -16584,7 +16584,7 @@
         "geschlecht": "m"
       }
     ],
-    "Schwarzenfeld": [
+    "schwarzenfeld": [
       {
         "id": 254,
         "titel": "",
@@ -16599,7 +16599,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schwebheim": [
+    "schwebheim": [
       {
         "id": 265,
         "titel": "",
@@ -16627,7 +16627,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schweinfurt": [
+    "schweinfurt": [
       {
         "id": 602,
         "titel": "",
@@ -16642,7 +16642,7 @@
         "geschlecht": "w"
       }
     ],
-    "Schwerin": [
+    "schwerin": [
       {
         "id": 160,
         "titel": "",
@@ -16670,7 +16670,7 @@
         "geschlecht": "m"
       }
     ],
-    "Seevetal": [
+    "seevetal": [
       {
         "id": 370,
         "titel": "",
@@ -16685,7 +16685,7 @@
         "geschlecht": "w"
       }
     ],
-    "Selzen": [
+    "selzen": [
       {
         "id": 2,
         "titel": "",
@@ -16700,7 +16700,7 @@
         "geschlecht": "m"
       }
     ],
-    "Sendenhorst": [
+    "sendenhorst": [
       {
         "id": 533,
         "titel": "",
@@ -16715,7 +16715,7 @@
         "geschlecht": "m"
       }
     ],
-    "Siegburg": [
+    "siegburg": [
       {
         "id": 477,
         "titel": "",
@@ -16730,7 +16730,7 @@
         "geschlecht": "w"
       }
     ],
-    "Sonthofen": [
+    "sonthofen": [
       {
         "id": 266,
         "titel": "",
@@ -16745,7 +16745,7 @@
         "geschlecht": "m"
       }
     ],
-    "Speyer": [
+    "speyer": [
       {
         "id": 13,
         "titel": "",
@@ -16760,7 +16760,7 @@
         "geschlecht": "w"
       }
     ],
-    "St. Leon-Rot": [
+    "st. leon-rot": [
       {
         "id": 572,
         "titel": "",
@@ -16775,7 +16775,7 @@
         "geschlecht": "m"
       }
     ],
-    "Stadtbergen": [
+    "stadtbergen": [
       {
         "id": 617,
         "titel": "",
@@ -16790,7 +16790,7 @@
         "geschlecht": "w"
       }
     ],
-    "Steinfurt": [
+    "steinfurt": [
       {
         "id": 519,
         "titel": "",
@@ -16805,7 +16805,7 @@
         "geschlecht": "w"
       }
     ],
-    "Steinheim an der Murr": [
+    "steinheim an der murr": [
       {
         "id": 553,
         "titel": "",
@@ -16820,7 +16820,7 @@
         "geschlecht": "m"
       }
     ],
-    "Steinhöring": [
+    "steinhöring": [
       {
         "id": 306,
         "titel": "Dr.",
@@ -16835,7 +16835,7 @@
         "geschlecht": "m"
       }
     ],
-    "Stockelsdorf": [
+    "stockelsdorf": [
       {
         "id": 80,
         "titel": "",
@@ -16850,7 +16850,7 @@
         "geschlecht": "m"
       }
     ],
-    "Stralsund": [
+    "stralsund": [
       {
         "id": 167,
         "titel": "",
@@ -16865,7 +16865,7 @@
         "geschlecht": "m"
       }
     ],
-    "Strullendorf": [
+    "strullendorf": [
       {
         "id": 312,
         "titel": "",
@@ -16880,7 +16880,7 @@
         "geschlecht": "m"
       }
     ],
-    "Stuttgart": [
+    "stuttgart": [
       {
         "id": 536,
         "titel": "",
@@ -16921,7 +16921,7 @@
         "geschlecht": "m"
       }
     ],
-    "Süderholz": [
+    "süderholz": [
       {
         "id": 164,
         "titel": "",
@@ -16936,7 +16936,7 @@
         "geschlecht": "m"
       }
     ],
-    "Suhlendorf": [
+    "suhlendorf": [
       {
         "id": 363,
         "titel": "",
@@ -16951,7 +16951,7 @@
         "geschlecht": "m"
       }
     ],
-    "Sundern (Sauerland)": [
+    "sundern (sauerland)": [
       {
         "id": 619,
         "titel": "",
@@ -16966,7 +16966,7 @@
         "geschlecht": "w"
       }
     ],
-    "Tauberbischofsheim": [
+    "tauberbischofsheim": [
       {
         "id": 574,
         "titel": "",
@@ -16981,7 +16981,7 @@
         "geschlecht": "w"
       }
     ],
-    "Taucha": [
+    "taucha": [
       {
         "id": 37,
         "titel": "Dr.",
@@ -16996,7 +16996,7 @@
         "geschlecht": "w"
       }
     ],
-    "Taunusstein": [
+    "taunusstein": [
       {
         "id": 219,
         "titel": "",
@@ -17011,7 +17011,7 @@
         "geschlecht": "m"
       }
     ],
-    "Tecklenburg": [
+    "tecklenburg": [
       {
         "id": 503,
         "titel": "",
@@ -17026,7 +17026,7 @@
         "geschlecht": "w"
       }
     ],
-    "Thyrnau": [
+    "thyrnau": [
       {
         "id": 315,
         "titel": "",
@@ -17041,7 +17041,7 @@
         "geschlecht": "m"
       }
     ],
-    "Tornesch": [
+    "tornesch": [
       {
         "id": 77,
         "titel": "",
@@ -17056,7 +17056,7 @@
         "geschlecht": "m"
       }
     ],
-    "Traunstein": [
+    "traunstein": [
       {
         "id": 278,
         "titel": "Dr.",
@@ -17071,7 +17071,7 @@
         "geschlecht": "w"
       }
     ],
-    "Trebbin": [
+    "trebbin": [
       {
         "id": 92,
         "titel": "",
@@ -17086,7 +17086,7 @@
         "geschlecht": "w"
       }
     ],
-    "Trier": [
+    "trier": [
       {
         "id": 14,
         "titel": "",
@@ -17114,7 +17114,7 @@
         "geschlecht": "w"
       }
     ],
-    "Trochtelfingen": [
+    "trochtelfingen": [
       {
         "id": 625,
         "titel": "",
@@ -17129,7 +17129,7 @@
         "geschlecht": "m"
       }
     ],
-    "Tübingen": [
+    "tübingen": [
       {
         "id": 591,
         "titel": "",
@@ -17144,7 +17144,7 @@
         "geschlecht": "w"
       }
     ],
-    "Türkenfeld": [
+    "türkenfeld": [
       {
         "id": 273,
         "titel": "",
@@ -17159,7 +17159,7 @@
         "geschlecht": "w"
       }
     ],
-    "Tuttlingen": [
+    "tuttlingen": [
       {
         "id": 589,
         "titel": "",
@@ -17174,7 +17174,7 @@
         "geschlecht": "m"
       }
     ],
-    "Überlingen": [
+    "überlingen": [
       {
         "id": 626,
         "titel": "",
@@ -17189,7 +17189,7 @@
         "geschlecht": "m"
       }
     ],
-    "Uckerfelde": [
+    "uckerfelde": [
       {
         "id": 97,
         "titel": "",
@@ -17204,7 +17204,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ueckermünde": [
+    "ueckermünde": [
       {
         "id": 158,
         "titel": "",
@@ -17219,7 +17219,7 @@
         "geschlecht": "m"
       }
     ],
-    "Ulm": [
+    "ulm": [
       {
         "id": 586,
         "titel": "",
@@ -17234,7 +17234,7 @@
         "geschlecht": "m"
       }
     ],
-    "Unna": [
+    "unna": [
       {
         "id": 506,
         "titel": "",
@@ -17249,7 +17249,7 @@
         "geschlecht": "m"
       }
     ],
-    "Uplengen": [
+    "uplengen": [
       {
         "id": 371,
         "titel": "",
@@ -17264,7 +17264,7 @@
         "geschlecht": "w"
       }
     ],
-    "Uttenweiler": [
+    "uttenweiler": [
       {
         "id": 624,
         "titel": "",
@@ -17279,7 +17279,7 @@
         "geschlecht": "m"
       }
     ],
-    "Velden": [
+    "velden": [
       {
         "id": 294,
         "titel": "",
@@ -17294,7 +17294,7 @@
         "geschlecht": "m"
       }
     ],
-    "Verden (Aller)": [
+    "verden (aller)": [
       {
         "id": 377,
         "titel": "Dr.",
@@ -17309,7 +17309,7 @@
         "geschlecht": "w"
       }
     ],
-    "Viersen": [
+    "viersen": [
       {
         "id": 512,
         "titel": "Dr.",
@@ -17324,7 +17324,7 @@
         "geschlecht": "m"
       }
     ],
-    "Vlotho": [
+    "vlotho": [
       {
         "id": 493,
         "titel": "",
@@ -17339,7 +17339,7 @@
         "geschlecht": "m"
       }
     ],
-    "Waiblingen": [
+    "waiblingen": [
       {
         "id": 550,
         "titel": "",
@@ -17354,7 +17354,7 @@
         "geschlecht": "w"
       }
     ],
-    "Waldthurn": [
+    "waldthurn": [
       {
         "id": 301,
         "titel": "",
@@ -17369,7 +17369,7 @@
         "geschlecht": "m"
       }
     ],
-    "Walldürn": [
+    "walldürn": [
       {
         "id": 601,
         "titel": "",
@@ -17384,7 +17384,7 @@
         "geschlecht": "m"
       }
     ],
-    "Walting": [
+    "walting": [
       {
         "id": 250,
         "titel": "",
@@ -17399,7 +17399,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wanfried": [
+    "wanfried": [
       {
         "id": 203,
         "titel": "",
@@ -17414,7 +17414,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wanzleben-Börde": [
+    "wanzleben-börde": [
       {
         "id": 146,
         "titel": "",
@@ -17429,7 +17429,7 @@
         "geschlecht": "m"
       }
     ],
-    "Warnow": [
+    "warnow": [
       {
         "id": 159,
         "titel": "",
@@ -17444,7 +17444,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wedemark": [
+    "wedemark": [
       {
         "id": 342,
         "titel": "",
@@ -17459,7 +17459,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weiden i.d.OPf.": [
+    "weiden i.d.opf.": [
       {
         "id": 261,
         "titel": "",
@@ -17474,7 +17474,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weilerswist": [
+    "weilerswist": [
       {
         "id": 485,
         "titel": "",
@@ -17489,7 +17489,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weingarten": [
+    "weingarten": [
       {
         "id": 628,
         "titel": "",
@@ -17504,7 +17504,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weingarten (Baden)": [
+    "weingarten (baden)": [
       {
         "id": 567,
         "titel": "",
@@ -17519,7 +17519,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weißdorf": [
+    "weißdorf": [
       {
         "id": 303,
         "titel": "",
@@ -17534,7 +17534,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weißenburg i.Bay.": [
+    "weißenburg i.bay.": [
       {
         "id": 316,
         "titel": "",
@@ -17549,7 +17549,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weißenfels": [
+    "weißenfels": [
       {
         "id": 138,
         "titel": "",
@@ -17564,7 +17564,7 @@
         "geschlecht": "m"
       }
     ],
-    "Weißenhorn": [
+    "weißenhorn": [
       {
         "id": 329,
         "titel": "",
@@ -17579,7 +17579,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wermsdorf": [
+    "wermsdorf": [
       {
         "id": 60,
         "titel": "",
@@ -17594,7 +17594,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wetzlar": [
+    "wetzlar": [
       {
         "id": 202,
         "titel": "",
@@ -17609,7 +17609,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wiesbaden": [
+    "wiesbaden": [
       {
         "id": 231,
         "titel": "Dr.",
@@ -17624,7 +17624,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wiesloch": [
+    "wiesloch": [
       {
         "id": 609,
         "titel": "Dr.",
@@ -17639,7 +17639,7 @@
         "geschlecht": "m"
       }
     ],
-    "Winsen (Luhe)": [
+    "winsen (luhe)": [
       {
         "id": 390,
         "titel": "Dr.",
@@ -17654,7 +17654,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wipperfürth": [
+    "wipperfürth": [
       {
         "id": 414,
         "titel": "",
@@ -17669,7 +17669,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wismar": [
+    "wismar": [
       {
         "id": 165,
         "titel": "",
@@ -17684,7 +17684,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wittenberg": [
+    "wittenberg": [
       {
         "id": 149,
         "titel": "",
@@ -17699,7 +17699,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wittmund": [
+    "wittmund": [
       {
         "id": 350,
         "titel": "",
@@ -17714,7 +17714,7 @@
         "geschlecht": "w"
       }
     ],
-    "Wolfertschwenden": [
+    "wolfertschwenden": [
       {
         "id": 255,
         "titel": "",
@@ -17729,7 +17729,7 @@
         "geschlecht": "m"
       }
     ],
-    "Wuppertal": [
+    "wuppertal": [
       {
         "id": 476,
         "titel": "",
@@ -17757,7 +17757,7 @@
         "geschlecht": "m"
       }
     ],
-    "Würzburg": [
+    "würzburg": [
       {
         "id": 251,
         "titel": "",
@@ -17785,7 +17785,7 @@
         "geschlecht": "w"
       }
     ],
-    "Zellingen": [
+    "zellingen": [
       {
         "id": 327,
         "titel": "",
@@ -17800,7 +17800,7 @@
         "geschlecht": "m"
       }
     ],
-    "Zetel": [
+    "zetel": [
       {
         "id": 348,
         "titel": "",
@@ -17815,7 +17815,7 @@
         "geschlecht": "m"
       }
     ],
-    "Zirndorf": [
+    "zirndorf": [
       {
         "id": 309,
         "titel": "",

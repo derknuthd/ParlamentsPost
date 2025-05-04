@@ -35,6 +35,15 @@ function formatFullName(titel, rufname, vorname, namensbestandteile, name) {
   return `${titelTeil}${rufnameTeil}${vorname} ${namensbestandteileTeil}${name}`.trim();
 }
 
+// Funktion zum Normalisieren des Wohnorts für Index-Zwecke
+function normalizeWohnort(wohnort) {
+  return wohnort
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/[-]+/g, '-');
+}
+
 // Funktion, um die Daten zu verarbeiten
 function processKandidatenData(parsedData) {
   const wahlkreise = {};
@@ -77,6 +86,8 @@ function processKandidatenData(parsedData) {
 
     // Wohnort1 extrahieren
     const wohnort1 = personendaten.$.Wohnort1 || "ohneWohnort";
+    // Normalisierter Wohnort für den Index
+    const wohnort1Normalized = normalizeWohnort(wohnort1);
 
     // Geschlecht extrahieren
     const geschlecht = personendaten.$.Geschlecht || "unbekannt";
@@ -119,7 +130,7 @@ function processKandidatenData(parsedData) {
       vollerName, // Voller Name hinzufügen
       partei,
       wahlkreis: wahlkreisName,
-      wohnort: wohnort1,
+      wohnort: wohnort1, // Original-Wohnort für Anzeige
       geschlecht,
     };
 
@@ -129,11 +140,11 @@ function processKandidatenData(parsedData) {
     }
     wahlkreise[wahlkreisNummer].push(abgeordneter);
 
-    // Nach Wohnort gruppieren
-    if (!wohnorte[wohnort1]) {
-      wohnorte[wohnort1] = [];
+    // Nach normalisiertem Wohnort gruppieren
+    if (!wohnorte[wohnort1Normalized]) {
+      wohnorte[wohnort1Normalized] = [];
     }
-    wohnorte[wohnort1].push(abgeordneter);
+    wohnorte[wohnort1Normalized].push(abgeordneter);
   });
 
   // Wohnorte alphabetisch sortieren

@@ -1,12 +1,11 @@
-/* print-styles.css - optimiert für alle Browser (Chrome, Firefox, Safari) */
+/* print-styles.css - optimiert für Chrome, Firefox, Safari */
 @media print {
-    /* Grundlegende Seiteneinstellungen für alle Seiten */
+    /* Seiteneinstellungen */
     @page {
       size: A4 portrait;
-      margin: 15mm; /* Reduzierter Standardrand für bessere Kompatibilität */
+      margin: 15mm;
     }
-    
-    /* Grundlegende Dokumenteinstellungen */
+  
     html, body {
       width: auto !important;
       height: auto !important;
@@ -15,12 +14,12 @@
       font-size: 11pt;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
-      color-adjust: exact;
       background-color: white !important;
       color: black !important;
+      counter-reset: page;
     }
-    
-    /* Verstecke alle nicht-druckbaren Elemente */
+  
+    /* Nicht-druckbare Elemente ausblenden */
     .print\:hidden,
     #header,
     #footer,
@@ -32,9 +31,10 @@
     div.print\:hidden {
       display: none !important;
     }
-    
-    /* Hauptbriefcontainer */
-    #briefvorschau {
+  
+    /* Hauptcontainer */
+    #briefvorschau,
+    #vorschau-container {
       display: block;
       width: auto !important;
       height: auto !important;
@@ -45,38 +45,23 @@
       overflow: visible;
       box-shadow: none !important;
       position: relative;
-    }
-    
-    #vorschau-container {
-      position: relative;
-      width: auto !important;
-      height: auto !important;
-      background: white !important;
-      color: black !important;
-      box-shadow: none !important;
       border-radius: 0 !important;
-      padding: 0 !important;
-      margin: 0 !important;
     }
-    
-    /* Briefkomponenten nach DIN 5008 (angepasst) */
-    
-    /* Absender - rechtsbündig */
+  
+    /* Absender */
     #brief-absender {
       position: relative;
       margin-top: 0;
       margin-bottom: 15mm;
-      padding-right: 0;
       width: 100%;
-      max-width: 100%;
       font-size: 10pt !important;
       line-height: 1.2;
       text-align: right;
       white-space: pre-line;
       color: black !important;
     }
-    
-    /* Empfänger - im Adressfensterbereich */
+  
+    /* Empfänger */
     #brief-empfaenger {
       position: relative;
       margin-bottom: 15mm;
@@ -87,8 +72,8 @@
       white-space: pre-line;
       color: black !important;
     }
-    
-    /* Ort und Datum - rechtsbündig */
+  
+    /* Ort/Datum */
     #brief-ortdatum {
       position: relative;
       margin-bottom: 10mm;
@@ -99,8 +84,8 @@
       white-space: pre-line;
       color: black !important;
     }
-    
-    /* Betreff - linksbündig, fettgedruckt */
+  
+    /* Betreff */
     #brief-betreff {
       position: relative;
       margin-bottom: 10mm;
@@ -112,8 +97,8 @@
       white-space: pre-line;
       color: black !important;
     }
-    
-    /* Brieftext mit Anrede und Grußformel (Blocksatz) */
+  
+    /* Brieftext */
     #brief-text {
       position: relative;
       width: 100%;
@@ -122,61 +107,60 @@
       text-align: justify;
       white-space: pre-line;
       color: black !important;
-      orphans: 4 !important; /* Mehr Zeilen vor einem Seitenumbruch */
-      widows: 4 !important;  /* Mehr Zeilen nach einem Seitenumbruch */
       word-wrap: break-word;
       overflow-wrap: break-word;
       hyphens: auto;
-    }
-    
-    /* Schriftgrößen-Anpassungen für die Druckausgabe */
-    .text-sm {
-      font-size: 10pt !important;
-    }
-    
-    .text-base {
-      font-size: 11pt !important;
-    }
-    
-    .text-lg {
-      font-size: 12pt !important;
-    }
-    
-    /* Verbesserte Seitenumbruch-Regeln (alte und neue Syntax für maximale Kompatibilität) */
-    #brief-text, #brief-text p {
-      /* Alte Syntax */
+  
+      /* Seitenumbruchregeln */
       page-break-inside: auto !important;
       page-break-before: auto !important;
       page-break-after: auto !important;
-      
-      /* Neue Syntax */
       break-inside: auto !important;
       break-before: auto !important;
       break-after: auto !important;
+  
+      orphans: 4 !important;
+      widows: 4 !important;
     }
-    
-    /* Strengere Regeln für Absätze gegen Durchschneiden */
-    #brief-text p, #brief-text div {
+  
+    /* Absätze: Vermeidung von Zeilenumbrüchen mitten im Absatz */
+    #brief-text p,
+    #brief-text div {
       page-break-inside: avoid !important;
       break-inside: avoid !important;
-      display: inline-block;
+      display: block;
       width: 100%;
       margin-bottom: 0.5em;
     }
-    
-    /* Fix für Safari-spezifische Probleme */
-    @media not all and (min-resolution:.001dpcm) { 
-      @supports (-webkit-appearance:none) {
-        #briefvorschau, #vorschau-container {
-          width: 100% !important;
-          max-width: 170mm !important;
-          margin: 0 auto !important;
-        }
-        
-        #brief-text {
-          width: 100% !important;
-          max-width: 170mm !important;
-        }
-      }
+  
+    /* Schriftgrößen-Klassen */
+    .text-sm {
+      font-size: 10pt !important;
+    }
+  
+    .text-base {
+      font-size: 11pt !important;
+    }
+  
+    .text-lg {
+      font-size: 12pt !important;
+    }
+  
+    /* Seitenzähler ab Seite 2 */
+    .print-footer {
+      position: fixed;
+      bottom: 10mm;
+      right: 15mm;
+      font-size: 9pt;
+    }
+  
+    .print-footer::after {
+      counter-increment: page;
+      content: counter(page);
+    }
+  
+    /* Nur anzeigen ab Seite 2 */
+    body > .print-footer:first-of-type {
+      display: none;
     }
   }

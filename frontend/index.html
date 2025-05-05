@@ -37,40 +37,6 @@
         nav {
           display: none !important;
         }
-
-        /* Briefvorschau-Styles */
-        #briefvorschau {
-          background: white !important;
-          padding: 0 !important;
-          margin: 0 !important;
-          box-shadow: none !important;
-          width: 100% !important;
-        }
-
-        #vorschau-inhalt {
-          max-width: none !important;
-          width: 100% !important;
-          padding: 2.54cm !important; /* Margen stattdessen hier definieren */
-          margin: 0 !important;
-          background: white !important;
-          box-shadow: none !important;
-          box-sizing: border-box !important;
-          page-break-inside: avoid !important;
-        }
-
-        /* Entferne Grid-Layout im Druckmodus */
-        main {
-          display: block !important;
-          padding: 0 !important;
-          margin: 0 !important;
-          width: 100% !important;
-        }
-
-        /* Weitere Safari-spezifische Fixes */
-        * {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-        }
       }
     </style>
   </head>
@@ -341,36 +307,247 @@
         </div>
       </form>
 
-      <!-- Briefvorschau -->
+      <!-- Briefvorschau mit separaten Feldern -->
       <div
-        id="briefvorschau"
-        class="bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500"
+      id="briefvorschau"
+      class="bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500"
       >
-        <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-          Briefvorschau
-        </h3>
-        <div
-          id="vorschau-inhalt"
-          contenteditable="true"
-          class="text-gray-800 p-4 print:shadow-none bg-white shadow-sm rounded-sm font-serif dark:text-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-        >
-          <p>Nutze das Formular um einen Brief zu generieren.</p>
-          <p>Hier erscheint danach die Vorschau Deines Briefs.</p>
-        </div>
-        <div class="mt-4 print:hidden text-sm text-gray-600 dark:text-gray-400">
-          <p>Tipp: Du kannst den Brief direkt in der Vorschau bearbeiten.</p>
-        </div>
-        <div class="mt-8 print:hidden">
-          <button
-            id="export-pdf-button"
-            class="bg-teal-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300"
-            @click="briefDrucken"
-            disabled
+      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
+        Briefvorschau
+      </h3>
+
+      <!-- Formatierungsoptionen -->
+      <div class="print:hidden mb-6 flex flex-wrap gap-4">
+        <div>
+          <label for="schriftart" class="block text-sm text-gray-600 dark:text-gray-400">Schriftart</label>
+          <select 
+            id="schriftart" 
+            class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="formatierung.schriftart"
           >
-            Brief drucken (PDF)
-          </button>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="Calibri, sans-serif">Calibri</option>
+          </select>
+        </div>
+        <div>
+          <label for="schriftgroesse" class="block text-sm text-gray-600 dark:text-gray-400">Schriftgröße</label>
+          <select 
+            id="schriftgroesse" 
+            class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
+            x-model="formatierung.schriftgroesse"
+          >
+            <option value="klein">Klein (10pt)</option>
+            <option value="mittel">Mittel (11pt)</option>
+            <option value="gross">Groß (12pt)</option>
+          </select>
         </div>
       </div>
+
+      <!-- Briefvorschau-Container - flexibles Layout für Bildschirmansicht -->
+      <div id="vorschau-container" class="relative bg-white dark:bg-gray-700 p-6 shadow-sm rounded-sm"
+        :class="{
+          'text-sm': formatierung.schriftgroesse === 'klein',
+          'text-base': formatierung.schriftgroesse === 'mittel',
+          'text-lg': formatierung.schriftgroesse === 'gross'
+        }"
+        :style="`font-family: ${formatierung.schriftart};`"
+      >
+        <!-- Absender (rechtsbündig, kleinere Schrift) -->
+        <div id="brief-absender" contenteditable="true" 
+          class="w-full mb-8 text-right text-gray-700 dark:text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          x-html="briefFelder.absender ? briefFelder.absender.replace(/\n/g, '<br>') : ''"
+          @input="briefFelder.absender = $event.target.innerText">
+        </div>
+        
+        <!-- Empfänger (linksbündig) -->
+        <div id="brief-empfaenger" contenteditable="true" 
+          class="w-full mb-8 text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          x-html="briefFelder.empfaenger ? briefFelder.empfaenger.replace(/\n/g, '<br>') : ''"
+          @input="briefFelder.empfaenger = $event.target.innerText">
+        </div>
+        
+        <!-- Ort und Datum (rechtsbündig) -->
+        <div id="brief-ortdatum" contenteditable="true" 
+          class="w-full mb-8 text-right text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          x-html="briefFelder.ortDatum ? briefFelder.ortDatum.replace(/\n/g, '<br>') : ''"
+          @input="briefFelder.ortDatum = $event.target.innerText">
+        </div>
+        
+        <!-- Betreff (linksbündig, fett) -->
+        <div id="brief-betreff" contenteditable="true" 
+          class="w-full mb-8 text-left font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          x-html="briefFelder.betreff ? briefFelder.betreff.replace(/\n/g, '<br>') : ''"
+          @input="briefFelder.betreff = $event.target.innerText">
+        </div>
+        
+        <!-- Brieftext mit Anrede und Grußformel (Blocksatz) -->
+        <div id="brief-text" contenteditable="true" 
+          class="w-full text-justify text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          x-html="briefFelder.brieftext ? briefFelder.brieftext.replace(/\n/g, '<br>') : ''"
+          @input="briefFelder.brieftext = $event.target.innerText">
+        </div>
+      </div>
+
+      <div class="mt-4 print:hidden text-sm text-gray-600 dark:text-gray-400">
+        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten. Der Brief wird nach DIN 5008 formatiert gedruckt.</p>
+      </div>
+
+      <div class="mt-8 print:hidden">
+        <button
+          id="export-pdf-button"
+          class="bg-teal-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300"
+          @click="briefDrucken"
+          disabled
+        >
+          Brief drucken (PDF)
+        </button>
+      </div>
+      </div>
+
+      <!-- Diese CSS-Regeln sind speziell für den Druck -->
+      <style>
+      @media print {
+          @page {
+            size: A4 portrait;
+            margin: 0; /* Basis-Seitenränder bleiben bei 0, wir definieren sie detaillierter */
+          }
+          
+          @page :first {
+            margin-bottom: 20mm; /* Unterer Rand für die erste Seite */
+          }
+          
+          @page {
+            margin-top: 20mm; /* Oberer Rand für Folgeseiten */
+            margin-bottom: 20mm; /* Unterer Rand für Folgeseiten */
+          }
+          
+          html, body {
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0;
+            padding: 0;
+            font-size: 11pt;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            color-adjust: exact;
+          }
+          
+          #briefvorschau {
+            display: block;
+            position: relative;
+            width: 21cm;
+            height: 29.7cm;
+            background: white !important;
+            color: black !important;
+            margin: 0;
+            padding: 0;
+            overflow: visible;
+          }
+          
+          #vorschau-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 21cm;
+            height: 29.7cm;
+            background: white !important;
+            color: black !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+          
+          /* Absender (27mm vom oberen Rand, rechtsbündig) */
+          #brief-absender {
+            position: absolute;
+            top: 27mm;
+            right: 25mm;
+            left: auto;
+            width: auto;
+            max-width: 85mm;
+            font-size: 10pt !important;
+            line-height: 1.2;
+            text-align: right;
+            white-space: pre-line;
+            color: black !important;
+          }
+          
+          /* Empfänger (45mm vom oberen Rand, links im Adressfensterbereich) */
+          #brief-empfaenger {
+            position: absolute;
+            top: 45mm;
+            left: 25mm;
+            width: 80mm;
+            font-size: 11pt !important;
+            line-height: 1.15;
+            white-space: pre-line;
+            color: black !important;
+          }
+          
+          /* Ort und Datum (nach dem Empfänger, rechtsbündig) */
+          #brief-ortdatum {
+            position: absolute;
+            top: 85mm;
+            right: 25mm;
+            width: auto;
+            text-align: right;
+            font-size: 11pt !important;
+            line-height: 1.2;
+            white-space: pre-line;
+            color: black !important;
+          }
+          
+          /* Betreff (nach Ort und Datum, linksbündig) */
+          #brief-betreff {
+            position: absolute;
+            top: 95mm;
+            left: 25mm;
+            right: 25mm;
+            font-weight: bold;
+            font-size: 11pt !important;
+            line-height: 1.2;
+            white-space: pre-line;
+            color: black !important;
+          }
+          
+          /* Brieftext mit Anrede und Grußformel (Blocksatz) */
+          #brief-text {
+            position: absolute;
+            top: 110mm;
+            left: 25mm;
+            right: 25mm;
+            max-width: 160mm;
+            max-height: 170mm;
+            font-size: 11pt !important;
+            line-height: 1.5;
+            text-align: justify;
+            white-space: pre-line;
+            color: black !important;
+            orphans: 3;
+            widows: 3;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            padding-bottom: 25mm; /* Zusätzlicher Abstand am Ende für den unteren Rand */
+          }
+          
+          /* Seitenumbruch-Regeln */
+          #brief-text {
+            page-break-inside: auto; /* Erlaubt Seitenumbrüche innerhalb des Textes */
+          }
+          
+          /* Spezieller Abstand für Folgeseiten */
+          #brief-text::after {
+            content: "";
+            display: block;
+            height: 20mm; /* Zusätzlicher Bereich am Ende jeder Seite */
+          }
+        }
+      </style>
     </main>
 
     <!-- Footer (per Fetch geladen) -->

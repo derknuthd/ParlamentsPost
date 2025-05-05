@@ -55,6 +55,21 @@ export function parlamentspostApp() {
     topics: [],
     availableSubtopics: [],
     
+    // Brief-Formatierung
+    formatierung: {
+      schriftart: "Arial, sans-serif", // Standardwert, wird in init() zufällig gesetzt
+      schriftgroesse: "mittel"
+    },
+    
+    // Brief-Felder für die separate Bearbeitung
+    briefFelder: {
+      absender: "",
+      empfaenger: "",
+      ortDatum: "",
+      betreff: "",
+      brieftext: ""
+    },
+    
     // Cache-Konfiguration
     cacheEnabled: true,
     cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden in Millisekunden
@@ -68,8 +83,23 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "true");
       }
       
+      // Zufällige Schriftart wählen
+      this.formatierung.schriftart = this.getRandomFontFamily();
+      
       // Lade Subtopics für das statische Topic
       await this.loadSubtopics();
+    },
+    
+    // Zufällige Schriftart auswählen
+    getRandomFontFamily() {
+      const fonts = [
+        "Arial, sans-serif",
+        "Times New Roman, serif",
+        "Georgia, serif",
+        "Verdana, sans-serif",
+        "Calibri, sans-serif"
+      ];
+      return fonts[Math.floor(Math.random() * fonts.length)];
     },
     
     // Dark Mode Toggle Methode
@@ -150,7 +180,7 @@ export function parlamentspostApp() {
         log("WARN", "Fehler beim Leeren des Caches", { error: error.message });
       }
     },
-
+    
     // Subtopics vom Server laden
     async loadSubtopics() {
       this.isLoading = true;
@@ -333,8 +363,10 @@ export function parlamentspostApp() {
     async generiereBrief(kiGeneriert = false) {
       log("INFO", "Starte Briefgenerierung", { kiGeneriert });
 
-      // Absender, Ort/Datum und Wahlkreis
+      // Absender zusammenstellen
       const absender = `${this.name}\n${this.straße}\n${this.plz} ${this.ort}`;
+      
+      // Aktuelles Datum im deutschen Format
       const aktuellesDatum = new Date().toLocaleDateString("de-DE", {
         day: "2-digit",
         month: "long",
@@ -342,27 +374,30 @@ export function parlamentspostApp() {
       });
       const ortUndDatum = `${this.ort}, den ${aktuellesDatum}`;
 
+      // Abgeordneteninformationen abrufen
       const abgeordneter = this.abgeordneteListe.find(
         (a) => String(a.id) === this.abgeordnete
       );
-      const wahlkreisBez =
-        abgeordneter?.wkr_bezeichnung || "Wahlkreis unbekannt";
+      const wahlkreisBez = abgeordneter?.wkr_bezeichnung || "Wahlkreis unbekannt";
 
-      // Verwende "vollerName" und "partei" aus der JSON-Datei
+      // Für Betreff und Anrede
       const vollerNameDesAbgeordneten = abgeordneter?.vollerName || "Unbekannt";
       const parteiDesAbgeordneten = abgeordneter?.partei || "Unbekannte Partei";
 
-      // Adresse des Adressaten (abhängig vom Parlament)
-      let empfänger = "";
+      // Anrede basierend auf Geschlecht
+      const anrede = 
+        abgeordneter?.geschlecht === "m" ? "Sehr geehrter Herr" :
+        abgeordneter?.geschlecht === "w" ? "Sehr geehrte Frau" : 
+        "Sehr geehrte:r";
 
-      if (parlament === "Bundestag") {
-        empfänger = `
-${vollerNameDesAbgeordneten}
+      // Adresse des Adressaten zusammenstellen
+      const empfänger = `${vollerNameDesAbgeordneten}
 Deutscher Bundestag
 Platz der Republik 1
-11011 Berlin
-        `.trim();
-      }
+11011 Berlin`;
+
+      // Betreffzeile
+      const betreff = `Wahlkreis: ${wahlkreisBez}`;
 
       // Validierung von Freitext und Themen
       if (!this.freitext.trim() && this.themen.length === 0) {
@@ -371,7 +406,7 @@ Platz der Republik 1
         return;
       }
 
-      let inhalt;
+      let brieftext = "";
       if (kiGeneriert) {
         this.isLoading = true;
         try {
@@ -418,8 +453,8 @@ Platz der Republik 1
           }
 
           const data = await response.json();
-          inhalt = data.briefText || "(Kein KI-Text vorhanden)";
-          log("INFO", "KI-Text erfolgreich generiert", { briefText: inhalt });
+          brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${data.briefText || "(Kein KI-Text vorhanden)"}\n\nMit freundlichen Grüßen,\n${this.name}`;
+          log("INFO", "KI-Text erfolgreich generiert", { briefText: brieftext });
         } catch (error) {
           log("ERROR", "Fehler bei der KI-Abfrage", { message: error.message });
           alert(`Fehler bei der KI-Abfrage: ${error.message}`);
@@ -434,60 +469,56 @@ Platz der Republik 1
         );
         
         const textBlocks = selectedSubtopics.map(subtopic => subtopic.textBlock).join("\n\n");
+        const subtopicsText = selectedSubtopics.length > 0 
+          ? `Ich wende mich heute an Sie bezüglich folgender Themen: ${selectedSubtopics.map(subtopic => subtopic.name).join(", ")}.`
+          : "";
         
-        inhalt = `
-      Ich wende mich heute an Sie bezüglich folgender Themen: ${selectedSubtopics.map(subtopic => subtopic.name).join(", ")}.
-
-      ${textBlocks}
-
-      ${this.freitext}
-          `.trim();
-        log("INFO", "Manueller Briefinhalt erstellt", { inhalt });
+        brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${subtopicsText}\n\n${textBlocks}\n\n${this.freitext}\n\nMit freundlichen Grüßen,\n${this.name}`;
+        log("INFO", "Manueller Briefinhalt erstellt", { brieftext });
       }
 
-      // Brieftext zusammenstellen
-      const anrede =
-        abgeordneter?.geschlecht === "m"
-          ? "Sehr geehrter Herr"
-          : abgeordneter?.geschlecht === "w"
-          ? "Sehr geehrte Frau"
-          : "Hallo";
+      // Brieffelder setzen
+      this.briefFelder = {
+        absender: absender,
+        empfaenger: empfänger,
+        ortDatum: ortUndDatum,
+        betreff: betreff,
+        brieftext: brieftext
+      };
 
-      // Verwende "name" für die Anrede
-      const briefText = `
-    ${absender}
-
-    ${empfänger}
-
-    ${ortUndDatum}
-
-    Wahlkreis: ${wahlkreisBez}
-
-    ${anrede} ${abgeordneter?.name || "Unbekannt"},
-
-    ${inhalt}
-
-    Mit freundlichen Grüßen,
-    ${this.name}
-        `.trim();
-
-      log("INFO", "Brieftext erstellt", { briefText });
-      this.zeigeVorschau(briefText);
+      log("INFO", "Brieffelder erstellt", this.briefFelder);
+      
+      // Briefvorschau aktivieren
+      this.aktiviereBriefvorschau();
     },
 
-    zeigeVorschau(briefText) {
-      log("INFO", "Zeige Briefvorschau", { briefText });
-      const vorschauInhalt = document.getElementById("vorschau-inhalt");
-      vorschauInhalt.innerHTML = briefText.replace(/\n/g, "<br>"); // Formatierung beibehalten
+    aktiviereBriefvorschau() {
+      log("INFO", "Aktiviere Briefvorschau");
+      
+      // Wir müssen die DOM-Elemente nicht mehr manuell aktualisieren, 
+      // da Alpine.js das über die x-html Bindings automatisch tut
+      
+      // Export-Button aktivieren
+      const exportButton = document.getElementById("export-pdf-button");
+      if (exportButton) {
+        exportButton.disabled = false;
+      }
+      
+      // Zum Briefvorschau-Bereich scrollen
       const briefVorschau = document.getElementById("briefvorschau");
-      const generierenButton = document.getElementById("export-pdf-button");
-      generierenButton.disabled = false; // Button aktivieren
-      briefVorschau.scrollIntoView({ behavior: "smooth" });
+      if (briefVorschau) {
+        briefVorschau.scrollIntoView({ behavior: "smooth" });
+      }
     },
 
     briefDrucken() {
       log("INFO", "Brief wird gedruckt");
+      
+      // Die contenteditable-Elemente werden durch Event-Handler aktualisiert,
+      // daher brauchen wir hier keine manuelle Aktualisierung mehr
+      
+      // Druck auslösen
       window.print();
-    },
+    }
   };
 }

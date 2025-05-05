@@ -47,6 +47,51 @@ function validateWohnort(wohnort) {
   return { valid: true };
 }
 
+// Neue Hilfsfunktion: Fuzzy-Suche für Wohnorte
+// Diese Funktion findet sowohl exakte Übereinstimmungen als auch Wohnorte, die den Suchbegriff enthalten
+function findMatchingWohnorte(gemeindeIndex, sanitizedWohnort) {
+  let matches = [];
+  
+  // 1. Exakte Übereinstimmung prüfen
+  if (gemeindeIndex[sanitizedWohnort]) {
+    matches.push({
+      wohnort: sanitizedWohnort,
+      wahlkreisBez: gemeindeIndex[sanitizedWohnort].wahlkreisBez,
+      wahlkreisNr: gemeindeIndex[sanitizedWohnort].wahlkreisNr || null,
+      matchType: "exact"
+    });
+  }
+  
+  // 2. Partielle Übereinstimmungen suchen (nur wenn keine exakte Übereinstimmung gefunden wurde)
+  if (matches.length === 0) {
+    for (const wohnort in gemeindeIndex) {
+      // Fall 1: Suchbegriff ist am Beginn des vollständigen Wohnorts 
+      // (z.B. "Ludwigshafen" in "ludwigshafen am rhein")
+      if (wohnort.startsWith(sanitizedWohnort + " ")) {
+        matches.push({
+          wohnort: wohnort,
+          wahlkreisBez: gemeindeIndex[wohnort].wahlkreisBez,
+          wahlkreisNr: gemeindeIndex[wohnort].wahlkreisNr || null,
+          matchType: "partial"
+        });
+      }
+      
+      // Fall 2: Suchbegriff ist exakt der erste Teil eines zusammengesetzten Namens 
+      // (z.B. "Frankenthal" in "frankenthal (pfalz)")
+      if (wohnort.match(new RegExp(`^${sanitizedWohnort}\\s*\\([^)]+\\)$`))) {
+        matches.push({
+          wohnort: wohnort,
+          wahlkreisBez: gemeindeIndex[wohnort].wahlkreisBez,
+          wahlkreisNr: gemeindeIndex[wohnort].wahlkreisNr || null,
+          matchType: "partial"
+        });
+      }
+    }
+  }
+  
+  return matches;
+}
+
 // API-Route
 router.get("/:wahl/wahlkreis", (req, res) => {
   const { wahl } = req.params;
@@ -144,16 +189,54 @@ router.get("/:wahl/wahlkreis", (req, res) => {
       .json({ error: "Daten konnten nicht geladen werden" });
   }
 
-  // Suche im gemeindeIndex
-  const result = gemeindeIndex[sanitizedWohnort];
+  // Hier verwendet die angepasste Suchfunktion für die Wahlkreise
+  const matches = findMatchingWohnorte(gemeindeIndex, sanitizedWohnort);
+  log("DEBUG", "Gefundene Übereinstimmungen", { matches });
 
-  if (result) {
-    log("INFO", "Wohnort gefunden", { wohnort: sanitizedWohnort, result });
-    res.json({
-      wohnort: sanitizedWohnort,
-      wahlkreisBez: result.wahlkreisBez,
-      wahlkreisNr: result.wahlkreisNr || null, // Falls wahlkreisNr fehlt, wird null zurückgegeben
-    });
+  if (matches.length > 0) {
+    // Wenn es exakte und partielle Übereinstimmungen gibt, priorisieren wir die exakten
+    const exactMatches = matches.filter(match => match.matchType === "exact");
+    
+    if (exactMatches.length > 0) {
+      log("INFO", "Exakte Übereinstimmungen gefunden", { matches: exactMatches });
+      
+      // Wenn es nur eine exakte Übereinstimmung gibt, dann diese zurückgeben
+      if (exactMatches.length === 1) {
+        const match = exactMatches[0];
+        res.json({
+          wohnort: match.wohnort,
+          wahlkreisBez: match.wahlkreisBez,
+          wahlkreisNr: match.wahlkreisNr
+        });
+      } else {
+        // Wenn es mehrere exakte Übereinstimmungen gibt, dann alle als Array zurückgeben
+        res.json(exactMatches.map(match => ({
+          wohnort: match.wohnort,
+          wahlkreisBez: match.wahlkreisBez,
+          wahlkreisNr: match.wahlkreisNr
+        })));
+      }
+    } else {
+      // Nur partielle Übereinstimmungen
+      log("INFO", "Partielle Übereinstimmungen gefunden", { matches });
+      
+      // Wenn es nur eine partielle Übereinstimmung gibt, dann diese zurückgeben
+      if (matches.length === 1) {
+        const match = matches[0];
+        res.json({
+          wohnort: match.wohnort,
+          wahlkreisBez: match.wahlkreisBez,
+          wahlkreisNr: match.wahlkreisNr
+        });
+      } else {
+        // Wenn es mehrere partielle Übereinstimmungen gibt, dann alle als Array zurückgeben
+        res.json(matches.map(match => ({
+          wohnort: match.wohnort,
+          wahlkreisBez: match.wahlkreisBez,
+          wahlkreisNr: match.wahlkreisNr
+        })));
+      }
+    }
   } else {
     log("WARN", `Kein Wahlkreis für den Wohnort "${sanitizedWohnort}" gefunden.`);
     res.status(404).json({

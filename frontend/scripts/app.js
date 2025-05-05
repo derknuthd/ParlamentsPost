@@ -60,6 +60,7 @@ export function parlamentspostApp() {
       }
     },
 
+    // Hier nur die angepasste holeAbgeordnete()-Methode
     async holeAbgeordnete() {
       if (!this.ort.trim()) {
         log("WARN", "Kein Wohnort eingegeben");
@@ -107,57 +108,74 @@ export function parlamentspostApp() {
 
         log("INFO", "Wahlkreis-Daten erfolgreich abgerufen", wahlkreisData);
 
-        if (!wahlkreisData || !wahlkreisData.wahlkreisNr) {
+        // Prüfen, ob die Antwort ein Array oder ein einzelnes Objekt ist
+        if (!wahlkreisData) {
           log("WARN", `Kein Wahlkreis für "${this.ort}" gefunden`);
           throw new Error(`Kein Wahlkreis für "${this.ort}" gefunden.`);
         }
 
-        // 2. Mit der Wahlkreisnummer die Abgeordneten abrufen
-        const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${
-          wahlkreisData.wahlkreisNr
-        }&wohnort=${encodeURIComponent(this.ort.trim())}`;
-        log("DEBUG", "Abgeordnete-API-URL", { url: abgeordneteUrl });
-
-        const abgeordneteResponse = await fetch(abgeordneteUrl);
-        log("DEBUG", "Abgeordnete-Antwort erhalten", {
-          status: abgeordneteResponse.status,
-          ok: abgeordneteResponse.ok,
-        });
-
-        const abgeordneteResponseText = await abgeordneteResponse
-          .clone()
-          .text();
-        log(
-          "DEBUG",
-          "Abgeordnete-Antwort (Raw Text):",
-          abgeordneteResponseText
-        );
-
-        if (!abgeordneteResponse.ok) {
-          const err = await abgeordneteResponse.json();
-          log("ERROR", "Fehler beim Abrufen der Abgeordneten", err);
-          throw new Error(err.error || "Fehler beim Abrufen der Abgeordneten.");
+        // Mehrere Wahlkreise werden als Array zurückgegeben
+        let wahlkreise = [];
+        if (Array.isArray(wahlkreisData)) {
+          wahlkreise = wahlkreisData;
+          log("INFO", "Mehrere Wahlkreise gefunden", wahlkreise);
+        } else {
+          // Ein einzelner Wahlkreis wird als Objekt zurückgegeben
+          wahlkreise = [wahlkreisData];
+          log("INFO", "Ein Wahlkreis gefunden", wahlkreise);
         }
 
-        this.abgeordneteListe = await abgeordneteResponse.json();
-        log("INFO", "Abgeordnete erfolgreich abgerufen", this.abgeordneteListe);
-        log(
-          "DEBUG",
-          "Abgeordnete-Liste nach API-Aufruf",
-          this.abgeordneteListe
+        // Alle gefundenen Abgeordneten sammeln
+        let alleAbgeordnete = [];
+
+        // 2. Für jeden Wahlkreis die zugehörigen Abgeordneten abrufen
+        for (const wahlkreis of wahlkreise) {
+          if (!wahlkreis.wahlkreisNr) {
+            log("WARN", `Wahlkreisnummer fehlt für Wahlkreis`, wahlkreis);
+            continue; // Überspringe diesen Wahlkreis, wenn keine Nummer vorhanden
+          }
+
+          const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${
+            wahlkreis.wahlkreisNr
+          }&wohnort=${encodeURIComponent(wahlkreis.wohnort)}`;
+          log("DEBUG", "Abgeordnete-API-URL", { url: abgeordneteUrl });
+
+          const abgeordneteResponse = await fetch(abgeordneteUrl);
+          log("DEBUG", "Abgeordnete-Antwort erhalten", {
+            status: abgeordneteResponse.status,
+            ok: abgeordneteResponse.ok,
+          });
+
+          if (!abgeordneteResponse.ok) {
+            log("WARN", `Keine Abgeordneten für Wahlkreis ${wahlkreis.wahlkreisNr} gefunden`);
+            continue; // Mit dem nächsten Wahlkreis fortfahren
+          }
+
+          const abgeordnete = await abgeordneteResponse.json();
+          log("INFO", `Abgeordnete für Wahlkreis ${wahlkreis.wahlkreisNr} erfolgreich abgerufen`, abgeordnete);
+
+          // Füge Wahlkreisbezeichnung zu jedem Abgeordneten hinzu
+          const abgeordneteMitWKB = abgeordnete.map(abg => ({
+            ...abg,
+            wkr_bezeichnung: wahlkreis.wahlkreisBez || "Unbekannter Wahlkreis"
+          }));
+
+          // Füge diese Abgeordneten zum Gesamtergebnis hinzu
+          alleAbgeordnete = [...alleAbgeordnete, ...abgeordneteMitWKB];
+        }
+
+        // Deduplizieren der Abgeordneten basierend auf der ID
+        this.abgeordneteListe = Array.from(
+          new Map(alleAbgeordnete.map(item => [item.id, item])).values()
         );
 
-        // Für die Anzeige im Format "WahlkreisName: Abgeordnete (Partei), wohnhaft in Wohnort"
-        this.abgeordneteListe = this.abgeordneteListe.map((abg) => ({
-          ...abg,
-          wkr_bezeichnung:
-            wahlkreisData.wahlkreisBez || "Unbekannter Wahlkreis",
-        }));
-        log(
-          "DEBUG",
-          "Abgeordnete-Liste mit Bezeichnungen",
-          this.abgeordneteListe
-        );
+        log("INFO", "Alle Abgeordneten zusammengeführt", this.abgeordneteListe);
+        log("DEBUG", "Abgeordnete-Liste nach API-Aufruf", this.abgeordneteListe);
+
+        if (this.abgeordneteListe.length === 0) {
+          log("WARN", `Keine Abgeordneten für "${this.ort}" gefunden`);
+          throw new Error(`Keine Abgeordneten für "${this.ort}" gefunden.`);
+        }
       } catch (error) {
         log("ERROR", "Fehler in holeAbgeordnete", { message: error.message });
         alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);

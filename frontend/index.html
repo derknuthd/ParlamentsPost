@@ -287,6 +287,10 @@
         Briefvorschau
       </h3>
 
+      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
+        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten. Der Brief wird angelehnt an DIN 5008 formatiert gedruckt.</p>
+      </div>
+
       <!-- Formatierungsoptionen -->
       <div class="print:hidden mb-6 flex flex-wrap gap-4">
         <div>
@@ -360,10 +364,6 @@
           x-html="briefFelder.brieftext ? briefFelder.brieftext.replace(/\n/g, '<br>') : ''"
           @input="briefFelder.brieftext = $event.target.innerText">
         </div>
-      </div>
-
-      <div class="mt-4 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten. Der Brief wird nach DIN 5008 formatiert gedruckt.</p>
       </div>
 
       <div class="mt-8 print:hidden">

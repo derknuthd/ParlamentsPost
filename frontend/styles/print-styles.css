@@ -133,16 +133,86 @@
       margin-bottom: 0.5em;
     }
   
-    /* Schriftgrößen-Klassen */
-    .text-sm {
+    /* Schriftgrößen-Klassen verbessert */
+    /* Für den Container */
+    #vorschau-container.text-sm {
+      font-size: 10pt !important;
+      line-height: 1.2 !important;
+    }
+    
+    #vorschau-container.text-base {
+      font-size: 11pt !important;
+      line-height: 1.3 !important;
+    }
+    
+    #vorschau-container.text-lg {
+      font-size: 12pt !important;
+      line-height: 1.4 !important;
+    }
+    
+    /* Für einzelne Elemente basierend auf Container-Klasse */
+    /* Absender */
+    #vorschau-container.text-sm #brief-absender {
+      font-size: 9pt !important;
+    }
+    
+    #vorschau-container.text-base #brief-absender {
       font-size: 10pt !important;
     }
-  
-    .text-base {
+    
+    #vorschau-container.text-lg #brief-absender {
       font-size: 11pt !important;
     }
-  
-    .text-lg {
+    
+    /* Empfänger */
+    #vorschau-container.text-sm #brief-empfaenger {
+      font-size: 10pt !important;
+    }
+    
+    #vorschau-container.text-base #brief-empfaenger {
+      font-size: 11pt !important;
+    }
+    
+    #vorschau-container.text-lg #brief-empfaenger {
+      font-size: 12pt !important;
+    }
+    
+    /* Ort/Datum */
+    #vorschau-container.text-sm #brief-ortdatum {
+      font-size: 10pt !important;
+    }
+    
+    #vorschau-container.text-base #brief-ortdatum {
+      font-size: 11pt !important;
+    }
+    
+    #vorschau-container.text-lg #brief-ortdatum {
+      font-size: 12pt !important;
+    }
+    
+    /* Betreff */
+    #vorschau-container.text-sm #brief-betreff {
+      font-size: 10pt !important;
+    }
+    
+    #vorschau-container.text-base #brief-betreff {
+      font-size: 11pt !important;
+    }
+    
+    #vorschau-container.text-lg #brief-betreff {
+      font-size: 12pt !important;
+    }
+    
+    /* Brieftext */
+    #vorschau-container.text-sm #brief-text {
+      font-size: 10pt !important;
+    }
+    
+    #vorschau-container.text-base #brief-text {
+      font-size: 11pt !important;
+    }
+    
+    #vorschau-container.text-lg #brief-text {
       font-size: 12pt !important;
     }
   
@@ -163,4 +233,4 @@
     body > .print-footer:first-of-type {
       display: none;
     }
-  }
+}

@@ -1,30 +1,62 @@
 {
-    "topics": [
-      {
-        "id": "umwelt_und_nachhaltigkeit",
-        "name": "Umwelt & Nachhaltigkeit",
-        "description": "Umweltschutz, Klimawandel und nachhaltige Entwicklung",
-        "basePrompt": "Du bist ein Experte für Umweltthemen. Formuliere einen formalen Brief an einen Abgeordneten, der umweltpolitische Anliegen präzise und sachlich darstellt. Erkläre die Dringlichkeit des Themas, ohne alarmistisch zu wirken. Beziehe dich auf wissenschaftliche Erkenntnisse und aktuelle politische Entwicklungen. Bleibe respektvoll und konstruktiv in deinen Forderungen.",
-        "subtopics": [
-          {
-            "id": "klimaschutz",
-            "name": "Klimaschutz",
-            "textBlock": "Ich bin besorgt über die unzureichenden Maßnahmen im Klimaschutz. Deutschland hat sich zur Einhaltung des 1,5-Grad-Ziels verpflichtet, doch die aktuellen Bemühungen reichen nicht aus. Ich bitte Sie, sich für ambitioniertere Klimaziele und wirkungsvolle Maßnahmen einzusetzen.",
-            "promptBlock": "Der Briefschreiber ist besorgt über unzureichende Klimaschutzmaßnahmen und möchte, dass der Abgeordnete sich für stärkere Klimaziele einsetzt. Beziehe dich auf das 1,5-Grad-Ziel des Pariser Abkommens und aktuelle Defizite in der deutschen Klimapolitik."
-          },
-          {
-            "id": "naturschutz",
-            "name": "Naturschutz",
-            "textBlock": "Der Schutz unserer natürlichen Lebensräume und der Artenvielfalt liegt mir besonders am Herzen. Die fortschreitende Zerstörung von Ökosystemen und das Artensterben sind alarmierend. Ich möchte Sie bitten, sich verstärkt für wirksame Naturschutzmaßnahmen einzusetzen.",
-            "promptBlock": "Der Briefschreiber sorgt sich um Naturschutz und Biodiversität. Betone die Bedeutung intakter Ökosysteme für unser aller Zukunft und formuliere konkrete Forderungen zum Schutz natürlicher Lebensräume und bedrohter Arten."
-          },
-          {
-            "id": "energiewende",
-            "name": "Energiewende",
-            "textBlock": "Die Energiewende ist ein zentraler Baustein für eine nachhaltige Zukunft. Ich appelliere an Sie, den Ausbau erneuerbarer Energien zu beschleunigen und den Kohleausstieg voranzutreiben. Gleichzeitig sollten soziale Härten vermieden und Bürger bei der Umstellung unterstützt werden.",
-            "promptBlock": "Der Briefschreiber unterstützt die Energiewende und möchte schnellere Fortschritte sehen. Erkläre, warum der Ausbau erneuerbarer Energien sowohl ökologisch als auch wirtschaftlich sinnvoll ist. Sprich auch die soziale Dimension der Energiewende an."
-          }
-        ]
-      }
-    ]
-  }
+  "topics": [
+    {
+      "id": "umwelt_und_nachhaltigkeit",
+      "name": "Umwelt & Nachhaltigkeit",
+      "description": "Umweltschutz, Klimawandel und nachhaltige Entwicklung",
+      "basePrompt": "Du bist ein Experte für Umweltthemen. Formuliere einen formalen Brief an einen Abgeordneten, der umweltpolitische Anliegen präzise und sachlich darstellt. Erkläre die Dringlichkeit des Themas, ohne alarmistisch zu wirken. Beziehe dich auf wissenschaftliche Erkenntnisse und aktuelle politische Entwicklungen. Bleibe respektvoll und konstruktiv in deinen Forderungen.",
+      "subtopics": [
+        {
+          "id": "klimaschutz",
+          "name": "Klimaschutz",
+          "textBlock": "Ich bin besorgt über die unzureichenden Maßnahmen im Klimaschutz. Deutschland hat sich zur Einhaltung des 1,5-Grad-Ziels verpflichtet, doch die aktuellen Bemühungen reichen nicht aus. Ich bitte Sie, sich für ambitioniertere Klimaziele und wirkungsvolle Maßnahmen einzusetzen.",
+          "promptBlock": "Der Briefschreiber ist besorgt über unzureichende Klimaschutzmaßnahmen und möchte, dass der Abgeordnete sich für stärkere Klimaziele einsetzt. Beziehe dich auf das 1,5-Grad-Ziel des Pariser Abkommens und aktuelle Defizite in der deutschen Klimapolitik."
+        },
+        {
+          "id": "naturschutz",
+          "name": "Naturschutz",
+          "textBlock": "Der Schutz unserer natürlichen Lebensräume und der Artenvielfalt liegt mir besonders am Herzen. Die fortschreitende Zerstörung von Ökosystemen und das Artensterben sind alarmierend. Ich möchte Sie bitten, sich verstärkt für wirksame Naturschutzmaßnahmen einzusetzen.",
+          "promptBlock": "Der Briefschreiber sorgt sich um Naturschutz und Biodiversität. Betone die Bedeutung intakter Ökosysteme für unser aller Zukunft und formuliere konkrete Forderungen zum Schutz natürlicher Lebensräume und bedrohter Arten."
+        },
+        {
+          "id": "energiewende",
+          "name": "Energiewende",
+          "textBlock": "Die Energiewende ist ein zentraler Baustein für eine nachhaltige Zukunft. Ich appelliere an Sie, den Ausbau erneuerbarer Energien zu beschleunigen und den Kohleausstieg voranzutreiben. Gleichzeitig sollten soziale Härten vermieden und Bürger bei der Umstellung unterstützt werden.",
+          "promptBlock": "Der Briefschreiber unterstützt die Energiewende und möchte schnellere Fortschritte sehen. Erkläre, warum der Ausbau erneuerbarer Energien sowohl ökologisch als auch wirtschaftlich sinnvoll ist. Sprich auch die soziale Dimension der Energiewende an."
+        }
+      ]
+    },
+    {
+      "id": "afd_parteiverbotsverfahren",
+      "name": "AfD Parteiverbotsverfahren",
+      "description": "Argumente für ein Verbotsverfahren gegen die AfD nach Artikel 21 Grundgesetz",
+      "basePrompt": "Du bist ein Experte für Verfassungsrecht. Formuliere einen formalen Brief an einen Abgeordneten, der sachlich und fundiert die Argumente für ein Parteiverbotsverfahren gegen die AfD darlegt. Beziehe dich auf juristische Grundlagen, verfassungsrechtliche Kriterien und konkrete Sachverhalte. Halte den Ton respektvoll und sachlich. Vermeide emotionale Übertreibungen und konzentriere dich auf rechtlich relevante Aspekte.",
+      "subtopics": [
+        {
+          "id": "verfassungsfeindliche_bestrebungen",
+          "name": "Verfassungsfeindliche Bestrebungen",
+          "textBlock": "Die verfassungsrechtlichen Kriterien für ein Parteiverbot sind im Grundgesetz klar definiert. Die Einstufung der AfD als rechtsextremistischer Verdachtsfall durch das Bundesamt für Verfassungsschutz und die vollständige Einstufung mehrerer Landesverbände als gesichert rechtsextrem zeigen, dass die verfassungsrechtlichen Hürden für ein Verbotsverfahren möglicherweise erreicht sein könnten. Ich bitte Sie, sich für eine sorgfältige Prüfung dieser Sachlage einzusetzen.",
+          "promptBlock": "Der Briefschreiber verweist auf die verfassungsrechtlichen Kriterien für ein Parteiverbot und die Einstufungen durch den Verfassungsschutz. Behandle die juristischen Voraussetzungen nach Art. 21 GG und die notwendigen Nachweise für ein erfolgreiches Verbotsverfahren vor dem Bundesverfassungsgericht."
+        },
+        {
+          "id": "systemumsturz_bestrebungen",
+          "name": "Bestrebungen zum Systemumsturz",
+          "textBlock": "Die dokumentierten Äußerungen führender AfD-Politiker über einen angeblich notwendigen 'Systemumsturz' und die 'Remigration' bestimmter Bevölkerungsgruppen sind besorgniserregend. Diese Positionen stehen in direktem Widerspruch zu Kernprinzipien unserer freiheitlichen demokratischen Grundordnung. Ich möchte Sie bitten, diese Sachverhalte im Hinblick auf ein mögliches Parteiverbotsverfahren zu bewerten.",
+          "promptBlock": "Der Briefschreiber ist besorgt über dokumentierte Äußerungen zum 'Systemumsturz' und zur 'Remigration'. Gehe auf diese konkreten Beispiele ein und analysiere, inwiefern sie mit der freiheitlichen demokratischen Grundordnung unvereinbar sein könnten. Stelle den Bezug zu den Kriterien des Bundesverfassungsgerichts her."
+        },
+        {
+          "id": "legalistische_strategie",
+          "name": "Legalistische Strategie",
+          "textBlock": "Die AfD verfolgt eine Strategie, die darauf abzielt, demokratische Institutionen zu nutzen, um diese letztlich zu schwächen. Dieses 'legalistische' Vorgehen wurde bereits in anderen historischen Fällen beobachtet und stellt eine besondere Herausforderung für die wehrhafte Demokratie dar. Ich bitte Sie, sich für eine differenzierte Betrachtung dieses Aspekts im Rahmen der Debatte um ein Parteiverbotsverfahren einzusetzen.",
+          "promptBlock": "Der Briefschreiber spricht die 'legalistische Strategie' der AfD an. Erkläre dieses Konzept im verfassungsrechtlichen Kontext und wie es die Frage eines Parteiverbots beeinflusst. Gehe darauf ein, wie das Bundesverfassungsgericht in früheren Urteilen mit ähnlichen Strategien umgegangen ist."
+        },
+        {
+          "id": "internationale_vernetzung",
+          "name": "Internationale Vernetzung",
+          "textBlock": "Die internationale Vernetzung der AfD mit Parteien und Gruppierungen, die in ihren Ländern demokratiefeindliche Positionen vertreten oder bereits demokratische Strukturen abgebaut haben, ist ein weiterer besorgniserregender Aspekt. Diese Verbindungen sollten bei der Prüfung eines Verbotsverfahrens berücksichtigt werden. Ich bitte Sie, sich für eine umfassende Untersuchung dieser Netzwerke einzusetzen.",
+          "promptBlock": "Der Briefschreiber verweist auf die internationale Vernetzung der AfD. Erläutere die Relevanz solcher Verbindungen für die verfassungsrechtliche Bewertung einer Partei und wie internationale Kooperationen bei einem Verbotsverfahren berücksichtigt werden könnten."
+        }
+      ]
+    }
+  ]
+}

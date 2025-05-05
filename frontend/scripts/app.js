@@ -34,9 +34,9 @@ export function parlamentspostApp() {
     // Dark Mode Zustand
     isDark: localStorage.getItem("isDark") === "true",
 
-    // Persönliche Daten
+    // Persoenliche Daten
     name: "",
-    straße: "",
+    strasse: "",
     plz: "",
     ort: "",
     email: "",
@@ -84,7 +84,7 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "true");
       }
       
-      // NEU: Event-Listener für Änderungen der Systemeinstellung
+      // Event-Listener für Änderungen der Systemeinstellung
       const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       darkModeMediaQuery.addEventListener('change', (e) => {
         // Nur anwenden, wenn der Nutzer keine manuelle Einstellung vorgenommen hat
@@ -104,7 +104,10 @@ export function parlamentspostApp() {
       // Zufällige Schriftart wählen
       this.formatierung.schriftart = this.getRandomFontFamily();
       
-      // Lade Subtopics für das statische Topic
+      // Topics beim Start laden
+      await this.ladeTopics();
+      
+      // Lade Subtopics für das ausgewählte Topic
       await this.loadSubtopics();
     },
     
@@ -133,14 +136,58 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "false");
       }
       
-      // NEU: Markieren, dass der Nutzer manuell umgeschaltet hat
+      // Markieren, dass der Nutzer manuell umgeschaltet hat
       localStorage.setItem("isDarkUserSet", "true");
       
-      // NEU: Animation für sanfteren Übergang hinzufügen
+      // Animation für sanfteren Übergang hinzufügen
       document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
       setTimeout(() => {
         document.body.style.transition = "";
       }, 500);
+    },
+    
+    // Alle Topics laden
+    async ladeTopics() {
+      this.isLoading = true;
+      try {
+        const response = await fetch('/api/v1/topics');
+        if (!response.ok) {
+          throw new Error("Fehler beim Laden der Topics");
+        }
+        
+        this.topics = await response.json();
+        log("INFO", "Topics geladen", { count: this.topics.length });
+      } catch (error) {
+        log("ERROR", "Fehler beim Laden der Topics", { message: error.message });
+        alert(`Fehler beim Laden der Topics: ${error.message}`);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    
+    // Topic auswählen und zugehörige Subtopics laden
+    async waehleTopic(topicId) {
+      if (this.topic === topicId) return; // Keine Änderung, wenn gleiches Topic
+      
+      this.topic = topicId;
+      log("INFO", `Topic gewechselt zu ${topicId}`);
+      
+      // Themen zurücksetzen, da wir neue Subtopics laden werden
+      this.themen = [];
+      
+      // Subtopics für das neue Topic laden
+      await this.loadSubtopics();
+      
+      // Nach dem Laden der Subtopics zum Formular scrollen
+      setTimeout(() => {
+        const formElement = document.getElementById("user-form");
+        if (formElement) {
+          formElement.scrollIntoView({ 
+            behavior: "smooth", 
+            block: "start" 
+          });
+        }
+      }, 100);
     },
     
     // Cache-Management Methoden
@@ -213,11 +260,15 @@ export function parlamentspostApp() {
     async loadSubtopics() {
       this.isLoading = true;
       try {
-        // Topic-Daten laden
-        const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
-        if (topicResponse.ok) {
-          this.topicData = await topicResponse.json();
-          log("INFO", "Topic-Daten geladen", this.topicData);
+        // Topic-Daten laden, falls noch nicht geschehen oder sich das Topic geändert hat
+        if (!this.topicData || this.topicData.id !== this.topic) {
+          const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
+          if (topicResponse.ok) {
+            this.topicData = await topicResponse.json();
+            log("INFO", "Topic-Daten geladen", this.topicData);
+          } else {
+            throw new Error(`Fehler beim Laden des Topics ${this.topic}`);
+          }
         }
         
         // Subtopics laden
@@ -400,7 +451,7 @@ export function parlamentspostApp() {
       log("INFO", "Starte Briefgenerierung", { kiGeneriert });
 
       // Absender zusammenstellen
-      const absender = `${this.name}\n${this.straße}\n${this.plz} ${this.ort}`;
+      const absender = `${this.name}\n${this.strasse}\n${this.plz} ${this.ort}`;
       
       // Aktuelles Datum im deutschen Format
       const aktuellesDatum = new Date().toLocaleDateString("de-DE", {
@@ -427,7 +478,7 @@ export function parlamentspostApp() {
         "Sehr geehrte:r";
 
       // Adresse des Adressaten zusammenstellen
-      const empfänger = `${vollerNameDesAbgeordneten}
+      const empfaenger = `${vollerNameDesAbgeordneten}
 Deutscher Bundestag
 Platz der Republik 1
 11011 Berlin`;
@@ -546,7 +597,7 @@ Platz der Republik 1
       // Brieffelder setzen
       this.briefFelder = {
         absender: absender,
-        empfaenger: empfänger,
+        empfaenger: empfaenger,
         ortDatum: ortUndDatum,
         betreff: betreff,
         brieftext: brieftext

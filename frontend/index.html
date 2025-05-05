@@ -279,10 +279,10 @@
           </select>
         </div>
 
-        <!-- Themenblöcke -->
+        <!-- Argumente -->
         <div>
           <label class="block text-gray-800 dark:text-gray-300 font-medium"
-            >Themenblöcke</label
+            >Argumente</label
           >
           <div class="mt-2 flex flex-wrap gap-4">
             <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
@@ -298,7 +298,7 @@
             </template>
             <!-- Fallback, wenn keine Subtopics geladen werden konnten -->
             <p x-show="availableSubtopics.length === 0" class="text-gray-500 italic">
-              Keine Themenblöcke verfügbar.
+              Keine Argument-Vorlagen verfügbar.
             </p>
           </div>
         </div>

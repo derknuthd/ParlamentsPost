@@ -134,7 +134,8 @@ app.post("/api/genai-brief", rateLimiter, async (req, res) => {
     const prompt = `
 ${basePrompt}
 
-Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens. 
+Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens.
+Verwende dabei keine Formatierungsbefehle als Markdown, HTML oder ähnliches. 
 Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden:
 - Absender
 - Ort und Datum

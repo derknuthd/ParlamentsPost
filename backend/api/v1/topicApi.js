@@ -38,7 +38,14 @@ router.get("/topics", (req, res) => {
   try {
     const topicsData = loadTopicsData();
     log("INFO", "Topics erfolgreich geladen", { count: topicsData.topics.length });
-    res.json(topicsData.topics);
+    
+    // Optional: Subtopics aus der Antwort entfernen, wenn sie nicht benötigt werden
+    const topicsWithoutSubtopics = topicsData.topics.map(topic => {
+      const { subtopics, ...topicWithoutSubtopics } = topic;
+      return topicWithoutSubtopics;
+    });
+    
+    res.json(topicsWithoutSubtopics);
   } catch (error) {
     log("ERROR", "Fehler beim Abrufen der Topics", { error: error.message });
     res.status(500).json({ error: "Fehler beim Abrufen der Topics: " + error.message });
@@ -65,23 +72,25 @@ router.get("/topics/:id", (req, res) => {
   }
 });
 
-// GET /api/v1/subtopics - Alle Subtopics oder gefiltert nach topicId
-router.get("/subtopics", (req, res) => {
+// GET /api/v1/topics/:id/subtopics - Alle Subtopics eines Topics abrufen
+router.get("/topics/:id/subtopics", (req, res) => {
   try {
-    const { topicId } = req.query;
+    const { id } = req.params;
     const topicsData = loadTopicsData();
+    const topic = topicsData.topics.find(t => t.id === id);
     
-    let subtopics = topicsData.subtopics;
-    
-    // Filtern nach topicId, falls angegeben
-    if (topicId) {
-      subtopics = subtopics.filter(s => s.topicId === topicId);
-      log("INFO", `Subtopics für Topic ${topicId} geladen`, { count: subtopics.length });
-    } else {
-      log("INFO", "Alle Subtopics geladen", { count: subtopics.length });
+    if (!topic) {
+      log("WARN", `Topic mit ID ${id} nicht gefunden`);
+      return res.status(404).json({ error: `Topic mit ID ${id} nicht gefunden` });
     }
     
-    res.json(subtopics);
+    if (!topic.subtopics || topic.subtopics.length === 0) {
+      log("INFO", `Keine Subtopics für Topic ${id} gefunden`);
+      return res.json([]);
+    }
+    
+    log("INFO", `Subtopics für Topic ${id} erfolgreich geladen`, { count: topic.subtopics.length });
+    res.json(topic.subtopics);
   } catch (error) {
     log("ERROR", "Fehler beim Abrufen der Subtopics", { error: error.message });
     res.status(500).json({ error: "Fehler beim Abrufen der Subtopics: " + error.message });
@@ -93,15 +102,27 @@ router.get("/subtopics/:id", (req, res) => {
   try {
     const { id } = req.params;
     const topicsData = loadTopicsData();
-    const subtopic = topicsData.subtopics.find(s => s.id === id);
     
-    if (!subtopic) {
+    let foundSubtopic = null;
+    
+    // Suche das Subtopic in allen Topics
+    for (const topic of topicsData.topics) {
+      if (topic.subtopics) {
+        const subtopic = topic.subtopics.find(s => s.id === id);
+        if (subtopic) {
+          foundSubtopic = subtopic;
+          break;
+        }
+      }
+    }
+    
+    if (!foundSubtopic) {
       log("WARN", `Subtopic mit ID ${id} nicht gefunden`);
       return res.status(404).json({ error: `Subtopic mit ID ${id} nicht gefunden` });
     }
     
     log("INFO", `Subtopic ${id} erfolgreich geladen`);
-    res.json(subtopic);
+    res.json(foundSubtopic);
   } catch (error) {
     log("ERROR", "Fehler beim Abrufen des Subtopics", { error: error.message });
     res.status(500).json({ error: "Fehler beim Abrufen des Subtopics: " + error.message });

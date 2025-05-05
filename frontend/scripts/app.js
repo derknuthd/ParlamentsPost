@@ -155,7 +155,7 @@ export function parlamentspostApp() {
     async loadSubtopics() {
       this.isLoading = true;
       try {
-        const response = await fetch(`/api/v1/subtopics?topicId=${this.topic}`);
+        const response = await fetch(`/api/v1/topics/${this.topic}/subtopics`);
         if (!response.ok) {
           throw new Error("Fehler beim Laden der Subtopics");
         }

@@ -53,6 +53,7 @@ export function parlamentspostApp() {
     // Topic-System
     topic: "umwelt_und_nachhaltigkeit", // Statisch festgelegt für den Anfang
     topics: [],
+    topicData: null, // Speichert die vollständigen Topic-Daten
     availableSubtopics: [],
     
     // Brief-Formatierung
@@ -185,6 +186,14 @@ export function parlamentspostApp() {
     async loadSubtopics() {
       this.isLoading = true;
       try {
+        // Topic-Daten laden
+        const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
+        if (topicResponse.ok) {
+          this.topicData = await topicResponse.json();
+          log("INFO", "Topic-Daten geladen", this.topicData);
+        }
+        
+        // Subtopics laden
         const response = await fetch(`/api/v1/topics/${this.topic}/subtopics`);
         if (!response.ok) {
           throw new Error("Fehler beim Laden der Subtopics");
@@ -396,8 +405,29 @@ Deutscher Bundestag
 Platz der Republik 1
 11011 Berlin`;
 
-      // Betreffzeile
-      const betreff = `Wahlkreis: ${wahlkreisBez}`;
+      // Betreffzeile basierend auf dem Topic-Namen generieren
+      let betreff = "Anliegen zur Politik";
+      
+      // Topic-Daten verwenden, falls bereits geladen
+      if (this.topicData && this.topicData.name) {
+        betreff = `Anliegen zum Thema: ${this.topicData.name}`;
+        log("INFO", "Betreff aus gespeichertem Topic-Namen generiert", { betreff });
+      } else {
+        // Topic-Daten laden, falls noch nicht geschehen
+        try {
+          const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
+          if (topicResponse.ok) {
+            this.topicData = await topicResponse.json();
+            if (this.topicData && this.topicData.name) {
+              betreff = `Anliegen zum Thema: ${this.topicData.name}`;
+              log("INFO", "Betreff aus frisch geladenem Topic-Namen generiert", { betreff });
+            }
+          }
+        } catch (topicError) {
+          log("WARN", "Fehler beim Laden des Topic-Namens für Betreff", { error: topicError.message });
+          // Fallback-Betreff verwenden
+        }
+      }
 
       // Validierung von Freitext und Themen
       if (!this.freitext.trim() && this.themen.length === 0) {
@@ -417,20 +447,8 @@ Platz der Republik 1
           
           const promptBlocks = selectedSubtopics.map(subtopic => subtopic.promptBlock);
           
-          // Topic-Daten laden
-          let topicData = null;
-          try {
-            const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
-            if (topicResponse.ok) {
-              topicData = await topicResponse.json();
-            }
-          } catch (topicError) {
-            log("WARN", "Fehler beim Laden der Topic-Daten", { error: topicError.message });
-            // Fortfahren ohne Topic-Daten
-          }
-          
           const userData = {
-            topic: topicData,
+            topic: this.topicData,  // Wir geben die Topic-Daten mit, die wir bereits geladen haben
             selectedSubtopics,
             promptBlocks,
             freitext: this.freitext.trim(),
@@ -469,11 +487,32 @@ Platz der Republik 1
         );
         
         const textBlocks = selectedSubtopics.map(subtopic => subtopic.textBlock).join("\n\n");
-        const subtopicsText = selectedSubtopics.length > 0 
+        
+        // Prüfe, ob Themen ausgewählt wurden oder Freitext vorhanden ist
+        const hasSubtopics = selectedSubtopics.length > 0;
+        const hasFreitext = this.freitext.trim().length > 0;
+        
+        // Einleitung nur erstellen, wenn Themenblöcke ausgewählt wurden
+        const subtopicsText = hasSubtopics 
           ? `Ich wende mich heute an Sie bezüglich folgender Themen: ${selectedSubtopics.map(subtopic => subtopic.name).join(", ")}.`
           : "";
         
-        brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${subtopicsText}\n\n${textBlocks}\n\n${this.freitext}\n\nMit freundlichen Grüßen,\n${this.name}`;
+        // Beginne mit Anrede
+        brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},`;
+        
+        // Füge Thementext und -blöcke nur hinzu, wenn vorhanden
+        if (hasSubtopics) {
+          brieftext += `\n\n${subtopicsText}\n\n${textBlocks}`;
+        }
+        
+        // Füge Freitext nur hinzu, wenn vorhanden
+        if (hasFreitext) {
+          brieftext += `\n\n${this.freitext}`;
+        }
+        
+        // Füge Grußformel am Ende hinzu
+        brieftext += `\n\nMit freundlichen Grüßen,\n${this.name}`;
+        
         log("INFO", "Manueller Briefinhalt erstellt", { brieftext });
       }
 

@@ -1,6 +1,7 @@
 import Alpine from "alpinejs";
 import "./styles/styles.css";
 import { parlamentspostApp } from "./scripts/app.js";
+import { initComponents } from "./scripts/components.js";
 
 // Register parlamentspostApp globally before starting Alpine
 window.parlamentspostApp = parlamentspostApp;
@@ -10,6 +11,11 @@ window.Alpine = Alpine;
 
 // Initialize Alpine
 Alpine.start();
+
+// Komponenten laden
+document.addEventListener("DOMContentLoaded", () => {
+  initComponents();
+});
 
 // Hot Module Replacement (HMR) support
 if (import.meta.hot) {

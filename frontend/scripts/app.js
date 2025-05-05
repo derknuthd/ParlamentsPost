@@ -16,8 +16,48 @@ function log(level, message, data = null) {
   }
 }
 
+// Komponenten-Ladung
+function loadComponents() {
+  try {
+    // Header laden
+    fetch("/components/header.html")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler beim Laden des Headers: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById("header").innerHTML = data;
+      })
+      .catch((error) => {
+        log("ERROR", "Fehler beim Laden des Headers:", error);
+      });
+
+    // Footer laden
+    fetch("/components/footer.html")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler beim Laden des Footers: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById("footer").innerHTML = data;
+      })
+      .catch((error) => {
+        log("ERROR", "Fehler beim Laden des Footers:", error);
+      });
+  } catch (error) {
+    log("ERROR", "Fehler beim Laden der Komponenten:", error);
+  }
+}
+
 // Event-Listener für DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
+  // Komponenten laden
+  loadComponents();
+  
   const menuButton = document.getElementById("menu-button");
   const mobileNav = document.getElementById("mobile-nav");
   if (menuButton) {

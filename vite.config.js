@@ -4,7 +4,6 @@ import { resolve } from "path";
 export default defineConfig({
   root: "frontend", // Set the root directory for the frontend
   publicDir: "public", // Static assets folder
-  assetsInclude: ['**/*.html'], // Ermöglicht das Importieren von HTML-Dateien
   server: {
     port: 4000,
     open: true, // Auto-open browser on start

@@ -405,7 +405,7 @@ Platz der Republik 1
 
           log("DEBUG", "Daten für KI-Generierung", userData);
 
-          const response = await fetch("/api/genai-brief", {
+          const response = await fetch("/api/v1/genai-brief", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userData }),

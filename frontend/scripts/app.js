@@ -684,7 +684,7 @@ Platz der Republik 1
       log("INFO", "Aktiviere Briefvorschau");
 
       // Export-Button und Speichern-Button aktivieren
-      const exportButton = document.getElementById("export-pdf-button");
+      const exportButton = document.getElementById("print-button");
       if (exportButton) {
         exportButton.disabled = false;
       }

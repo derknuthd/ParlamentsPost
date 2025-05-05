@@ -1,3 +1,4 @@
+// server.js
 require("dotenv").config(); // Lädt die .env aus dem Projekt-Root
 
 const express = require("express");
@@ -11,7 +12,6 @@ const wahlkreisApi = require("./api/v1/wahlkreisApi");
 const abgeordneteApi = require("./api/v1/abgeordneteApi");
 const topicApi = require("./api/v1/topicApi");
 const genaiApi = require("./api/v1/genaiApi");
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -61,36 +61,42 @@ console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
 
 /**
  * ===========================
- * 3) Rate-Limiter
+ * 3) Zentrale Rate-Limiter-Definitionen
  * ===========================
  */
-const rateLimiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS || "60", 10) * 1000, // Zeitfenster in Millisekunden
-  max: parseInt(process.env.RATE_LIMIT_MAX || "10", 10), // Maximale Anfragen pro Zeitfenster
-  message: "Too many requests. Bitte später erneut versuchen.",
-});
+const rateLimiters = {
+  // Standard-Limiter für reguläre API-Anfragen
+  standard: rateLimit({
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS || "60", 10) * 1000,
+    max: parseInt(process.env.RATE_LIMIT_MAX || "20", 10),
+    message: "Too many requests. Bitte später erneut versuchen.",
+    keyGenerator: (req) => req.ip + '_standard'
+  }),
+  
+  // Spezifischer Limiter für KI-Anfragen
+  ai: rateLimit({
+    windowMs: parseInt(process.env.AI_RATE_LIMIT_WINDOW_SECONDS || "300", 10) * 1000,
+    max: parseInt(process.env.AI_RATE_LIMIT_MAX || "5", 10),
+    message: "Zu viele KI-Anfragen. Bitte warten Sie einige Minuten.",
+    keyGenerator: (req) => req.ip + '_ai'
+  })
+};
 
 console.log("[DEBUG] [server.js] Rate-Limiter eingerichtet.");
 
 /**
  * ===========================
- * 4) API-Routen
+ * 4) API-Routen mit spezifischen Rate-Limitern
  * ===========================
  */
 
-// Einbindung der separaten API-Routen
-app.use(
-  "/api/v1", // Präfix für alle API-Routen
-  rateLimiter,
-  (req, res, next) => {
-    console.log(`[DEBUG] Anfrage an ${req.originalUrl}`);
-    next();
-  }
-);
-app.use("/api/v1", wahlkreisApi); // Binde den wahlkreisApi-Router ein
-app.use("/api/v1", abgeordneteApi); // Binde den abgeordneteApi-Router ein
-app.use("/api/v1", topicApi); // Binde den Topic-API-Router ein
-app.use("/api/v1", genaiApi);
+// Standard-APIs mit Standard-Rate-Limiter
+app.use("/api/v1", rateLimiters.standard, wahlkreisApi);
+app.use("/api/v1", rateLimiters.standard, abgeordneteApi);
+app.use("/api/v1", rateLimiters.standard, topicApi);
+
+// KI-API mit speziellem Rate-Limiter
+app.use("/api/v1", rateLimiters.ai, genaiApi);
 
 // Server starten
 app.listen(PORT, () => {

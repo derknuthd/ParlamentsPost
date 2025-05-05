@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const router = express.Router();
 
-// Logging-Funktion (wie in deinen anderen APIs)
+// Logging-Funktion
 const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
 const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
 function log(level, message, data = null) {
@@ -94,38 +94,6 @@ router.get("/topics/:id/subtopics", (req, res) => {
   } catch (error) {
     log("ERROR", "Fehler beim Abrufen der Subtopics", { error: error.message });
     res.status(500).json({ error: "Fehler beim Abrufen der Subtopics: " + error.message });
-  }
-});
-
-// GET /api/v1/subtopics/:id - Einzelnes Subtopic abrufen
-router.get("/subtopics/:id", (req, res) => {
-  try {
-    const { id } = req.params;
-    const topicsData = loadTopicsData();
-    
-    let foundSubtopic = null;
-    
-    // Suche das Subtopic in allen Topics
-    for (const topic of topicsData.topics) {
-      if (topic.subtopics) {
-        const subtopic = topic.subtopics.find(s => s.id === id);
-        if (subtopic) {
-          foundSubtopic = subtopic;
-          break;
-        }
-      }
-    }
-    
-    if (!foundSubtopic) {
-      log("WARN", `Subtopic mit ID ${id} nicht gefunden`);
-      return res.status(404).json({ error: `Subtopic mit ID ${id} nicht gefunden` });
-    }
-    
-    log("INFO", `Subtopic ${id} erfolgreich geladen`);
-    res.json(foundSubtopic);
-  } catch (error) {
-    log("ERROR", "Fehler beim Abrufen des Subtopics", { error: error.message });
-    res.status(500).json({ error: "Fehler beim Abrufen des Subtopics: " + error.message });
   }
 });
 

@@ -74,6 +74,13 @@ export function parlamentspostApp() {
     // Cache-Konfiguration
     cacheEnabled: true,
     cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden in Millisekunden
+    
+    // "Meine Briefe" Konfiguration
+    briefStorage: {
+      storageKey: 'parlamentspost_briefe',
+      maxPreviewBriefe: 3
+    },
+    showAlleBriefe: false,
 
     // Initialisierung
     async init() {
@@ -109,6 +116,9 @@ export function parlamentspostApp() {
       
       // Lade Subtopics für das ausgewählte Topic
       await this.loadSubtopics();
+      
+      // "Meine Briefe"-Bereich aktualisieren
+      this.updateMeineBriefeUI();
     },
     
     // Zufällige Schriftart auswählen
@@ -607,18 +617,26 @@ Platz der Republik 1
       
       // Briefvorschau aktivieren
       this.aktiviereBriefvorschau();
+      
+      // Den Brief automatisch im Local Storage speichern
+      this.speichereBrief();
+      
+      // "Meine Briefe"-Bereich aktualisieren
+      this.updateMeineBriefeUI();
     },
 
     aktiviereBriefvorschau() {
       log("INFO", "Aktiviere Briefvorschau");
       
-      // Wir müssen die DOM-Elemente nicht mehr manuell aktualisieren, 
-      // da Alpine.js das über die x-html Bindings automatisch tut
-      
-      // Export-Button aktivieren
+      // Export-Button und Speichern-Button aktivieren
       const exportButton = document.getElementById("export-pdf-button");
       if (exportButton) {
         exportButton.disabled = false;
+      }
+      
+      const saveButton = document.getElementById("save-brief-button");
+      if (saveButton) {
+        saveButton.disabled = false;
       }
       
       // Zum Briefvorschau-Bereich scrollen
@@ -636,6 +654,269 @@ Platz der Republik 1
       
       // Druck auslösen
       window.print();
+    },
+    
+    // Brief speichern
+    speichereBrief() {
+      // Sammle alle relevanten Daten
+      let briefDaten = {
+        id: `brief_${Date.now()}`,
+        zeitstempel: new Date().toISOString(),
+        titel: this.generateBriefTitel(),
+        absender: {
+          name: this.name,
+          strasse: this.strasse,
+          plz: this.plz,
+          ort: this.ort,
+          email: this.email
+        },
+        empfaenger: {
+          id: this.abgeordnete,
+          abgeordneter: this.abgeordneteListe.find(a => String(a.id) === this.abgeordnete) || null
+        },
+        themen: {
+          topic: this.topic,
+          ausgewaehlteThemen: this.themen,
+          freitext: this.freitext,
+        },
+        briefInhalt: {
+          absenderText: this.briefFelder.absender,
+          empfaengerText: this.briefFelder.empfaenger,
+          ortDatumText: this.briefFelder.ortDatum,
+          betreffText: this.briefFelder.betreff,
+          briefText: this.briefFelder.brieftext
+        },
+        formatierung: {
+          schriftart: this.formatierung.schriftart,
+          schriftgroesse: this.formatierung.schriftgroesse
+        }
+      };
+
+      log("INFO", "Brief wird im Local Storage gespeichert", { briefId: briefDaten.id });
+
+      try {
+        // Bestehende Briefe laden
+        const briefe = this.ladeBriefe();
+        
+        // Neuen Brief hinzufügen
+        briefe.push(briefDaten);
+        
+        // Zurück in Local Storage speichern
+        localStorage.setItem(this.briefStorage.storageKey, JSON.stringify(briefe));
+        
+        // UI aktualisieren
+        this.updateMeineBriefeUI();
+        
+        log("INFO", "Brief erfolgreich gespeichert", { id: briefDaten.id });
+        
+        return briefDaten.id;
+      } catch (error) {
+        log("ERROR", "Fehler beim Speichern des Briefes", { error: error.message });
+        alert("Der Brief konnte nicht gespeichert werden: " + error.message);
+        return null;
+      }
+    },
+
+    // Generiert einen ansprechenden Titel für den Brief
+    generateBriefTitel() {
+      // Versuche den Empfänger zu bekommen
+      const abgeordneter = this.abgeordneteListe.find(a => String(a.id) === this.abgeordnete);
+      const empfaengerName = abgeordneter ? abgeordneter.vollerName : "Unbekannter Empfänger";
+      
+      // Versuche den Thementitel zu bekommen
+      let themenTitel = "Allgemein";
+      const selectedTopic = this.topics.find(t => t.id === this.topic);
+      if (selectedTopic) {
+        themenTitel = selectedTopic.name;
+      }
+      
+      // Datum im kurzen Format
+      const datum = new Date().toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit"
+      });
+      
+      // Titel zusammenstellen
+      return `Brief an ${empfaengerName} - ${themenTitel} (${datum})`;
+    },
+
+    // Alle Briefe laden
+    ladeBriefe(limit = null) {
+      try {
+        // Aus dem Local Storage laden
+        const briefeJson = localStorage.getItem(this.briefStorage.storageKey);
+        if (!briefeJson) {
+          return [];
+        }
+        
+        // In Objekt umwandeln
+        let briefe = JSON.parse(briefeJson);
+        
+        // Nach Datum sortieren (neueste zuerst)
+        briefe.sort((a, b) => new Date(b.zeitstempel) - new Date(a.zeitstempel));
+        
+        // Optional begrenzen
+        if (limit !== null && Number.isInteger(limit) && limit > 0) {
+          briefe = briefe.slice(0, limit);
+        }
+        
+        log("INFO", "Briefe aus Local Storage geladen", { count: briefe.length });
+        return briefe;
+      } catch (error) {
+        log("ERROR", "Fehler beim Laden der Briefe", { error: error.message });
+        return [];
+      }
+    },
+
+    // Einzelnen Brief laden
+    ladeBrief(id) {
+      try {
+        const briefe = this.ladeBriefe();
+        const brief = briefe.find(b => b.id === id);
+        
+        if (!brief) {
+          log("WARN", `Brief mit ID ${id} nicht gefunden`);
+          return null;
+        }
+        
+        log("INFO", `Brief ${id} geladen`);
+        return brief;
+      } catch (error) {
+        log("ERROR", `Fehler beim Laden des Briefs ${id}`, { error: error.message });
+        return null;
+      }
+    },
+
+    // Brief löschen
+    loescheBrief(id) {
+      try {
+        // Alle Briefe laden
+        const briefe = this.ladeBriefe();
+        
+        // Brief mit der ID filtern
+        const filteredBriefe = briefe.filter(b => b.id !== id);
+        
+        // Wenn keine Änderung, dann wurde der Brief nicht gefunden
+        if (filteredBriefe.length === briefe.length) {
+          log("WARN", `Brief mit ID ${id} konnte nicht gelöscht werden (nicht gefunden)`);
+          return false;
+        }
+        
+        // Aktualisierte Liste speichern
+        localStorage.setItem(this.briefStorage.storageKey, JSON.stringify(filteredBriefe));
+        
+        // UI aktualisieren
+        this.updateMeineBriefeUI();
+        
+        log("INFO", `Brief ${id} gelöscht`);
+        return true;
+      } catch (error) {
+        log("ERROR", `Fehler beim Löschen des Briefs ${id}`, { error: error.message });
+        return false;
+      }
+    },
+
+    // Alle Briefe löschen
+    loescheAlleBriefe() {
+      try {
+        localStorage.removeItem(this.briefStorage.storageKey);
+        
+        // UI aktualisieren
+        this.updateMeineBriefeUI();
+        
+        log("INFO", "Alle Briefe gelöscht");
+        return true;
+      } catch (error) {
+        log("ERROR", "Fehler beim Löschen aller Briefe", { error: error.message });
+        return false;
+      }
+    },
+
+    // Brief in die globalen Daten laden und bearbeiten können
+    briefBearbeiten(id) {
+      try {
+        // Brief laden
+        const brief = this.ladeBrief(id);
+        if (!brief) {
+          alert("Der Brief konnte nicht geladen werden.");
+          return false;
+        }
+        
+        // Nutzerdaten setzen
+        this.name = brief.absender.name || "";
+        this.strasse = brief.absender.strasse || "";
+        this.plz = brief.absender.plz || "";
+        this.ort = brief.absender.ort || "";
+        this.email = brief.absender.email || "";
+        
+        // Themen setzen
+        this.topic = brief.themen.topic || this.topic;
+        this.loadSubtopics().then(() => {
+          // Nur nach dem Laden der Subtopics die Auswahl setzen
+          this.themen = brief.themen.ausgewaehlteThemen || [];
+          this.freitext = brief.themen.freitext || "";
+        });
+        
+        // Abgeordneten setzen (ID muss als String vorliegen)
+        this.abgeordnete = String(brief.empfaenger.id) || "";
+        
+        // Wenn keine Abgeordnetenliste vorhanden, neu laden
+        if (this.abgeordneteListe.length === 0) {
+          this.holeAbgeordnete();
+        }
+        
+        // Brieffelder setzen
+        this.briefFelder = {
+          absender: brief.briefInhalt.absenderText || "",
+          empfaenger: brief.briefInhalt.empfaengerText || "",
+          ortDatum: brief.briefInhalt.ortDatumText || "",
+          betreff: brief.briefInhalt.betreffText || "",
+          brieftext: brief.briefInhalt.briefText || ""
+        };
+        
+        // Formatierung setzen
+        this.formatierung = {
+          schriftart: brief.formatierung.schriftart || "Arial, sans-serif",
+          schriftgroesse: brief.formatierung.schriftgroesse || "mittel"
+        };
+        
+        // Briefvorschau aktivieren
+        this.aktiviereBriefvorschau();
+        
+        // Zum Formular scrollen
+        setTimeout(() => {
+          const formElement = document.getElementById("user-form");
+          if (formElement) {
+            formElement.scrollIntoView({ 
+              behavior: "smooth", 
+              block: "start" 
+            });
+          }
+        }, 100);
+        
+        log("INFO", `Brief ${id} zur Bearbeitung geladen`);
+        return true;
+      } catch (error) {
+        log("ERROR", `Fehler beim Laden des Briefs ${id} zur Bearbeitung`, { error: error.message });
+        alert(`Fehler beim Laden des Briefs: ${error.message}`);
+        return false;
+      }
+    },
+
+    // Aktualisierung des "Meine Briefe"-UI-Bereichs
+    updateMeineBriefeUI() {
+      // Überprüfen wir, ob Briefe vorhanden sind
+      const briefe = this.ladeBriefe(this.briefStorage.maxPreviewBriefe);
+      const meineBriefeBereich = document.getElementById("meine-briefe-bereich");
+      
+      if (meineBriefeBereich) {
+        if (briefe.length > 0) {
+          meineBriefeBereich.classList.remove("hidden");
+        } else {
+          meineBriefeBereich.classList.add("hidden");
+        }
+      }
     }
   };
 }

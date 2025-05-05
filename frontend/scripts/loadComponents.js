@@ -1,24 +1,15 @@
 // frontend/scripts/loadComponents.js
+import headerHTML from '../components/header.html?raw';
+import footerHTML from '../components/footer.html?raw';
 
 /**
  * Lädt Header- und Footer-Komponenten in die entsprechenden HTML-Container
- * @returns {Promise<void>} Ein Promise, das abgeschlossen wird, wenn alle Komponenten geladen wurden
  */
-export async function loadComponents() {
+export function loadComponents() {
   try {
-    // Header laden
-    const headerResponse = await fetch("/components/header.html");
-    if (!headerResponse.ok) {
-      throw new Error(`HTTP-Fehler beim Laden des Headers: ${headerResponse.status}`);
-    }
-    document.getElementById("header").innerHTML = await headerResponse.text();
-    
-    // Footer laden
-    const footerResponse = await fetch("/components/footer.html");
-    if (!footerResponse.ok) {
-      throw new Error(`HTTP-Fehler beim Laden des Footers: ${footerResponse.status}`);
-    }
-    document.getElementById("footer").innerHTML = await footerResponse.text();
+    // Header und Footer direkt einfügen
+    document.getElementById("header").innerHTML = headerHTML;
+    document.getElementById("footer").innerHTML = footerHTML;
     
     console.log("Komponenten erfolgreich geladen");
   } catch (error) {

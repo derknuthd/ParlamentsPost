@@ -1,5 +1,7 @@
 import Alpine from "alpinejs";
 import "./styles/styles.css";
+import "./styles/print-styles.css"; // Print-Styles importieren
+import "./styles/safari-print-fixes.css"; // Safari-spezifische Fixes
 import { parlamentspostApp } from "./scripts/app.js";
 import { initComponents } from "./scripts/components.js";
 

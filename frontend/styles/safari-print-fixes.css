@@ -1,0 +1,66 @@
+/* Safari-spezifische Anpassungen für print-styles.css */
+/* Diese Änderungen beeinflussen nur Safari, während andere Browser unverändert bleiben */
+
+@media print {
+    /* Verbesserte Safari-Erkennung - diese wird garantiert funktionieren */
+    @media not all and (min-resolution:.001dpcm) {
+      @supports (-webkit-appearance:none) and (not (stroke-color:transparent)) {
+        /* Grundlegende Container-Anpassungen für Safari */
+        html, body {
+          width: 210mm !important; /* A4-Breite fix für Safari */
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        
+        /* Rand-Anpassungen für Safari */
+        @page {
+          margin: 10mm !important; /* Reduzierter Rand speziell für Safari */
+        }
+        
+        /* Briefvorschau-Container */
+        #briefvorschau {
+          width: 190mm !important; /* 210mm - 20mm Rand */
+          margin: 0 auto !important;
+          box-sizing: border-box !important;
+        }
+        
+        #vorschau-container {
+          width: 190mm !important;
+          margin: 0 auto !important;
+          box-sizing: border-box !important;
+        }
+        
+        /* Briefelemente mit fester Breite für Safari */
+        #brief-absender, #brief-ortdatum, #brief-betreff, #brief-text {
+          width: 190mm !important;
+          box-sizing: border-box !important;
+          overflow: visible !important;
+        }
+        
+        /* Safari-spezifische Positionen */
+        #brief-absender {
+          text-align: right !important;
+          margin-bottom: 15mm !important;
+        }
+        
+        #brief-empfaenger {
+          width: 80mm !important;
+          margin-bottom: 15mm !important;
+        }
+        
+        #brief-ortdatum {
+          text-align: right !important;
+          margin-bottom: 10mm !important;
+        }
+        
+        #brief-betreff {
+          margin-bottom: 10mm !important;
+        }
+        
+        /* Verhindern von Textdurchschneiden */
+        #brief-text p {
+          page-break-inside: avoid !important;
+        }
+      }
+    }
+  }

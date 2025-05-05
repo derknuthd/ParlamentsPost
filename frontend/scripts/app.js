@@ -46,6 +46,10 @@ export function parlamentspostApp() {
     abgeordnete: "",
     abgeordneteListe: [],
     isLoading: false, // Ladeindikator
+    
+    // Cache-Konfiguration
+    cacheEnabled: true,
+    cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden in Millisekunden
 
     // Dark Mode Toggle Methode
     toggleDarkMode() {
@@ -59,11 +63,85 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "false");
       }
     },
+    
+    // Cache-Management Methoden
+    getCachedAbgeordnete(ort) {
+      if (!this.cacheEnabled) return null;
+      
+      try {
+        const cacheKey = `abgeordnete_${ort.trim().toLowerCase()}`;
+        const cachedData = localStorage.getItem(cacheKey);
+        
+        if (!cachedData) return null;
+        
+        const parsedData = JSON.parse(cachedData);
+        const cacheTime = parsedData.timestamp;
+        const now = Date.now();
+        
+        // Cache-Gültigkeit prüfen
+        if (now - cacheTime < this.cacheTTL) {
+          log("INFO", "Daten aus Cache geladen", { ort });
+          return parsedData.data;
+        } else {
+          // Abgelaufene Cache-Einträge löschen
+          localStorage.removeItem(cacheKey);
+          return null;
+        }
+      } catch (error) {
+        log("WARN", "Fehler beim Lesen des Caches", { error: error.message });
+        return null;
+      }
+    },
+    
+    setCachedAbgeordnete(ort, data) {
+      if (!this.cacheEnabled) return;
+      
+      try {
+        const cacheKey = `abgeordnete_${ort.trim().toLowerCase()}`;
+        const cacheData = {
+          timestamp: Date.now(),
+          data: data
+        };
+        
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        log("INFO", "Daten im Cache gespeichert", { ort, entries: data.length });
+      } catch (error) {
+        log("WARN", "Fehler beim Speichern im Cache", { error: error.message });
+        // Bei Fehler (z.B. LocalStorage voll) Cache-Funktion deaktivieren
+        this.cacheEnabled = false;
+      }
+    },
+    
+    clearAbgeordneteCache() {
+      // Alle Cache-Einträge für Abgeordnete löschen
+      try {
+        const keys = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key.startsWith('abgeordnete_')) {
+            keys.push(key);
+          }
+        }
+        
+        keys.forEach(key => localStorage.removeItem(key));
+        log("INFO", "Abgeordneten-Cache geleert", { entries: keys.length });
+      } catch (error) {
+        log("WARN", "Fehler beim Leeren des Caches", { error: error.message });
+      }
+    },
 
-    // Hier nur die angepasste holeAbgeordnete()-Methode
+    // Hier die angepasste holeAbgeordnete()-Methode mit Cache-Integration
     async holeAbgeordnete() {
       if (!this.ort.trim()) {
         log("WARN", "Kein Wohnort eingegeben");
+        return;
+      }
+      
+      // Versuche zuerst, Daten aus dem Cache zu laden
+      const cachedAbgeordnete = this.getCachedAbgeordnete(this.ort);
+      if (cachedAbgeordnete) {
+        this.abgeordneteListe = cachedAbgeordnete;
+        log("INFO", "Abgeordnete aus Cache geladen", { anzahl: cachedAbgeordnete.length });
         return;
       }
 
@@ -176,6 +254,12 @@ export function parlamentspostApp() {
           log("WARN", `Keine Abgeordneten für "${this.ort}" gefunden`);
           throw new Error(`Keine Abgeordneten für "${this.ort}" gefunden.`);
         }
+        
+        // Nach erfolgreicher Abfrage im Cache speichern
+        if (this.abgeordneteListe.length > 0) {
+          this.setCachedAbgeordnete(this.ort, this.abgeordneteListe);
+        }
+        
       } catch (error) {
         log("ERROR", "Fehler in holeAbgeordnete", { message: error.message });
         alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);

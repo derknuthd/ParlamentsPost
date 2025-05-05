@@ -84,6 +84,23 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "true");
       }
       
+      // NEU: Event-Listener für Änderungen der Systemeinstellung
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      darkModeMediaQuery.addEventListener('change', (e) => {
+        // Nur anwenden, wenn der Nutzer keine manuelle Einstellung vorgenommen hat
+        if (localStorage.getItem("isDarkUserSet") !== "true") {
+          this.isDark = e.matches;
+          if (this.isDark) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("isDark", "true");
+          } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("isDark", "false");
+          }
+          log("INFO", "Dark Mode durch Systemeinstellung geändert", { isDark: this.isDark });
+        }
+      });
+      
       // Zufällige Schriftart wählen
       this.formatierung.schriftart = this.getRandomFontFamily();
       
@@ -103,10 +120,11 @@ export function parlamentspostApp() {
       return fonts[Math.floor(Math.random() * fonts.length)];
     },
     
-    // Dark Mode Toggle Methode
+    // Verbesserte toggleDarkMode-Funktion
     toggleDarkMode() {
       this.isDark = !this.isDark;
-      log("INFO", "Dark Mode umgeschaltet", { isDark: this.isDark });
+      log("INFO", "Dark Mode manuell umgeschaltet", { isDark: this.isDark });
+      
       if (this.isDark) {
         document.documentElement.classList.add("dark");
         localStorage.setItem("isDark", "true");
@@ -114,6 +132,15 @@ export function parlamentspostApp() {
         document.documentElement.classList.remove("dark");
         localStorage.setItem("isDark", "false");
       }
+      
+      // NEU: Markieren, dass der Nutzer manuell umgeschaltet hat
+      localStorage.setItem("isDarkUserSet", "true");
+      
+      // NEU: Animation für sanfteren Übergang hinzufügen
+      document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
+      setTimeout(() => {
+        document.body.style.transition = "";
+      }, 500);
     },
     
     // Cache-Management Methoden

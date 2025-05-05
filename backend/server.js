@@ -9,6 +9,7 @@ const rateLimit = require("express-rate-limit");
 // Import der API-Logik
 const wahlkreisApi = require("./api/v1/wahlkreisApi");
 const abgeordneteApi = require("./api/v1/abgeordneteApi");
+const topicApi = require("./api/v1/topicApi");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -86,7 +87,9 @@ app.use(
 );
 app.use("/api/v1", wahlkreisApi); // Binde den wahlkreisApi-Router ein
 app.use("/api/v1", abgeordneteApi); // Binde den abgeordneteApi-Router ein
+app.use("/api/v1", topicApi); // Binde den Topic-API-Router ein
 
+// POST /api/genai-brief
 // POST /api/genai-brief
 app.post("/api/genai-brief", rateLimiter, async (req, res) => {
   try {
@@ -98,15 +101,39 @@ app.post("/api/genai-brief", rateLimiter, async (req, res) => {
       userData
     );
 
-    if (!userData || !userData.freitext) {
-      return res.status(400).json({ error: "Freitext oder userData fehlt." });
+    if (!userData) {
+      return res.status(400).json({ error: "userData fehlt." });
     }
 
     const model = process.env.OPENAI_MODEL;
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
+    // Basis-Prompt aus dem Topic verwenden, falls vorhanden
+    let basePrompt = "Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll.";
+    if (userData.topic && userData.topic.basePrompt) {
+      basePrompt = userData.topic.basePrompt;
+    }
+    
+    // Prompt-Blöcke der ausgewählten Subtopics sammeln
+    let promptDetails = "";
+    if (userData.selectedSubtopics && userData.selectedSubtopics.length > 0) {
+      promptDetails = "Beachte folgende spezifische Anliegen:\n" + 
+        userData.selectedSubtopics
+          .map(subtopic => subtopic.promptBlock)
+          .join("\n\n");
+    }
+    
+    // Subtopic-Namen für die Themenübersicht sammeln
+    let themenÜbersicht = "Keine spezifischen Themen angegeben.";
+    if (userData.selectedSubtopics && userData.selectedSubtopics.length > 0) {
+      themenÜbersicht = userData.selectedSubtopics
+        .map(subtopic => subtopic.name)
+        .join(", ");
+    }
+
     const prompt = `
-Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll. 
+${basePrompt}
+
 Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens. 
 Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden:
 - Absender
@@ -120,17 +147,30 @@ Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen 
 Das Rahmendokument enthält bereits die Anrede und die Grußformel. Dein Beitrag beginnt nach der Anrede und endet vor der Grußformel.
 
 Informationen zu den Themen:
-${
-  Array.isArray(userData.themen)
-    ? userData.themen.join(", ")
-    : "Keine spezifischen Themen angegeben."
-}
+${themenÜbersicht}
+
+${promptDetails}
 
 Freitext vom Nutzer:
 ${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
 
+Der Brief richtet sich an: ${userData.abgeordneteName || "einen Abgeordneten"} (${userData.abgeordnetePartei || "Partei unbekannt"})
+
 Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
       `;
+
+    // Log den vollständigen Prompt
+    console.log("[DEBUG] [server.js] Vollständiger Prompt:", prompt);
+    
+    // Log den kompletten Request, der an OpenAI gesendet wird
+    const openaiRequestData = {
+      model,
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: maxTokens,
+      temperature: 0.7,
+    };
+    
+    console.log("[DEBUG] [server.js] OpenAI Request:", JSON.stringify(openaiRequestData, null, 2));  
 
     const openaiResponse = await axios.post(
       "https://api.openai.com/v1/chat/completions",

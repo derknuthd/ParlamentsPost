@@ -34,23 +34,44 @@ export function parlamentspostApp() {
     // Dark Mode Zustand
     isDark: localStorage.getItem("isDark") === "true",
 
+    // Persönliche Daten
     name: "",
     straße: "",
     plz: "",
     ort: "",
     email: "",
 
+    // Aktuelle Themen und Freitext
     themen: [],
     freitext: "",
 
+    // Abgeordnete
     abgeordnete: "",
     abgeordneteListe: [],
     isLoading: false, // Ladeindikator
+    
+    // Topic-System
+    topic: "umwelt_und_nachhaltigkeit", // Statisch festgelegt für den Anfang
+    topics: [],
+    availableSubtopics: [],
     
     // Cache-Konfiguration
     cacheEnabled: true,
     cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden in Millisekunden
 
+    // Initialisierung
+    async init() {
+      // Dark Mode basierend auf Systemeinstellungen
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem("isDark") === null) {
+        this.isDark = true;
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("isDark", "true");
+      }
+      
+      // Lade Subtopics für das statische Topic
+      await this.loadSubtopics();
+    },
+    
     // Dark Mode Toggle Methode
     toggleDarkMode() {
       this.isDark = !this.isDark;
@@ -130,7 +151,29 @@ export function parlamentspostApp() {
       }
     },
 
-    // Hier die angepasste holeAbgeordnete()-Methode mit Cache-Integration
+    // Subtopics vom Server laden
+    async loadSubtopics() {
+      this.isLoading = true;
+      try {
+        const response = await fetch(`/api/v1/subtopics?topicId=${this.topic}`);
+        if (!response.ok) {
+          throw new Error("Fehler beim Laden der Subtopics");
+        }
+        
+        this.availableSubtopics = await response.json();
+        // Setze themen zurück, da wir neue Subtopics haben
+        this.themen = [];
+        
+        log("INFO", "Subtopics geladen", { count: this.availableSubtopics.length });
+      } catch (error) {
+        log("ERROR", "Fehler beim Laden der Subtopics", { message: error.message });
+        alert(`Fehler beim Laden der Subtopics: ${error.message}`);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    // Abgeordnete holen
     async holeAbgeordnete() {
       if (!this.ort.trim()) {
         log("WARN", "Kein Wohnort eingegeben");
@@ -332,10 +375,30 @@ Platz der Republik 1
       if (kiGeneriert) {
         this.isLoading = true;
         try {
+          // Sammle Prompt-Blöcke der ausgewählten Subtopics
+          const selectedSubtopics = this.availableSubtopics.filter(
+            subtopic => this.themen.includes(subtopic.id)
+          );
+          
+          const promptBlocks = selectedSubtopics.map(subtopic => subtopic.promptBlock);
+          
+          // Topic-Daten laden
+          let topicData = null;
+          try {
+            const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
+            if (topicResponse.ok) {
+              topicData = await topicResponse.json();
+            }
+          } catch (topicError) {
+            log("WARN", "Fehler beim Laden der Topic-Daten", { error: topicError.message });
+            // Fortfahren ohne Topic-Daten
+          }
+          
           const userData = {
-            ...(this.themen.length > 0 && { themen: this.themen }),
-            ...(this.freitext.trim() && { freitext: this.freitext.trim() }),
-            // Verwende "vollerName" und "partei" für die KI
+            topic: topicData,
+            selectedSubtopics,
+            promptBlocks,
+            freitext: this.freitext.trim(),
             abgeordneteName: vollerNameDesAbgeordneten,
             abgeordnetePartei: parteiDesAbgeordneten,
           };
@@ -365,11 +428,17 @@ Platz der Republik 1
           this.isLoading = false;
         }
       } else {
-        // Manuelle Erstellung
+        // Manuelle Erstellung mit subtopic-spezifischen Textblöcken
+        const selectedSubtopics = this.availableSubtopics.filter(
+          subtopic => this.themen.includes(subtopic.id)
+        );
+        
+        const textBlocks = selectedSubtopics.map(subtopic => subtopic.textBlock).join("\n\n");
+        
         inhalt = `
-      Ich wende mich heute an Sie bezüglich folgender Themen: ${this.themen.join(
-        ", "
-      )}.
+      Ich wende mich heute an Sie bezüglich folgender Themen: ${selectedSubtopics.map(subtopic => subtopic.name).join(", ")}.
+
+      ${textBlocks}
 
       ${this.freitext}
           `.trim();

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de" x-data="parlamentspostApp()" :class="{ 'dark': isDark }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/icons/favicon.ico"
+    />
+    <title>Impressum - ParlamentsPost</title>
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body
+    class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500"
+  >
+    <!-- Dark Mode Toggle -->
+    <button
+      class="print:hidden fixed z-20 bottom-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none transition-colors duration-300"
+      @click="toggleDarkMode"
+      aria-label="Dark Mode Toggle"
+      aria-pressed="isDark"
+    >
+      <!-- Heroicons Solid Sonnen-Icon (Light Mode) -->
+      <svg
+        x-show="!isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-yellow-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+        />
+      </svg>
+
+      <!-- Heroicons Solid Mond-Icon (Dark Mode) -->
+      <svg
+        x-show="isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-gray-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+        />
+      </svg>
+    </button>
+
+    <!-- Header (per Fetch geladen) -->
+    <div id="header" class="print:hidden"></div>
+
+    <!-- Hauptinhalt -->
+    <main class="container mx-auto p-6 max-w-4xl">
+      <!-- Zurück-Button -->
+      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Zurück zur Startseite
+      </a>
+      
+      <!-- Impressum-Inhalt -->
+      <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Impressum</h1>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</h2>
+          
+          <div class="space-y-2">
+            <h3 class="text-lg font-medium">Diensteanbieter</h3>
+            <p>ParlamentsPost e.V.<br>
+            Musterstraße 123<br>
+            12345 Musterstadt<br>
+            Deutschland</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Vertretungsberechtigt</h3>
+          <p>Vorstand gemäß § 26 BGB:</p>
+          <ul class="list-disc ml-5 mt-2">
+            <li>Max Mustermann (Vorsitzender)</li>
+            <li>Erika Musterfrau (Stellvertretende Vorsitzende)</li>
+            <li>Thomas Beispiel (Schatzmeister)</li>
+          </ul>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Kontakt</h3>
+          <p>Telefon: +49 (0) 123 456789<br>
+          E-Mail: <a href="mailto:kontakt@parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">kontakt@parlamentspost.de</a><br>
+          Website: <a href="https://www.parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">www.parlamentspost.de</a></p>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Vereinsregister</h3>
+          <p>Registergericht: Amtsgericht Musterstadt<br>
+          Registernummer: VR 12345</p>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Umsatzsteuer</h3>
+          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>
+          DE123456789<br>
+          <span class="text-gray-500 dark:text-gray-400 text-sm italic">(falls der Verein eine USt-ID besitzt)</span></p>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Inhaltlich Verantwortlicher gemäß § 55 Abs. 2 RStV</h3>
+          <p>Max Mustermann<br>
+          Musterstraße 123<br>
+          12345 Musterstadt<br>
+          Deutschland</p>
+        </section>
+        
+        <section class="mb-8">
+          <h3 class="text-lg font-medium mb-2">Vorstandschaft</h3>
+          <p>1. Vorsitzender: Max Mustermann<br>
+          2. Vorsitzende: Erika Musterfrau<br>
+          Schatzmeister: Thomas Beispiel<br>
+          Schriftführer: Anna Beispiel</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Hinweis zur außergerichtlichen Streitschlichtung</h2>
+          <p class="mb-3">Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">https://ec.europa.eu/consumers/odr/</a><br>
+          Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+          
+          <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Vereinszweck</h2>
+          <p>ParlamentsPost e.V. ist ein gemeinnütziger Verein, der die politische Bildung und demokratische Teilhabe fördert. Der Verein betreibt eine Web-Anwendung, die es Bürgerinnen und Bürgern ermöglicht, personalisierte Briefe an ihre politischen Vertreter zu erstellen, um die Kommunikation zwischen Bürgern und Volksvertretern zu vereinfachen und zu fördern.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Gemeinnützigkeit</h2>
+          <p>(Falls zutreffend)<br>
+          Der Verein ist als gemeinnützig anerkannt durch Bescheid des Finanzamts Musterstadt vom [DATUM], Steuernummer: [STEUERNUMMER].</p>
+        </section>
+        
+        <div class="mt-8 p-4 bg-gray-100 dark:bg-gray-700 rounded text-sm text-gray-500 dark:text-gray-400">
+          <p><em>Hinweis: Bitte passen Sie alle Felder an die tatsächlichen Daten Ihres Vereins an. Entfernen Sie Abschnitte, die nicht zutreffen, zum Beispiel den Abschnitt zur Umsatzsteuer-ID, wenn Ihr Verein keine besitzt, oder ergänzen Sie weitere notwendige Angaben, falls Ihr Verein besonderen rechtlichen Anforderungen unterliegt.</em></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer (per Fetch geladen) -->
+    <div id="footer" class="print:hidden"></div>
+  </body>
+</html>

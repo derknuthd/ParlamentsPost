@@ -1,16 +1,33 @@
-<!-- frontend/components/Footer.html -->
-<footer class="bg-gray-200 dark:bg-gray-800 text-center p-4">
-  <p class="text-gray-700 dark:text-gray-300">
-    &copy; 2025 ParlamentsPost. Alle Rechte vorbehalten.
-  </p>
-  <!-- Cache-Control UI-Element -->
-  <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-    <button 
-      @click="clearAllCache()" 
-      class="hover:underline focus:outline-none"
-      title="Löscht alle zwischengespeicherten Daten"
-    >
-      Cache leeren
-    </button>
+<!-- Footer -->
+<footer class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 py-4 mt-12 text-sm border-t border-gray-200 dark:border-gray-700">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center md:justify-start gap-x-4 mb-2 md:mb-0">
+        <a href="/impressum.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Impressum</a>
+        <span class="text-gray-400">|</span>
+        <a href="/datenschutz.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Datenschutz</a>
+        <span class="text-gray-400">|</span>
+        <!-- Spam-geschützte E-Mail -->
+        <a href="#" 
+           x-data="{ email: 'kontakt', domain: 'parlamentspost.de' }"
+           @click.prevent="window.location.href = 'mailto:' + email + '@' + domain"
+           class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+          Kontakt
+        </a>
+        <span class="text-gray-400">|</span>
+        <button 
+          @click="clearAllCache()"
+          class="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400"
+        >
+          Cache leeren
+        </button>
+      </div>
+      
+      <!-- Copyright -->
+      <div class="text-xs text-gray-500 dark:text-gray-400">
+        &copy; 2025 ParlamentsPost
+      </div>
+    </div>
   </div>
 </footer>

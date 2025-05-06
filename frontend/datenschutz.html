@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de" x-data="parlamentspostApp()" :class="{ 'dark': isDark }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/icons/favicon.ico"
+    />
+    <title>Datenschutzerklärung - ParlamentsPost</title>
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body
+    class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500"
+  >
+    <!-- Dark Mode Toggle -->
+    <button
+      class="print:hidden fixed z-20 bottom-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none transition-colors duration-300"
+      @click="toggleDarkMode"
+      aria-label="Dark Mode Toggle"
+      aria-pressed="isDark"
+    >
+      <!-- Heroicons Solid Sonnen-Icon (Light Mode) -->
+      <svg
+        x-show="!isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-yellow-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+        />
+      </svg>
+
+      <!-- Heroicons Solid Mond-Icon (Dark Mode) -->
+      <svg
+        x-show="isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-gray-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+        />
+      </svg>
+    </button>
+
+    <!-- Header (per Fetch geladen) -->
+    <div id="header" class="print:hidden"></div>
+
+    <!-- Hauptinhalt -->
+    <main class="container mx-auto p-6 max-w-4xl">
+      <!-- Zurück-Button -->
+      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Zurück zur Startseite
+      </a>
+      
+      <!-- Datenschutzerklärung-Inhalt -->
+      <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Datenschutzerklärung</h1>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">1. Verantwortlichkeit und Kontakt</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-medium mb-2">Verantwortlich für die Datenverarbeitung:</h3>
+              <p>ParlamentsPost e.V.<br>
+              Musterstraße 123<br>
+              12345 Musterstadt<br>
+              Deutschland</p>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-medium mb-2">Vertreten durch den Vorstand:</h3>
+              <p>Max Mustermann (Vorsitzender)<br>
+              Erika Musterfrau (Stellvertretende Vorsitzende)<br>
+              Thomas Beispiel (Schatzmeister)</p>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-medium mb-2">Kontaktmöglichkeiten:</h3>
+              <p>Telefon: +49 (0) 123 456789<br>
+              E-Mail: <a href="mailto:datenschutz@parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">datenschutz@parlamentspost.de</a><br>
+              Website: <a href="https://www.parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">www.parlamentspost.de</a></p>
+            </div>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">2. Überblick der Datenverarbeitung</h2>
+          
+          <p class="mb-4">Der Schutz Ihrer persönlichen Daten hat für den ParlamentsPost e.V. höchste Priorität. Diese Datenschutzerklärung informiert Sie darüber, wie wir mit Ihren personenbezogenen Daten umgehen, wenn Sie unsere ParlamentsPost-Web-Anwendung nutzen.</p>
+          
+          <div class="mt-4">
+            <h3 class="text-lg font-medium mb-2">2.1 Besonderheit unserer Anwendung</h3>
+            <div class="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
+              <p>Die ParlamentsPost-Anwendung wurde mit besonderem Fokus auf Datenschutz und Datensparsamkeit entwickelt. <strong>Ihre personenbezogenen Daten (Name, Adresse, E-Mail) werden ausschließlich lokal in Ihrem Browser gespeichert und nicht an unsere Server übertragen.</strong></p>
+            </div>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">3. Rechtsgrundlagen der Datenverarbeitung</h2>
+          
+          <p class="mb-4">Die Verarbeitung Ihrer personenbezogenen Daten erfolgt auf Basis folgender Rechtsgrundlagen:</p>
+          <ul class="list-disc ml-5 space-y-2">
+            <li>Für Funktionen, die Sie aktiv nutzen (z.B. Brief erstellen): Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO</li>
+            <li>Für technisch notwendige Komponenten: Unser berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO</li>
+          </ul>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">4. Datenverarbeitung bei Nutzung unserer Web-Anwendung</h2>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-lg font-medium mb-2">4.1 Bereitstellung der Website</h3>
+              
+              <h4 class="font-medium mb-1">Erhebung und Verwendung von Daten</h4>
+              <p class="mb-3">Beim Besuch unserer Website werden von Ihrem Browser automatisch Informationen an den Server unserer Website gesendet. Diese Informationen umfassen:</p>
+              <ul class="list-disc ml-5 mb-3">
+                <li>IP-Adresse</li>
+                <li>Datum und Uhrzeit der Anfrage</li>
+                <li>Informationen über Ihren Browser und Ihr Betriebssystem</li>
+                <li>Die aufgerufene Seite</li>
+              </ul>
+              <p class="mb-3">Diese Daten sind für die technische Bereitstellung unserer Website erforderlich und werden nach Beendigung Ihrer Sitzung automatisch gelöscht.</p>
+              
+              <h4 class="font-medium mb-1">Rechtsgrundlage</h4>
+              <p>Die Datenverarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Unser berechtigtes Interesse besteht in der Bereitstellung und Optimierung unserer Website.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-medium mb-2">4.2 Lokale Speicherung (Local Storage)</h3>
+              
+              <h4 class="font-medium mb-1">Erhebung und Verwendung von Daten</h4>
+              <p class="mb-3">Die ParlamentsPost-Anwendung nutzt die Local-Storage-Funktion Ihres Browsers, um folgende Daten lokal auf Ihrem Gerät zu speichern:</p>
+              <ul class="list-disc ml-5 mb-3">
+                <li>Persönliche Daten (Name, Adresse, E-Mail-Adresse)</li>
+                <li>Gespeicherte Briefe mit Informationen zu Abgeordneten und gewählten Themen</li>
+                <li>Formatierungseinstellungen und andere Nutzerpräferenzen</li>
+                <li>Informationen über den ausgewählten Dark/Light-Modus</li>
+              </ul>
+              <p class="mb-3">Diese Daten werden ausschließlich lokal gespeichert und nicht an unsere Server übertragen oder von uns eingesehen.</p>
+              
+              <h4 class="font-medium mb-1">Rechtsgrundlage</h4>
+              <p class="mb-3">Die Speicherung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), die Sie durch die aktive Nutzung der Anwendung erteilen.</p>
+              
+              <h4 class="font-medium mb-1">Dauer der Speicherung</h4>
+              <p>Die im Local Storage gespeicherten Daten bleiben bestehen, bis Sie diese selbst über die "Cache leeren"-Funktion in der Anwendung oder durch Löschen des Browser-Caches entfernen.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-medium mb-2">4.3 Cache-Speicherung</h3>
+              <p>Für eine bessere Verfügbarkeit speichert die App Informationen wie Abgeordnetendaten und Themenlisten im Browser-Cache. Diese Funktion dient der Verbesserung der Nutzererfahrung und ermöglicht die eingeschränkte Nutzung der App auch im Offline-Modus.</p>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-medium mb-2">4.4 KI-gestützte Briefgenerierung</h3>
+              
+              <h4 class="font-medium mb-1">Erhebung und Verwendung von Daten</h4>
+              <p class="mb-3">Wenn Sie die Funktion "Brief generieren ✨mit KI✨" verwenden, werden folgende Informationen an einen externen KI-Dienst (OpenAI) übermittelt:</p>
+              <ul class="list-disc ml-5 mb-3">
+                <li>Ausgewählte Themen und Themenbereiche</li>
+                <li>Von Ihnen eingegebener Freitext mit Ihrem Anliegen</li>
+                <li>Name und Partei des ausgewählten Abgeordneten</li>
+              </ul>
+              
+              <div class="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg mb-3">
+                <p><strong>Wichtig:</strong> Ihre persönlichen Kontaktdaten (Name, E-Mail, Adresse) werden NICHT an den KI-Dienst übermittelt. Die Generierung des vollständigen Briefes mit Ihren persönlichen Daten erfolgt ausschließlich lokal auf Ihrem Gerät.</p>
+              </div>
+              
+              <h4 class="font-medium mb-1">Rechtsgrundlage</h4>
+              <p class="mb-3">Die Datenverarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), die Sie durch die aktive Nutzung der KI-Funktion erteilen.</p>
+              
+              <h4 class="font-medium mb-1">Hinweis zu externen Anbietern</h4>
+              <p>Für die KI-Briefgenerierung nutzen wir die API von OpenAI. Bitte beachten Sie, dass für die Verarbeitung der Daten durch diesen Anbieter dessen eigene Datenschutzbestimmungen gelten. Wir haben mit dem Anbieter einen Auftragsverarbeitungsvertrag abgeschlossen.</p>
+            </div>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">5. Ihre Rechte als betroffene Person</h2>
+          
+          <p class="mb-4">Als betroffene Person stehen Ihnen folgende Rechte zu:</p>
+          <ul class="list-disc ml-5 space-y-2">
+            <li><strong>Auskunftsrecht</strong> (Art. 15 DSGVO): Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob Sie betreffende personenbezogene Daten verarbeitet werden.</li>
+            <li><strong>Recht auf Berichtigung</strong> (Art. 16 DSGVO): Sie haben das Recht, die Berichtigung Sie betreffender unrichtiger personenbezogener Daten zu verlangen.</li>
+            <li><strong>Recht auf Löschung</strong> (Art. 17 DSGVO): Sie haben das Recht, die Löschung Sie betreffender personenbezogener Daten zu verlangen.</li>
+            <li><strong>Recht auf Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO): Sie haben das Recht, die Einschränkung der Verarbeitung zu verlangen.</li>
+            <li><strong>Recht auf Datenübertragbarkeit</strong> (Art. 20 DSGVO): Sie haben das Recht, die Sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</li>
+            <li><strong>Widerspruchsrecht</strong> (Art. 21 DSGVO): Sie haben das Recht, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten Widerspruch einzulegen.</li>
+            <li><strong>Widerrufsrecht</strong>: Sie haben das Recht, Ihre erteilte Einwilligung jederzeit zu widerrufen.</li>
+          </ul>
+          
+          <p class="mt-4">Zur Ausübung dieser Rechte wenden Sie sich bitte an die oben genannten Kontaktdaten.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">6. Beschwerde bei der Aufsichtsbehörde</h2>
+          
+          <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Die für unseren Verein zuständige Aufsichtsbehörde ist:</p>
+          <p class="mt-2">[Name und Kontaktdaten der zuständigen Landesaufsichtsbehörde für Datenschutz]</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">7. Änderung dieser Datenschutzerklärung</h2>
+          
+          <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie stets den aktuellen rechtlichen Anforderungen oder bei Änderungen unserer Anwendung anzupassen. Für Ihren erneuten Besuch gilt die jeweils aktuelle Fassung.</p>
+          <p class="mt-4 font-medium">Stand: Mai 2025</p>
+        </section>
+        
+        <div class="mt-8 p-4 bg-gray-100 dark:bg-gray-700 rounded text-sm text-gray-500 dark:text-gray-400">
+          <p><em>Hinweis: Bitte passen Sie alle Angaben an die tatsächlichen Daten Ihres Vereins an, insbesondere Kontaktdaten, zuständige Aufsichtsbehörde und das aktuelle Datum. Diese Datenschutzerklärung ist ein Muster und sollte von einem Rechtsexperten geprüft werden.</em></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer (per Fetch geladen) -->
+    <div id="footer" class="print:hidden"></div>
+  </body>
+</html>

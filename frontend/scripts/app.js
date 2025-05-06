@@ -55,6 +55,10 @@ export function parlamentspostApp() {
     topics: [],
     topicData: null, // Speichert die vollständigen Topic-Daten
     availableSubtopics: [],
+    
+    // Zeigt an, ob Topics aus dem Cache geladen wurden
+    topicLoadedFromCache: false,
+    subtopicsLoadedFromCache: false,
 
     // Brief-Formatierung
     formatierung: {
@@ -73,7 +77,8 @@ export function parlamentspostApp() {
 
     // Cache-Konfiguration
     cacheEnabled: true,
-    cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden in Millisekunden
+    cacheTTL: 24 * 60 * 60 * 1000, // 24 Stunden für Abgeordnete
+    topicCacheTTL: 7 * 24 * 60 * 60 * 1000, // 1 Woche für Topics
 
     // "Meine Briefe" Konfiguration
     briefStorage: {
@@ -133,6 +138,151 @@ export function parlamentspostApp() {
       this.updateMeineBriefeUI();
     },
 
+    // Cache-Management Funktionen für Topics
+
+    // Topics aus dem Cache laden
+    getCachedTopics() {
+      if (!this.cacheEnabled) return null;
+
+      try {
+        const cacheKey = 'parlamentspost_topics_cache';
+        const cachedData = localStorage.getItem(cacheKey);
+
+        if (!cachedData) return null;
+
+        const parsedData = JSON.parse(cachedData);
+        const cacheTime = parsedData.timestamp;
+        const now = Date.now();
+
+        // Cache-Gültigkeit prüfen (1 Woche für Topics)
+        if (now - cacheTime < this.topicCacheTTL) {
+          log("INFO", "Topics aus Cache geladen");
+          return parsedData.data;
+        } else {
+          // Abgelaufene Cache-Einträge löschen
+          localStorage.removeItem(cacheKey);
+          return null;
+        }
+      } catch (error) {
+        log("WARN", "Fehler beim Lesen des Topic-Caches", { error: error.message });
+        return null;
+      }
+    },
+
+    // Topics im Cache speichern
+    setCachedTopics(data) {
+      if (!this.cacheEnabled) return;
+
+      try {
+        const cacheKey = 'parlamentspost_topics_cache';
+        const cacheData = {
+          timestamp: Date.now(),
+          data: data,
+        };
+
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        log("INFO", "Topics im Cache gespeichert", {
+          entries: data.length,
+        });
+      } catch (error) {
+        log("WARN", "Fehler beim Speichern der Topics im Cache", { error: error.message });
+      }
+    },
+
+    // Topic-Daten aus dem Cache laden
+    getCachedTopic(topicId) {
+      if (!this.cacheEnabled) return null;
+
+      try {
+        const cacheKey = `parlamentspost_topic_${topicId}_cache`;
+        const cachedData = localStorage.getItem(cacheKey);
+
+        if (!cachedData) return null;
+
+        const parsedData = JSON.parse(cachedData);
+        const cacheTime = parsedData.timestamp;
+        const now = Date.now();
+
+        // Cache-Gültigkeit prüfen (1 Woche für Topics)
+        if (now - cacheTime < this.topicCacheTTL) {
+          log("INFO", `Topic ${topicId} aus Cache geladen`);
+          return parsedData.data;
+        } else {
+          localStorage.removeItem(cacheKey);
+          return null;
+        }
+      } catch (error) {
+        log("WARN", `Fehler beim Lesen des Topic-Caches für ${topicId}`, { error: error.message });
+        return null;
+      }
+    },
+
+    // Topic-Daten im Cache speichern
+    setCachedTopic(topicId, data) {
+      if (!this.cacheEnabled) return;
+
+      try {
+        const cacheKey = `parlamentspost_topic_${topicId}_cache`;
+        const cacheData = {
+          timestamp: Date.now(),
+          data: data,
+        };
+
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        log("INFO", `Topic ${topicId} im Cache gespeichert`);
+      } catch (error) {
+        log("WARN", `Fehler beim Speichern des Topics ${topicId} im Cache`, { error: error.message });
+      }
+    },
+
+    // Subtopics aus dem Cache laden
+    getCachedSubtopics(topicId) {
+      if (!this.cacheEnabled) return null;
+
+      try {
+        const cacheKey = `parlamentspost_subtopics_${topicId}_cache`;
+        const cachedData = localStorage.getItem(cacheKey);
+
+        if (!cachedData) return null;
+
+        const parsedData = JSON.parse(cachedData);
+        const cacheTime = parsedData.timestamp;
+        const now = Date.now();
+
+        // Cache-Gültigkeit prüfen (1 Woche für Subtopics)
+        if (now - cacheTime < this.topicCacheTTL) {
+          log("INFO", `Subtopics für ${topicId} aus Cache geladen`);
+          return parsedData.data;
+        } else {
+          localStorage.removeItem(cacheKey);
+          return null;
+        }
+      } catch (error) {
+        log("WARN", `Fehler beim Lesen des Subtopic-Caches für ${topicId}`, { error: error.message });
+        return null;
+      }
+    },
+
+    // Subtopics im Cache speichern
+    setCachedSubtopics(topicId, data) {
+      if (!this.cacheEnabled) return;
+
+      try {
+        const cacheKey = `parlamentspost_subtopics_${topicId}_cache`;
+        const cacheData = {
+          timestamp: Date.now(),
+          data: data,
+        };
+
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        log("INFO", `Subtopics für ${topicId} im Cache gespeichert`, {
+          entries: data.length,
+        });
+      } catch (error) {
+        log("WARN", `Fehler beim Speichern der Subtopics für ${topicId} im Cache`, { error: error.message });
+      }
+    },
+
     // Zufällige Schriftart auswählen
     getRandomFontFamily() {
       const fonts = [
@@ -169,22 +319,45 @@ export function parlamentspostApp() {
       }, 500);
     },
 
-    // Alle Topics laden
+    // Alle Topics laden mit Cache-Unterstützung
     async ladeTopics() {
       this.isLoading = true;
+      this.topicLoadedFromCache = false;
+      
       try {
+        // Versuche zuerst, aus dem Cache zu laden
+        const cachedTopics = this.getCachedTopics();
+        if (cachedTopics) {
+          this.topics = cachedTopics;
+          this.topicLoadedFromCache = true;
+          log("INFO", "Topics aus Cache geladen", { count: cachedTopics.length });
+          this.isLoading = false;
+          return cachedTopics;
+        }
+        
+        // Wenn nicht im Cache, vom Server laden
         const response = await fetch("/api/v1/topics");
         if (!response.ok) {
           throw new Error("Fehler beim Laden der Topics");
         }
 
-        this.topics = await response.json();
-        log("INFO", "Topics geladen", { count: this.topics.length });
+        const topics = await response.json();
+        this.topics = topics;
+        
+        // Im Cache speichern
+        this.setCachedTopics(topics);
+        
+        log("INFO", "Topics vom Server geladen", { count: topics.length });
+        return topics;
       } catch (error) {
         log("ERROR", "Fehler beim Laden der Topics", {
           message: error.message,
         });
-        alert(`Fehler beim Laden der Topics: ${error.message}`);
+        // Nur UI-Alert zeigen, wenn keine Daten aus dem Cache verfügbar sind
+        if (!this.topics || this.topics.length === 0) {
+          alert(`Fehler beim Laden der Topics: ${error.message}`);
+        }
+        return this.topics || [];
       } finally {
         this.isLoading = false;
       }
@@ -215,7 +388,7 @@ export function parlamentspostApp() {
       }, 100);
     },
 
-    // Cache-Management Methoden
+    // Cache-Management Methoden für Abgeordnete
     getCachedAbgeordnete(ort) {
       if (!this.cacheEnabled) return null;
 
@@ -266,57 +439,119 @@ export function parlamentspostApp() {
       }
     },
 
-    clearAbgeordneteCache() {
-      // Alle Cache-Einträge für Abgeordnete löschen
+    // Den gesamten Cache leeren (Abgeordnete, Topics, etc.)
+    clearAllCache() {
       try {
-        const keys = [];
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          if (key.startsWith("abgeordnete_")) {
-            keys.push(key);
+        // Alle Cache-Einträge mit Präfixen identifizieren
+        const prefixes = [
+          'abgeordnete_',  // Abgeordneten-Cache
+          'parlamentspost_topics',  // Topics-Cache
+          'parlamentspost_topic_',  // Einzelne Topic-Caches
+          'parlamentspost_subtopics_'  // Subtopics-Caches
+        ];
+        
+        let totalDeleted = 0;
+        
+        // Für jeden Präfix alle passenden Einträge löschen
+        prefixes.forEach(prefix => {
+          const keys = [];
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith(prefix)) {
+              keys.push(key);
+            }
           }
+          
+          keys.forEach(key => localStorage.removeItem(key));
+          log("INFO", `Cache-Einträge mit Präfix ${prefix} gelöscht`, { count: keys.length });
+          totalDeleted += keys.length;
+        });
+        
+        log("INFO", "Gesamter Cache geleert", { totalDeleted });
+        
+        // Optional: Feedback für den Benutzer anzeigen
+        if (totalDeleted > 0) {
+          alert(`Cache erfolgreich geleert (${totalDeleted} Einträge gelöscht).`);
+        } else {
+          alert("Kein Cache zum Leeren gefunden.");
         }
-
-        keys.forEach((key) => localStorage.removeItem(key));
-        log("INFO", "Abgeordneten-Cache geleert", { entries: keys.length });
       } catch (error) {
-        log("WARN", "Fehler beim Leeren des Caches", { error: error.message });
+        log("ERROR", "Fehler beim Leeren des Caches", { error: error.message });
+        alert("Fehler beim Leeren des Caches: " + error.message);
       }
     },
 
-    // Subtopics vom Server laden
+    // Subtopics vom Server oder Cache laden
     async loadSubtopics() {
       this.isLoading = true;
+      this.subtopicsLoadedFromCache = false;
+      
       try {
-        // Topic-Daten laden, falls noch nicht geschehen oder sich das Topic geändert hat
+        // Sicherheitscheck - ist ein Topic ausgewählt?
+        if (!this.topic) {
+          this.availableSubtopics = [];
+          return [];
+        }
+        
+        // Topic-Daten laden, falls nicht vorhanden oder wenn sich das Topic geändert hat
         if (!this.topicData || this.topicData.id !== this.topic) {
-          const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
-          if (topicResponse.ok) {
-            this.topicData = await topicResponse.json();
-            log("INFO", "Topic-Daten geladen", this.topicData);
+          // Versuche zuerst, Topic-Daten aus dem Cache zu laden
+          const cachedTopic = this.getCachedTopic(this.topic);
+          if (cachedTopic) {
+            this.topicData = cachedTopic;
+            log("INFO", "Topic-Daten aus Cache geladen", this.topicData);
           } else {
-            throw new Error(`Fehler beim Laden des Topics ${this.topic}`);
+            // Wenn nicht im Cache, vom Server laden
+            const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
+            if (topicResponse.ok) {
+              this.topicData = await topicResponse.json();
+              // Im Cache speichern
+              this.setCachedTopic(this.topic, this.topicData);
+              log("INFO", "Topic-Daten vom Server geladen", this.topicData);
+            } else {
+              throw new Error(`Fehler beim Laden des Topics ${this.topic}`);
+            }
           }
         }
 
-        // Subtopics laden
+        // Versuche, Subtopics aus dem Cache zu laden
+        const cachedSubtopics = this.getCachedSubtopics(this.topic);
+        if (cachedSubtopics) {
+          this.availableSubtopics = cachedSubtopics;
+          this.themen = []; // Zurücksetzen, da neue Subtopics
+          this.subtopicsLoadedFromCache = true;
+          log("INFO", "Subtopics aus Cache geladen", {
+            count: cachedSubtopics.length,
+          });
+          return cachedSubtopics;
+        }
+        
+        // Wenn nicht im Cache, vom Server laden
         const response = await fetch(`/api/v1/topics/${this.topic}/subtopics`);
         if (!response.ok) {
           throw new Error("Fehler beim Laden der Subtopics");
         }
 
-        this.availableSubtopics = await response.json();
-        // Setze themen zurück, da wir neue Subtopics haben
-        this.themen = [];
-
-        log("INFO", "Subtopics geladen", {
-          count: this.availableSubtopics.length,
+        const subtopics = await response.json();
+        this.availableSubtopics = subtopics;
+        this.themen = []; // Setze themen zurück, da wir neue Subtopics haben
+        
+        // Im Cache speichern
+        this.setCachedSubtopics(this.topic, subtopics);
+        
+        log("INFO", "Subtopics vom Server geladen", {
+          count: subtopics.length,
         });
+        return subtopics;
       } catch (error) {
         log("ERROR", "Fehler beim Laden der Subtopics", {
           message: error.message,
         });
-        alert(`Fehler beim Laden der Subtopics: ${error.message}`);
+        // Nur UI-Alert zeigen, wenn keine Daten aus dem Cache verfügbar sind
+        if (!this.availableSubtopics || this.availableSubtopics.length === 0) {
+          alert(`Fehler beim Laden der Subtopics: ${error.message}`);
+        }
+        return this.availableSubtopics || [];
       } finally {
         this.isLoading = false;
       }
@@ -539,27 +774,6 @@ Platz der Republik 1
         log("INFO", "Betreff aus gespeichertem Topic-Namen generiert", {
           betreff,
         });
-      } else {
-        // Topic-Daten laden, falls noch nicht geschehen
-        try {
-          const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
-          if (topicResponse.ok) {
-            this.topicData = await topicResponse.json();
-            if (this.topicData && this.topicData.name) {
-              betreff = `Anliegen zum Thema: ${this.topicData.name}`;
-              log(
-                "INFO",
-                "Betreff aus frisch geladenem Topic-Namen generiert",
-                { betreff }
-              );
-            }
-          }
-        } catch (topicError) {
-          log("WARN", "Fehler beim Laden des Topic-Namens für Betreff", {
-            error: topicError.message,
-          });
-          // Fallback-Betreff verwenden
-        }
       }
 
       // Validierung von Freitext und Themen

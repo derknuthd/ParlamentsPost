@@ -34,6 +34,12 @@ export function parlamentspostApp() {
     // Dark Mode Zustand
     isDark: localStorage.getItem("isDark") === "true",
 
+    // Netzwerkstatus
+    isOnline: navigator.onLine, // Aktueller Online-Status
+
+    // Benachrichtigungen
+    notifications: [], // Speichert aktive Benachrichtigungen
+
     // Persoenliche Daten
     name: "",
     strasse: "",
@@ -101,6 +107,21 @@ export function parlamentspostApp() {
         localStorage.setItem("isDark", "true");
       }
 
+      // Netzwerkstatus überwachen
+      window.addEventListener('online', () => {
+        this.isOnline = true;
+        log("INFO", "Netzwerkverbindung wiederhergestellt");
+        // Optional: Benachrichtigung anzeigen
+        this.showNotification("Netzwerkverbindung wiederhergestellt", "success");
+      });
+
+      window.addEventListener('offline', () => {
+        this.isOnline = false;
+        log("WARN", "Netzwerkverbindung verloren");
+        // Benachrichtigung anzeigen
+        this.showNotification("Sie sind offline. Die App verwendet zwischengespeicherte Daten.", "warning", 8000);
+      });
+
       // Event-Listener für Änderungen der Systemeinstellung
       const darkModeMediaQuery = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -125,18 +146,8 @@ export function parlamentspostApp() {
       // Zufällige Schriftart wählen
       this.formatierung.schriftart = this.getRandomFontFamily();
 
-      // Topics nur einmal beim Start laden
-      const topics = await this.ladeTopics();
-      
-      // Wenn Topics erfolgreich geladen wurden und mindestens ein Topic vorhanden ist,
-      // setze das erste Topic als Standard und lade dessen Subtopics
-      if (topics && topics.length > 0) {
-        // Nur setzen, wenn noch kein Topic ausgewählt ist (z.B. beim ersten Laden)
-        if (!this.topic) {
-          this.topic = topics[0].id;
-        }
-        await this.loadSubtopics();
-      }
+      // Topics im Hintergrund laden ohne Ladeindikator anzuzeigen
+      this.loadInitialDataInBackground();
 
       // Gespeicherte Briefe laden
       this.gespeicherteBriefe = this.ladeBriefe();
@@ -332,38 +343,31 @@ export function parlamentspostApp() {
       this.topicLoadedFromCache = false;
       
       try {
-        // Versuche zuerst, aus dem Cache zu laden
-        const cachedTopics = this.getCachedTopics();
-        if (cachedTopics) {
-          this.topics = cachedTopics;
-          this.topicLoadedFromCache = true;
-          log("INFO", "Topics aus Cache geladen", { count: cachedTopics.length });
-          this.isLoading = false;
-          return cachedTopics;
-        }
+        // API-Aufruf mit Offline-Unterstützung
+        const response = await this.fetchWithOfflineSupport(
+          "/api/v1/topics",
+          {},
+          // Cache-Funktionen bereitstellen
+          () => this.getCachedTopics(),
+          (data) => this.setCachedTopics(data)
+        );
         
-        // Wenn nicht im Cache, vom Server laden
-        const response = await fetch("/api/v1/topics");
-        if (!response.ok) {
-          throw new Error("Fehler beim Laden der Topics");
-        }
-
         const topics = await response.json();
         this.topics = topics;
         
-        // Im Cache speichern
-        this.setCachedTopics(topics);
+        // Cache-Status für UI setzen (wenn offline und Daten vorhanden, müssen sie aus dem Cache sein)
+        this.topicLoadedFromCache = !this.isOnline && topics.length > 0;
         
-        log("INFO", "Topics vom Server geladen", { count: topics.length });
+        log("INFO", "Topics geladen", { count: topics.length, fromCache: this.topicLoadedFromCache });
         return topics;
       } catch (error) {
-        log("ERROR", "Fehler beim Laden der Topics", {
-          message: error.message,
-        });
-        // Nur UI-Alert zeigen, wenn keine Daten aus dem Cache verfügbar sind
+        log("ERROR", "Fehler beim Laden der Topics", { message: error.message });
+        
+        // Benachrichtigung anzeigen, wenn keine Daten aus dem Cache verfügbar sind
         if (!this.topics || this.topics.length === 0) {
-          alert(`Fehler beim Laden der Topics: ${error.message}`);
+          this.showNotification(`Fehler beim Laden der Topics: ${error.message}`, "error");
         }
+        
         return this.topics || [];
       } finally {
         this.isLoading = false;
@@ -478,13 +482,13 @@ export function parlamentspostApp() {
         
         // Optional: Feedback für den Benutzer anzeigen
         if (totalDeleted > 0) {
-          alert(`Cache erfolgreich geleert (${totalDeleted} Einträge gelöscht).`);
+          this.showNotification(`Cache erfolgreich geleert (${totalDeleted} Einträge gelöscht).`);
         } else {
-          alert("Kein Cache zum Leeren gefunden.");
+          this.showNotification("Kein Cache zum Leeren gefunden.");
         }
       } catch (error) {
         log("ERROR", "Fehler beim Leeren des Caches", { error: error.message });
-        alert("Fehler beim Leeren des Caches: " + error.message);
+        this.showNotification("Fehler beim Leeren des Caches: " + error.message);
       }
     },
 
@@ -502,63 +506,65 @@ export function parlamentspostApp() {
         
         // Topic-Daten laden, falls nicht vorhanden oder wenn sich das Topic geändert hat
         if (!this.topicData || this.topicData.id !== this.topic) {
-          // Versuche zuerst, Topic-Daten aus dem Cache zu laden
-          const cachedTopic = this.getCachedTopic(this.topic);
-          if (cachedTopic) {
-            this.topicData = cachedTopic;
-            log("INFO", "Topic-Daten aus Cache geladen", this.topicData);
-          } else {
-            // Wenn nicht im Cache, vom Server laden
-            const topicResponse = await fetch(`/api/v1/topics/${this.topic}`);
-            if (topicResponse.ok) {
-              this.topicData = await topicResponse.json();
-              // Im Cache speichern
-              this.setCachedTopic(this.topic, this.topicData);
-              log("INFO", "Topic-Daten vom Server geladen", this.topicData);
-            } else {
-              throw new Error(`Fehler beim Laden des Topics ${this.topic}`);
-            }
+          try {
+            // Versuche, Topic-Daten mit Offline-Unterstützung zu laden
+            const topicResponse = await this.fetchWithOfflineSupport(
+              `/api/v1/topics/${this.topic}`,
+              {},
+              () => this.getCachedTopic(this.topic),
+              (data) => this.setCachedTopic(this.topic, data)
+            );
+            
+            // Extrahiere die Daten
+            const topicData = await topicResponse.json();
+            this.topicData = topicData;
+            
+            // Setze fromCache basierend darauf, ob es eine eigene Anfrage war oder aus dem Cache kam
+            const isFromCache = topicResponse._fromCache === true;
+            
+            log("INFO", "Topic-Daten geladen", {
+              topic: this.topic,
+              fromCache: isFromCache // Aktualisiertes Flag
+            });
+          } catch (error) {
+            log("ERROR", `Fehler beim Laden des Topics ${this.topic}`, { message: error.message });
+            this.showNotification(`Fehler beim Laden des Topics: ${error.message}`, "error");
+            return [];
           }
         }
-
-        // Versuche, Subtopics aus dem Cache zu laden
-        const cachedSubtopics = this.getCachedSubtopics(this.topic);
-        if (cachedSubtopics) {
-          this.availableSubtopics = cachedSubtopics;
-          this.themen = []; // Zurücksetzen, da neue Subtopics
-          this.subtopicsLoadedFromCache = true;
-          log("INFO", "Subtopics aus Cache geladen", {
-            count: cachedSubtopics.length,
+    
+        try {
+          // Subtopics mit Offline-Unterstützung laden
+          const response = await this.fetchWithOfflineSupport(
+            `/api/v1/topics/${this.topic}/subtopics`,
+            {},
+            () => this.getCachedSubtopics(this.topic),
+            (data) => this.setCachedSubtopics(this.topic, data)
+          );
+          
+          const subtopics = await response.json();
+          this.availableSubtopics = subtopics;
+          this.themen = []; // Setze themen zurück, da wir neue Subtopics haben
+          
+          // Cache-Status für UI setzen - Prüfen, ob die Antwort aus dem Cache kam
+          this.subtopicsLoadedFromCache = response._fromCache === true;
+          
+          log("INFO", "Subtopics geladen", {
+            count: subtopics.length,
+            fromCache: this.subtopicsLoadedFromCache
           });
-          return cachedSubtopics;
+          
+          return subtopics;
+        } catch (error) {
+          log("ERROR", "Fehler beim Laden der Subtopics", { message: error.message });
+          
+          // Benachrichtigung nur zeigen, wenn keine Daten aus dem Cache verfügbar sind
+          if (!this.availableSubtopics || this.availableSubtopics.length === 0) {
+            this.showNotification(`Fehler beim Laden der Subtopics: ${error.message}`, "error");
+          }
+          
+          return this.availableSubtopics || [];
         }
-        
-        // Wenn nicht im Cache, vom Server laden
-        const response = await fetch(`/api/v1/topics/${this.topic}/subtopics`);
-        if (!response.ok) {
-          throw new Error("Fehler beim Laden der Subtopics");
-        }
-
-        const subtopics = await response.json();
-        this.availableSubtopics = subtopics;
-        this.themen = []; // Setze themen zurück, da wir neue Subtopics haben
-        
-        // Im Cache speichern
-        this.setCachedSubtopics(this.topic, subtopics);
-        
-        log("INFO", "Subtopics vom Server geladen", {
-          count: subtopics.length,
-        });
-        return subtopics;
-      } catch (error) {
-        log("ERROR", "Fehler beim Laden der Subtopics", {
-          message: error.message,
-        });
-        // Nur UI-Alert zeigen, wenn keine Daten aus dem Cache verfügbar sind
-        if (!this.availableSubtopics || this.availableSubtopics.length === 0) {
-          alert(`Fehler beim Laden der Subtopics: ${error.message}`);
-        }
-        return this.availableSubtopics || [];
       } finally {
         this.isLoading = false;
       }
@@ -581,108 +587,88 @@ export function parlamentspostApp() {
         return;
       }
 
+      // Überprüfe Online-Status
+      if (!this.isOnline) {
+        this.showNotification(
+          "Keine Netzwerkverbindung und keine Cache-Daten für den eingegebenen Ort",
+          "warning"
+        );
+        return;
+      }
+
       this.isLoading = true; // Ladeindikator aktivieren
       log("INFO", "Starte Abruf der Abgeordneten", { ort: this.ort });
 
       try {
-        // 1. Zuerst den Wahlkreis für den Ort abrufen
-        const wahlkreisUrl = `/api/v1/BTW25/wahlkreis?wohnort=${encodeURIComponent(
-          this.ort.trim()
-        )}`;
-        log("DEBUG", "Wahlkreis-API-URL", { url: wahlkreisUrl });
-
-        const wahlkreisResponse = await fetch(wahlkreisUrl);
-        log("DEBUG", "Wahlkreis-Antwort erhalten", {
-          status: wahlkreisResponse.status,
-          ok: wahlkreisResponse.ok,
-        });
-
-        const wahlkreisResponseText = await wahlkreisResponse.clone().text();
-        log("DEBUG", "Wahlkreis-Antwort (Raw Text):", wahlkreisResponseText);
-
-        if (!wahlkreisResponse.ok) {
-          log(
-            "ERROR",
-            "Fehler beim Abrufen des Wahlkreises",
-            wahlkreisResponseText
-          );
-          throw new Error("Fehler beim Abrufen des Wahlkreises.");
-        }
-
+        // Wahlkreis-Abfrage mit Fehlerbehandlung
         let wahlkreisData;
         try {
-          wahlkreisData = JSON.parse(wahlkreisResponseText);
-        } catch (error) {
-          log("ERROR", "Fehler beim Parsen der Wahlkreis-Antwort", {
-            rawText: wahlkreisResponseText,
-            error: error.message,
-          });
-          throw new Error("Ungültige Antwort vom Server.");
+          // Hier könnte fetchWithOfflineSupport verwendet werden, aber wir brauchen mehr Kontrolle über die Verarbeitung
+          // der Antwort, daher verwenden wir direkt fetch
+          const wahlkreisUrl = `/api/v1/BTW25/wahlkreis?wohnort=${encodeURIComponent(this.ort.trim())}`;
+          const wahlkreisResponse = await fetch(wahlkreisUrl);
+
+          if (!wahlkreisResponse.ok) {
+            throw new Error("Fehler beim Abrufen des Wahlkreises.");
+          }
+
+          const wahlkreisResponseText = await wahlkreisResponse.text();
+          try {
+            wahlkreisData = JSON.parse(wahlkreisResponseText);
+          } catch (parseError) {
+            throw new Error("Ungültige Antwort vom Server.");
+          }
+
+          if (!wahlkreisData) {
+            throw new Error(`Kein Wahlkreis für "${this.ort}" gefunden.`);
+          }
+        } catch (wahlkreisError) {
+          throw wahlkreisError; // Weiterleiten an die äußere catch-Klausel
         }
 
-        log("INFO", "Wahlkreis-Daten erfolgreich abgerufen", wahlkreisData);
-
-        // Prüfen, ob die Antwort ein Array oder ein einzelnes Objekt ist
-        if (!wahlkreisData) {
-          log("WARN", `Kein Wahlkreis für "${this.ort}" gefunden`);
-          throw new Error(`Kein Wahlkreis für "${this.ort}" gefunden.`);
-        }
-
-        // Mehrere Wahlkreise werden als Array zurückgegeben
-        let wahlkreise = [];
-        if (Array.isArray(wahlkreisData)) {
-          wahlkreise = wahlkreisData;
-          log("INFO", "Mehrere Wahlkreise gefunden", wahlkreise);
-        } else {
-          // Ein einzelner Wahlkreis wird als Objekt zurückgegeben
-          wahlkreise = [wahlkreisData];
-          log("INFO", "Ein Wahlkreis gefunden", wahlkreise);
-        }
+        // Wahlkreisdaten verarbeiten
+        let wahlkreise = Array.isArray(wahlkreisData) ? wahlkreisData : [wahlkreisData];
+        log("INFO", `${wahlkreise.length} Wahlkreis(e) gefunden`, wahlkreise);
 
         // Alle gefundenen Abgeordneten sammeln
         let alleAbgeordnete = [];
 
-        // 2. Für jeden Wahlkreis die zugehörigen Abgeordneten abrufen
+        // Für jeden Wahlkreis die zugehörigen Abgeordneten abrufen
         for (const wahlkreis of wahlkreise) {
           if (!wahlkreis.wahlkreisNr) {
             log("WARN", `Wahlkreisnummer fehlt für Wahlkreis`, wahlkreis);
             continue; // Überspringe diesen Wahlkreis, wenn keine Nummer vorhanden
           }
 
-          const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${
-            wahlkreis.wahlkreisNr
-          }&wohnort=${encodeURIComponent(wahlkreis.wohnort)}`;
-          log("DEBUG", "Abgeordnete-API-URL", { url: abgeordneteUrl });
+          try {
+            // Abgeordneten-API mit fetchWithOfflineSupport aufrufen
+            const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${wahlkreis.wahlkreisNr}&wohnort=${encodeURIComponent(wahlkreis.wohnort)}`;
+            
+            // Hier verwenden wir für die Konsistenz wieder fetch direkt,
+            // da wir für diese spezielle Abfrage kein Caching implementiert haben
+            const abgeordneteResponse = await fetch(abgeordneteUrl);
+            
+            if (!abgeordneteResponse.ok) {
+              log("WARN", `Keine Abgeordneten für Wahlkreis ${wahlkreis.wahlkreisNr} gefunden`);
+              continue; // Mit dem nächsten Wahlkreis fortfahren
+            }
 
-          const abgeordneteResponse = await fetch(abgeordneteUrl);
-          log("DEBUG", "Abgeordnete-Antwort erhalten", {
-            status: abgeordneteResponse.status,
-            ok: abgeordneteResponse.ok,
-          });
+            const abgeordnete = await abgeordneteResponse.json();
+            
+            // Füge Wahlkreisbezeichnung zu jedem Abgeordneten hinzu
+            const abgeordneteMitWKB = abgeordnete.map((abg) => ({
+              ...abg,
+              wkr_bezeichnung: wahlkreis.wahlkreisBez || "Unbekannter Wahlkreis",
+            }));
 
-          if (!abgeordneteResponse.ok) {
-            log(
-              "WARN",
-              `Keine Abgeordneten für Wahlkreis ${wahlkreis.wahlkreisNr} gefunden`
-            );
-            continue; // Mit dem nächsten Wahlkreis fortfahren
+            // Füge diese Abgeordneten zum Gesamtergebnis hinzu
+            alleAbgeordnete = [...alleAbgeordnete, ...abgeordneteMitWKB];
+          } catch (abgeordneteError) {
+            log("WARN", `Fehler beim Abrufen der Abgeordneten für Wahlkreis ${wahlkreis.wahlkreisNr}`, {
+              error: abgeordneteError.message
+            });
+            // Hier nur warnen und mit dem nächsten Wahlkreis fortfahren
           }
-
-          const abgeordnete = await abgeordneteResponse.json();
-          log(
-            "INFO",
-            `Abgeordnete für Wahlkreis ${wahlkreis.wahlkreisNr} erfolgreich abgerufen`,
-            abgeordnete
-          );
-
-          // Füge Wahlkreisbezeichnung zu jedem Abgeordneten hinzu
-          const abgeordneteMitWKB = abgeordnete.map((abg) => ({
-            ...abg,
-            wkr_bezeichnung: wahlkreis.wahlkreisBez || "Unbekannter Wahlkreis",
-          }));
-
-          // Füge diese Abgeordneten zum Gesamtergebnis hinzu
-          alleAbgeordnete = [...alleAbgeordnete, ...abgeordneteMitWKB];
         }
 
         // Deduplizieren der Abgeordneten basierend auf der ID
@@ -690,29 +676,28 @@ export function parlamentspostApp() {
           new Map(alleAbgeordnete.map((item) => [item.id, item])).values()
         );
 
-        log("INFO", "Alle Abgeordneten zusammengeführt", this.abgeordneteListe);
-        log(
-          "DEBUG",
-          "Abgeordnete-Liste nach API-Aufruf",
-          this.abgeordneteListe
-        );
-
         if (this.abgeordneteListe.length === 0) {
-          log("WARN", `Keine Abgeordneten für "${this.ort}" gefunden`);
           throw new Error(`Keine Abgeordneten für "${this.ort}" gefunden.`);
         }
 
         // Nach erfolgreicher Abfrage im Cache speichern
-        if (this.abgeordneteListe.length > 0) {
-          this.setCachedAbgeordnete(this.ort, this.abgeordneteListe);
-        }
+        this.setCachedAbgeordnete(this.ort, this.abgeordneteListe);
+        
+        log("INFO", "Alle Abgeordneten zusammengeführt", {
+          count: this.abgeordneteListe.length
+        });
+        
+        return this.abgeordneteListe;
       } catch (error) {
         log("ERROR", "Fehler in holeAbgeordnete", { message: error.message });
-        alert(`Fehler beim Abrufen der Abgeordneten: ${error.message}`);
+        this.showNotification(
+          `Fehler beim Abrufen der Abgeordneten: ${error.message}`,
+          "error"
+        );
         this.abgeordneteListe = [];
+        return [];
       } finally {
         this.isLoading = false; // Ladeindikator deaktivieren
-        log("INFO", "Abruf der Abgeordneten abgeschlossen");
       }
     },
 
@@ -786,7 +771,7 @@ Platz der Republik 1
       // Validierung von Freitext und Themen
       if (!this.freitext.trim() && this.themen.length === 0) {
         log("WARN", "Kein Freitext oder Thema angegeben");
-        alert("Bitte einen Freitext oder mindestens ein Thema angeben.");
+        this.showNotification("Bitte einen Freitext oder mindestens ein Thema angeben.");
         return;
       }
 
@@ -798,45 +783,50 @@ Platz der Republik 1
           const selectedSubtopics = this.availableSubtopics.filter((subtopic) =>
             this.themen.includes(subtopic.id)
           );
-
+      
           const promptBlocks = selectedSubtopics.map(
             (subtopic) => subtopic.promptBlock
           );
-
+      
           const userData = {
-            topic: this.topicData, // Wir geben die Topic-Daten mit, die wir bereits geladen haben
+            topic: this.topicData,
             selectedSubtopics,
             promptBlocks,
             freitext: this.freitext.trim(),
             abgeordneteName: vollerNameDesAbgeordneten,
             abgeordnetePartei: parteiDesAbgeordneten,
           };
-
+      
           log("DEBUG", "Daten für KI-Generierung", userData);
-
-          const response = await fetch("/api/v1/genai-brief", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userData }),
-          });
-
-          if (!response.ok) {
-            const err = await response.json();
-            log("ERROR", "Fehler bei der KI-Generierung", err);
-            throw new Error(err.error || "Fehler bei der KI-Generierung.");
+      
+          try {
+            // Da wir hier keinen Cache verwenden, direkt fetch benutzen
+            const response = await fetch("/api/v1/genai-brief", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ userData }),
+            });
+      
+            if (!response.ok) {
+              const err = await response.json();
+              throw new Error(err.error || "Fehler bei der KI-Generierung.");
+            }
+      
+            const data = await response.json();
+            brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${
+              data.briefText || "(Kein KI-Text vorhanden)"
+            }\n\nMit freundlichen Grüßen,\n${this.name}`;
+            
+            log("INFO", "KI-Text erfolgreich generiert");
+          } catch (apiError) {
+            log("ERROR", "API-Fehler bei KI-Generierung", { message: apiError.message });
+            this.showNotification(`Fehler bei der KI-Generierung: ${apiError.message}`, "error");
+            throw apiError; // Weiterleiten, um die Briefgenerierung abzubrechen
           }
-
-          const data = await response.json();
-          brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${
-            data.briefText || "(Kein KI-Text vorhanden)"
-          }\n\nMit freundlichen Grüßen,\n${this.name}`;
-          log("INFO", "KI-Text erfolgreich generiert", {
-            briefText: brieftext,
-          });
         } catch (error) {
           log("ERROR", "Fehler bei der KI-Abfrage", { message: error.message });
-          alert(`Fehler bei der KI-Abfrage: ${error.message}`);
-          return;
+          this.showNotification(`Fehler bei der KI-Abfrage: ${error.message}`, "error");
+          return; // Briefgenerierung abbrechen
         } finally {
           this.isLoading = false;
         }
@@ -1003,14 +993,14 @@ Platz der Republik 1
         }
 
         log("INFO", "Brief erfolgreich gespeichert", { id: briefDaten.id });
-        //        alert("Brief wurde erfolgreich gespeichert!");
+        //        this.showNotification("Brief wurde erfolgreich gespeichert!");
 
         return briefDaten.id;
       } catch (error) {
         log("ERROR", "Fehler beim Speichern des Briefes", {
           error: error.message,
         });
-        alert("Der Brief konnte nicht gespeichert werden: " + error.message);
+        this.showNotification("Der Brief konnte nicht gespeichert werden: " + error.message);
         return null;
       }
     },
@@ -1184,7 +1174,7 @@ Platz der Republik 1
         // Brief laden
         const brief = this.ladeBrief(id);
         if (!brief) {
-          alert("Der Brief konnte nicht geladen werden.");
+          this.showNotification("Der Brief konnte nicht geladen werden.");
           return false;
         }
 
@@ -1246,7 +1236,7 @@ Platz der Republik 1
         log("ERROR", `Fehler beim Laden des Briefs ${id} zur Bearbeitung`, {
           error: error.message,
         });
-        alert(`Fehler beim Laden des Briefs: ${error.message}`);
+        this.showNotification(`Fehler beim Laden des Briefs: ${error.message}`);
         return false;
       }
     },
@@ -1265,6 +1255,221 @@ Platz der Republik 1
         } else {
           meineBriefeBereich.classList.add("hidden");
         }
+      }
+    },
+
+    // Hilfsfunktion für API-Aufrufe mit Offline-Unterstützung
+    async fetchWithOfflineSupport(url, options = {}, getCacheFn, setCacheFn) {
+      // Prüfen, ob Daten im Cache verfügbar sind
+      if (getCacheFn) {
+        const cachedData = getCacheFn();
+        if (cachedData) {
+          // Im Online-Modus können wir den Cache verwenden und später aktualisieren
+          // Im Offline-Modus müssen wir den Cache verwenden
+          if (!this.isOnline) {
+            log("INFO", `Offline-Modus: Daten aus Cache für ${url}`);
+            return { 
+              ok: true, 
+              json: () => Promise.resolve(cachedData),
+              _fromCache: true // Markierung hinzufügen
+            };
+          } else {
+            // Im Online-Modus prüfen wir auch, ob wir den Cache verwenden können
+            log("INFO", `Daten aus Cache für ${url} geladen`);
+            
+            // Optional: Starte eine Hintergrundaktualisierung und speichere neue Daten im Cache
+            this.updateCacheInBackground(url, options, setCacheFn);
+            
+            // Gib die Daten aus dem Cache zurück
+            return { 
+              ok: true, 
+              json: () => Promise.resolve(cachedData),
+              _fromCache: true // Markierung hinzufügen
+            };
+          }
+        } else if (!this.isOnline) {
+          // Wenn offline und keine Cache-Daten verfügbar, werfen wir einen Fehler
+          throw new Error("Keine Netzwerkverbindung und keine Cache-Daten verfügbar");
+        }
+      }
+      
+      // Normal fortfahren, wenn online und keine Cache-Daten vorhanden sind
+      try {
+        const response = await fetch(url, options);
+        // Bei Erfolg und wenn Cache-Funktion verfügbar, Ergebnis cachen
+        if (response.ok && setCacheFn) {
+          const data = await response.clone().json();
+          setCacheFn(data);
+        }
+        return response; // Keine Cache-Markierung, da direkt vom Server
+      } catch (error) {
+        // Bei Netzwerkfehlern prüfen, ob Cache verfügbar
+        if (getCacheFn) {
+          const cachedData = getCacheFn();
+          if (cachedData) {
+            log("INFO", `Netzwerkfehler: Fallback auf Cache-Daten für ${url}`);
+            return { 
+              ok: true, 
+              json: () => Promise.resolve(cachedData),
+              _fromCache: true // Markierung hinzufügen
+            };
+          }
+        }
+        throw error;
+      }
+    },
+
+    // Funktion, um den Cache im Hintergrund zu aktualisieren
+    async updateCacheInBackground(url, options, setCacheFn) {
+      if (!this.isOnline || !setCacheFn) return;
+      
+      try {
+        // Fetch im Hintergrund ohne auf Antwort zu warten
+        fetch(url, options)
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Fehler bei der Hintergrundaktualisierung");
+          })
+          .then(data => {
+            setCacheFn(data);
+            log("INFO", `Cache für ${url} im Hintergrund aktualisiert`);
+          })
+          .catch(error => {
+            log("WARN", `Cache-Hintergrundaktualisierung für ${url} fehlgeschlagen`, { error: error.message });
+          });
+      } catch (error) {
+        // Fehler hier ignorieren, da es nur eine Hintergrundaktualisierung ist
+        log("WARN", `Fehler beim Starten der Hintergrundaktualisierung für ${url}`, { error: error.message });
+      }
+    },
+
+    // Zeigt eine Benachrichtigung an
+    showNotification(message, type = 'info', duration = 5000) {
+      const id = Date.now();
+      
+      // Wenn bereits Benachrichtigungen existieren, erstelle ein Array
+      if (!this.notifications) {
+        this.notifications = [];
+      }
+      
+      this.notifications.push({ id, message, type, duration });
+      
+      // Automatisch nach der angegebenen Dauer entfernen
+      setTimeout(() => {
+        this.removeNotification(id);
+      }, duration);
+      
+      return id;
+    },
+
+    // Entfernt eine Benachrichtigung
+    removeNotification(id) {
+      if (this.notifications) {
+        this.notifications = this.notifications.filter(n => n.id !== id);
+      }
+    },
+    async loadInitialDataInBackground() {
+      try {
+        // Cache für Topics überprüfen
+        const cachedTopics = this.getCachedTopics();
+        if (cachedTopics) {
+          this.topics = cachedTopics;
+          this.topicLoadedFromCache = true;
+          log("INFO", "Topics aus Cache für initiale Anzeige geladen", { count: cachedTopics.length });
+          
+          // Wenn ein Topic gesetzt ist, Subtopics aus dem Cache laden
+          if (this.topic) {
+            const cachedSubtopics = this.getCachedSubtopics(this.topic);
+            if (cachedSubtopics) {
+              this.availableSubtopics = cachedSubtopics;
+              this.subtopicsLoadedFromCache = true;
+              log("INFO", "Subtopics aus Cache für initiale Anzeige geladen", { count: cachedSubtopics.length });
+            }
+          }
+          
+          // Im Hintergrund aktualisieren, wenn online
+          if (this.isOnline) {
+            this.updateTopicsInBackground();
+          }
+        } else {
+          // Wenn kein Cache vorhanden, dann Topics laden, aber ohne Ladeindikator
+          try {
+            const response = await fetch("/api/v1/topics");
+            if (response.ok) {
+              const topics = await response.json();
+              this.topics = topics;
+              this.setCachedTopics(topics);
+              log("INFO", "Topics für initiale Anzeige geladen", { count: topics.length });
+              
+              // Wenn topics vorhanden, erstes Topic setzen und Subtopics laden
+              if (topics && topics.length > 0) {
+                if (!this.topic) {
+                  this.topic = topics[0].id;
+                }
+                
+                // Subtopics im Hintergrund laden
+                try {
+                  const subtopicsResponse = await fetch(`/api/v1/topics/${this.topic}/subtopics`);
+                  if (subtopicsResponse.ok) {
+                    const subtopics = await subtopicsResponse.json();
+                    this.availableSubtopics = subtopics;
+                    this.setCachedSubtopics(this.topic, subtopics);
+                    log("INFO", "Subtopics für initiale Anzeige geladen", { count: subtopics.length });
+                  }
+                } catch (subtopicsError) {
+                  log("WARN", "Fehler beim initialen Laden der Subtopics", { error: subtopicsError.message });
+                }
+              }
+            }
+          } catch (error) {
+            log("WARN", "Fehler beim initialen Laden der Topics", { error: error.message });
+          }
+        }
+      } catch (error) {
+        log("WARN", "Fehler beim Laden der initialen Daten", { error: error.message });
+      }
+    },
+    
+    // Hilfsmethode zum Aktualisieren der Topics im Hintergrund
+    async updateTopicsInBackground() {
+      if (!this.isOnline) return;
+      
+      try {
+        // Topics im Hintergrund aktualisieren
+        fetch("/api/v1/topics")
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error("Fehler beim Aktualisieren der Topics");
+          })
+          .then(topics => {
+            this.topics = topics;
+            this.setCachedTopics(topics);
+            log("INFO", "Topics im Hintergrund aktualisiert", { count: topics.length });
+            
+            // Wenn ein Topic ausgewählt ist, auch Subtopics aktualisieren
+            if (this.topic) {
+              return fetch(`/api/v1/topics/${this.topic}/subtopics`);
+            }
+          })
+          .then(response => {
+            if (response && response.ok) return response.json();
+            throw new Error("Fehler beim Aktualisieren der Subtopics");
+          })
+          .then(subtopics => {
+            if (subtopics) {
+              this.availableSubtopics = subtopics;
+              this.setCachedSubtopics(this.topic, subtopics);
+              log("INFO", "Subtopics im Hintergrund aktualisiert", { count: subtopics.length });
+            }
+          })
+          .catch(error => {
+            log("WARN", "Fehler bei der Hintergrundaktualisierung", { error: error.message });
+          });
+      } catch (error) {
+        // Fehler hier ignorieren, da es nur eine Hintergrundaktualisierung ist
+        log("WARN", "Fehler beim Starten der Hintergrundaktualisierung", { error: error.message });
       }
     },
   };

@@ -125,11 +125,18 @@ export function parlamentspostApp() {
       // Zufällige Schriftart wählen
       this.formatierung.schriftart = this.getRandomFontFamily();
 
-      // Topics beim Start laden
-      await this.ladeTopics();
-
-      // Lade Subtopics für das ausgewählte Topic
-      await this.loadSubtopics();
+      // Topics nur einmal beim Start laden
+      const topics = await this.ladeTopics();
+      
+      // Wenn Topics erfolgreich geladen wurden und mindestens ein Topic vorhanden ist,
+      // setze das erste Topic als Standard und lade dessen Subtopics
+      if (topics && topics.length > 0) {
+        // Nur setzen, wenn noch kein Topic ausgewählt ist (z.B. beim ersten Laden)
+        if (!this.topic) {
+          this.topic = topics[0].id;
+        }
+        await this.loadSubtopics();
+      }
 
       // Gespeicherte Briefe laden
       this.gespeicherteBriefe = this.ladeBriefe();

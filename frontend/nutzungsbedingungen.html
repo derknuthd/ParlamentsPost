@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de" x-data="parlamentspostApp()" :class="{ 'dark': isDark }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/icons/favicon.ico"
+    />
+    <title>Nutzungsbedingungen - ParlamentsPost</title>
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body
+    class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500"
+  >
+    <!-- Dark Mode Toggle -->
+    <button
+      class="print:hidden fixed z-20 bottom-4 right-4 bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none transition-colors duration-300"
+      @click="toggleDarkMode"
+      aria-label="Dark Mode Toggle"
+      aria-pressed="isDark"
+    >
+      <!-- Heroicons Solid Sonnen-Icon (Light Mode) -->
+      <svg
+        x-show="!isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-yellow-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+        />
+      </svg>
+
+      <!-- Heroicons Solid Mond-Icon (Dark Mode) -->
+      <svg
+        x-show="isDark"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-gray-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        x-cloak
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+        />
+      </svg>
+    </button>
+
+    <!-- Header (per Fetch geladen) -->
+    <div id="header" class="print:hidden"></div>
+
+    <!-- Hauptinhalt -->
+    <main class="container mx-auto p-6 max-w-4xl">
+      <!-- Zurück-Button -->
+      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Zurück zur Startseite
+      </a>
+      
+      <!-- Nutzungsbedingungen-Inhalt -->
+      <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">Nutzungsbedingungen</h1>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">1. Allgemeines</h2>
+          
+          <p class="mb-4">Diese Nutzungsbedingungen regeln die Nutzung der ParlamentsPost-Web-Anwendung (nachfolgend "App" genannt), die von ParlamentsPost e.V. (nachfolgend "Betreiber" genannt) betrieben wird.</p>
+          
+          <p class="mb-4">Durch die Nutzung der App erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie mit den Bedingungen nicht einverstanden sind, nutzen Sie die App bitte nicht.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">2. Leistungsbeschreibung</h2>
+          
+          <p class="mb-4">Die App ermöglicht es Nutzern, personalisierte Briefe an ihre politischen Vertreter zu erstellen. Die Funktionen umfassen:</p>
+          
+          <ul class="list-disc ml-5 mb-4 space-y-2">
+            <li>Automatische Identifikation relevanter Abgeordneter basierend auf dem Wohnort des Nutzers</li>
+            <li>Auswahl vordefinierter Themen und Themenblöcke</li>
+            <li>Optional KI-gestützte Generierung formeller Brieftexte</li>
+            <li>Manuelle Bearbeitung und Anpassung der Briefe</li>
+            <li>Export als PDF (über die Browser-Druckfunktion)</li>
+            <li>Lokale Speicherung erstellter Briefe im Browser des Nutzers</li>
+          </ul>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">3. Datenschutz und Datenverarbeitung</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">3.1 Lokale Datenspeicherung</h3>
+            <p>Die App ist datenschutzfreundlich konzipiert. Persönliche Daten (Name, Adresse, E-Mail) werden ausschließlich lokal im Browser des Nutzers gespeichert und nicht an den Server des Betreibers übermittelt.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">3.2 KI-gestützte Briefgenerierung</h3>
+            <p class="mb-3">Bei Nutzung der optionalen KI-Funktion werden folgende Informationen an einen externen KI-Dienst übermittelt:</p>
+            <ul class="list-disc ml-5 mb-3">
+              <li>Ausgewählte Themen und Themenbereiche</li>
+              <li>Vom Nutzer eingegebener Freitext mit dem Anliegen</li>
+              <li>Name und Partei des ausgewählten Abgeordneten</li>
+            </ul>
+            
+            <div class="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg mb-3">
+              <p>Die persönlichen Kontaktdaten des Nutzers (Name, E-Mail, Adresse) werden NICHT an den KI-Dienst übermittelt.</p>
+            </div>
+            
+            <p>Weitere Informationen zur Datenverarbeitung finden Sie in unserer <a href="/datenschutz.html" class="text-indigo-600 dark:text-indigo-400 hover:underline">Datenschutzerklärung</a>.</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">4. Nutzungsbestimmungen</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">4.1 Allgemeine Nutzungsregeln</h3>
+            <p class="mb-3">Der Nutzer verpflichtet sich:</p>
+            <ul class="list-disc ml-5">
+              <li>Die App nur für den vorgesehenen Zweck zu nutzen</li>
+              <li>Keine beleidigenden, diskriminierenden oder rechtswidrigen Inhalte zu erstellen</li>
+              <li>Keine technischen Maßnahmen zu umgehen, die die Funktionalität der App einschränken</li>
+              <li>Sich bei der Kommunikation mit politischen Vertretern respektvoll zu verhalten</li>
+            </ul>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">4.2 Inhaltsverantwortung</h3>
+            <p>Der Nutzer trägt die alleinige Verantwortung für die Inhalte der erstellten Briefe. Der Betreiber übernimmt keine Haftung für die vom Nutzer verfassten oder mit Hilfe der KI erstellten Inhalte.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">4.3 KI-generierte Inhalte</h3>
+            <p>Die KI-Funktion dient lediglich als Hilfsmittel zur Formulierung. Der Nutzer ist verpflichtet, den automatisch generierten Text vor dem Versenden zu überprüfen und gegebenenfalls anzupassen.</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">5. Verfügbarkeit und Gewährleistung</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">5.1 Verfügbarkeit der App</h3>
+            <p>Der Betreiber bemüht sich, die App möglichst unterbrechungsfrei zur Verfügung zu stellen, kann jedoch keine dauerhafte oder ununterbrochene Verfügbarkeit garantieren. Ein Anspruch des Nutzers auf ständige Verfügbarkeit besteht nicht.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">5.2 Aktualität der Daten</h3>
+            <p>Der Betreiber bemüht sich, die Daten über Abgeordnete und Wahlkreise aktuell zu halten, kann jedoch keine Gewähr für die Vollständigkeit, Richtigkeit und Aktualität dieser Daten übernehmen.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">5.3 Keine Gewährleistung</h3>
+            <p>Die App wird im Ist-Zustand ohne jegliche Gewährleistung bereitgestellt. Der Betreiber übernimmt keine Gewähr für die Eignung der App für einen bestimmten Zweck oder die Fehlerfreiheit der Software.</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">6. Haftungsbeschränkung</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">6.1 Haftungsausschluss</h3>
+            <p>Der Betreiber haftet nicht für Schäden, die durch die Nutzung der App entstehen, es sei denn, diese beruhen auf einem vorsätzlichen oder grob fahrlässigen Verhalten.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">6.2 Haftungsausschluss für externe Links und Dienste</h3>
+            <p>Die App kann Links zu externen Webseiten und Diensten enthalten, für deren Inhalte der Betreiber keine Verantwortung übernimmt. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">7. Urheberrecht und geistiges Eigentum</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">7.1 Rechte des Betreibers</h3>
+            <p>Alle Rechte an der App, einschließlich Design, Software, Grafiken und Texten (mit Ausnahme der Inhalte, die vom Nutzer erstellt werden), stehen dem Betreiber zu oder werden mit entsprechender Lizenz verwendet.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">7.2 Rechte an erstellten Briefen</h3>
+            <p>Die vom Nutzer erstellten Briefinhalte stehen im alleinigen Eigentum des Nutzers. Der Betreiber erhebt keine Rechte an diesen Inhalten.</p>
+          </div>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">8. Änderungen der Nutzungsbedingungen</h2>
+          
+          <p>Der Betreiber behält sich das Recht vor, diese Nutzungsbedingungen jederzeit zu ändern. Die geänderten Bedingungen werden auf der Website veröffentlicht. Die fortgesetzte Nutzung der App nach Veröffentlichung der geänderten Nutzungsbedingungen gilt als Zustimmung zu diesen.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">9. Schlussbestimmungen</h2>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">9.1 Salvatorische Klausel</h3>
+            <p>Sollten einzelne Bestimmungen dieser Nutzungsbedingungen unwirksam oder undurchführbar sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen davon unberührt.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">9.2 Anwendbares Recht</h3>
+            <p>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</p>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-lg font-medium mb-2">9.3 Gerichtsstand</h3>
+            <p>Als Gerichtsstand wird, soweit gesetzlich zulässig, der Sitz des Betreibers vereinbart.</p>
+          </div>
+        </section>
+        
+        <hr class="my-8 border-gray-200 dark:border-gray-700">
+        
+        <div class="text-sm">
+          <p class="mb-2 font-medium">Stand: Mai 2025</p>
+          
+          <p>ParlamentsPost e.V.<br>
+          Musterstraße 123<br>
+          12345 Musterstadt<br>
+          Deutschland</p>
+          
+          <p class="mt-2">E-Mail: 
+            <span 
+              x-data="{ 
+                email: 'kontakt', 
+                domain: 'parlamentspost.de',
+                getEmail() { return this.email + '@' + this.domain; }
+              }"
+            >
+              <a 
+                :href="'mailto:' + getEmail()"
+                x-text="getEmail()"
+                class="text-indigo-600 dark:text-indigo-400 hover:underline"
+              ></a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer (per Fetch geladen) -->
+    <div id="footer" class="print:hidden"></div>
+  </body>
+</html>

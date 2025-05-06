@@ -491,7 +491,7 @@ Dieser Text wird bei KI-Nutzung an die KI übermittelt."
       <p class="text-gray-600 dark:text-gray-300 mb-6">Hier finden Sie Ihre gespeicherten Briefe. Diese werden lokal in Ihrem Browser gespeichert.</p>
       
       <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <template x-for="brief in ladeBriefe(briefStorage.maxPreviewBriefe)" :key="brief.id">
+        <template x-for="brief in gespeicherteBriefe.slice(0, briefStorage.maxPreviewBriefe)" :key="brief.id">
           <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
             <div class="flex justify-between items-start mb-2">
               <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200" x-text="brief.titel"></h4>
@@ -571,7 +571,7 @@ Dieser Text wird bei KI-Nutzung an die KI übermittelt."
         <h4 class="text-xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">Alle gespeicherten Briefe</h4>
         
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <template x-for="brief in ladeBriefe()" :key="brief.id">
+          <template x-for="brief in gespeicherteBriefe" :key="brief.id">
             <div x-show="brief.id && !brief.hidden" class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
               <div class="flex justify-between items-start mb-2">
                 <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200" x-text="brief.titel"></h4>

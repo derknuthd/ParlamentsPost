@@ -12,9 +12,12 @@
         <span class="text-gray-400">|</span>
         <!-- Spam-geschützte E-Mail -->
         <a href="#" 
-           x-data="{ email: 'kontakt', domain: 'parlamentspost.de' }"
-           @click.prevent="window.location.href = 'mailto:' + email + '@' + domain"
-           class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+          x-data="{
+          emailParts: ['erden', '-', 'esprit', '-9g', '@', 'i', 'cloud.com'],
+          getEmail() { return this.emailParts.join(''); }
+          }"
+          @click.prevent="window.location.href = 'mailto:' + getEmail()"
+          class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
           Kontakt
         </a>
         <span class="text-gray-400">|</span>

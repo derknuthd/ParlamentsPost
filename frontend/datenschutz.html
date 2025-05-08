@@ -9,6 +9,17 @@
       href="assets/icons/favicon.ico"
     />
     <title>Datenschutzerklärung - ParlamentsPost</title>
+    <!-- CSS direkt einbinden -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+            document.querySelectorAll('.back-button').forEach(function(el) {
+              el.classList.add('loaded');
+            });
+          }, 100);
+        });
+    </script>
     <script type="module" src="/main.js"></script>
   </head>
   <body
@@ -64,9 +75,9 @@
     <!-- Hauptinhalt -->
     <main class="container mx-auto p-6 max-w-4xl">
       <!-- Zurück-Button -->
-      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+      <a href="/" class="back-button inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
         </svg>
         Zurück zur Startseite
       </a>
@@ -81,23 +92,35 @@
           <div class="space-y-4">
             <div>
               <h3 class="text-lg font-medium mb-2">Verantwortlich für die Datenverarbeitung:</h3>
-              <p>ParlamentsPost (Verein in Gründung)<br>
-              Musterstraße 123<br>
-              12345 Musterstadt<br>
+              <p>meinVerein e.V.i.G.<br>
+              Teststr. 1<br>
+              12345 Heidelberg<br>
               Deutschland</p>
               
-              <p class="mt-4">Der Verein befindet sich derzeit in Gründung. Eine Eintragung ins Vereinsregister ist geplant.</p>
+              <!--<p class="mt-4">Der Verein befindet sich derzeit in Gründung. Eine Eintragung ins Vereinsregister ist geplant.</p>-->
             </div>
 
             <div>
               <h3 class="text-lg font-medium mb-2">Vertreten durch den Vorstand:</h3>
-              <p>Max Mustermann (Vorsitzender)<br>
+              <p>Sebastian Tran<br>
             </div>
 
             <div>
               <h3 class="text-lg font-medium mb-2">Kontaktmöglichkeiten:</h3>
               <!--<p>Telefon: +49 (0) 123 456789<br>-->
-              E-Mail: <a href="mailto:kontakt@parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">kontakt@parlamentspost.de</a><br>
+              E-Mail: 
+              <span
+               x-data="{
+               emailParts: ['erden', '-', 'esprit', '-9g', '@', 'i', 'cloud.com'],
+               getEmail() { return this.emailParts.join(''); }
+               }"
+              >
+              <a
+              :href="'mailto:' + getEmail()"
+              x-text="getEmail()"
+              class="text-indigo-600 dark:text-indigo-400 hover:underline"
+              ></a>
+              </span><br>
               Website: <a href="https://www.parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">www.parlamentspost.de</a></p>
             </div>
           </div>
@@ -133,9 +156,9 @@
             <div>
               <h3 class="text-lg font-medium mb-2">4.1 Webanalyse und Tracking</h3>
               
-              <p class="mb-3">Wir verzichten auf den Einsatz von Webanalyse-Tools wie Google Analytics, Matomo oder ähnliche Dienste. Es werden keine Tracking-Cookies gesetzt und keine Nutzerprofile erstellt. Wir sammeln keine Daten über Ihr Nutzungsverhalten auf unserer Website und führen keine statistische Auswertung durch.</p>
+              <p class="mb-3">Wir verzichten auf den Einsatz von Webanalyse-Tools wie Google Analytics, Matomo oder ähnliche Dienste. Es werden keine Tracking-Cookies gesetzt und keine Nutzer:innenprofile erstellt. Wir sammeln keine Daten über Ihr Nutzungsverhalten auf unserer Website und führen keine statistische Auswertung durch.</p>
               
-              <p class="mb-3">Unsere Website enthält keine Social-Media-Plugins oder externe Tracking-Skripte, die Daten an Drittanbieter übermitteln könnten. Wir haben bewusst auf diese Technologien verzichtet, um Ihre Privatsphäre zu schützen.</p>
+              <p class="mb-3">Unsere Website enthält keine Social-Media-Plugins oder externe Tracking-Skripte, die Daten an Drittanbieter:innen übermitteln könnten. Wir haben bewusst auf diese Technologien verzichtet, um Ihre Privatsphäre zu schützen.</p>
             </div>
             
             <div>
@@ -169,7 +192,7 @@
               <ul class="list-disc ml-5 mb-3">
                 <li>Persönliche Daten (Name, Adresse, E-Mail-Adresse)</li>
                 <li>Gespeicherte Briefe mit Informationen zu Abgeordneten und gewählten Themen</li>
-                <li>Formatierungseinstellungen und andere Nutzerpräferenzen</li>
+                <li>Formatierungseinstellungen und andere Nutzer:innenpräferenzen</li>
                 <li>Informationen über den ausgewählten Dark/Light-Modus</li>
                 <li>Cache-Daten zu Abgeordneten, Wahlkreisen und Themen für die Offline-Nutzung</li>
               </ul>
@@ -203,7 +226,7 @@
               <ul class="list-disc ml-5 mb-3">
                 <li>Ausgewählte Themen und Themenbereiche</li>
                 <li>Von Ihnen eingegebener Freitext mit Ihrem Anliegen</li>
-                <li>Name und Partei des ausgewählten Abgeordneten</li>
+                <li>Name und Partei der:des ausgewählten Abgeordneten</li>
               </ul>
               
               <div class="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg mb-3">
@@ -213,8 +236,8 @@
               <h4 class="font-medium mb-1">Rechtsgrundlage</h4>
               <p class="mb-3">Die Datenverarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung), die Sie durch die aktive Nutzung der KI-Funktion erteilen.</p>
               
-              <h4 class="font-medium mb-1">Hinweis zu externen Anbietern</h4>
-              <p>Für die KI-Briefgenerierung nutzen wir die API von OpenAI. Bitte beachten Sie, dass für die Verarbeitung der Daten durch diesen Anbieter dessen eigene Datenschutzbestimmungen gelten. Wir haben mit dem Anbieter einen Auftragsverarbeitungsvertrag abgeschlossen. Datenschutzerklärung: <a href="https://openai.com/privacy" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">https://openai.com/privacy</a></p>
+              <h4 class="font-medium mb-1">Hinweis zu externen Anbieter:innen</h4>
+              <p>Für die KI-Briefgenerierung nutzen wir die API von OpenAI. Bitte beachten Sie, dass für die Verarbeitung der Daten durch diese:n Anbieter:in dessen eigene Datenschutzbestimmungen gelten. Wir haben mit dem:der Anbieter:in einen Auftragsverarbeitungsvertrag abgeschlossen. Datenschutzerklärung: <a href="https://openai.com/privacy" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">https://openai.com/privacy</a></p>
             </div>
             
             <div>
@@ -223,14 +246,14 @@
             </div>
             
             <div>
-              <h3 class="text-lg font-medium mb-2">4.7 Nutzerpräferenzen</h3>
-              <p class="mb-3">Die Anwendung erkennt und speichert lokal folgende Nutzerpräferenzen:</p>
+              <h3 class="text-lg font-medium mb-2">4.7 Nutzer:innenpräferenzen</h3>
+              <p class="mb-3">Die Anwendung erkennt und speichert lokal folgende Nutzer:innenpräferenzen:</p>
               <ul class="list-disc ml-5 mb-3">
                 <li>Ausgewählter Anzeigemodus (Dark/Light Mode)</li>
                 <li>Systemeinstellung für den Dark Mode über die Media Query "prefers-color-scheme"</li>
                 <li>Online/Offline-Status für die Offline-Funktionalität</li>
               </ul>
-              <p class="mb-3">Diese Einstellungen werden ausschließlich lokal gespeichert und dienen der Verbesserung Ihrer Nutzererfahrung.</p>
+              <p class="mb-3">Diese Einstellungen werden ausschließlich lokal gespeichert und dienen der Verbesserung Ihrer Nutzer:innenerfahrung.</p>
             </div>
           </div>
         </section>
@@ -249,22 +272,15 @@
             </ul>
             <p class="mt-4">Zur Ausübung dieser Rechte wenden Sie sich bitte an die oben genannten Kontaktdaten.</p>
             <div class="p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg mt-4">
-              <p><strong>Hinweis:</strong> Die meisten personenbezogenen Daten werden ausschließlich lokal in Ihrem Browser gespeichert und nicht an uns übermittelt. Daher haben wir keine Möglichkeit, diese einzusehen, zu berichtigen oder zu löschen. Sie können Ihre Daten jederzeit selbst über die „Cache leeren“-Funktion oder durch Löschen des Browser-Caches verwalten.</p>
+              <p><strong>Hinweis:</strong> Die meisten personenbezogenen Daten werden ausschließlich lokal in Ihrem Browser gespeichert und nicht an uns übermittelt. Daher haben wir keine Möglichkeit, diese einzusehen, zu berichtigen oder zu löschen. Sie können Ihre Daten jederzeit selbst über die „Cache leeren"-Funktion oder durch Löschen des Browser-Caches verwalten.</p>
             </div>
         </section>
         
         <section class="mb-8">
           <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">6. Beschwerde bei der Aufsichtsbehörde</h2>
           
-          <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren. Die für unseren Verein zuständige Aufsichtsbehörde ist:</p>
-          <p class="mt-4">
-            Landesbeauftragte für den Datenschutz Niedersachsen<br>
-            Prinzenstraße 5<br>
-            30159 Hannover<br>
-            Telefon: +49 (0) 511 120 4500<br>
-            E-Mail: <a href="mailto:poststelle@lfd.niedersachsen.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">poststelle@lfd.niedersachsen.de</a><br>
-            Website: <a href="https://lfd.niedersachsen.de" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">lfd.niedersachsen.de</a>
-          </p>
+          <p><strong>Beschwerde (Art. 77 DSGVO)</strong><br>
+          Wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt, haben Sie das Recht auf Beschwerde bei einer Aufsichtsbehörde. Sie können dieses Recht bei einer Aufsichtsbehörde in dem EU-Mitgliedstaat Ihres Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes geltend machen.</p>
         </section>
         
         <section class="mb-8">

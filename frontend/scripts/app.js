@@ -38,7 +38,7 @@ export function parlamentspostApp() {
     abgeordneteListe: [],
     
     // Topic-System
-    topic: "umwelt_und_nachhaltigkeit", // Standard-Topic
+    topic: "afd_parteiverbotsverfahren", // Standard-Topic
     topics: [],
     topicData: null,
     availableSubtopics: [],

@@ -9,6 +9,17 @@
       href="assets/icons/favicon.ico"
     />
     <title>Impressum - ParlamentsPost</title>
+    <!-- CSS direkt einbinden -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          document.querySelectorAll('.back-button').forEach(function(el) {
+            el.classList.add('loaded');
+          });
+        }, 100);
+      });
+    </script>
     <script type="module" src="/main.js"></script>
   </head>
   <body
@@ -64,7 +75,7 @@
     <!-- Hauptinhalt -->
     <main class="container mx-auto p-6 max-w-4xl">
       <!-- Zurück-Button -->
-      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+      <a href="/" class="back-button inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
         </svg>
@@ -80,12 +91,25 @@
           
           <div class="space-y-2">
             <p class="font-bold">Postanschrift</p>
-            <p>ParlamentsPost e.V.i.G.<br>
+            <p>meinVerein e.V.i.G.<br>
             Teststr. 1<br>
             12345 Heidelberg<br>
             Deutschland</p>
             
-            <p class="mt-4"><strong>E-Mail:</strong> <a href="mailto:kontakt@parlamentspost.de" class="text-indigo-600 dark:text-indigo-400 hover:underline">kontakt@parlamentspost.de</a></p>
+            <p class="mt-4"><strong>E-Mail:</strong> 
+              <span
+               x-data="{
+               emailParts: ['erden', '-', 'esprit', '-9g', '@', 'i', 'cloud.com'],
+               getEmail() { return this.emailParts.join(''); }
+               }"
+              >
+              <a
+              :href="'mailto:' + getEmail()"
+              x-text="getEmail()"
+              class="text-indigo-600 dark:text-indigo-400 hover:underline"
+              ></a>
+              </span>
+            </p>
           </div>
         </section>
         
@@ -93,26 +117,28 @@
           <p><strong>Vertreten durch den Vorstand:</strong> Sebastian Tran</p>
           <!--<p class="mt-4">Der ParlamentsPost e.V. ist im Vereinsregister des Amtsgerichts Berlin-Charlottenburg unter der Registernummer VR 123456 eingetragen und zuletzt per Bescheid vom 15. März 2023 vom Finanzamt Berlin-Mitte als gemeinnützig anerkannt.</p>-->
           <!--<p class="mt-4">Der ParlamentsPost e.V. ist im Vereinsregister des Amtsgerichts Berlin-Charlottenburg unter der Registernummer VR 123456 eingetragen und zuletzt per Bescheid vom 15. März 2023 vom Finanzamt Berlin-Mitte als gemeinnützig anerkannt.</p>-->
-          <p class="mt-4">Der ParlamentsPost e.V.i.G. ist ein Verein in Gründung</p>
+          <!--<p class="mt-4">Der meinVerein e.V.i.G. ist ein Verein in Gründung</p>-->
         </section>
         
         <section class="mb-8">
           <p><strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong> Sebastian Tran</p>
         </section>
         
+        <!--
         <section class="mb-8">
           <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Vereinszweck</h2>
-          <p>Der ParlamentsPost e.V. ist ein gemeinnütziger Verein, der die politische Bildung und demokratische Teilhabe fördert. Der Verein betreibt eine Web-Anwendung, die es Bürgerinnen und Bürgern ermöglicht, personalisierte Briefe an ihre politischen Vertreter zu erstellen, um die Kommunikation zwischen Bürgern und Volksvertretern zu vereinfachen und zu fördern.</p>
+          <p>Der meinVerein e.V. ist ein gemeinnütziger Verein, der die politische Bildung und demokratische Teilhabe fördert. Der Verein betreibt eine Web-Anwendung, die es Bürger:innen ermöglicht, personalisierte Briefe an ihre politischen Vertreter:innen zu erstellen, um die Kommunikation zwischen Bürger:innen und Volksvertreter:innen zu vereinfachen und zu fördern.</p>
         </section>
-        
+        -->
+
         <section class="mb-8">
           <h2 class="text-xl font-semibold mb-3 text-indigo-500 dark:text-indigo-300">Haftungsausschluss</h2>
           
           <h3 class="text-lg font-medium mb-2">Haftung für Inhalte</h3>
-          <p class="mb-4">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+          <p class="mb-4">Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter:innen sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter:innen jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
           
           <h3 class="text-lg font-medium mb-2">Haftung für Links</h3>
-          <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+          <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der:die jeweilige Anbieter:in oder Betreiber:in der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
         </section>
         
         <section class="mb-8">

@@ -11,6 +11,35 @@ const outputJsonPath = path.join(
   "../data/BTW25/abgeordneteIndex.json"
 );
 
+// Funktion, um Parteinamen in Abkürzungen umzuwandeln
+function getPartyAbbreviation(partyName) {
+  const partyMappings = {
+    "Christlich Demokratische Union Deutschlands": "CDU",
+    "Sozialdemokratische Partei Deutschlands": "SPD",
+    "Bündnis 90/Die Grünen": "GRÜNE",
+    "BÜNDNIS 90/DIE GRÜNEN": "GRÜNE",
+    "Freie Demokratische Partei": "FDP",
+    "Alternative für Deutschland": "AfD",
+    "DIE LINKE": "LINKE",
+    "Die Linke": "LINKE",
+    "Christlich-Soziale Union in Bayern": "CSU",
+    "Bündnis Sahra Wagenknecht": "BSW",
+    "FREIE WÄHLER": "FW",
+    "Südschleswigscher Wählerverband": "SSW",
+    "PARTEI MENSCH UMWELT TIERSCHUTZ": "Tierschutz",
+    "Ökologisch-Demokratische Partei": "ÖDP",
+    "Piratenpartei Deutschland": "PIRATEN",
+    "Volt Deutschland": "Volt",
+    "Deutsche Kommunistische Partei": "DKP",
+    "Nationaldemokratische Partei Deutschlands": "NPD",
+    "Die Heimat": "NPD",
+    "Familien-Partei Deutschlands": "FAMILIE",
+    "Basisdemokratische Partei Deutschland": "dieBasis"
+  };
+
+  return partyMappings[partyName] || partyName;
+}
+
 // Funktion, um die XML-Daten zu parsen
 function parseXmlToJson(xmlData) {
   const parser = new xml2js.Parser({ explicitArray: false });
@@ -66,6 +95,9 @@ function processKandidatenData(parsedData) {
     } else if (wahldaten.Direkt) {
       partei = wahldaten.Direkt.$.Gruppenname;
     }
+    
+    // Partei in Abkürzung umwandeln
+    partei = getPartyAbbreviation(partei);
 
     // Wahlkreis aus Verknüpfung holen
     let wahlkreisNummer = "ohneWahlkreis";

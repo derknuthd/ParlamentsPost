@@ -9,6 +9,17 @@
       href="assets/icons/favicon.ico"
     />
     <title>Über uns - ParlamentsPost</title>
+    <!-- CSS direkt einbinden -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+            document.querySelectorAll('.back-button').forEach(function(el) {
+                el.classList.add('loaded');
+            });
+            }, 100);
+        });
+    </script>
     <script type="module" src="/main.js"></script>
   </head>
   <body
@@ -64,9 +75,9 @@
     <!-- Hauptinhalt -->
     <main class="container mx-auto p-6 max-w-4xl">
       <!-- Zurück-Button -->
-      <a href="/" class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
+      <a href="/" class="back-button inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
         </svg>
         Zurück zur Startseite
       </a>
@@ -79,11 +90,11 @@
           <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">Was ist ParlamentsPost?</h2>
           
           <p class="mb-4">
-            ParlamentsPost ist eine Web-Anwendung, die es vereinfacht, Briefe an politische Vertreter zu erstellen. Die App hilft dabei, die zuständigen Abgeordneten zu identifizieren und professionell gestaltete Schreiben zu verfassen.
+            ParlamentsPost ist eine Web-Anwendung, die es vereinfacht, Briefe an politische Vertreter:innen zu erstellen. Die App hilft dabei, die zuständigen Abgeordneten zu identifizieren und professionell gestaltete Schreiben zu verfassen.
           </p>
           
           <p>
-            Mit ParlamentsPost können alle Interessierten schnell und unkompliziert mit ihren gewählten Vertretern in Kontakt treten, unabhängig von Vorkenntnissen im Briefeschreiben oder politischen Strukturen.
+            Mit ParlamentsPost können alle Interessierten schnell und unkompliziert mit ihren gewählten Vertreter:innen in Kontakt treten, unabhängig von Vorkenntnissen im Briefeschreiben oder politischen Strukturen.
           </p>
         </section>
         
@@ -95,7 +106,7 @@
               <strong>Abgeordnetensuche:</strong> Die App findet automatisch die zuständigen Abgeordneten für den eingegebenen Wohnort.
             </li>
             <li>
-              <strong>Themenauswahl:</strong> Nutzer können aus verschiedenen Themenbereichen wählen und ihre spezifischen Anliegen eingeben.
+              <strong>Themenauswahl:</strong> Nutzer:innen können aus verschiedenen Themenbereichen wählen und ihre spezifischen Anliegen eingeben.
             </li>
             <li>
               <strong>Briefgenerierung:</strong> Die App erstellt einen formellen Brief entweder manuell basierend auf den ausgewählten Themen oder optional mit KI-Unterstützung.
@@ -113,7 +124,7 @@
           <h2 class="text-xl font-semibold mb-4 text-indigo-500 dark:text-indigo-300">Datenschutz</h2>
           
           <p class="mb-4">
-            ParlamentsPost legt besonderen Wert auf den Schutz persönlicher Daten. Alle Nutzerdaten werden ausschließlich im lokalen Speicher des Browsers verarbeitet und nicht an Server übertragen. 
+            ParlamentsPost legt besonderen Wert auf den Schutz persönlicher Daten. Alle Nutzer:innendaten werden ausschließlich im lokalen Speicher des Browsers verarbeitet und nicht an Server übertragen. 
           </p>
           
           <p>
@@ -131,7 +142,7 @@
           <p>
             <span 
               x-data="{ 
-                emailParts: ['kon', 'takt', '@', 'parlaments', 'post.de'],
+                emailParts: ['erden', '-', 'esprit', '-9g', '@', 'i', 'cloud.com'],
                 getEmail() { return this.emailParts.join(''); }
               }"
             >

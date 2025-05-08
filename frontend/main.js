@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
-import "./styles/styles.css";
-import "./styles/print-styles.css";
+//import "./styles/styles.css";
+//import "./styles/print-styles.css";
 import { parlamentspostApp } from "./scripts/app.js";
 import { initComponents } from "./scripts/components.js";
 

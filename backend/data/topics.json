@@ -1,32 +1,6 @@
 {
   "topics": [
     {
-      "id": "umwelt_und_nachhaltigkeit",
-      "name": "Umwelt & Nachhaltigkeit",
-      "description": "Umweltschutz, Klimawandel und nachhaltige Entwicklung",
-      "basePrompt": "Du bist ein Experte für Umweltthemen. Formuliere einen formalen Brief an einen Abgeordneten, der umweltpolitische Anliegen präzise und sachlich darstellt. Erkläre die Dringlichkeit des Themas, ohne alarmistisch zu wirken. Beziehe dich auf wissenschaftliche Erkenntnisse und aktuelle politische Entwicklungen. Bleibe respektvoll und konstruktiv in deinen Forderungen.",
-      "subtopics": [
-        {
-          "id": "klimaschutz",
-          "name": "Klimaschutz",
-          "textBlock": "Ich bin besorgt über die unzureichenden Maßnahmen im Klimaschutz. Deutschland hat sich zur Einhaltung des 1,5-Grad-Ziels verpflichtet, doch die aktuellen Bemühungen reichen nicht aus. Ich bitte Sie, sich für ambitioniertere Klimaziele und wirkungsvolle Maßnahmen einzusetzen.",
-          "promptBlock": "Der Briefschreiber ist besorgt über unzureichende Klimaschutzmaßnahmen und möchte, dass der Abgeordnete sich für stärkere Klimaziele einsetzt. Beziehe dich auf das 1,5-Grad-Ziel des Pariser Abkommens und aktuelle Defizite in der deutschen Klimapolitik."
-        },
-        {
-          "id": "naturschutz",
-          "name": "Naturschutz",
-          "textBlock": "Der Schutz unserer natürlichen Lebensräume und der Artenvielfalt liegt mir besonders am Herzen. Die fortschreitende Zerstörung von Ökosystemen und das Artensterben sind alarmierend. Ich möchte Sie bitten, sich verstärkt für wirksame Naturschutzmaßnahmen einzusetzen.",
-          "promptBlock": "Der Briefschreiber sorgt sich um Naturschutz und Biodiversität. Betone die Bedeutung intakter Ökosysteme für unser aller Zukunft und formuliere konkrete Forderungen zum Schutz natürlicher Lebensräume und bedrohter Arten."
-        },
-        {
-          "id": "energiewende",
-          "name": "Energiewende",
-          "textBlock": "Die Energiewende ist ein zentraler Baustein für eine nachhaltige Zukunft. Ich appelliere an Sie, den Ausbau erneuerbarer Energien zu beschleunigen und den Kohleausstieg voranzutreiben. Gleichzeitig sollten soziale Härten vermieden und Bürger bei der Umstellung unterstützt werden.",
-          "promptBlock": "Der Briefschreiber unterstützt die Energiewende und möchte schnellere Fortschritte sehen. Erkläre, warum der Ausbau erneuerbarer Energien sowohl ökologisch als auch wirtschaftlich sinnvoll ist. Sprich auch die soziale Dimension der Energiewende an."
-        }
-      ]
-    },
-    {
       "id": "afd_parteiverbotsverfahren",
       "name": "AfD Parteiverbotsverfahren",
       "description": "Argumente für ein Verbotsverfahren gegen die AfD nach Artikel 21 Grundgesetz",

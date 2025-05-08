@@ -12,7 +12,7 @@ const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
 const FILTER_PARTEIEN = true; // Setze auf `false`, um den Filter zu deaktivieren
 
 // Liste der Parteien, die gefiltert werden sollen
-const GEFILTERTE_PARTEIEN = ["Alternative für Deutschland"];
+const GEFILTERTE_PARTEIEN = ["Alternative für Deutschland","AfD"];
 
 // Logging-Funktion
 const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];

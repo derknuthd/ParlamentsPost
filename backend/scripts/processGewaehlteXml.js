@@ -23,6 +23,7 @@ function getPartyAbbreviation(partyName) {
     "DIE LINKE": "LINKE",
     "Die Linke": "LINKE",
     "Christlich-Soziale Union in Bayern": "CSU",
+    "Christlich-Soziale Union in Bayern e.V.": "CSU",
     "Bündnis Sahra Wagenknecht": "BSW",
     "FREIE WÄHLER": "FW",
     "Südschleswigscher Wählerverband": "SSW",

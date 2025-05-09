@@ -27,7 +27,7 @@ export function parlamentspostApp() {
     },
       
     // Benachrichtigungen (vom NotificationService verwaltet)
-    get notifications() { return notificationService.notifications; },
+    notifications: [], // Direkt als Eigenschaft, nicht als Getter
     
     // Persönliche Daten
     name: "",
@@ -121,6 +121,17 @@ export function parlamentspostApp() {
         // Lokale reaktive Kopie aktualisieren
         this._isOnline = data.isOnline;
         console.log("Online-Status aktualisiert:", this._isOnline);
+      });
+
+      // Benachrichtigungen-Abonnement hinzufügen
+      eventBus.subscribe('notification', (data) => {
+        if (data.action === 'add') {
+          // Da Alpine.js Änderungen an Arrays nicht immer erkennt, 
+          // erstellen wir eine neue Kopie des Arrays
+          this.notifications = [...notificationService.notifications];
+        } else if (data.action === 'remove') {
+          this.notifications = [...notificationService.notifications];
+        }
       });
       
       // Lokale Kopie initial setzen

@@ -19,6 +19,26 @@
       "dest": "/backend/server.js"
     },
     {
+      "src": "/main\\.js",
+      "headers": { "content-type": "application/javascript" },
+      "dest": "/dist/main.js"
+    },
+    {
+      "src": "/styles/styles\\.css",
+      "headers": { "content-type": "text/css" },
+      "dest": "/dist/styles/styles.css"
+    },
+    {
+      "src": "/(.*)\\.js",
+      "headers": { "content-type": "application/javascript" },
+      "dest": "/dist/$1.js"
+    },
+    {
+      "src": "/(.*)\\.css",
+      "headers": { "content-type": "text/css" },
+      "dest": "/dist/$1.css"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dist/$1"
     }

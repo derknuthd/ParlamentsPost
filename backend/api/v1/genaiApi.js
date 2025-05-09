@@ -91,7 +91,9 @@ ${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
 Der Brief richtet sich an: ${userData.abgeordneteName || "einen Abgeordneten"} (${userData.abgeordnetePartei || "Partei unbekannt"})
 
 Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
-    `;
+
+Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text KEINE Grußformel, KEINE Unterschrift und KEINEN Namen unter der Unterschrift enthält. Diese Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden.
+`;
 
     log("DEBUG", "Vollständiger Prompt:", prompt);
     

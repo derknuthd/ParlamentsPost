@@ -12,7 +12,10 @@ export function parlamentspostApp() {
   return {
     // Zustandsvariablen
     isLoading: false,
-    
+    briefGenerationDuration: 0, // Zählt Sekunden während der Brief-Generierung
+    loadingTimer: null, // Timer-Referenz
+
+
     // Dark Mode (vom ThemeService verwaltet)
     get isDark() { return themeService.isDark; },
     
@@ -141,6 +144,20 @@ export function parlamentspostApp() {
     
     // Themenbezogene Methoden
     
+    startLoadingTimer() {
+      this.briefGenerationDuration = 0;
+      this.loadingTimer = setInterval(() => {
+        this.briefGenerationDuration++;
+      }, 1000);
+    },
+    
+    stopLoadingTimer() {
+      if (this.loadingTimer) {
+        clearInterval(this.loadingTimer);
+        this.loadingTimer = null;
+      }
+    },
+
     // Zufällige Schriftart auswählen
     // Zufällige Schriftart auswählen
     getRandomFontFamily() {
@@ -247,7 +264,8 @@ export function parlamentspostApp() {
       }
       
       this.isLoading = true; // Ladeindikator aktivieren
-      
+      this.startLoadingTimer();
+
       try {
         // Abgeordnete über den API-Service laden
         const abgeordnete = await apiService.getAbgeordnete(this.ort);
@@ -271,6 +289,7 @@ export function parlamentspostApp() {
         return [];
       } finally {
         this.isLoading = false; // Ladeindikator deaktivieren
+        this.stopLoadingTimer();
       }
     },
     
@@ -296,6 +315,12 @@ export function parlamentspostApp() {
     async generiereBrief(kiGeneriert = false) {
       logService.info("Starte Briefgenerierung", { kiGeneriert });
       
+      // Starte den Timer für die Ladezeit
+      this.startLoadingTimer();
+      
+      // Lade-Status aktivieren
+      this.isLoading = true;
+
       // Absender zusammenstellen
       const absender = `${this.name}\n${this.strasse}\n${this.plz} ${this.ort}`;
       
@@ -388,6 +413,7 @@ Platz der Republik 1
           return; // Briefgenerierung abbrechen
         } finally {
           this.isLoading = false;
+          this.stopLoadingTimer(); // Timer anhalten
         }
       } else {
         // Falls conclusion fehlt, Topic nachladen

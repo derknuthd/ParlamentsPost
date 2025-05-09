@@ -6,6 +6,8 @@ import { briefService } from './services/briefService.js';
 import { themeService } from './services/themeService.js';
 import { config } from './config.js';
 import { briefModel } from './models/briefModel.js';
+import eventBus from './services/eventBus.js';
+
 
 // Export der Alpine.js App-Funktionalität
 export function parlamentspostApp() {
@@ -14,14 +16,16 @@ export function parlamentspostApp() {
     isLoading: false,
     briefGenerationDuration: 0, // Zählt Sekunden während der Brief-Generierung
     loadingTimer: null, // Timer-Referenz
-
+    _isOnline: navigator.onLine, // Lokale Kopie für Alpine.js-Reaktivität
 
     // Dark Mode (vom ThemeService verwaltet)
     get isDark() { return themeService.isDark; },
     
     // Netzwerkstatus (vom ApiService verwaltet)
-    get isOnline() { return apiService.isOnline; },
-    
+    get isOnline() { 
+      return this._isOnline; 
+    },
+      
     // Benachrichtigungen (vom NotificationService verwaltet)
     get notifications() { return notificationService.notifications; },
     
@@ -112,6 +116,16 @@ export function parlamentspostApp() {
 
     // Initialisierung
     async init() {
+      // eventBus-Abonnement für Online-Status
+      eventBus.subscribe('online-status-change', (data) => {
+        // Lokale reaktive Kopie aktualisieren
+        this._isOnline = data.isOnline;
+        console.log("Online-Status aktualisiert:", this._isOnline);
+      });
+      
+      // Lokale Kopie initial setzen
+      this._isOnline = apiService.isOnline;
+      
       // Dark Mode initialisieren
       themeService.init();
       

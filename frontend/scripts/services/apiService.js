@@ -1,6 +1,8 @@
 import { cacheService } from './cacheService.js';
 import { notificationService } from './notificationService.js';
 import { logService } from './logService.js';
+import eventBus from './eventBus.js';
+
 
 export const apiService = {
   // Status-Eigenschaften
@@ -15,6 +17,9 @@ export const apiService = {
     // Online/Offline-Events überwachen
     window.addEventListener('online', () => {
       this.isOnline = true;
+      // Über den eventBus veröffentlichen
+      eventBus.publish('online-status-change', { isOnline: true });
+      
       logService.log("INFO", "Netzwerkverbindung wiederhergestellt");
       notificationService.showNotification(
         "Netzwerkverbindung wiederhergestellt", 
@@ -24,6 +29,9 @@ export const apiService = {
 
     window.addEventListener('offline', () => {
       this.isOnline = false;
+      // Über den eventBus veröffentlichen
+      eventBus.publish('online-status-change', { isOnline: false });
+      
       logService.log("WARN", "Netzwerkverbindung verloren");
       notificationService.showNotification(
         "Sie sind offline. Die App verwendet zwischengespeicherte Daten.", 

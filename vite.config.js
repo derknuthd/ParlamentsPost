@@ -3,7 +3,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   root: "frontend", // Set the root directory for the frontend
-  publicDir: "public", // Static assets folder
+  publicDir: "../public", // Static assets folder
   server: {
     port: 4000,
     open: true, // Auto-open browser on start

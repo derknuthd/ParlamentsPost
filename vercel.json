@@ -11,40 +11,12 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "frontend/public/**/*",
-      "use": "@vercel/static",
-      "config": {
-        "zeroConfig": true
-      }
-    },
-    {
-      "src": "frontend/styles/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "frontend/main.js",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/backend/server.js"
-    },
-    {
-      "src": "/main.js",
-      "headers": { "content-type": "application/javascript" },
-      "dest": "/frontend/main.js"
-    },
-    {
-      "src": "/styles/(.*)\\.css",
-      "headers": { "content-type": "text/css" },
-      "dest": "/frontend/styles/$1.css"
-    },
-    {
-      "handle": "filesystem"
     },
     {
       "src": "/(.*)",

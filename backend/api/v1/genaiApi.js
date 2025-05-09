@@ -55,6 +55,13 @@ router.post("/genai-brief", async (req, res) => {
         .join(", ");
     }
 
+    // Conclusion-Prompt verwenden, falls vorhanden
+    let conclusionPromptText = "";
+    if (userData.topic && userData.topic.conclusionPrompt) {
+      conclusionPromptText = "\n\nFür den Abschluss des Briefes:\n" + 
+        userData.topic.conclusionPrompt;
+    }
+
     const prompt = `
 ${basePrompt}
 
@@ -75,6 +82,8 @@ Informationen zu den Themen:
 ${themenÜbersicht}
 
 ${promptDetails}
+
+${conclusionPromptText}
 
 Freitext vom Nutzer:
 ${userData.freitext || "Kein zusätzlicher Freitext angegeben."}

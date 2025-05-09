@@ -390,6 +390,14 @@ Platz der Republik 1
           this.isLoading = false;
         }
       } else {
+        // Falls conclusion fehlt, Topic nachladen
+       if (!this.topicData?.conclusion) {
+         try {
+           this.topicData = await apiService.getTopic(this.topic);
+         } catch (error) {
+           logService.warn("Konnte conclusion nicht nachladen", { error: error.message });
+         }
+       }
         // Manuelle Erstellung mit subtopic-spezifischen Textblöcken
         const selectedSubtopics = this.availableSubtopics.filter((subtopic) =>
           this.themen.includes(subtopic.id)
@@ -423,6 +431,11 @@ Platz der Republik 1
           brieftext += `\n\n${this.freitext}`;
         }
         
+        // HIER den Conclusion-Text hinzufügen:
+        if (this.topicData && this.topicData.conclusion) {
+          brieftext += `\n\n${this.topicData.conclusion}`;
+        }
+
         // Füge Grußformel am Ende hinzu
         brieftext += `\n\nMit freundlichen Grüßen,\n\n\n${this.name}`;
         
@@ -729,13 +742,35 @@ Platz der Republik 1
           this.topicLoadedFromCache = true;
           logService.info("Topics aus Cache für initiale Anzeige geladen", { count: cachedTopics.length });
           
-          // Wenn ein Topic gesetzt ist, Subtopics aus dem Cache laden
+          // Wenn ein Topic gesetzt ist, sofort auch die Topic-Daten und Subtopics laden
           if (this.topic) {
-            const cachedSubtopics = cacheService.getSubtopicsCache(this.topic);
-            if (cachedSubtopics) {
-              this.availableSubtopics = cachedSubtopics;
-              this.subtopicsLoadedFromCache = true;
-              logService.info("Subtopics aus Cache für initiale Anzeige geladen", { count: cachedSubtopics.length });
+            // Zuerst versuchen, das vollständige Topic zu laden
+            try {
+              const topicData = await apiService.getTopic(this.topic);
+              this.topicData = topicData;
+              logService.info("Topic-Daten initial geladen", { 
+                topicId: this.topic,
+                fromCache: topicData._fromCache === true
+              });
+              console.log("Initial geladene Topic-Daten:", this.topicData);
+              
+              // Dann Subtopics laden
+              const cachedSubtopics = cacheService.getSubtopicsCache(this.topic);
+              if (cachedSubtopics) {
+                this.availableSubtopics = cachedSubtopics;
+                this.subtopicsLoadedFromCache = true;
+                logService.info("Subtopics aus Cache für initiale Anzeige geladen", { count: cachedSubtopics.length });
+              } else {
+                // Wenn keine Subtopics im Cache, direkt laden
+                const subtopics = await apiService.getSubtopics(this.topic);
+                this.availableSubtopics = subtopics;
+                logService.info("Subtopics initial geladen", { count: subtopics.length });
+              }
+            } catch (error) {
+              logService.warn("Fehler beim initialen Laden der Topic-Daten", { 
+                error: error.message,
+                topicId: this.topic
+              });
             }
           }
           
@@ -749,18 +784,25 @@ Platz der Republik 1
             const topics = await apiService.getTopics();
             this.topics = topics;
             
-            // Wenn topics vorhanden, erstes Topic setzen und Subtopics laden
+            // Wenn topics vorhanden, erstes Topic setzen und Topic-Daten und Subtopics laden
             if (topics && topics.length > 0) {
               if (!this.topic) {
                 this.topic = topics[0].id;
               }
               
-              // Subtopics im Hintergrund laden
+              // Vollständige Topic-Daten laden
               try {
+                const topicData = await apiService.getTopic(this.topic);
+                this.topicData = topicData;
+                logService.info("Topic-Daten initial geladen", { topicId: this.topic });
+                console.log("Initial geladene Topic-Daten:", this.topicData);
+                
+                // Subtopics im Hintergrund laden
                 const subtopics = await apiService.getSubtopics(this.topic);
                 this.availableSubtopics = subtopics;
-              } catch (subtopicsError) {
-                logService.warn("Fehler beim initialen Laden der Subtopics", { error: subtopicsError.message });
+                logService.info("Subtopics initial geladen", { count: subtopics.length });
+              } catch (error) {
+                logService.warn("Fehler beim initialen Laden der Topic-Daten", { error: error.message });
               }
             }
           } catch (error) {

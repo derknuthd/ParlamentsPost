@@ -66,7 +66,47 @@ export function parlamentspostApp() {
     get briefStorage() { return config.briefStorage; },
     showAlleBriefe: false,
     gespeicherteBriefe: [],
-    
+
+    // Verfügbare Schriftarten (zentrale Liste)
+    fonts: [
+      // Seriöse Sans-Serif-Schriftarten (hohe Systemkompatibilität)
+      "Arial, Helvetica, sans-serif",
+      "Verdana, Geneva, sans-serif",
+      "Tahoma, Geneva, sans-serif",
+      "Trebuchet MS, Helvetica, sans-serif",
+      "Segoe UI, Roboto, sans-serif",
+      "Helvetica Neue, Helvetica, Arial, sans-serif",
+      
+      // Seriöse Serif-Schriftarten (hohe Systemkompatibilität)
+      "Times New Roman, Times, serif",
+      "Georgia, Times, serif",
+      "Palatino Linotype, Book Antiqua, Palatino, serif",
+      "Cambria, Georgia, serif",
+      
+      // Moderne, saubere Schriftarten
+      "Calibri, Roboto, sans-serif",
+      "Century Gothic, Apple Gothic, sans-serif",
+      "Gill Sans, Gill Sans MT, sans-serif",
+      
+      // Monospace-Schriftarten
+      "Courier New, Courier, monospace",
+      "Lucida Console, Monaco, monospace",
+      "Consolas, Liberation Mono, monospace",
+      
+      // Weniger formelle Schriftarten
+      "Comic Sans MS, Comic Sans, cursive",
+      "Brush Script MT, Brush Script Std, cursive",
+      
+      // Dekorative Schriftarten
+      "Papyrus, fantasy",
+      "Impact, Charcoal, sans-serif",
+      "Arial Rounded MT Bold, Helvetica Rounded, sans-serif",
+      
+      // Sehr ausgefallene Schriftarten
+      "Copperplate, Copperplate Gothic Light, fantasy",
+      "Lucida Handwriting, cursive"
+    ],
+
     // Initialisierung
     async init() {
       // Dark Mode initialisieren
@@ -78,9 +118,17 @@ export function parlamentspostApp() {
       // Log-Level setzen
       logService.logLevel = config.logLevel;
       
-      // Zufällige Schriftart wählen
-      this.formatierung.schriftart = this.getRandomFontFamily();
+      // Zufällige Schriftart wählen und explizit setzen
+      const randomFont = this.getRandomFontFamily();
+      console.log("Setze initiale Schriftart auf:", randomFont);
+      this.formatierung.schriftart = randomFont;
       
+      // Zufällige Schriftgröße wählen
+      const sizes = ["klein", "mittel", "gross"];
+      const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+      console.log("Setze initiale Schriftgröße auf:", randomSize);
+      this.formatierung.schriftgroesse = randomSize;
+
       // Initiale Daten im Hintergrund laden
       this.loadInitialDataInBackground();
       
@@ -94,15 +142,52 @@ export function parlamentspostApp() {
     // Themenbezogene Methoden
     
     // Zufällige Schriftart auswählen
+    // Zufällige Schriftart auswählen
     getRandomFontFamily() {
+      // Direkte Liste statt this.fonts verwenden
       const fonts = [
-        "Arial, sans-serif",
-        "Times New Roman, serif",
-        "Georgia, serif",
-        "Verdana, sans-serif",
-        "Calibri, sans-serif",
+        // Seriöse Sans-Serif-Schriftarten (hohe Systemkompatibilität)
+        "Arial, Helvetica, sans-serif",
+        "Verdana, Geneva, sans-serif",
+        "Tahoma, Geneva, sans-serif",
+        "Trebuchet MS, Helvetica, sans-serif",
+        "Segoe UI, Roboto, sans-serif",
+        "Helvetica Neue, Helvetica, Arial, sans-serif",
+        
+        // Seriöse Serif-Schriftarten (hohe Systemkompatibilität)
+        "Times New Roman, Times, serif",
+        "Georgia, Times, serif",
+        "Palatino Linotype, Book Antiqua, Palatino, serif",
+        "Cambria, Georgia, serif",
+        
+        // Moderne, saubere Schriftarten
+        "Calibri, Roboto, sans-serif",
+        "Century Gothic, Apple Gothic, sans-serif",
+        "Gill Sans, Gill Sans MT, sans-serif",
+        
+        // Monospace-Schriftarten
+        "Courier New, Courier, monospace",
+        "Lucida Console, Monaco, monospace",
+        "Consolas, Liberation Mono, monospace",
+        
+        // Weniger formelle Schriftarten
+        "Comic Sans MS, Comic Sans, cursive",
+        "Brush Script MT, Brush Script Std, cursive",
+        
+        // Dekorative Schriftarten
+        "Papyrus, fantasy",
+        "Impact, Charcoal, sans-serif",
+        "Arial Rounded MT Bold, Helvetica Rounded, sans-serif",
+        
+        // Sehr ausgefallene Schriftarten
+        "Copperplate, Copperplate Gothic Light, fantasy",
+        "Lucida Handwriting, cursive"
       ];
-      return fonts[Math.floor(Math.random() * fonts.length)];
+      
+      const randomIndex = Math.floor(Math.random() * fonts.length);
+      const selectedFont = fonts[randomIndex];
+      console.log("Zufällig ausgewählte Schriftart:", selectedFont, "Index:", randomIndex);
+      return selectedFont;
     },
     
     // Dark Mode umschalten
@@ -291,7 +376,7 @@ Platz der Republik 1
           
           brieftext = `${anrede} ${abgeordneter?.name || "Unbekannt"},\n\n${
             data.briefText || "(Kein KI-Text vorhanden)"
-          }\n\nMit freundlichen Grüßen,\n${this.name}`;
+          }\n\nMit freundlichen Grüßen,\n\n\n${this.name}`;
           
           logService.info("KI-Text erfolgreich generiert");
         } catch (error) {
@@ -339,7 +424,7 @@ Platz der Republik 1
         }
         
         // Füge Grußformel am Ende hinzu
-        brieftext += `\n\nMit freundlichen Grüßen,\n${this.name}`;
+        brieftext += `\n\nMit freundlichen Grüßen,\n\n\n${this.name}`;
         
         logService.info("Manueller Briefinhalt erstellt");
       }

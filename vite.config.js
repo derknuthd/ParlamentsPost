@@ -16,8 +16,17 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "../dist", // Output in the project root's dist folder
+    outDir: "../dist",
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "frontend/index.html"),
+        impressum: resolve(__dirname, "frontend/impressum.html"),
+        datenschutz: resolve(__dirname, "frontend/datenschutz.html"),
+        nutzungsbedingungen: resolve(__dirname, "frontend/nutzungsbedingungen.html"),
+        ueberuns: resolve(__dirname, "frontend/ueber-uns.html")
+      },
+    },
   },
   resolve: {
     alias: {

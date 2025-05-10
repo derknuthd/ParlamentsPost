@@ -33,12 +33,14 @@ export const themeService = {
         }
       }
       
-      // Event über den EventBus veröffentlichen (Initial)
-      eventBus.publish('theme-change', { 
-        isDark: this.isDark, 
-        isUserSet: this.isUserSet 
-      });
-    },
+      // Event mit kurzer Verzögerung veröffentlichen, um sicherzustellen, dass der EventBus bereit ist
+      setTimeout(() => {
+        eventBus.publish('theme-change', { 
+          isDark: this.isDark, 
+          isUserSet: this.isUserSet 
+        });
+      }, 50);
+     },
     
     // Dark Mode ein-/ausschalten
     setDarkMode(isDark, isUserSet = true) {

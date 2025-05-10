@@ -134,6 +134,21 @@ export function parlamentspostApp() {
         }
       });
       
+      // eventBus-Abonnement für Brief-Ereignisse
+      eventBus.subscribe('brief', (data) => {
+        if (data.action === 'saved' || data.action === 'deleted' || data.action === 'deleted-all') {
+          // Briefe neu laden und UI aktualisieren
+          this.gespeicherteBriefe = briefService.ladeBriefe();
+          this.updateMeineBriefeUI();
+        } else if (data.action === 'error') {
+          // Hier könntest du je nach Fehlertyp spezifische Benachrichtigungen anzeigen
+          notificationService.showNotification(
+            `Fehler bei ${data.operation}: ${data.error}`,
+            "error"
+          );
+        }
+      });
+
       // Lokale Kopie initial setzen
       this._isOnline = apiService.isOnline;
       

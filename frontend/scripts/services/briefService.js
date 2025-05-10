@@ -1,5 +1,7 @@
 import { cacheService } from './cacheService.js';
 import { logService } from './logService.js';
+import eventBus from './eventBus.js';
+
 
 export const briefService = {
   // Speicher-Konfiguration
@@ -27,10 +29,25 @@ export const briefService = {
       // Zurück in Local Storage speichern
       cacheService.setBriefCache(briefe);
       
+      // Event über den EventBus veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'saved', 
+        id: neuerBrief.id, 
+        brief: neuerBrief 
+      });
+
       logService.info(`Brief ${neuerBrief.id} gespeichert`);
       return neuerBrief.id;
     } catch (error) {
       logService.error("Fehler beim Speichern des Briefes", { error: error.message });
+
+      // Optional: Auch Fehler als Event veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'error', 
+        operation: 'save',
+        error: error.message 
+      });
+
       return null;
     }
   },
@@ -67,10 +84,26 @@ export const briefService = {
         return null;
       }
       
+      // Event über den EventBus veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'loaded', 
+        id: id,
+        brief: brief
+      });
+
       logService.info(`Brief ${id} geladen`);
       return brief;
     } catch (error) {
       logService.error(`Fehler beim Laden des Briefs ${id}`, { error: error.message });
+
+      // Optional: Auch Fehler als Event veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'error', 
+        operation: 'load',
+        id: id,
+        error: error.message 
+      });
+      
       return null;
     }
   },
@@ -93,10 +126,25 @@ export const briefService = {
       // Aktualisierte Liste speichern
       cacheService.setBriefCache(filteredBriefe);
       
+      // Event über den EventBus veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'deleted', 
+        id: id 
+      });
+
       logService.info(`Brief ${id} gelöscht`);
       return true;
     } catch (error) {
       logService.error(`Fehler beim Löschen des Briefs ${id}`, { error: error.message });
+      
+      // Optional: Auch Fehler als Event veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'error', 
+        operation: 'delete',
+        id: id,
+        error: error.message 
+      });
+
       return false;
     }
   },
@@ -105,10 +153,24 @@ export const briefService = {
   loescheAlleBriefe() {
     try {
       cacheService.clearBriefCache();
+      
+      // Event über den EventBus veröffentlichen
+    eventBus.publish('brief', { 
+        action: 'deleted-all'
+      });
+
       logService.info("Alle Briefe gelöscht");
       return true;
     } catch (error) {
       logService.error("Fehler beim Löschen aller Briefe", { error: error.message });
+      
+      // Optional: Auch Fehler als Event veröffentlichen
+      eventBus.publish('brief', { 
+        action: 'error', 
+        operation: 'delete-all',
+        error: error.message 
+      });
+
       return false;
     }
   },

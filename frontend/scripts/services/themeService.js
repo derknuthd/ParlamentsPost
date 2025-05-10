@@ -1,3 +1,5 @@
+import eventBus from './eventBus.js';
+
 export const themeService = {
     // Ist Dark Mode aktiv?
     isDark: false,
@@ -30,10 +32,17 @@ export const themeService = {
           this.setDarkMode(true, false);
         }
       }
+      
+      // Event über den EventBus veröffentlichen (Initial)
+      eventBus.publish('theme-change', { 
+        isDark: this.isDark, 
+        isUserSet: this.isUserSet 
+      });
     },
     
     // Dark Mode ein-/ausschalten
     setDarkMode(isDark, isUserSet = true) {
+      const previousState = this.isDark;
       this.isDark = isDark;
       
       if (isDark) {
@@ -55,10 +64,18 @@ export const themeService = {
       setTimeout(() => {
         document.body.style.transition = "";
       }, 500);
+      
+      // Event über den EventBus veröffentlichen, aber nur bei tatsächlicher Änderung
+      if (previousState !== isDark) {
+        eventBus.publish('theme-change', { 
+          isDark: isDark, 
+          isUserSet: isUserSet 
+        });
+      }
     },
     
     // Dark Mode umschalten
     toggleDarkMode() {
       this.setDarkMode(!this.isDark);
     }
-  };
+};

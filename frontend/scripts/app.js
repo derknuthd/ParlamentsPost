@@ -149,6 +149,22 @@ export function parlamentspostApp() {
         }
       });
 
+      // eventBus-Abonnement für Theme-Änderungen
+      eventBus.subscribe('theme-change', (data) => {
+        // Falls du zusätzliche UI-Aktualisierungen oder Benachrichtigungen 
+        // bei Theme-Änderungen anzeigen möchtest
+        console.log("Theme geändert:", data.isDark ? "Dunkel" : "Hell");
+        
+        // Optional: Benachrichtigung bei manueller Theme-Änderung
+        if (data.isUserSet) {
+          notificationService.showNotification(
+            `Design auf ${data.isDark ? "Dunkelmodus" : "Hellmodus"} umgeschaltet`,
+            "info",
+            3000
+          );
+        }
+      });
+
       // Lokale Kopie initial setzen
       this._isOnline = apiService.isOnline;
       

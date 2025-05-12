@@ -8,24 +8,14 @@ const router = express.Router();
 // Log-Level aus der .env-Datei
 const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
 
+// Import Service-Module
+const logService = require('../../services/logService');
+
 // Konstante zum Aktivieren/Deaktivieren des Filters
 const FILTER_PARTEIEN = true; // Setze auf `false`, um den Filter zu deaktivieren
 
 // Liste der Parteien, die gefiltert werden sollen
 const GEFILTERTE_PARTEIEN = ["Alternative für Deutschland","AfD"];
-
-// Logging-Funktion
-const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
-function log(level, message, data = null) {
-  if (logLevels.indexOf(level) >= logLevels.indexOf(LOG_LEVEL)) {
-    const logMessage = `[${level}] ${message}`;
-    if (data) {
-      console.log(logMessage, data);
-    } else {
-      console.log(logMessage);
-    }
-  }
-}
 
 // Hilfsfunktion zur Wahlkreis-Validierung
 function validateWahlkreis(wahlkreis) {
@@ -116,11 +106,11 @@ router.get("/:wahl/abgeordnete", (req, res) => {
   const { wahl } = req.params;
   const { wahlkreis, wohnort } = req.query;
 
-  log("DEBUG", "Eingehende Anfrage", { wahl, wahlkreis, wohnort });
+  logService.debug("Eingehende Anfrage", { wahl, wahlkreis, wohnort });
 
   // Validierung des Wahl-Parameters
   if (!wahl || !wahl.match(/^[a-zA-Z0-9]+$/)) {
-    log("WARN", "Ungültiger Wahl-Parameter", { wahl });
+    logService.warn("Ungültiger Wahl-Parameter", { wahl });
     return res.status(400).json({ 
       error: "Ungültiger Parameter 'wahl'. Erlaubt sind nur Buchstaben und Zahlen." 
     });
@@ -128,7 +118,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
 
   // Mindestens Wahlkreis oder Wohnort muss angegeben sein
   if (!wahlkreis && !wohnort) {
-    log("WARN", "Wahlkreis- und Wohnort-Parameter fehlen");
+    logService.warn("Wahlkreis- und Wohnort-Parameter fehlen");
     return res.status(400).json({
       error: "Es muss mindestens ein Wahlkreis oder ein Wohnort angegeben werden.",
     });
@@ -137,7 +127,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
   // Validierung der Wahlkreis-Parameter
   const wahlkreisValidation = validateWahlkreis(wahlkreis);
   if (!wahlkreisValidation.valid) {
-    log("WARN", "Ungültiger Wahlkreis-Parameter", { 
+    logService.warn("Ungültiger Wahlkreis-Parameter", { 
       wahlkreis, 
       error: wahlkreisValidation.error 
     });
@@ -147,7 +137,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
   // Validierung des Wohnort-Parameters
   const wohnortValidation = validateWohnort(wohnort);
   if (!wohnortValidation.valid) {
-    log("WARN", "Ungültiger Wohnort-Parameter", { 
+    logService.warn("Ungültiger Wohnort-Parameter", { 
       wohnort, 
       error: wohnortValidation.error 
     });
@@ -158,7 +148,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
   const sanitizedWahlkreise = sanitizeWahlkreis(wahlkreis);
   const sanitizedWohnorte = sanitizeWohnort(wohnort);
   
-  log("DEBUG", "Sanitized Parameter", { 
+  logService.debug("Sanitized Parameter", { 
     wahlkreise: sanitizedWahlkreise, 
     wohnorte: sanitizedWohnorte 
   });
@@ -166,7 +156,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
   // Sicherheitscheck für den dynamischen Pfad
   const safeWahl = wahl.replace(/[^a-zA-Z0-9]/g, ''); // Nur alphanumerische Zeichen zulassen
   if (safeWahl !== wahl) {
-    log("ERROR", "Versuchte Path Traversal erkannt", { wahl, safeWahl });
+    logService.error("Versuchte Path Traversal erkannt", { wahl, safeWahl });
     return res.status(400).json({ error: "Ungültiger Wahl-Parameter" });
   }
 
@@ -175,11 +165,11 @@ router.get("/:wahl/abgeordnete", (req, res) => {
     __dirname,
     `../../data/${safeWahl}/abgeordneteIndex.json`
   );
-  log("DEBUG", "Pfad zur JSON-Datei", { abgeordneteIndexPath });
+  logService.debug("Pfad zur JSON-Datei", { abgeordneteIndexPath });
 
   // Prüfen, ob die Datei existiert
   if (!fs.existsSync(abgeordneteIndexPath)) {
-    log("ERROR", `Keine Daten für die Wahl "${safeWahl}" gefunden.`);
+    logService.error(`Keine Daten für die Wahl "${safeWahl}" gefunden.`);
     return res
       .status(404)
       .json({ error: `Keine Daten für die Wahl "${safeWahl}" gefunden.` });
@@ -194,7 +184,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
     try {
       parsedData = JSON.parse(rawData);
     } catch (parseError) {
-      log("ERROR", "Fehler beim Parsen der JSON-Datei", { 
+      logService.error("Fehler beim Parsen der JSON-Datei", { 
         error: parseError.message,
         abgeordneteIndexPath 
       });
@@ -206,7 +196,7 @@ router.get("/:wahl/abgeordnete", (req, res) => {
     // Überprüfung der JSON-Struktur
     if (!parsedData || !parsedData.wahlkreise || !parsedData.wohnorte || 
         typeof parsedData.wahlkreise !== 'object' || typeof parsedData.wohnorte !== 'object') {
-      log("ERROR", "Ungültige JSON-Struktur", { 
+      logService.error("Ungültige JSON-Struktur", { 
         abgeordneteIndexPath,
         structure: parsedData ? Object.keys(parsedData) : 'null' 
       });
@@ -216,13 +206,13 @@ router.get("/:wahl/abgeordnete", (req, res) => {
     }
     
     abgeordneteIndex = parsedData;
-    log("INFO", "JSON-Datei erfolgreich geladen");
-    log("DEBUG", "Geladene Daten", {
+    logService.info("JSON-Datei erfolgreich geladen");
+    logService.debug("Geladene Daten", {
       wahlkreise: Object.keys(abgeordneteIndex.wahlkreise || {}),
       wohnorte: Object.keys(abgeordneteIndex.wohnorte || {}),
     });
   } catch (error) {
-    log("ERROR", "Fehler beim Laden der JSON-Datei", { error: error.message });
+    logService.error("Fehler beim Laden der JSON-Datei", { error: error.message });
     return res
       .status(500)
       .json({ error: "Daten konnten nicht geladen werden" });
@@ -233,36 +223,36 @@ router.get("/:wahl/abgeordnete", (req, res) => {
 
   // Suche nach Wahlkreis-IDs
   if (sanitizedWahlkreise.length > 0) {
-    log("DEBUG", "Wahlkreis-IDs", { wahlkreisIds: sanitizedWahlkreise });
+    logService.debug("Wahlkreis-IDs", { wahlkreisIds: sanitizedWahlkreise });
 
     sanitizedWahlkreise.forEach((id) => {
       if (abgeordneteIndex.wahlkreise[id]) {
-        log("DEBUG", `Abgeordnete für Wahlkreis-ID "${id}" gefunden`, {
+        logService.debug(`Abgeordnete für Wahlkreis-ID "${id}" gefunden`, {
           abgeordnete: abgeordneteIndex.wahlkreise[id],
         });
         abgeordneteIndex.wahlkreise[id].forEach((abgeordneter) =>
           results.add(JSON.stringify(abgeordneter))
         );
       } else {
-        log("WARN", `Keine Abgeordneten für Wahlkreis-ID "${id}" gefunden.`);
+        logService.warn(`Keine Abgeordneten für Wahlkreis-ID "${id}" gefunden.`);
       }
     });
   }
 
   // Suche nach Wohnorten
   if (sanitizedWohnorte.length > 0) {
-    log("DEBUG", "Wohnorte", { wohnorte: sanitizedWohnorte });
+    logService.debug("Wohnorte", { wohnorte: sanitizedWohnorte });
 
     sanitizedWohnorte.forEach((ort) => {
       if (abgeordneteIndex.wohnorte[ort]) {
-        log("DEBUG", `Abgeordnete für Wohnort "${ort}" gefunden`, {
+        logService.debug(`Abgeordnete für Wohnort "${ort}" gefunden`, {
           abgeordnete: abgeordneteIndex.wohnorte[ort],
         });
         abgeordneteIndex.wohnorte[ort].forEach((abgeordneter) =>
           results.add(JSON.stringify(abgeordneter))
         );
       } else {
-        log("WARN", `Keine Abgeordneten für Wohnort "${ort}" gefunden.`);
+        logService.warn(`Keine Abgeordneten für Wohnort "${ort}" gefunden.`);
       }
     });
   }
@@ -277,18 +267,15 @@ router.get("/:wahl/abgeordnete", (req, res) => {
       uniqueResults = uniqueResults.filter(
         (person) => !GEFILTERTE_PARTEIEN.includes(person.partei)
       );
-      log(
-        "INFO",
-        `Filter angewendet: ${GEFILTERTE_PARTEIEN.join(", ")} ausgeschlossen`
-      );
+      logService.info(`Filter angewendet: ${GEFILTERTE_PARTEIEN.join(", ")} ausgeschlossen`);
     }
 
-    log("INFO", "Abgeordnete gefunden (nach Filterung)", {
+    logService.info("Abgeordnete gefunden (nach Filterung)", {
       count: uniqueResults.length,
     });
     res.json(uniqueResults);
   } else {
-    log("WARN", "Keine Abgeordneten gefunden");
+    logService.warn("Keine Abgeordneten gefunden");
     res.status(404).json({ error: "Keine Abgeordneten gefunden." });
   }
 });
@@ -299,7 +286,7 @@ if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.use("/api/v1", router); // Verwende den Router
   app.listen(PORT, () => {
-    log("INFO", `Abgeordnete-API läuft auf http://localhost:${PORT}`);
+    logService.info(`Abgeordnete-API läuft auf http://localhost:${PORT}`);
   });
 }
 

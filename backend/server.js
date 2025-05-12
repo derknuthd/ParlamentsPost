@@ -13,6 +13,9 @@ const abgeordneteApi = require("./api/v1/abgeordneteApi");
 const topicApi = require("./api/v1/topicApi");
 const genaiApi = require("./api/v1/genaiApi");
 
+// Import Service-Module
+const logService = require('./services/logService');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -29,13 +32,13 @@ if (process.env.ALLOWED_ORIGINS) {
 app.use(
   cors({
     origin: (origin, callback) => {
-      console.log(`[DEBUG] Anfrage von Origin: ${origin}`);
-      console.log(`[DEBUG] Erlaubte Ursprünge: ${allowedOrigins}`);
+      logService.debug(`Anfrage von Origin: ${origin}`);
+      logService.debug(`Erlaubte Ursprünge: ${allowedOrigins}`);
       if (!origin || allowedOrigins.includes(origin)) {
-        console.log("[DEBUG] Origin erlaubt.");
+        logService.debug("Origin erlaubt.");
         return callback(null, true);
       }
-      console.error(`[ERROR] CORS Error: Origin ${origin} not allowed!`);
+      logService.error(`CORS Error: Origin ${origin} not allowed!`);
       callback(new Error(`CORS Error: Origin not allowed!`));
     },
   })
@@ -49,15 +52,15 @@ app.use(
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  console.log("[DEBUG] Neue Anfrage:");
-  console.log(`[DEBUG] Methode: ${req.method}`);
-  console.log(`[DEBUG] URL: ${req.url}`);
-  console.log(`[DEBUG] Headers:`, req.headers);
-  console.log(`[DEBUG] Body:`, req.body);
+  logService.debug("Neue Anfrage:");
+  logService.debug(`Methode: ${req.method}`, req.method);
+  logService.debug(`URL: ${req.url}`, req.url);
+  logService.debug(`Headers:`, req.headers);
+  logService.debug(`Body:`, req.body);
   next();
 });
 
-console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
+logService.debug("[server.js] Express-App und Middleware eingerichtet.");
 
 /**
  * ===========================
@@ -66,7 +69,7 @@ console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
  */
 const rateLimiter = require('./services/rateLimitService');
 
-console.log("[DEBUG] [server.js] Rate-Limiter eingerichtet.");
+logService.debug("[server.js] Rate-Limiter eingerichtet.");
 
 /**
  * ===========================
@@ -81,10 +84,19 @@ app.use("/api/v1", (req, res, next) => {
     return next();
   }
   
-  if (!rateLimiter.isAllowed(req)) {
-    console.log("[WARN] Standard Rate-Limit erreicht");
+  const result = rateLimiter.isAllowed(req);
+  
+  // Wenn eine Warnung ausgegeben werden soll
+  if (result.warning) {
+    res.setHeader('X-RateLimit-Warning', result.message);
+  }
+  
+  // Wenn nicht erlaubt
+  if (!result.allowed) {
+    logService.warn("Standard Rate-Limit erreicht");
     return res.status(429).json({ 
-      error: "Zu viele Anfragen. Bitte versuchen Sie es später erneut."
+      error: result.message,
+      resetTimeSeconds: result.resetTimeSeconds
     });
   }
   
@@ -93,19 +105,28 @@ app.use("/api/v1", (req, res, next) => {
 
 // Spezielles Rate-Limiting für KI-Anfragen
 app.use("/api/v1", (req, res, next) => {
-  if (req.path === '/genai-brief' && !rateLimiter.isAllowed(req, true)) {
-    console.log("[WARN] AI Rate-Limit erreicht");
-    return res.status(429).json({ 
-      error: "Zu viele KI-Anfragen. Bitte versuchen Sie es in einigen Minuten erneut."
-    });
+  if (req.path === '/genai-brief') {
+    const result = rateLimiter.isAllowed(req, true);
+    
+    // Wenn eine Warnung ausgegeben werden soll
+    if (result.warning) {
+      res.setHeader('X-RateLimit-Warning', result.message);
+    }
+    
+    // Wenn nicht erlaubt
+    if (!result.allowed) {
+      logService.warn("AI Rate-Limit erreicht");
+      return res.status(429).json({ 
+        error: result.message,
+        resetTimeSeconds: result.resetTimeSeconds
+      });
+    }
   }
   
   next();
 }, genaiApi);
 
-
-
 // Server starten
 app.listen(PORT, () => {
-  console.log(`[DEBUG] [server.js] Server läuft auf Port ${PORT}`);
+  logService.debug(`[server.js] Server läuft auf Port ${PORT}`);
 });

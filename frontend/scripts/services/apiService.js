@@ -100,6 +100,21 @@ export const apiService = {
     try {
       const response = await fetch(url, options);
       
+      // Auf Warnungen prüfen
+      const warning = response.headers.get('X-RateLimit-Warning');
+      if (warning) {
+        console.log("[WARN] Rate-Limit-Warnung:", warning);
+        notificationService.showNotification(warning, "warning", 8000);
+      }
+      
+      // Auf Rate-Limit-Fehler prüfen
+      if (response.status === 429) {
+        const errorData = await response.json();
+        const message = errorData.error || "Zu viele Anfragen. Bitte später erneut versuchen.";
+        notificationService.showNotification(message, "error", 10000);
+        throw new Error(message);
+      }
+      
       // Rate-Limit-Auswertung
       const isAiRequest = url.includes('/genai-brief');
       this.updateRateLimits(response, isAiRequest ? 'ai' : 'standard');
@@ -309,6 +324,21 @@ export const apiService = {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userData })
       });
+      
+      // Auf Warnungen prüfen
+      const warning = response.headers.get('X-RateLimit-Warning');
+      if (warning) {
+        console.log("[WARN] KI-Rate-Limit-Warnung:", warning);
+        notificationService.showNotification(warning, "warning", 8000);
+      }
+      
+      // Auf Rate-Limit-Fehler prüfen
+      if (response.status === 429) {
+        const errorData = await response.json();
+        const message = errorData.error || "KI-Anfragelimit erreicht. Bitte später erneut versuchen.";
+        notificationService.showNotification(message, "error", 10000);
+        throw new Error(message);
+      }
       
       // Rate-Limit-Auswertung für AI-Anfragen
       this.updateRateLimits(response, 'ai');

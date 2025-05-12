@@ -3,27 +3,16 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 
-// Logging-Funktion (wie in den anderen APIs)
-const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
-const logLevels = ["DEBUG", "INFO", "WARN", "ERROR"];
-function log(level, message, data = null) {
-  if (logLevels.indexOf(level) >= logLevels.indexOf(LOG_LEVEL)) {
-    const logMessage = `[${level}] ${message}`;
-    if (data) {
-      console.log(logMessage, data);
-    } else {
-      console.log(logMessage);
-    }
-  }
-}
+// Import Service-Module
+const logService = require('../../services/logService');
 
 // POST /genai-brief - Hier kein Rate-Limiter mehr, da er in server.js definiert ist
 router.post("/genai-brief", async (req, res) => {
   try {
-    log("DEBUG", "Request Body:", req.body);
+    logService.debug("Request Body:", req.body);
 
     const { userData } = req.body;
-    log("INFO", "Anfrage erhalten: POST /genai-brief", userData);
+    logService.info("Anfrage erhalten: POST /genai-brief", userData);
 
     if (!userData) {
       return res.status(400).json({ error: "userData fehlt." });
@@ -95,7 +84,7 @@ Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dab
 Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text KEINE Grußformel, KEINE Unterschrift und KEINEN Namen unter der Unterschrift enthält. Diese Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden.
 `;
 
-    log("DEBUG", "Vollständiger Prompt:", prompt);
+    logService.debug("Vollständiger Prompt:", prompt);
     
     const openaiRequestData = {
       model,
@@ -104,7 +93,7 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
       temperature: 0.7,
     };
     
-    log("DEBUG", "OpenAI Request:", JSON.stringify(openaiRequestData, null, 2));  
+    logService.debug("OpenAI Request:", JSON.stringify(openaiRequestData, null, 2));  
 
     try {
       const openaiResponse = await axios.post(
@@ -122,12 +111,12 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
       const generatedText =
         openaiResponse.data.choices?.[0]?.message?.content ||
         "(Konnte keinen Text generieren)";
-      log("INFO", "KI-Text generiert.");
+      logService.info("KI-Text generiert.");
 
       return res.json({ briefText: generatedText });
     } catch (openaiError) {
       // Spezifische Fehlerbehandlung für OpenAI API
-      log("ERROR", "Fehler bei OpenAI API-Anfrage", openaiError);
+      logService.error("Fehler bei OpenAI API-Anfrage", openaiError);
       
       if (openaiError.response) {
         // Der Server hat geantwortet mit einem Fehlercode
@@ -170,7 +159,7 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
       }
     }
   } catch (error) {
-    log("ERROR", "Allgemeiner Fehler bei POST /genai-brief:", error);
+    logService.error("Allgemeiner Fehler bei POST /genai-brief:", error);
     res.status(500).json({ error: "Interner Serverfehler bei der Brief-Generierung." });
   }
 });

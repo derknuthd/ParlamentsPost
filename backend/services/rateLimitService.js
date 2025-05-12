@@ -1,5 +1,6 @@
 // services/rateLimitService.js
 const crypto = require('crypto');
+const logService = require('./logService'); // Passe den Pfad entsprechend an
 
 /**
  * Datenschutzfreundlicher TokenBucket-RateLimiter
@@ -33,15 +34,15 @@ class PrivacyFriendlyRateLimiter {
     // Periodische Bereinigung alter Einträge
     setInterval(() => this.cleanup(), 5 * 60 * 1000); // Alle 5 Minuten
     
-    console.log("[INFO] PrivacyFriendlyRateLimiter initialisiert");
-    console.log(`[INFO] Salt-Intervall: ${this.saltIntervalMs/60000} Minuten, Max Bucket-Alter: ${this.maxBucketAge/60000} Minuten`);
+    logService.info("PrivacyFriendlyRateLimiter initialisiert");
+    logService.info(`Salt-Intervall: ${this.saltIntervalMs/60000} Minuten, Max Bucket-Alter: ${this.maxBucketAge/60000} Minuten`);
   }
   
-  /**
+    /**
    * Prüft, ob eine Anfrage erlaubt ist
    * @param {Object} req - Express Request-Objekt
    * @param {boolean} isAiRequest - Gibt an, ob es sich um eine KI-Anfrage handelt
-   * @returns {boolean} - Ob die Anfrage erlaubt ist
+   * @returns {Object} - Informationen zur Anfrage-Erlaubnis und ggf. Warnungen
    */
   isAllowed(req, isAiRequest = false) {
     const bucketConfig = isAiRequest ? this.aiBucket : this.standardBucket;
@@ -53,14 +54,19 @@ class PrivacyFriendlyRateLimiter {
     // Aktuelle Zeit
     const now = Date.now();
     
+    // Debug-Ausgaben für anonyme ID
+    logService.debug(`Anfrage-Typ: ${bucketType}, Anonyme ID: ${anonId.substring(0, 8)}...`);
+
     // Bucket initialisieren oder holen
     if (!this.buckets.has(anonId)) {
       this.buckets.set(anonId, {
-        tokens: bucketConfig.capacity, // Voller Bucket für neue Benutzer
+        tokens: bucketConfig.capacity,
         lastRefill: now,
-        type: bucketType
+        type: bucketType,
+        warningIssued: false // Neue Eigenschaft: Wurde bereits eine Warnung ausgegeben?
       });
-      return true; // Erste Anfrage erlauben
+      logService.debug(`Neuer Bucket erstellt für ${bucketType}. Volle Kapazität: ${bucketConfig.capacity}`);
+      return { allowed: true };
     }
     
     // Bestehenden Bucket holen
@@ -70,19 +76,118 @@ class PrivacyFriendlyRateLimiter {
     const elapsedMs = now - bucket.lastRefill;
     const newTokens = (elapsedMs / 1000) * bucketConfig.refillRate;
     
+    // Alte Tokens speichern für Debug-Ausgabe
+    const oldTokens = bucket.tokens;
+    
     bucket.tokens = Math.min(
       bucketConfig.capacity,
       bucket.tokens + newTokens
     );
     bucket.lastRefill = now;
     
-    // Anfrage erlauben, wenn genug Tokens vorhanden sind
-    if (bucket.tokens >= 1) {
-      bucket.tokens -= 1;
-      return true;
+    // Prozentsatz berechnen
+    const usedPercentage = 100 - (bucket.tokens / bucketConfig.capacity * 100);
+    
+    // Debug-Ausgabe für Bucket-Status
+    logService.debug(`Bucket-Status für ${bucketType}:`, {
+      oldTokens: oldTokens.toFixed(2),
+      addedTokens: newTokens.toFixed(2),
+      currentTokens: bucket.tokens.toFixed(2),
+      capacity: bucketConfig.capacity,
+      usedPercentage: usedPercentage.toFixed(1) + '%',
+      warningIssued: bucket.warningIssued,
+      elapsedSinceLastRefill: (elapsedMs / 1000).toFixed(1) + 's',
+      refillRatePerSecond: bucketConfig.refillRate.toFixed(3)
+    });
+    
+    // Reset-Informationen berechnen
+    const resetInfo = this.getResetTimeInfo(req, isAiRequest);
+    
+    // 80% Warnung, falls noch nicht ausgegeben
+    if (usedPercentage >= 80 && !bucket.warningIssued) {
+      bucket.warningIssued = true; // Markieren als ausgegeben
+      logService.info(`80% Warnung für ${bucketType} ausgelöst. Reset in: ${resetInfo.resetTimeFormatted}`);
+      
+      return { 
+        allowed: bucket.tokens >= 1,
+        warning: true,
+        warningLevel: "80percent",
+        message: `Sie haben bereits 80% Ihres ${isAiRequest ? 'KI-' : ''}Anfragelimits aufgebraucht. Vollständiger Reset in ${resetInfo.resetTimeFormatted}.`,
+        resetTimeSeconds: resetInfo.resetTimeSeconds
+      };
     }
     
-    return false;
+    // Anfrage erlauben, wenn genug Tokens vorhanden
+    if (bucket.tokens >= 1) {
+      bucket.tokens -= 1;
+      logService.debug(`Anfrage erlaubt für ${bucketType}. Verbleibende Tokens: ${bucket.tokens.toFixed(2)}`);
+      return { allowed: true };
+    }
+    
+    // Limit erreicht
+    logService.warn(`Rate-Limit erreicht für ${bucketType}! Keine Tokens übrig. Reset in: ${resetInfo.resetTimeFormatted}`);
+    return { 
+      allowed: false,
+      message: `Anfragelimit erreicht. Bitte warten Sie ${resetInfo.resetTimeFormatted} auf den Reset.`,
+      resetTimeSeconds: resetInfo.resetTimeSeconds
+    };
+  }
+  
+  /**
+   * Berechnet die verbleibende Zeit bis zum Reset
+   * @param {Object} req - Express Request-Objekt
+   * @param {boolean} isAiRequest - Gibt an, ob es sich um eine KI-Anfrage handelt
+   * @returns {Object} - Informationen zur Reset-Zeit
+   */
+  getResetTimeInfo(req, isAiRequest = false) {
+    const bucketConfig = isAiRequest ? this.aiBucket : this.standardBucket;
+    const bucketType = isAiRequest ? 'ai' : 'standard';
+    const anonId = this.generateAnonymousId(req, bucketType);
+    
+    // Wenn kein Bucket existiert
+    if (!this.buckets.has(anonId)) {
+      return { resetTimeSeconds: 0 };
+    }
+    
+    const bucket = this.buckets.get(anonId);
+    const now = Date.now();
+    
+    // Zeit bis vollständige Regeneration (in Sekunden)
+    const elapsedMs = now - bucket.lastRefill;
+    const newTokens = (elapsedMs / 1000) * bucketConfig.refillRate;
+    const currentTokens = Math.min(
+      bucketConfig.capacity,
+      bucket.tokens + newTokens
+    );
+    
+    // Berechne wann der Bucket wieder voll ist
+    const tokensNeeded = bucketConfig.capacity - currentTokens;
+    const secondsToFullRefill = tokensNeeded > 0 
+      ? Math.ceil(tokensNeeded / bucketConfig.refillRate)
+      : 0;
+    
+    return {
+      resetTimeSeconds: secondsToFullRefill,
+      resetTimeFormatted: this.formatTimeString(secondsToFullRefill)
+    };
+  }
+  
+  /**
+   * Formatiert eine Zeitdauer benutzerfreundlich
+   * @param {number} seconds - Anzahl der Sekunden
+   * @returns {string} - Formatierte Zeitangabe
+   */
+  formatTimeString(seconds) {
+    if (seconds < 60) {
+      return `${seconds} Sekunden`;
+    } else if (seconds < 3600) {
+      const minutes = Math.ceil(seconds / 60);
+      return `${minutes} Minute${minutes > 1 ? 'n' : ''}`;
+    } else {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.ceil((seconds % 3600) / 60);
+      return `${hours} Stunde${hours > 1 ? 'n' : ''} und ${minutes} Minute${minutes > 1 ? 'n' : ''}`;
+    }
   }
   
   /**
@@ -215,7 +320,7 @@ class PrivacyFriendlyRateLimiter {
     });
     
     if (count > 0) {
-      console.log(`[INFO] PrivacyFriendlyRateLimiter: ${count} alte Einträge bereinigt`);
+      logService.info(`PrivacyFriendlyRateLimiter: ${count} alte Einträge bereinigt`);
     }
   }
 }

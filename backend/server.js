@@ -64,39 +64,46 @@ console.log("[DEBUG] [server.js] Express-App und Middleware eingerichtet.");
  * 3) Zentrale Rate-Limiter-Definitionen
  * ===========================
  */
-const rateLimiters = {
-  // Standard-Limiter für reguläre API-Anfragen
-  standard: rateLimit({
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS || "60", 10) * 1000,
-    max: parseInt(process.env.RATE_LIMIT_MAX || "20", 10),
-    message: "Too many requests. Bitte später erneut versuchen.",
-    keyGenerator: (req) => req.ip + '_standard'
-  }),
-  
-  // Spezifischer Limiter für KI-Anfragen
-  ai: rateLimit({
-    windowMs: parseInt(process.env.AI_RATE_LIMIT_WINDOW_SECONDS || "300", 10) * 1000,
-    max: parseInt(process.env.AI_RATE_LIMIT_MAX || "5", 10),
-    message: "Zu viele KI-Anfragen. Bitte warten Sie einige Minuten.",
-    keyGenerator: (req) => req.ip + '_ai'
-  })
-};
+const rateLimiter = require('./services/rateLimitService');
 
 console.log("[DEBUG] [server.js] Rate-Limiter eingerichtet.");
 
 /**
  * ===========================
- * 4) API-Routen mit spezifischen Rate-Limitern
+ * 4) API-Routen mit datenschutzfreundlichem Rate-Limiter
  * ===========================
  */
 
-// Standard-APIs mit Standard-Rate-Limiter
-app.use("/api/v1", rateLimiters.standard, wahlkreisApi);
-app.use("/api/v1", rateLimiters.standard, abgeordneteApi);
-app.use("/api/v1", rateLimiters.standard, topicApi);
+// Standard-Rate-Limiting-Middleware für alle API-Anfragen außer KI
+app.use("/api/v1", (req, res, next) => {
+  // KI-Endpunkte ausschließen, diese werden separat limitiert
+  if (req.path === '/genai-brief') {
+    return next();
+  }
+  
+  if (!rateLimiter.isAllowed(req)) {
+    console.log("[WARN] Standard Rate-Limit erreicht");
+    return res.status(429).json({ 
+      error: "Zu viele Anfragen. Bitte versuchen Sie es später erneut."
+    });
+  }
+  
+  next();
+}, wahlkreisApi, abgeordneteApi, topicApi);
 
-// KI-API mit speziellem Rate-Limiter
-app.use("/api/v1", rateLimiters.ai, genaiApi);
+// Spezielles Rate-Limiting für KI-Anfragen
+app.use("/api/v1", (req, res, next) => {
+  if (req.path === '/genai-brief' && !rateLimiter.isAllowed(req, true)) {
+    console.log("[WARN] AI Rate-Limit erreicht");
+    return res.status(429).json({ 
+      error: "Zu viele KI-Anfragen. Bitte versuchen Sie es in einigen Minuten erneut."
+    });
+  }
+  
+  next();
+}, genaiApi);
+
+
 
 // Server starten
 app.listen(PORT, () => {

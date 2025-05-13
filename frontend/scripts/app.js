@@ -19,6 +19,9 @@ export function parlamentspostApp() {
   const events = eventModule();
   
   return {
+    // Konfiguration verfügbar machen
+    config,
+
     // Kombinieren aller Module
     ...userData,
     ...brief,

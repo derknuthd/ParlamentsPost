@@ -11,6 +11,16 @@ router.post("/genai-brief", async (req, res) => {
   try {
     logService.debug("Request Body:", req.body);
 
+    // In genaiApi.js innerhalb der Route
+    const MAX_FREITEXT_LENGTH = parseInt(process.env.MAX_FREITEXT_LENGTH || "1000", 10);
+
+    // Validierung der Freitextlänge
+    if (userData.freitext && userData.freitext.length > MAX_FREITEXT_LENGTH) {
+      return res.status(400).json({ 
+        error: `Text zu lang (max. ${MAX_FREITEXT_LENGTH} Zeichen).` 
+      });
+    }
+
     const { userData } = req.body;
     logService.info("Anfrage erhalten: POST /genai-brief", userData);
 
@@ -18,7 +28,7 @@ router.post("/genai-brief", async (req, res) => {
       return res.status(400).json({ error: "userData fehlt." });
     }
 
-    const model = process.env.OPENAI_MODEL;
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini"; // Fallback hinzugefügt
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
     // Basis-Prompt aus dem Topic verwenden, falls vorhanden

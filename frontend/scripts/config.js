@@ -1,4 +1,7 @@
 export const config = {
+    // Log-Level
+    logLevel: "INFO", // DEBUG, INFO, WARN, ERROR
+
     // Cache-Einstellungen
     cache: {
       enabled: true,
@@ -12,6 +15,8 @@ export const config = {
       maxPreviewBriefe: 4
     },
     
-    // Log-Level
-    logLevel: "INFO" // DEBUG, INFO, WARN, ERROR
+    // Textbegrenzungen
+    textLimits: {
+        freitext: 1000 // Maximale Anzahl an Zeichen für Freitext
+    },
   };

@@ -11,24 +11,32 @@ router.post("/genai-brief", async (req, res) => {
   try {
     logService.debug("Request Body:", req.body);
 
-    // In genaiApi.js innerhalb der Route
-    const MAX_FREITEXT_LENGTH = parseInt(process.env.MAX_FREITEXT_LENGTH || "1000", 10);
+    const { userData } = req.body;
+    
+    if (!userData) {
+      logService.warn("Ungültige Anfrage: userData fehlt");
+      return res.status(400).json({ 
+        error: "Ungültige Anfrage", 
+        message: "userData fehlt." 
+      });
+    }
+    
+    logService.info("Anfrage erhalten: POST /genai-brief", userData);
 
     // Validierung der Freitextlänge
+    const MAX_FREITEXT_LENGTH = parseInt(process.env.MAX_FREITEXT_LENGTH || "1000", 10);
     if (userData.freitext && userData.freitext.length > MAX_FREITEXT_LENGTH) {
+      logService.warn("Freitext zu lang", { 
+        length: userData.freitext.length, 
+        max: MAX_FREITEXT_LENGTH 
+      });
       return res.status(400).json({ 
-        error: `Text zu lang (max. ${MAX_FREITEXT_LENGTH} Zeichen).` 
+        error: "Eingabefehler", 
+        message: `Text zu lang (max. ${MAX_FREITEXT_LENGTH} Zeichen).` 
       });
     }
 
-    const { userData } = req.body;
-    logService.info("Anfrage erhalten: POST /genai-brief", userData);
-
-    if (!userData) {
-      return res.status(400).json({ error: "userData fehlt." });
-    }
-
-    const model = process.env.OPENAI_MODEL || "gpt-4o-mini"; // Fallback hinzugefügt
+    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
     // Basis-Prompt aus dem Topic verwenden, falls vorhanden
@@ -121,7 +129,7 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
       const generatedText =
         openaiResponse.data.choices?.[0]?.message?.content ||
         "(Konnte keinen Text generieren)";
-      logService.info("KI-Text generiert.");
+      logService.info("KI-Text erfolgreich generiert");
 
       return res.json({ briefText: generatedText });
     } catch (openaiError) {
@@ -135,42 +143,52 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
         
         if (statusCode === 401) {
           return res.status(500).json({ 
-            error: "Authentifizierungsfehler bei der KI-Anfrage. Bitte kontaktieren Sie den Administrator." 
+            error: "Authentifizierungsfehler",
+            message: "Authentifizierungsfehler bei der KI-Anfrage. Bitte kontaktieren Sie den Administrator." 
           });
         } else if (statusCode === 429) {
           return res.status(429).json({ 
-            error: "Das Anfragelimit der KI wurde überschritten. Bitte versuchen Sie es später erneut." 
+            error: "Ratenlimit überschritten",
+            message: "Das Anfragelimit der KI wurde überschritten. Bitte versuchen Sie es später erneut." 
           });
         } else if (statusCode === 400) {
           return res.status(400).json({ 
-            error: "Ungültige Anfrage an die KI. Möglicherweise ist Ihr Text zu lang oder enthält unzulässige Inhalte." 
+            error: "Ungültige Anfrage",
+            message: "Ungültige Anfrage an die KI. Möglicherweise ist Ihr Text zu lang oder enthält unzulässige Inhalte." 
           });
         } else {
           return res.status(500).json({ 
-            error: `Fehler bei der KI-Anfrage: ${errorData.error?.message || 'Unbekannter Fehler'}` 
+            error: "KI-Dienst-Fehler",
+            message: `Fehler bei der KI-Anfrage: ${errorData.error?.message || 'Unbekannter Fehler'}` 
           });
         }
       } else if (openaiError.request) {
         // Die Anfrage wurde gestellt, aber keine Antwort erhalten
         if (openaiError.code === 'ECONNABORTED') {
           return res.status(504).json({ 
-            error: "Zeitüberschreitung bei der KI-Anfrage. Bitte versuchen Sie es später erneut." 
+            error: "Zeitüberschreitung",
+            message: "Zeitüberschreitung bei der KI-Anfrage. Bitte versuchen Sie es später erneut." 
           });
         } else {
           return res.status(503).json({ 
-            error: "Der KI-Dienst ist derzeit nicht erreichbar. Bitte versuchen Sie es später erneut." 
+            error: "Dienst nicht verfügbar",
+            message: "Der KI-Dienst ist derzeit nicht erreichbar. Bitte versuchen Sie es später erneut." 
           });
         }
       } else {
         // Etwas ist bei der Einrichtung der Anfrage schiefgegangen
         return res.status(500).json({ 
-          error: "Fehler bei der Verarbeitung der KI-Anfrage: " + openaiError.message 
+          error: "Interner Fehler",
+          message: "Fehler bei der Verarbeitung der KI-Anfrage: " + openaiError.message 
         });
       }
     }
   } catch (error) {
     logService.error("Allgemeiner Fehler bei POST /genai-brief:", error);
-    res.status(500).json({ error: "Interner Serverfehler bei der Brief-Generierung." });
+    res.status(500).json({ 
+      error: "Interner Fehler", 
+      message: "Interner Serverfehler bei der Brief-Generierung." 
+    });
   }
 });
 

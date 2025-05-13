@@ -1,6 +1,8 @@
+import { config } from './config.js';
+
 export const logService = {
-    // Log-Level: DEBUG, INFO, WARN, ERROR
-    logLevel: "DEBUG",
+    // Log-Level aus der Konfiguration nehmen
+    logLevel: config.logLevel || "DEBUG",
     
     // Verfügbare Log-Level
     logLevels: ["DEBUG", "INFO", "WARN", "ERROR"],

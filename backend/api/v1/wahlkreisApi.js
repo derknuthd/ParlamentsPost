@@ -5,11 +5,8 @@ require("dotenv").config();
 
 const router = express.Router();
 
-// Log-Level aus der .env-Datei
-const LOG_LEVEL = process.env.LOG_LEVEL || "INFO";
-
 // Import Service-Module
-const logService = require('../../services/logService'); // Pfad anpassen
+const logService = require('../../services/logService');
 
 // Hilfsfunktion zur Wohnort-Validierung
 function validateWohnort(wohnort) {
@@ -93,7 +90,8 @@ router.get("/:wahl/wahlkreis", (req, res) => {
   if (!wahl || !wahl.match(/^[a-zA-Z0-9]+$/)) {
     logService.warn("Ungültiger Wahl-Parameter", { wahl });
     return res.status(400).json({ 
-      error: "Ungültiger Parameter 'wahl'. Erlaubt sind nur Buchstaben und Zahlen." 
+      error: "Eingabefehler", 
+      message: "Ungültiger Parameter 'wahl'. Erlaubt sind nur Buchstaben und Zahlen." 
     });
   }
 
@@ -104,7 +102,10 @@ router.get("/:wahl/wahlkreis", (req, res) => {
       wohnort, 
       error: wohnortValidation.error 
     });
-    return res.status(400).json({ error: wohnortValidation.error });
+    return res.status(400).json({ 
+      error: "Eingabefehler", 
+      message: wohnortValidation.error 
+    });
   }
 
   // Sanitierung des Wohnort-Parameters
@@ -120,7 +121,10 @@ router.get("/:wahl/wahlkreis", (req, res) => {
   const safeWahl = wahl.replace(/[^a-zA-Z0-9]/g, ''); // Nur alphanumerische Zeichen zulassen
   if (safeWahl !== wahl) {
     logService.error("Versuchte Path Traversal erkannt", { wahl, safeWahl });
-    return res.status(400).json({ error: "Ungültiger Wahl-Parameter" });
+    return res.status(400).json({ 
+      error: "Sicherheitsverletzung", 
+      message: "Ungültiger Wahl-Parameter" 
+    });
   }
   
   // Dynamischer Pfad zur JSON-Datei basierend auf der Wahl
@@ -133,9 +137,10 @@ router.get("/:wahl/wahlkreis", (req, res) => {
   // Prüfen, ob die Datei existiert
   if (!fs.existsSync(gemeindeIndexPath)) {
     logService.error(`Keine Daten für die Wahl "${safeWahl}" gefunden.`);
-    return res
-      .status(404)
-      .json({ error: `Keine Daten für die Wahl "${safeWahl}" gefunden.` });
+    return res.status(404).json({ 
+      error: "Daten nicht gefunden", 
+      message: `Keine Daten für die Wahl "${safeWahl}" gefunden.` 
+    });
   }
 
   // JSON-Daten laden
@@ -152,7 +157,8 @@ router.get("/:wahl/wahlkreis", (req, res) => {
         gemeindeIndexPath 
       });
       return res.status(500).json({ 
-        error: "Die Wahlkreisdaten sind fehlerhaft formatiert. Bitte wenden Sie sich an den Administrator." 
+        error: "Datenformatfehler", 
+        message: "Die Wahlkreisdaten sind fehlerhaft formatiert. Bitte wenden Sie sich an den Administrator." 
       });
     }
     
@@ -163,7 +169,8 @@ router.get("/:wahl/wahlkreis", (req, res) => {
         structure: parsedData ? Object.keys(parsedData) : 'null' 
       });
       return res.status(500).json({ 
-        error: "Die Wahlkreisdaten haben eine ungültige Struktur. Bitte wenden Sie sich an den Administrator." 
+        error: "Datenstrukturfehler", 
+        message: "Die Wahlkreisdaten haben eine ungültige Struktur. Bitte wenden Sie sich an den Administrator." 
       });
     }
     
@@ -174,9 +181,10 @@ router.get("/:wahl/wahlkreis", (req, res) => {
     logService.info("JSON-Datei erfolgreich geladen");
   } catch (error) {
     logService.error("Fehler beim Laden der JSON-Datei", { error: error.message });
-    return res
-      .status(500)
-      .json({ error: "Daten konnten nicht geladen werden" });
+    return res.status(500).json({ 
+      error: "Datenzugriffsfehler", 
+      message: "Daten konnten nicht geladen werden" 
+    });
   }
 
   // Hier verwendet die angepasste Suchfunktion für die Wahlkreise
@@ -230,7 +238,8 @@ router.get("/:wahl/wahlkreis", (req, res) => {
   } else {
     logService.warn(`Kein Wahlkreis für den Wohnort "${sanitizedWohnort}" gefunden.`);
     res.status(404).json({
-      error: `Kein Wahlkreis für den Wohnort "${sanitizedWohnort}" gefunden.`,
+      error: "Keine Daten",
+      message: `Kein Wahlkreis für den Wohnort "${sanitizedWohnort}" gefunden.`
     });
   }
 });

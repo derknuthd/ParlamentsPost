@@ -1,4 +1,4 @@
-// topicApi.js
+// topicApi.js - Optimierte Version
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -11,11 +11,14 @@ const logService = require('../../services/logService');
 function loadTopicsData() {
   try {
     const topicsPath = path.join(__dirname, "../../data/topics.json");
+    
     if (!fs.existsSync(topicsPath)) {
-      logService.error("topics.json nicht gefunden", { path: topicsPath });
-      throw new Error("topics.json nicht gefunden");
+      logService.error("Themendaten-Datei nicht gefunden", { path: topicsPath });
+      throw new Error("Themendaten-Datei nicht gefunden");
     }
-    return JSON.parse(fs.readFileSync(topicsPath, "utf8"));
+    
+    const fileContent = fs.readFileSync(topicsPath, "utf8");
+    return JSON.parse(fileContent);
   } catch (error) {
     logService.error("Fehler beim Laden der Themendaten", { error: error.message });
     throw error;
@@ -37,7 +40,10 @@ router.get("/topics", (req, res) => {
     res.json(topicsWithoutSubtopics);
   } catch (error) {
     logService.error("Fehler beim Abrufen der Topics", { error: error.message });
-    res.status(500).json({ error: "Fehler beim Abrufen der Topics: " + error.message });
+    res.status(500).json({ 
+      error: "Datenzugriffsfehler", 
+      message: "Fehler beim Abrufen der Topics." 
+    });
   }
 });
 
@@ -50,14 +56,20 @@ router.get("/topics/:id", (req, res) => {
     
     if (!topic) {
       logService.warn(`Topic mit ID ${id} nicht gefunden`);
-      return res.status(404).json({ error: `Topic mit ID ${id} nicht gefunden` });
+      return res.status(404).json({ 
+        error: "Nicht gefunden", 
+        message: `Topic mit ID ${id} nicht gefunden` 
+      });
     }
     
     logService.info(`Topic ${id} erfolgreich geladen`);
     res.json(topic);
   } catch (error) {
     logService.error("Fehler beim Abrufen des Topics", { error: error.message });
-    res.status(500).json({ error: "Fehler beim Abrufen des Topics: " + error.message });
+    res.status(500).json({ 
+      error: "Datenzugriffsfehler", 
+      message: "Fehler beim Abrufen des Topics." 
+    });
   }
 });
 
@@ -70,7 +82,10 @@ router.get("/topics/:id/subtopics", (req, res) => {
     
     if (!topic) {
       logService.warn(`Topic mit ID ${id} nicht gefunden`);
-      return res.status(404).json({ error: `Topic mit ID ${id} nicht gefunden` });
+      return res.status(404).json({ 
+        error: "Nicht gefunden", 
+        message: `Topic mit ID ${id} nicht gefunden` 
+      });
     }
     
     if (!topic.subtopics || topic.subtopics.length === 0) {
@@ -82,7 +97,10 @@ router.get("/topics/:id/subtopics", (req, res) => {
     res.json(topic.subtopics);
   } catch (error) {
     logService.error("Fehler beim Abrufen der Subtopics", { error: error.message });
-    res.status(500).json({ error: "Fehler beim Abrufen der Subtopics: " + error.message });
+    res.status(500).json({ 
+      error: "Datenzugriffsfehler", 
+      message: "Fehler beim Abrufen der Subtopics." 
+    });
   }
 });
 

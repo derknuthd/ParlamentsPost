@@ -1,6 +1,6 @@
 export const config = {
     // Log-Level
-    logLevel: "INFO", // DEBUG, INFO, WARN, ERROR
+    logLevel: "DEBUG", // DEBUG, INFO, WARN, ERROR
 
     // Cache-Einstellungen
     cache: {

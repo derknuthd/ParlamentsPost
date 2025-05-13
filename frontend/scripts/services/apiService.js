@@ -3,7 +3,6 @@ import { notificationService } from './notificationService.js';
 import { logService } from './logService.js';
 import eventBus from './eventBus.js';
 
-
 export const apiService = {
   // Status-Eigenschaften
   isOnline: navigator.onLine,
@@ -39,6 +38,44 @@ export const apiService = {
         8000
       );
     });
+
+    // Test-Benachrichtigung nur in der Entwicklungsumgebung
+    if (import.meta.env?.DEV) {
+      setTimeout(() => {
+          notificationService.showNotification(
+          "Test-Benachrichtigung - Prüfung des Benachrichtigungssystems",
+          "warning",
+          10000
+          );
+          console.log("Test-Benachrichtigung wurde gesendet");
+      }, 3000); // Verzögerung von 3 Sekunden nach Initialisierung
+    }
+  },
+
+  // Hilfsfunktion zum Extrahieren des Pfads aus URLs (funktioniert auch mit relativen URLs)
+  getPathFromUrl(url) {
+    // Einfache Pfadextraktion ohne URL-Konstruktor
+    // Entferne Query-Parameter und Hash
+    const pathWithoutQuery = url.split('?')[0].split('#')[0];
+    
+    // Behandlung relativer URLs
+    if (pathWithoutQuery.startsWith('/')) {
+      return pathWithoutQuery;
+    }
+    
+    // Entferne Protokoll und Host bei absoluten URLs
+    try {
+      const urlParts = pathWithoutQuery.split('/');
+      // Wenn die URL ein Protokoll enthält (http:// oder https://)
+      if (urlParts[0].includes(':')) {
+        return '/' + urlParts.slice(3).join('/');
+      }
+      // Einfacher Fall ohne Protokoll
+      return '/' + urlParts.slice(1).join('/');
+    } catch (error) {
+      // Fallback: Gib einfach die URL ohne Queryparameter zurück
+      return pathWithoutQuery;
+    }
   },
   
   // Rate-Limit-Header auswerten
@@ -55,11 +92,25 @@ export const apiService = {
     
     // Wenn wir fast am Limit sind, zeige Warnung
     if (this.rateLimits[type].remaining !== null && this.rateLimits[type].remaining < 5) {
+      const typeLabel = type === 'ai' ? 'KI' : 'API';
       notificationService.showNotification(
-        `Fast am API-Limit (${type}): ${this.rateLimits[type].remaining} Anfragen übrig.`, 
+        `Fast am ${typeLabel}-Limit: ${this.rateLimits[type].remaining} Anfragen übrig.`, 
         'warning'
       );
     }
+  },
+  
+  // Hilfsfunktion zum Prüfen der Rate-Limit-Header
+  checkRateLimitHeaders(response, context = '', isAiRequest = false) {
+    const warning = response.headers.get('X-RateLimit-Warning');
+    if (warning) {
+      const typeLabel = isAiRequest ? 'KI' : 'Standard';
+      const formattedContext = context ? ` (${context})` : '';
+      logService.log("WARN", `${typeLabel}-Rate-Limit-Warnung${formattedContext}:`, warning);
+      notificationService.showNotification(warning, "warning", 8000);
+      return true;
+    }
+    return false;
   },
   
   // API-Aufruf mit Offline-Unterstützung und Caching
@@ -101,22 +152,20 @@ export const apiService = {
       const response = await fetch(url, options);
       
       // Auf Warnungen prüfen
-      const warning = response.headers.get('X-RateLimit-Warning');
-      if (warning) {
-        console.log("[WARN] Rate-Limit-Warnung:", warning);
-        notificationService.showNotification(warning, "warning", 8000);
-      }
+      const isAiRequest = url.includes('/genai-brief');
+      const pathContext = this.getPathFromUrl(url);
+      this.checkRateLimitHeaders(response, pathContext, isAiRequest);
       
       // Auf Rate-Limit-Fehler prüfen
       if (response.status === 429) {
         const errorData = await response.json();
-        const message = errorData.error || "Zu viele Anfragen. Bitte später erneut versuchen.";
+        const typeLabel = isAiRequest ? 'KI' : 'API';
+        const message = errorData.error || `Zu viele ${typeLabel}-Anfragen. Bitte später erneut versuchen.`;
         notificationService.showNotification(message, "error", 10000);
         throw new Error(message);
       }
       
       // Rate-Limit-Auswertung
-      const isAiRequest = url.includes('/genai-brief');
       this.updateRateLimits(response, isAiRequest ? 'ai' : 'standard');
       
       // Bei Erfolg und wenn Cache-Funktion verfügbar, Ergebnis cachen
@@ -149,6 +198,11 @@ export const apiService = {
     try {
       fetch(url, options)
         .then(response => {
+          // Auch im Hintergrund Rate-Limit-Header prüfen
+          const isAiRequest = url.includes('/genai-brief');
+          const pathContext = this.getPathFromUrl(url);
+          this.checkRateLimitHeaders(response, `Hintergrund: ${pathContext}`, isAiRequest);
+          
           if (response.ok) {
             return response.json();
           }
@@ -241,6 +295,54 @@ export const apiService = {
     }
   },
   
+  // Wahlkreis abrufen
+  async getWahlkreis(wohnort) {
+    try {
+      const response = await this.fetchWithOfflineSupport(
+        `/api/v1/BTW25/wahlkreis?wohnort=${encodeURIComponent(wohnort.trim())}`,
+        {},
+        () => cacheService.getWahlkreisCache(wohnort),
+        (data) => cacheService.setWahlkreisCache(wohnort, data)
+      );
+      
+      if (!response.ok && !response._fromCache) {
+        throw new Error(`Fehler beim Abrufen des Wahlkreises für ${wohnort}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      logService.log("ERROR", `Fehler beim Abrufen des Wahlkreises für ${wohnort}`, {
+        message: error.message
+      });
+      throw error;
+    }
+  },
+  
+  // Abgeordnete basierend auf Wahlkreis abrufen
+  async getAbgeordneteForWahlkreis(wahlkreisNr, wohnort) {
+    try {
+      const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${wahlkreisNr}&wohnort=${encodeURIComponent(wohnort)}`;
+      
+      const response = await this.fetchWithOfflineSupport(
+        abgeordneteUrl,
+        {},
+        () => cacheService.getAbgeordneteCache(`wk_${wahlkreisNr}_${wohnort}`),
+        (data) => cacheService.setAbgeordneteCache(`wk_${wahlkreisNr}_${wohnort}`, data)
+      );
+      
+      if (!response.ok && !response._fromCache) {
+        throw new Error(`Fehler beim Abrufen der Abgeordneten für Wahlkreis ${wahlkreisNr}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      logService.log("ERROR", `Fehler beim Abrufen der Abgeordneten für Wahlkreis ${wahlkreisNr}`, {
+        message: error.message
+      });
+      throw error;
+    }
+  },
+  
   // Abgeordnete basierend auf Wohnort abrufen
   async getAbgeordnete(ort) {
     if (!ort || !ort.trim()) {
@@ -249,13 +351,7 @@ export const apiService = {
     
     try {
       // Zuerst versuchen, Wahlkreisdaten zu bekommen
-      const wahlkreisResponse = await fetch(`/api/v1/BTW25/wahlkreis?wohnort=${encodeURIComponent(ort.trim())}`);
-      
-      if (!wahlkreisResponse.ok) {
-        throw new Error("Fehler beim Abrufen des Wahlkreises");
-      }
-      
-      const wahlkreisData = await wahlkreisResponse.json();
+      const wahlkreisData = await this.getWahlkreis(ort);
       const wahlkreise = Array.isArray(wahlkreisData) ? wahlkreisData : [wahlkreisData];
       
       // Abgeordnete für jeden Wahlkreis abrufen und zusammenführen
@@ -264,23 +360,19 @@ export const apiService = {
       for (const wahlkreis of wahlkreise) {
         if (!wahlkreis.wahlkreisNr) continue;
         
-        // Abgeordneten-Anfrage mit Cache-Unterstützung
-        const abgeordneteUrl = `/api/v1/BTW25/abgeordnete?wahlkreis=${wahlkreis.wahlkreisNr}&wohnort=${encodeURIComponent(wahlkreis.wohnort || ort)}`;
-        
         try {
-          const abgeordneteResponse = await fetch(abgeordneteUrl);
+          const abgeordnete = await this.getAbgeordneteForWahlkreis(
+            wahlkreis.wahlkreisNr, 
+            wahlkreis.wohnort || ort
+          );
           
-          if (abgeordneteResponse.ok) {
-            const abgeordnete = await abgeordneteResponse.json();
-            
-            // Wahlkreisbezeichnung hinzufügen
-            const abgeordneteMitWKB = abgeordnete.map(abg => ({
-              ...abg,
-              wkr_bezeichnung: wahlkreis.wahlkreisBez || "Unbekannter Wahlkreis"
-            }));
-            
-            alleAbgeordnete = [...alleAbgeordnete, ...abgeordneteMitWKB];
-          }
+          // Wahlkreisbezeichnung hinzufügen
+          const abgeordneteMitWKB = abgeordnete.map(abg => ({
+            ...abg,
+            wkr_bezeichnung: wahlkreis.wahlkreisBez || "Unbekannter Wahlkreis"
+          }));
+          
+          alleAbgeordnete = [...alleAbgeordnete, ...abgeordneteMitWKB];
         } catch (error) {
           logService.log("WARN", `Fehler beim Abrufen der Abgeordneten für Wahlkreis ${wahlkreis.wahlkreisNr}`, {
             error: error.message
@@ -293,7 +385,7 @@ export const apiService = {
         new Map(alleAbgeordnete.map(item => [item.id, item])).values()
       );
       
-      // Im Cache speichern
+      // Im Cache speichern (für den Gesamtergebnis-Cache)
       cacheService.setAbgeordneteCache(ort, uniqueAbgeordnete);
       
       return uniqueAbgeordnete;
@@ -316,7 +408,7 @@ export const apiService = {
     }
   },
   
-  // KI-Brief generieren
+  // KI-Brief generieren (keine Cache-Unterstützung, reine Online-Funktion)
   async generateAiBrief(userData) {
     try {
       const response = await fetch("/api/v1/genai-brief", {
@@ -325,12 +417,8 @@ export const apiService = {
         body: JSON.stringify({ userData })
       });
       
-      // Auf Warnungen prüfen
-      const warning = response.headers.get('X-RateLimit-Warning');
-      if (warning) {
-        console.log("[WARN] KI-Rate-Limit-Warnung:", warning);
-        notificationService.showNotification(warning, "warning", 8000);
-      }
+      // Auf Warnungen prüfen (explizit für KI-Anfragen)
+      this.checkRateLimitHeaders(response, 'KI-Brief', true);
       
       // Auf Rate-Limit-Fehler prüfen
       if (response.status === 429) {

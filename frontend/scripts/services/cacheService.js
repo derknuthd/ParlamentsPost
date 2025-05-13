@@ -5,6 +5,7 @@ export const cacheService = {
       enabled: true,
       abgeordneteTTL: 24 * 60 * 60 * 1000, // 24 Stunden
       topicsTTL: 7 * 24 * 60 * 60 * 1000,  // 1 Woche
+      wahlkreisTTL: 24 * 60 * 60 * 1000,   // 24 Stunden
     },
     
     // Generische Cache-Methoden
@@ -82,6 +83,19 @@ export const cacheService = {
       return this.clearCacheByPrefix('abgeordnete_');
     },
     
+    // Wahlkreis (NEU)
+    setWahlkreisCache(wohnort, data) {
+      return this.setCache(`wahlkreis_${wohnort.trim().toLowerCase()}`, data, this.config.wahlkreisTTL);
+    },
+    
+    getWahlkreisCache(wohnort) {
+      return this.getCache(`wahlkreis_${wohnort.trim().toLowerCase()}`, this.config.wahlkreisTTL);
+    },
+    
+    clearWahlkreisCache() {
+      return this.clearCacheByPrefix('wahlkreis_');
+    },
+    
     // Topics
     setTopicsCache(data) {
       return this.setCache('parlamentspost_topics', data, this.config.topicsTTL);
@@ -134,7 +148,8 @@ export const cacheService = {
         'parlamentspost_topics',
         'parlamentspost_topic_',
         'parlamentspost_subtopics_',
-        'parlamentspost_briefe'
+        'parlamentspost_briefe',
+        'wahlkreis_'  // Neu hinzugefügt
       ];
       
       let totalDeleted = 0;

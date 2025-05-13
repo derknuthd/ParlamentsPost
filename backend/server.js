@@ -89,6 +89,7 @@ app.use("/api/v1", (req, res, next) => {
   // Wenn eine Warnung ausgegeben werden soll
   if (result.warning) {
     res.setHeader('X-RateLimit-Warning', result.message);
+    logService.debug("Rate-Limit-Warning Header gesetzt:", result.message);
   }
   
   // Wenn nicht erlaubt

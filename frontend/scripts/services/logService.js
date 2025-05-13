@@ -1,6 +1,6 @@
 export const logService = {
     // Log-Level: DEBUG, INFO, WARN, ERROR
-    logLevel: "INFO",
+    logLevel: "DEBUG",
     
     // Verfügbare Log-Level
     logLevels: ["DEBUG", "INFO", "WARN", "ERROR"],

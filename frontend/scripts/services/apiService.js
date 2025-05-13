@@ -39,17 +39,17 @@ export const apiService = {
       );
     });
 
-    // Test-Benachrichtigung nur in der Entwicklungsumgebung
-    if (import.meta.env?.DEV) {
-      setTimeout(() => {
-          notificationService.showNotification(
-          "Test-Benachrichtigung - Prüfung des Benachrichtigungssystems",
-          "warning",
-          10000
-          );
-          console.log("Test-Benachrichtigung wurde gesendet");
-      }, 3000); // Verzögerung von 3 Sekunden nach Initialisierung
-    }
+    // // Test-Benachrichtigung nur in der Entwicklungsumgebung
+    // if (import.meta.env?.DEV) {
+    //   setTimeout(() => {
+    //       notificationService.showNotification(
+    //       "Test-Benachrichtigung - Prüfung des Benachrichtigungssystems",
+    //       "warning",
+    //       10000
+    //       );
+    //       console.log("Test-Benachrichtigung wurde gesendet");
+    //   }, 3000); // Verzögerung von 3 Sekunden nach Initialisierung
+    // }
   },
 
   // Hilfsfunktion zum Extrahieren des Pfads aus URLs (funktioniert auch mit relativen URLs)

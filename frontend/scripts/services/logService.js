@@ -1,4 +1,4 @@
-import { config } from './config.js';
+import { config } from '../config.js';
 
 export const logService = {
     // Log-Level aus der Konfiguration nehmen

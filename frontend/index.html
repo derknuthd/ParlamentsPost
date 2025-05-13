@@ -142,258 +142,114 @@
         </div>
       </div>
 
-      <!-- Formular -->
-      <form
-        id="user-form"
-        class="print:hidden relative bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg space-y-6 transition-colors duration-500"
-        @submit="validateAndSubmit"
-      >
-        <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-          Persönliche Daten & Abgeordnetenauswahl
-        </h3>
+  <!-- Linke Spalte: Zwei gleich hohe Blöcke -->
+  <form id="user-form" @submit="validateAndSubmit">
 
-        <!-- Persönliche Informationen -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Name -->
-          <div>
-            <label
-              for="name"
-              class="block text-gray-800 dark:text-gray-300 font-medium"
-              >Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              class="mt-1 p-2 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-              x-model="name"
-              placeholder="Maxine Musterfrau"
-              autocomplete="name"
-              required
-            />
-          </div>
+  <div class="flex flex-col gap-6 h-full">
 
-          <!-- E-Mail -->
-          <div>
-            <label
-              for="email"
-              class="block text-gray-800 dark:text-gray-300 font-medium"
-              >E-Mail</label
-            >
-            <input
-              type="email"
-              id="email"
-              class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-              x-model="email"
-              placeholder="maxine@email.de"
-              required
-            />
-          </div>
-
-          <!-- Straße und Hausnummer -->
-          <div>
-            <label
-              for="strasse"
-              class="block text-gray-800 dark:text-gray-300 font-medium"
-              >Straße und Hausnummer</label
-            >
-            <input
-              type="text"
-              id="strasse"
-              placeholder="Musterstraße 1"
-              class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-              x-model="strasse"
-              autocomplete="street-address"
-              required
-            />
-          </div>
-
-          <!-- Postleitzahl (PLZ) -->
-          <div>
-            <label
-              for="plz"
-              class="block text-gray-800 dark:text-gray-300 font-medium"
-              >Postleitzahl (PLZ)</label
-            >
-            <input
-              type="text"
-              id="plz"
-              pattern="\d{5}"
-              placeholder="12345"
-              class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-              x-model="plz"
-              autocomplete="postal-code"
-              required
-            />
-            <small class="text-gray-500 dark:text-gray-400"
-              >Bitte 5-stellige PLZ eingeben.</small
-            >
-          </div>
-
-          <!-- Ort (Gemeinde) -->
-          <div>
-            <label
-              for="ort"
-              class="block text-gray-800 dark:text-gray-300 font-medium"
-            >
-            <span
-              x-data="{ isVisible: false }"
-              tabindex="0"
-              class="tooltip-wrapper"
-              @mouseenter="isVisible = true"
-              @mouseleave="isVisible = false"
-              @focus="isVisible = true"
-              @blur="isVisible = false"
-            >
-              Ort (Gemeinde)
-              <span
-                x-show="isVisible"
-                x-cloak
-                class="tooltip-content tooltip-auto"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-y-1"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-200"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform translate-y-1"
-                role="tooltip"
-              >
-                Basierend auf deinem Wohnort werden automatisch passende Abgeordnete aus deinem Wahlkreis und Wohnort gefiltert und angezeigt. Dafür wird Ihr Ort an den Server gesendet, jedoch nicht für die KI-Briefgenerierung verwendet.
-              </span>
-            </span>
-            </label>
-            <input
-              type="text"
-              id="ort"
-              placeholder="Hannover"
-              class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-              x-model="ort"
-              autocomplete="home"
-              @blur="holeAbgeordnete"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Abgeordnete auswählen -->
-        <div>
-          <label
-            for="abgeordnete"
-            class="block text-gray-800 dark:text-gray-300 font-medium"
-            >Abgeordnete auswählen</label
-          >
-          <select
-            id="abgeordnete"
-            class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-            x-model="abgeordnete"
-            required
-          >
-            <option value="">Bitte wählen</option>
-            <template x-for="person in abgeordneteListe" :key="person.id">
-              <option
-                :value="person.id"
-                x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"
-              ></option>
-            </template>
-          </select>
-        </div>
-
-        <!-- Argumente -->
-        <div>
-          <label class="block text-gray-800 dark:text-gray-300 font-medium">
-            <span
-            x-data="{ isVisible: false }"
-            tabindex="0"
-            class="tooltip-wrapper ml-1"
-            @mouseenter="isVisible = true"
-            @mouseleave="isVisible = false"
-            @focus="isVisible = true"
-            @blur="isVisible = false"
-          >
-            Argumente
-            <span
-              x-show="isVisible"
-              x-cloak
-              class="tooltip-content tooltip-auto"
-              x-transition:enter="transition ease-out duration-300"
-              x-transition:enter-start="opacity-0 transform translate-y-1"
-              x-transition:enter-end="opacity-100 transform translate-y-0"
-              x-transition:leave="transition ease-in duration-200"
-              x-transition:leave-start="opacity-100 transform translate-y-0"
-              x-transition:leave-end="opacity-0 transform translate-y-1"
-              role="tooltip"
-            >
-              Die ausgewählten Argumente bestimmen die Themenschwerpunkte Ihres Briefes und werden bei der KI-Nutzung als Teil des Prompts an die KI übermittelt, um einen passenden Brief zu generieren.
-            </span>
-          </span>
-          </label>    
-          <div class="mt-2 flex flex-wrap gap-4">
-            <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
-              <label class="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400"
-                  :value="subtopic.id"
-                  x-model="themen"
-                />
-                <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
-              </label>
-            </template>
-            <!-- Fallback, wenn keine Subtopics geladen werden konnten -->
-            <p x-show="availableSubtopics.length === 0" class="text-gray-500 italic">
-              Keine Argument-Vorlagen verfügbar.
-            </p>
-          </div>
-        </div>
-
-        <!-- Freitext -->
-        <div>
-          <label for="freitext" class="block text-gray-800 dark:text-gray-300 font-medium flex justify-between">
-            <span>Eigener Text</span>
-            <span class="text-sm" :class="freitext.length > config.textLimits.freitext ? 'text-red-500' : 'text-gray-500'">
-              <span x-text="freitext.length"></span>/<span x-text="config.textLimits.freitext"></span>
-            </span>
-          </label>
-          <textarea
-            id="freitext"
-            rows="4"
-            class="mt-1 block w-full border-gray-300 p-2 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-            x-model="freitext"
-            :maxlength="config.textLimits.freitext"
-            placeholder="Mir ist zusätzlich noch wichtig, dass...
-        Dieser Text wird bei KI-Nutzung an die KI übermittelt."
-          ></textarea>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex flex-wrap gap-2">
-          <!-- Manuell generieren -->
-          <button
-            type="submit"
-            class="manual-button bg-indigo-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            :disabled="isLoading"
-          >
-            Brief generieren 🔐ohne KI🔐
-          </button>
-
-          <!-- Mit KI generieren -->
-          <button
-            type="submit"
-            class="ai-button bg-teal-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            :disabled="isLoading"
-          >
-            Brief generieren ✨mit KI✨
-          </button>
-        </div>
-      </form>
-
-      <!-- Briefvorschau mit separaten Feldern -->
-      <div
-      id="briefvorschau"
-      class="bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500"
-      >
+    <!-- Block 1: Persönliche Daten & Abgeordnetenauswahl -->
+    <div class="bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
       <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-        Briefvorschau
+        Persönliche Daten & Abgeordnetenauswahl
       </h3>
+
+      <!-- Persönliche Informationen -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-gray-800 dark:text-gray-300 font-medium">Name</label>
+          <input type="text" id="name" class="mt-1 p-2 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="name" placeholder="Maxine Musterfrau" autocomplete="name" required />
+        </div>
+
+        <!-- E-Mail -->
+        <div>
+          <label for="email" class="block text-gray-800 dark:text-gray-300 font-medium">E-Mail</label>
+          <input type="email" id="email" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="email" placeholder="maxine@email.de" required />
+        </div>
+
+        <!-- Straße und Hausnummer -->
+        <div>
+          <label for="strasse" class="block text-gray-800 dark:text-gray-300 font-medium">Straße und Hausnummer</label>
+          <input type="text" id="strasse" placeholder="Musterstraße 1" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="strasse" autocomplete="street-address" required />
+        </div>
+
+        <!-- Postleitzahl (PLZ) -->
+        <div>
+          <label for="plz" class="block text-gray-800 dark:text-gray-300 font-medium">Postleitzahl (PLZ)</label>
+          <input type="text" id="plz" pattern="\d{5}" placeholder="12345" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="plz" autocomplete="postal-code" required />
+          <small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>
+        </div>
+
+        <!-- Ort (Gemeinde) -->
+        <div>
+          <label for="ort" class="block text-gray-800 dark:text-gray-300 font-medium">Ort (Gemeinde)</label>
+          <input type="text" id="ort" placeholder="Hannover" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="ort" autocomplete="home" @blur="holeAbgeordnete" required />
+        </div>
+      </div>
+
+      <!-- Abgeordnete auswählen -->
+      <div class="mt-6">
+        <label for="abgeordnete" class="block text-gray-800 dark:text-gray-300 font-medium">Abgeordnete auswählen</label>
+        <select id="abgeordnete" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="abgeordnete" required>
+          <option value="">Bitte wählen</option>
+          <template x-for="person in abgeordneteListe" :key="person.id">
+            <option :value="person.id" x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"></option>
+          </template>
+        </select>
+      </div>
+    </div>
+
+    <!-- Block 2: Briefbausteine -->
+    <div class="flex-1 bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
+      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefbausteine</h3>
+
+      <div class="mt-2 mb-3 text-sm text-gray-600 dark:text-gray-400">
+        <p>Tipp: Wähle 2-3 Argumente, die dir persönlich am wichtigsten sind. Der Brief wird aus diesen Bausteinen erzeugt.</p>
+      </div>
+
+      <!-- Argumente -->
+      <div>
+        <label class="block text-gray-800 dark:text-gray-300 font-medium">Argumente</label>
+        <div class="mt-2 flex flex-wrap gap-4">
+          <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
+            <label class="inline-flex items-center">
+              <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" :value="subtopic.id" x-model="themen" />
+              <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
+            </label>
+          </template>
+          <p x-show="availableSubtopics.length === 0" class="text-gray-500 italic">Keine Argument-Vorlagen verfügbar.</p>
+        </div>
+      </div>
+
+      <!-- Freitext -->
+      <div class="mt-6">
+        <label for="freitext" class="block text-gray-800 dark:text-gray-300 font-medium flex justify-between">
+          <span>Eigener Text</span>
+          <span class="text-sm" :class="freitext.length > config.textLimits.freitext ? 'text-red-500' : 'text-gray-500'">
+            <span x-text="freitext.length"></span>/<span x-text="config.textLimits.freitext"></span>
+          </span>
+        </label>
+        <textarea id="freitext" rows="4" class="mt-1 block w-full border-gray-300 p-2 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="freitext" :maxlength="config.textLimits.freitext" placeholder="Mir ist zusätzlich noch wichtig, dass...
+  Dieser Text wird bei KI-Nutzung an die KI übermittelt."></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        <button type="submit" class="manual-button bg-indigo-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
+          Brief generieren 🔐ohne KI🔐
+        </button>
+        <button type="submit" class="ai-button bg-teal-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
+          Brief generieren ✨mit KI✨
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+  <!-- Rechte Spalte: Briefvorschau -->
+  <div id="briefvorschau" class="h-full bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500">
+    <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefvorschau</h3>
+
 
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
         <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten. Der Brief wird angelehnt an DIN 5008 formatiert gedruckt.</p>

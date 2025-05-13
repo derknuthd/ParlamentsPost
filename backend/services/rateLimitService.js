@@ -66,7 +66,14 @@ class PrivacyFriendlyRateLimiter {
         warningIssued: false // Neue Eigenschaft: Wurde bereits eine Warnung ausgegeben?
       });
       logService.debug(`Neuer Bucket erstellt für ${bucketType}. Volle Kapazität: ${bucketConfig.capacity}`);
-      return { allowed: true };
+      
+      // Einen vollständigen Satz von Informationen zurückgeben
+      return { 
+        allowed: true,
+        limit: bucketConfig.capacity,
+        remaining: bucketConfig.capacity - 1,  // -1 für die aktuelle Anfrage
+        resetTime: Math.floor((now + bucketConfig.refillWindowMs) / 1000)  // Unix-Timestamp in Sekunden
+      };
     }
     
     // Bestehenden Bucket holen
@@ -102,6 +109,14 @@ class PrivacyFriendlyRateLimiter {
     
     // Reset-Informationen berechnen
     const resetInfo = this.getResetTimeInfo(req, isAiRequest);
+    const resetTime = Math.floor((now + resetInfo.resetTimeSeconds * 1000) / 1000); // Unix-Timestamp in Sekunden
+    
+    // Standardantwort vorbereiten (wird bei allen Fällen zurückgegeben)
+    const response = {
+      limit: bucketConfig.capacity,
+      remaining: Math.floor(bucket.tokens),  // Aktuelle verbleibende Tokens (abgerundet)
+      resetTime: resetTime
+    };
     
     // 80% Warnung, falls noch nicht ausgegeben
     if (usedPercentage >= 80 && !bucket.warningIssued) {
@@ -109,6 +124,7 @@ class PrivacyFriendlyRateLimiter {
       logService.info(`80% Warnung für ${bucketType} ausgelöst. Reset in: ${resetInfo.resetTimeFormatted}`);
       
       return { 
+        ...response,
         allowed: bucket.tokens >= 1,
         warning: true,
         warningLevel: "80percent",
@@ -121,12 +137,19 @@ class PrivacyFriendlyRateLimiter {
     if (bucket.tokens >= 1) {
       bucket.tokens -= 1;
       logService.debug(`Anfrage erlaubt für ${bucketType}. Verbleibende Tokens: ${bucket.tokens.toFixed(2)}`);
-      return { allowed: true };
+      
+      return { 
+        ...response,
+        allowed: true,
+        remaining: Math.floor(bucket.tokens)  // Aktualisieren nach Abzug
+      };
     }
     
     // Limit erreicht
     logService.warn(`Rate-Limit erreicht für ${bucketType}! Keine Tokens übrig. Reset in: ${resetInfo.resetTimeFormatted}`);
+    
     return { 
+      ...response,
       allowed: false,
       message: `Anfragelimit erreicht. Bitte warten Sie ${resetInfo.resetTimeFormatted} auf den Reset.`,
       resetTimeSeconds: resetInfo.resetTimeSeconds

@@ -86,6 +86,19 @@ app.use("/api/v1", (req, res, next) => {
   
   const result = rateLimiter.isAllowed(req);
   
+  // Alle verfügbaren Rate-Limit-Header setzen
+  if (result.limit) {
+    res.setHeader('X-RateLimit-Limit', result.limit);
+  }
+  
+  if (result.remaining !== undefined) {
+    res.setHeader('X-RateLimit-Remaining', result.remaining);
+  }
+  
+  if (result.resetTime) {
+    res.setHeader('X-RateLimit-Reset', result.resetTime);
+  }
+  
   // Wenn eine Warnung ausgegeben werden soll
   if (result.warning) {
     res.setHeader('X-RateLimit-Warning', result.message);
@@ -108,6 +121,19 @@ app.use("/api/v1", (req, res, next) => {
 app.use("/api/v1", (req, res, next) => {
   if (req.path === '/genai-brief') {
     const result = rateLimiter.isAllowed(req, true);
+    
+    // Alle verfügbaren Rate-Limit-Header setzen
+    if (result.limit) {
+      res.setHeader('X-RateLimit-Limit', result.limit);
+    }
+    
+    if (result.remaining !== undefined) {
+      res.setHeader('X-RateLimit-Remaining', result.remaining);
+    }
+    
+    if (result.resetTime) {
+      res.setHeader('X-RateLimit-Reset', result.resetTime);
+    }
     
     // Wenn eine Warnung ausgegeben werden soll
     if (result.warning) {

@@ -100,96 +100,116 @@ export const apiService = {
     }
   },
   
-  // Hilfsfunktion zum Prüfen der Rate-Limit-Header
-  checkRateLimitHeaders(response, context = '', isAiRequest = false) {
+// Verbesserte checkRateLimitHeaders-Funktion
+checkRateLimitHeaders(response, context = '', isAiRequest = false) {
     const warning = response.headers.get('X-RateLimit-Warning');
     if (warning) {
-      const typeLabel = isAiRequest ? 'KI' : 'Standard';
-      const formattedContext = context ? ` (${context})` : '';
-      logService.log("WARN", `${typeLabel}-Rate-Limit-Warnung${formattedContext}:`, warning);
-      notificationService.showNotification(warning, "warning", 8000);
-      return true;
+    const typeLabel = isAiRequest ? 'KI' : 'Standard';
+    const formattedContext = context ? ` (${context})` : '';
+    logService.log("WARN", `${typeLabel}-Rate-Limit-Warnung${formattedContext}:`, warning);
+    
+    // Nur eine Benachrichtigung anzeigen (keine Fehlerbehandlung auslösen)
+    notificationService.showNotification(warning, "warning", 8000);
+    
+    // Wichtig: Wir geben true zurück, wenn ein Warning-Header gefunden wurde,
+    // aber wir lösen KEINEN Fehler aus - die Anfrage sollte weiterlaufen
+    return true;
     }
     return false;
-  },
+},
   
-  // API-Aufruf mit Offline-Unterstützung und Caching
-  async fetchWithOfflineSupport(url, options = {}, getCacheFn, setCacheFn) {
+// Verbesserte fetchWithOfflineSupport-Funktion
+async fetchWithOfflineSupport(url, options = {}, getCacheFn, setCacheFn) {
     // Prüfen, ob Daten im Cache verfügbar sind
     if (getCacheFn) {
-      const cachedData = getCacheFn();
-      if (cachedData) {
+    const cachedData = getCacheFn();
+    if (cachedData) {
         // Im Offline-Modus müssen wir den Cache verwenden
         if (!this.isOnline) {
-          logService.log("INFO", `Offline-Modus: Daten aus Cache für ${url}`);
-          return { 
-            ok: true, 
-            json: () => Promise.resolve(cachedData),
-            _fromCache: true // Markierung hinzufügen
-          };
-        } else {
-          // Im Online-Modus prüfen wir auch, ob wir den Cache verwenden können
-          logService.log("INFO", `Daten aus Cache für ${url} geladen`);
-          
-          // Starte eine Hintergrundaktualisierung
-          this.updateCacheInBackground(url, options, setCacheFn);
-          
-          // Gib die Daten aus dem Cache zurück
-          return { 
+        logService.log("INFO", `Offline-Modus: Daten aus Cache für ${url}`);
+        return { 
             ok: true, 
             json: () => Promise.resolve(cachedData),
             _fromCache: true
-          };
+        };
+        } else {
+        // Im Online-Modus prüfen wir auch, ob wir den Cache verwenden können
+        logService.log("INFO", `Daten aus Cache für ${url} geladen`);
+        
+        // Starte eine Hintergrundaktualisierung
+        this.updateCacheInBackground(url, options, setCacheFn);
+        
+        // Gib die Daten aus dem Cache zurück
+        return { 
+            ok: true, 
+            json: () => Promise.resolve(cachedData),
+            _fromCache: true
+        };
         }
-      } else if (!this.isOnline) {
+    } else if (!this.isOnline) {
         // Wenn offline und keine Cache-Daten verfügbar
         throw new Error("Keine Netzwerkverbindung und keine Cache-Daten verfügbar");
-      }
+    }
     }
     
     // Normal fortfahren, wenn online und keine Cache-Daten vorhanden sind
     try {
-      const response = await fetch(url, options);
-      
-      // Auf Warnungen prüfen
-      const isAiRequest = url.includes('/genai-brief');
-      const pathContext = this.getPathFromUrl(url);
-      this.checkRateLimitHeaders(response, pathContext, isAiRequest);
-      
-      // Auf Rate-Limit-Fehler prüfen
-      if (response.status === 429) {
+    const response = await fetch(url, options);
+    
+    // Rate-Limit-Auswertung
+    const isAiRequest = url.includes('/genai-brief');
+    this.updateRateLimits(response, isAiRequest ? 'ai' : 'standard');
+    
+    // Auf Warnungen prüfen - WICHTIG: Wir reagieren auf die Warnung, aber brechen nicht ab
+    const pathContext = this.getPathFromUrl(url);
+    this.checkRateLimitHeaders(response, pathContext, isAiRequest);
+    
+    // Auf Rate-Limit-Fehler prüfen - NUR bei 429 Status-Code
+    // Das ist der wirkliche Fehler, keine bloße Warnung
+    if (response.status === 429) {
         const errorData = await response.json();
         const typeLabel = isAiRequest ? 'KI' : 'API';
         const message = errorData.error || `Zu viele ${typeLabel}-Anfragen. Bitte später erneut versuchen.`;
         notificationService.showNotification(message, "error", 10000);
         throw new Error(message);
-      }
-      
-      // Rate-Limit-Auswertung
-      this.updateRateLimits(response, isAiRequest ? 'ai' : 'standard');
-      
-      // Bei Erfolg und wenn Cache-Funktion verfügbar, Ergebnis cachen
-      if (response.ok && setCacheFn) {
+    }
+    
+    // WICHTIG: Wir prüfen response.ok NACH der Warnung
+    // Bei einer 80%-Warnung ist response.ok immer noch true
+    if (!response.ok) {
+        // Bei anderen Fehlern (nicht 429) versuchen wir, die Fehlermeldung zu extrahieren
+        try {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP-Fehler: ${response.status}`);
+        } catch (jsonError) {
+        // Falls keine JSON-Daten vorhanden sind
+        throw new Error(`HTTP-Fehler: ${response.status}`);
+        }
+    }
+    
+    // Bei Erfolg und wenn Cache-Funktion verfügbar, Ergebnis cachen
+    if (setCacheFn) {
         const data = await response.clone().json();
         setCacheFn(data);
-      }
-      return response;
+    }
+    
+    return response;
     } catch (error) {
-      // Bei Netzwerkfehlern prüfen, ob Cache verfügbar
-      if (getCacheFn) {
+    // Bei Netzwerkfehlern prüfen, ob Cache verfügbar
+    if (getCacheFn) {
         const cachedData = getCacheFn();
         if (cachedData) {
-          logService.log("INFO", `Netzwerkfehler: Fallback auf Cache-Daten für ${url}`);
-          return { 
+        logService.log("INFO", `Netzwerkfehler: Fallback auf Cache-Daten für ${url}`);
+        return { 
             ok: true, 
             json: () => Promise.resolve(cachedData),
             _fromCache: true
-          };
+        };
         }
-      }
-      throw error;
     }
-  },
+    throw error;
+    }
+},
   
   // Cache im Hintergrund aktualisieren
   async updateCacheInBackground(url, options, setCacheFn) {

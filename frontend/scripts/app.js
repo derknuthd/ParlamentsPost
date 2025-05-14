@@ -240,7 +240,7 @@ Platz der Republik 1
         this.aktiviereBriefvorschau();
         
         // Den Brief automatisch im Local Storage speichern
-        this.speichereBrief();
+        // this.speichereBrief(); // führt zu Scrollen in den Briefvorschau-Bereich
       } finally {
         // Lade-Status deaktivieren und Timer anhalten - wird IMMER ausgeführt
         this.isLoading = false;

@@ -19,6 +19,18 @@
       counter-reset: page;
     }
   
+    /* Entferne fixe Höhen und Mindesthöhen von relevanten Containern */
+    #briefvorschau, 
+    #vorschau-container,
+    #brief-text,
+    main, 
+    body, 
+    html {
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: none !important;
+    }
+
     /* Nicht-druckbare Elemente ausblenden */
     .print\:hidden,
     #header,

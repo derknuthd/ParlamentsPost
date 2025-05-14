@@ -232,7 +232,7 @@
       <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefbausteine</h3>
 
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wähle bis zu 4 Argumente aus, die dir persönlich am wichtigsten sind und die dein Gegenüber überzeugen.</p>
+        <p>Wähle bis zu 3 Argumente aus oder schreibe deine eigenen Ideen auf, um dein Gegenüber zu überzeugen.</p>
       </div>
 
       <!-- Argumente -->
@@ -247,7 +247,7 @@
             @focus="isVisible = true"
             @blur="isVisible = false"
           >
-            Argumente
+            Argument-Vorlagen
             <span
               x-show="isVisible"
               x-cloak
@@ -260,7 +260,7 @@
               x-transition:leave-end="opacity-0 transform translate-y-1"
               role="tooltip"
             >
-              Die ausgewählten Argumente bestimmen die Themenschwerpunkte Ihres Briefes und werden bei der KI-Nutzung als Teil des Prompts an die KI übermittelt, um einen passenden Brief zu generieren.
+              Die ausgewählten Argumente bestimmen die Themenschwerpunkte deines Briefes und werden bei der KI-Nutzung als Teil des Anfrage an die KI übermittelt, um einen passenden Brief zu erstellen.
             </span>
           </span>
         </label>
@@ -271,9 +271,9 @@
               class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" 
               :value="subtopic.id" 
               x-model="themen" 
-              :disabled="!themen.includes(subtopic.id) && themen.length >= 4"
-              @click="if(themen.length >= 4 && !themen.includes(subtopic.id)) { 
-                       notificationService.showNotification('Bitte wähle maximal 4 Argumente für ein optimales Ergebnis.', 'warning'); 
+              :disabled="!themen.includes(subtopic.id) && themen.length >= 3"
+              @click="if(themen.length >= 3 && !themen.includes(subtopic.id)) { 
+                       notificationService.showNotification('Bitte wähle maximal 3 Argumente für ein optimales Ergebnis.', 'warning'); 
                        return false;
                      }" />
               <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
@@ -286,7 +286,7 @@
       <!-- Freitext -->
       <div class="mt-6">
         <label for="freitext" class="block text-gray-800 dark:text-gray-300 font-medium flex justify-between">
-          <span>Eigener Text</span>
+          <span>Deine Argumente</span>
           <span class="text-sm" :class="freitext.length > config.textLimits.freitext ? 'text-red-500' : 'text-gray-500'">
             <span x-text="freitext.length"></span>/<span x-text="config.textLimits.freitext"></span>
           </span>

@@ -232,7 +232,7 @@
       <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefbausteine</h3>
 
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wähle 2-3 Argumente, die dir persönlich am wichtigsten sind und die dein Gegenüber überzeugen.</p>
+        <p>Wähle bis zu 4 Argumente aus, die dir persönlich am wichtigsten sind und die dein Gegenüber überzeugen.</p>
       </div>
 
       <!-- Argumente -->
@@ -267,7 +267,15 @@
         <div class="mt-2 flex flex-wrap gap-4">
           <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
             <label class="inline-flex items-center">
-              <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" :value="subtopic.id" x-model="themen" />
+              <input type="checkbox" 
+              class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" 
+              :value="subtopic.id" 
+              x-model="themen" 
+              :disabled="!themen.includes(subtopic.id) && themen.length >= 4"
+              @click="if(themen.length >= 4 && !themen.includes(subtopic.id)) { 
+                       notificationService.showNotification('Bitte wähle maximal 4 Argumente für ein optimales Ergebnis.', 'warning'); 
+                       return false;
+                     }" />
               <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
             </label>
           </template>

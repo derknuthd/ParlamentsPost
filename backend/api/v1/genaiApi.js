@@ -36,6 +36,19 @@ router.post("/genai-brief", async (req, res) => {
       });
     }
 
+    // NEUE VALIDIERUNG: Beschränkung der Anzahl der Argumente
+    const MAX_SUBTOPICS = parseInt(process.env.MAX_SUBTOPICS || "4", 10);
+    if (userData.selectedSubtopics && userData.selectedSubtopics.length > MAX_SUBTOPICS) {
+      logService.warn("Zu viele Argumente ausgewählt", { 
+        selected: userData.selectedSubtopics.length, 
+        max: MAX_SUBTOPICS 
+      });
+      return res.status(400).json({ 
+        error: "Zu viele Argumente", 
+        message: `Bitte wählen Sie maximal ${MAX_SUBTOPICS} Argumente aus für ein optimales Ergebnis.` 
+      });
+    };
+
     const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
     const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
 
@@ -105,6 +118,19 @@ Achte bitte abschließend noch einmal darauf, dass der von dir generierte Text K
 
     logService.debug("Vollständiger Prompt:", prompt);
     
+    // NEUE VALIDIERUNG: Gesamtlänge des Prompts
+    const MAX_PROMPT_LENGTH = parseInt(process.env.MAX_PROMPT_LENGTH || "6000", 10);
+    if (prompt.length > MAX_PROMPT_LENGTH) {
+      logService.warn("Prompt zu lang", { 
+        length: prompt.length, 
+        max: MAX_PROMPT_LENGTH 
+      });
+      return res.status(400).json({ 
+        error: "Prompt zu lang", 
+        message: "Der generierte Prompt ist zu lang. Bitte reduzieren Sie die Anzahl oder Länge Ihrer Argumente." 
+      });
+    };    
+
     const openaiRequestData = {
       model,
       messages: [{ role: "user", content: prompt }],

@@ -46,31 +46,34 @@ router.post("/genai-brief", async (req, res) => {
     }
     
     // Prompt-Blöcke der ausgewählten Subtopics sammeln
-    let promptDetails = "";
+    let selectedArguments = "";
     if (userData.selectedSubtopics && userData.selectedSubtopics.length > 0) {
-      promptDetails = "Beachte folgende spezifische Anliegen:\n" + 
+      selectedArguments =  
         userData.selectedSubtopics
           .map(subtopic => subtopic.promptBlock)
           .join("\n\n");
     }
     
-    // Subtopic-Namen für die Themenübersicht sammeln
-    let themenÜbersicht = "Keine spezifischen Themen angegeben.";
-    if (userData.selectedSubtopics && userData.selectedSubtopics.length > 0) {
-      themenÜbersicht = userData.selectedSubtopics
-        .map(subtopic => subtopic.name)
-        .join(", ");
-    }
+    // // Subtopic-Namen für die Themenübersicht sammeln
+    // let themenÜbersicht = "Keine spezifischen Themen angegeben.";
+    // if (userData.selectedSubtopics && userData.selectedSubtopics.length > 0) {
+    //   themenÜbersicht = userData.selectedSubtopics
+    //     .map(subtopic => subtopic.name)
+    //     .join(", ");
+    // }
 
     // Conclusion-Prompt verwenden, falls vorhanden
     let conclusionPromptText = "";
     if (userData.topic && userData.topic.conclusionPrompt) {
-      conclusionPromptText = "\n\nFür den Abschluss des Briefes:\n" + 
+      conclusionPromptText = 
         userData.topic.conclusionPrompt;
     }
 
     const prompt = `
 ${basePrompt}
+
+Der Brief richtet sich an:
+${userData.abgeordneteName || "einen Abgeordneten"} (${userData.abgeordnetePartei || "Partei unbekannt"})
 
 Erstelle nur den reinen Brieftext, also den Hauptinhalt des Schreibens.
 Verwende dabei keine Formatierungsbefehle als Markdown, HTML oder ähnliches. 
@@ -85,17 +88,15 @@ Folgende Informationen sind bereits im Rahmen des Briefes enthalten und müssen 
 
 Das Rahmendokument enthält bereits die Anrede und die Grußformel. Dein Beitrag beginnt nach der Anrede und endet vor der Grußformel.
 
-Informationen zu den Themen:
-${themenÜbersicht}
+Nutze dabei folgende Argumente:
+${selectedArguments}
 
-${promptDetails}
+Und folgendes Argument, dass der User selbst eingeben hat:
+${userData.freitext || "Kein zusätzliches Argument angegeben."}
+Lege dabei besonderen Wert auf die Themen, die der User angegeben hat.
 
+Für den Abschluss des Briefes:
 ${conclusionPromptText}
-
-Freitext vom Nutzer:
-${userData.freitext || "Kein zusätzlicher Freitext angegeben."}
-
-Der Brief richtet sich an: ${userData.abgeordneteName || "einen Abgeordneten"} (${userData.abgeordnetePartei || "Partei unbekannt"})
 
 Formuliere den Hauptinhalt des Briefes auf Basis dieser Informationen. Nutze dabei einen höflichen und respektvollen Ton, der sich für ein formales Schreiben eignet. Schreibe sachlich, prägnant und ohne Wiederholungen.
 

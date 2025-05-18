@@ -1,9 +1,7 @@
 // genaiApi.js
 const express = require("express");
-const axios = require("axios");
 const router = express.Router();
-
-// Import Service-Module
+const llmService = require('../../services/llmService');
 const logService = require('../../services/logService');
 
 // POST /genai-brief - Hier kein Rate-Limiter mehr, da er in server.js definiert ist
@@ -47,10 +45,7 @@ router.post("/genai-brief", async (req, res) => {
         error: "Zu viele Argumente", 
         message: `Bitte wählen Sie maximal ${MAX_SUBTOPICS} Argumente aus für ein optimales Ergebnis.` 
       });
-    };
-
-    const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
-    const maxTokens = parseInt(process.env.OPENAI_MAX_TOKENS || "1200", 10);
+    }
 
     // Basis-Prompt aus dem Topic verwenden, falls vorhanden
     let basePrompt = "Du bist eine Hilfs-KI, die einen formalen Brief an einen Abgeordneten schreiben soll.";
@@ -71,7 +66,7 @@ router.post("/genai-brief", async (req, res) => {
     const hatPersoenlichesArgument = !!(userData.freitext && userData.freitext.trim());
 
     // Konfigurierbare Ziel-Gesamtlänge für Briefe (als Richtwert)
-    const TARGET_BRIEF_WORDS = parseInt(process.env.TARGET_BRIEF_WORDS || "300", 10);
+    const TARGET_BRIEF_WORDS = parseInt(process.env.TARGET_BRIEF_WORDS || "200", 10);
 
     // Minimale Wörter pro Abschnitt (absolute Untergrenzen)
     const MIN_WORDS = {
@@ -216,13 +211,14 @@ ${hatPersoenlichesArgument ? '- Das persönliche Argument des Nutzers soll im Mi
     // Allgemeine Formatanweisungen - mit tatsächlich berechneter Gesamtlänge
     const formatAnweisungen = `
 # STRUKTUR UND FORMAT
-- Erstelle NUR den Brieftext (keine Absenderzeile, Anrede, Grußformel, etc.)
+- Erstelle NUR den Hauptteil (keine Absenderzeile, Anrede, Grußformel, etc.)
 - Der Brief sollte etwa ${actualTotalWords} Wörter lang sein (Richtwert)
 - Verwende keine Formatierungsbefehle (kein Markdown/HTML)`;
-
     // Zusammensetzen des Prompts aus modularen Bausteinen - unter Berücksichtigung des persönlichen Arguments
     const prompt = `
 ${themaPrompt}
+- Schreibe am Anfang nicht "Sehr geehrte/r Frau/Herr [Nachname]" oder ähnliches
+- Schreibe am Ende nicht "Mit freundlichen Grüßen, [Ihr Name]" oder ähnliches
 
 Der Brief richtet sich an: ${userData.abgeordneter?.vollerName || "eine Person im Parlament, deren Geschlecht du nicht kennst und deshalb geschlechtsunspezifische Sprache wählst"} (${userData.abgeordneter?.partei || "Partei unbekannt"})
 
@@ -240,6 +236,9 @@ ${userData.freitext}` : ''}
 ${conclusionPromptText}
 
 ${stilAnweisungen}
+Achte abschließend darauf, dass der generierte Text KEINE Anrede (wie "Sehr geehrte/r Frau/Herr [Nachname]"), KEINE Grußformel, KEINE Unterschrift und KEINEN Namen unter der Unterschrift enthält. Diese Informationen sind bereits im Rahmen des Briefes enthalten und müssen von dir NICHT generiert werden.
+Wenn im dem von dir generierten Text folgendes steht "Sehr geehrte/r Frau/Herr [Nachname]" oder ähnliches oder "Mit freundlichen Grüßen, [Ihr Name]" oder ähnliches, dann lösche es. DU WIRST DARAN GEMESSEN, DASS DIESE TEILE NICHT IN DEM TEXT ENTHALTEN SIND.
+PÜFE DEN TEXT ABSCHLIESSEND AUF RECHTSCHREIBFEHLER UND GRAMMATIKFEHLER UND KORRIGIERE SIE.
 `;
 
     logService.debug("Prompt-Länge:", prompt.length);
@@ -255,58 +254,54 @@ ${stilAnweisungen}
         error: "Prompt zu lang", 
         message: "Der generierte Prompt ist zu lang. Bitte reduzieren Sie die Anzahl oder Länge Ihrer Argumente." 
       });
-    };    
-
-    const openaiRequestData = {
-      model,
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: maxTokens,
-      temperature: 0.7,
-    };
-    
-    logService.debug("OpenAI Request wird vorbereitet", { 
-      model, 
-      maxTokens, 
-      temperature: 0.7 
-    });  
+    }
 
     try {
-      logService.debug("OpenAI API-Anfrage wird gesendet...");
-      const openaiResponse = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        openaiRequestData,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          timeout: 30000 // 30 Sekunden Timeout
-        }
-      );
-
-      const generatedText =
-        openaiResponse.data.choices?.[0]?.message?.content ||
-        "(Konnte keinen Text generieren)";
+      const requestStartTime = Date.now();
+      logService.debug("KI-Anfrage wird vorbereitet", { 
+        provider: llmService.provider,
+        model: llmService.config[llmService.provider].defaultModel,
+        temperature: parseFloat(process.env.LLM_TEMPERATURE || "0.7")
+      });
+      
+      // LLM-Service anstatt direkter OpenAI-API-Anfrage verwenden
+      const generatedText = await llmService.generateCompletion(prompt);
       
       // Berechne ungefähre Wortanzahl des generierten Textes
       const approxWordCount = generatedText.split(/\s+/).length;
+      const targetRatio = approxWordCount / actualTotalWords;
+      const qualityIndicator = targetRatio >= 0.9 && targetRatio <= 1.2 ? "gut" : "abweichend";
+      const requestDuration = Date.now() - requestStartTime;
+      
       logService.info("KI-Text erfolgreich generiert", { 
+        provider: llmService.provider,
+        model: llmService.config[llmService.provider].defaultModel,
         approxWordCount,
         targetWordCount: actualTotalWords,
-        difference: approxWordCount - actualTotalWords
+        difference: approxWordCount - actualTotalWords,
+        ratio: targetRatio.toFixed(2),
+        quality: qualityIndicator,
+        duration: `${requestDuration}ms`
       });
 
-      return res.json({ briefText: generatedText });
-    } catch (openaiError) {
-      logService.error("OpenAI API Fehler:", openaiError.response?.data || openaiError.message);
+      return res.json({ 
+        briefText: generatedText,
+        meta: {
+          provider: llmService.provider,
+          model: llmService.config[llmService.provider].defaultModel,
+          wordCount: approxWordCount
+        }
+      });
+    } catch (llmError) {
+      logService.error("KI API Fehler:", llmError.response?.data || llmError.message);
       
       // Benutzerfreundliche Fehlermeldung je nach Fehlertyp
-      if (openaiError.response?.status === 429) {
+      if (llmError.response?.status === 429) {
         return res.status(429).json({
           error: "Überlastung",
           message: "Der Dienst ist momentan überlastet. Bitte versuchen Sie es in einigen Minuten erneut."
         });
-      } else if (openaiError.code === 'ECONNABORTED') {
+      } else if (llmError.code === 'ECONNABORTED') {
         return res.status(504).json({
           error: "Zeitüberschreitung",
           message: "Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es später noch einmal."

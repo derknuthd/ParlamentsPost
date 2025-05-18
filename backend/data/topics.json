@@ -5,7 +5,7 @@
       "name": "AfD Parteiverbotsverfahren",
       "description": "Rufe deine Abgeordneten auf, sich für ein Verbotsverfahren gegen die AfD zu engagieren.",
       "conclusion": "Deshalb bitte ich Sie nachdrücklich, sich für ein Verbotsverfahren gegen die AfD einzusetzen. Nutzen Sie Ihre Position, um dieses Anliegen im parlamentarischen Prozess voranzubringen. Eine Rückmeldung zu Ihren geplanten Aktivitäten in dieser Sache wäre mir wichtig. Die Stärkung unserer Demokratie liegt in unser aller Verantwortung.",
-      "basePrompt": "Formuliere einen Brief für ein Parteiverbotsverfahren gegen die AfD. Begründe, warum ein solches Verfahren zum Schutz unserer Demokratie notwendig ist. Beziehe dabei verfassungsrechtliche und gesellschaftspolitische Aspekte ein.",
+      "basePrompt": "Formuliere den Hauptteil eines Briefes für ein Parteiverbotsverfahren gegen die AfD. Begründe, warum ein solches Verfahren zum Schutz unserer Demokratie notwendig ist. Beziehe dabei verfassungsrechtliche und gesellschaftspolitische Aspekte ein.",
       "conclusionPrompt": "Formuliere einen prägnanten Abschluss für den Brief, der den Abgeordneten zu konkretem Handeln auffordert. Der Abschluss sollte die Kernargumente kurz zusammenfassen, spezifische parlamentarische Handlungsmöglichkeiten nennen und eine Bitte um Rückmeldung enthalten. Halte den Ton respektvoll aber bestimmt und betone die Dringlichkeit des Anliegens.",
       "subtopics": [
         {

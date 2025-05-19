@@ -93,39 +93,19 @@
           Willkommen bei ParlamentsPost
         </h2>
         <p class="text-lg text-gray-500 mb-8">
-          ParlamentsPost hilft dir, Briefe an deine Abgeordneten und politischen Entscheider:innen zu schreiben. Deine persönlichen Daten bleiben sicher auf deinem Gerät und werden auch bei optionaler KI-Unterstützung.
-          <span
-            x-data="{ isVisible: false }"
-            tabindex="0"
-            class="tooltip-wrapper"
-            @mouseenter="isVisible = true"
-            @mouseleave="isVisible = false"
-            @focus="isVisible = true"
-            @blur="isVisible = false"
-          >
+          ParlamentsPost hilft dir, persönliche Briefe an deine Abgeordneten und politischen Entscheider:innen zu schreiben. Deine Daten bleiben sicher auf deinem Gerät und werden auch bei optionaler KI-Unterstützung
+          <span 
+            title="Bei der KI-Briefgenerierung werden nur deine ausgewählten Themen und Argumente sowie dein Freitext übermittelt. Dein Name, deine Adresse und andere persönliche Kontaktdaten bleiben stets auf deinem Gerät."
+            class="tooltip-wrapper">
             nicht weitergegeben
-            <span
-              x-show="isVisible"
-              x-cloak
-              class="tooltip-content tooltip-auto"
-              x-transition:enter="transition ease-out duration-300"
-              x-transition:enter-start="opacity-0 transform translate-y-1"
-              x-transition:enter-end="opacity-100 transform translate-y-0"
-              x-transition:leave="transition ease-in duration-200"
-              x-transition:leave-start="opacity-100 transform translate-y-0"
-              x-transition:leave-end="opacity-0 transform translate-y-1"
-              role="tooltip"
-            >
-              Bei der KI-Briefgenerierung werden nur deine ausgewählten Themen und Argumente sowie dein Freitext übermittelt. Dein Name, deine Adresse und andere persönliche Kontaktdaten bleiben stets auf deinem Gerät.
-            </span>
           </span>
         </p>
       </header>
 
       <!-- Themenauswahl-Bereich -->
       <div class="col-span-full print:hidden bg-indigo-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg mb-6">
-        <h3 class="text-2xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">Wähle ein Thema</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Mit welchem Anliegen möchtest du dich an deine Abgeordneten wenden?</p>
+        <h3 class="text-2xl font-semibold mb-4 text-indigo-600">Wähle ein Thema</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Was möchtest du deinen Abgeordneten mitteilen?</p>
         
         <!-- Topic-Karten-Container -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -147,13 +127,13 @@
 
   <div class="flex flex-col gap-6 h-full">
 
-    <!-- Block 1: Persönliche Daten & Abgeordnetenauswahl -->
+    <!-- Block 1: Deine Adresse -->
     <div class="bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
       <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-        Persönliche Daten & Abgeordnetenauswahl
+        Deine Adresse
       </h3>
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Dein Angaben bei "Ort (Gemeinde)" bestimmen, welche Abgeordneten du zur Auswahl hast.</p>
+        <p>Wir brauchen deinen Ort, um deine Abgeordneten für dich zu finden. Alle anderen Angaben bleiben nur auf deinem Gerät.</p>
       </div>
       <!-- Persönliche Informationen -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -179,42 +159,33 @@
         <div>
           <label for="plz" class="block text-gray-800 dark:text-gray-300 font-medium">Postleitzahl (PLZ)</label>
           <input type="text" id="plz" pattern="\d{5}" placeholder="12345" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="plz" autocomplete="postal-code" required />
-          <small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>
+          <!--<small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>-->
         </div>
 
         <!-- Ort (Gemeinde) -->
         <div>
           <label for="ort" class="block text-gray-800 dark:text-gray-300 font-medium">
             <span
-              x-data="{ isVisible: false }"
-              tabindex="0"
+              title="Basierend auf deinem Wohnort werden automatisch passende Abgeordnete aus deinem Wahlkreis und Wohnort gefiltert und angezeigt. Dafür wird dein Ort an den Server gesendet, jedoch nicht für die KI-Briefgenerierung verwendet"
               class="tooltip-wrapper"
-              @mouseenter="isVisible = true"
-              @mouseleave="isVisible = false"
-              @focus="isVisible = true"
-              @blur="isVisible = false"
             >
-              Ort (Gemeinde)
-              <span
-                x-show="isVisible"
-                x-cloak
-                class="tooltip-content tooltip-auto"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-y-1"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-200"
-                x-transition:leave-start="opacity-100 transform translate-y-0"
-                x-transition:leave-end="opacity-0 transform translate-y-1"
-                role="tooltip"
-              >
-                Basierend auf deinem Wohnort werden automatisch passende Abgeordnete aus deinem Wahlkreis und Wohnort gefiltert und angezeigt. Dafür wird Ihr Ort an den Server gesendet, jedoch nicht für die KI-Briefgenerierung verwendet.
-              </span>
+              Ort
             </span>
           </label>
           <input type="text" id="ort" placeholder="Hannover" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="ort" autocomplete="home" @blur="holeAbgeordnete" required />
         </div>
       </div>
 
+    </div>
+
+    <!-- Block 2: Abgeordnetenauswahl -->
+    <div class="flex-1 bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
+      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
+        Wen möchtest du erreichen?
+      </h3>
+      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
+        <p>Wähle hier aus, an wen der Brief gehen soll.</p>
+      </div>
       <!-- Abgeordnete auswählen -->
       <div class="mt-6">
         <label for="abgeordnete" class="block text-gray-800 dark:text-gray-300 font-medium">Abgeordnete auswählen</label>
@@ -224,46 +195,27 @@
             <option :value="person.id" x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"></option>
           </template>
         </select>
-      </div>
+      </div>  
     </div>
 
-    <!-- Block 2: Briefbausteine -->
+
+    <!-- Block 3: Briefbausteine -->
     <div class="flex-1 bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
-      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefbausteine</h3>
+      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Deine Botschaft</h3>
 
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wähle bis zu 3 Argumente aus oder schreibe deine eigenen Ideen auf, um dein Gegenüber zu überzeugen.</p>
+        <p>Wähle bis zu 3 Argumente oder schreibe deine eigenen Gedanken dazu. Sie erscheinen später im Brief als Textbausteine oder 
+          <span
+            title="Die Argumente werden in den Brief eingefügt, um deine Botschaft zu unterstützen. Du kannst sie auch anpassen oder löschen."
+            class="tooltip-wrapper"
+          >
+          mithilfe der KI.
+          </span>
+        </p>
       </div>
 
       <!-- Argumente -->
       <div>
-        <label class="block text-gray-800 dark:text-gray-300 font-medium">
-          <span
-            x-data="{ isVisible: false }"
-            tabindex="0"
-            class="tooltip-wrapper ml-1"
-            @mouseenter="isVisible = true"
-            @mouseleave="isVisible = false"
-            @focus="isVisible = true"
-            @blur="isVisible = false"
-          >
-            Argument-Vorlagen
-            <span
-              x-show="isVisible"
-              x-cloak
-              class="tooltip-content tooltip-auto"
-              x-transition:enter="transition ease-out duration-300"
-              x-transition:enter-start="opacity-0 transform translate-y-1"
-              x-transition:enter-end="opacity-100 transform translate-y-0"
-              x-transition:leave="transition ease-in duration-200"
-              x-transition:leave-start="opacity-100 transform translate-y-0"
-              x-transition:leave-end="opacity-0 transform translate-y-1"
-              role="tooltip"
-            >
-              Die ausgewählten Argumente bestimmen die Themenschwerpunkte deines Briefes und werden bei der KI-Nutzung als Teil des Anfrage an die KI übermittelt, um einen passenden Brief zu erstellen.
-            </span>
-          </span>
-        </label>
         <div class="mt-2 flex flex-wrap gap-4">
           <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
             <label class="inline-flex items-center">
@@ -321,7 +273,7 @@ Dieser Text wird bei KI-Nutzung an die KI übermittelt."></textarea>
 
 
       <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten. Der Brief wird angelehnt an DIN 5008 formatiert gedruckt.</p>
+        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten.</p>
       </div>
 
       <!-- Formatierungsoptionen -->

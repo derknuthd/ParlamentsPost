@@ -74,24 +74,34 @@ class LLMService {
       
       // Extrahiere den generierten Text aus der Antwort
       let generatedText;
+      let tokenUsage = {};
       
       if (this.provider === "openai") {
         generatedText = response.data.choices?.[0]?.message?.content;
+        // Token-Nutzung extrahieren, falls verfügbar
+        tokenUsage = response.data.usage || {};
       } else if (this.provider === "mistral") {
         generatedText = response.data.choices?.[0]?.message?.content;
+        // Token-Nutzung extrahieren, falls verfügbar
+        tokenUsage = response.data.usage || {};
       }
       
       if (!generatedText) {
         throw new Error("Kein Text in der KI-Antwort gefunden");
       }
-
+  
       const responseTime = Date.now() - startTime;
       logService.info(`KI-Anfrage erfolgreich mit ${this.provider}`, { 
         provider: this.provider, 
         model: actualModel,
         responseLength: generatedText.length,
         responseTime: `${responseTime}ms`,
-        estimatedTokens: Math.round(generatedText.length / 4),
+        // Token-Nutzung loggen
+        tokenUsage: {
+          promptTokens: tokenUsage.prompt_tokens || 0,
+          completionTokens: tokenUsage.completion_tokens || 0,
+          totalTokens: tokenUsage.total_tokens || 0
+        },
         timestamp: new Date().toISOString()
       });
       

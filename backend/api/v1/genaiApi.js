@@ -200,12 +200,15 @@ router.post("/genai-brief", async (req, res) => {
     // Allgemeine Stilanweisungen - für ALLE Briefe gleich
     const stilAnweisungen = `
 # STIL
-- Falle nicht direkt mit der Tür ins Haus, sondern beginne mit einer kurzen Einleitung
-- Höflich und respektvoll, aber bestimmt und überzeugend
-- Persönlich, prägnant und ohne Wiederholungen
-- Schreibe aus Sicht der Person, die den Brief verfasst
+- nicht mit der Tür ins Haus fallen, sondern mit kurzer Einleitung beginnen
 - Vermeide Formulierungen, bei denen man das Geschlecht der schreibenden Person wissen muss. Verwende dann Sätze mit "ich"-Formulierungen.
-- Kurze, aktive Sätze statt komplizierter Konstruktionen
+- klare, ehrlicher Sprache, nicht zu akademisch
+- argumentiere passend zur Partei des Adressaten
+- schreibe so, als ob ich den Brief selbst geschrieben hätte
+- kleine Unsicherheiten oder Zwischentöne dürfen vorkommen
+- persönlich, prägnant und ohne Wiederholungen
+- kurze, aktive Sätze statt komplizierter Konstruktionen
+- höflich und respektvoll, aber bestimmt und überzeugend
 ${hatPersoenlichesArgument ? '- Das persönliche Argument des Nutzers soll im Mittelpunkt stehen' : ''}`;
 
     // Allgemeine Formatanweisungen - mit tatsächlich berechneter Gesamtlänge

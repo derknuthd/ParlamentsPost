@@ -121,7 +121,7 @@ Platz der Republik 1
         
         // Topic-Daten verwenden, falls bereits geladen
         if (this.topicData && this.topicData.name) {
-          betreff = `Anliegen zum Thema: ${this.topicData.name}`;
+          betreff = `${this.topicData.name}`;
           logService.info("Betreff aus gespeichertem Topic-Namen generiert", {
             betreff,
           });

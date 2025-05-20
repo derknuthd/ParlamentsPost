@@ -18,7 +18,7 @@
     class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500"
   >
     <!-- Notifications-System -->
-    <div class="fixed top-4 right-4 z-50 flex flex-col space-y-2 max-w-md">
+    <div class="fixed top-4 right-4 z-50 flex flex-col space-y-2 max-w-md print:hidden">
       <template x-for="notification in notifications" :key="notification.id">
         <div 
           :class="{
@@ -70,7 +70,7 @@
     <div 
     x-show="!isOnline"
     x-cloak 
-    class="fixed top-0 left-0 right-0 bg-yellow-500 text-white py-2 px-4 text-center z-50 shadow-md"
+    class="fixed top-0 left-0 right-0 bg-yellow-500 text-white py-2 px-4 text-center z-50 shadow-md print:hidden"
     >
       <div class="flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,271 +122,268 @@
         </div>
       </div>
 
-  <!-- Linke Spalte: Zwei gleich hohe Blöcke -->
-  <form id="user-form" @submit="validateAndSubmit" class="print:hidden">
+      <!-- Linke Spalte: Zwei gleich hohe Blöcke -->
+      <form id="user-form" @submit="validateAndSubmit" class="print:hidden">
 
-  <div class="flex flex-col gap-6 h-full">
+      <div class="flex flex-col gap-6 h-full">
 
-    <!-- Block 1: Deine Adresse -->
-    <div class="bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
-      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-        Deine Adresse
-      </h3>
-      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wir brauchen deinen Ort, um deine Abgeordneten für dich zu finden. Alle anderen Angaben bleiben nur auf deinem Gerät.</p>
-      </div>
-      <!-- Persönliche Informationen -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Name -->
-        <div>
-          <label for="name" class="block text-gray-800 dark:text-gray-300 font-medium">Name</label>
-          <input type="text" id="name" class="mt-1 p-2 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="name" placeholder="Maxine Musterfrau" autocomplete="name" required />
+        <!-- Block 1: Deine Adresse -->
+        <div class="bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
+          <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
+            Deine Adresse
+          </h3>
+          <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
+            <p>Wir brauchen deinen Ort, um deine Abgeordneten für dich zu finden. Alle anderen Angaben bleiben nur auf deinem Gerät.</p>
+          </div>
+          <!-- Persönliche Informationen -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Name -->
+            <div>
+              <label for="name" class="block text-gray-800 dark:text-gray-300 font-medium">Name</label>
+              <input type="text" id="name" class="mt-1 p-2 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="name" placeholder="Maxine Musterfrau" autocomplete="name" required />
+            </div>
+
+            <!-- E-Mail -->
+            <div>
+              <label for="email" class="block text-gray-800 dark:text-gray-300 font-medium">E-Mail</label>
+              <input type="email" id="email" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="email" placeholder="maxine@email.de" required />
+            </div>
+
+            <!-- Straße und Hausnummer -->
+            <div>
+              <label for="strasse" class="block text-gray-800 dark:text-gray-300 font-medium">Straße und Hausnummer</label>
+              <input type="text" id="strasse" placeholder="Musterstraße 1" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="strasse" autocomplete="street-address" required />
+            </div>
+
+            <!-- Postleitzahl (PLZ) -->
+            <div>
+              <label for="plz" class="block text-gray-800 dark:text-gray-300 font-medium">Postleitzahl (PLZ)</label>
+              <input type="text" id="plz" pattern="\d{5}" placeholder="12345" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="plz" autocomplete="postal-code" required />
+              <!--<small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>-->
+            </div>
+
+            <!-- Ort (Gemeinde) -->
+            <div>
+              <label for="ort" class="block text-gray-800 dark:text-gray-300 font-medium">
+                <span
+                  title="Basierend auf deinem Wohnort werden automatisch passende Abgeordnete aus deinem Wahlkreis und Wohnort gefiltert und angezeigt. Dafür wird dein Ort an den Server gesendet, jedoch nicht für die KI-Briefgenerierung verwendet"
+                  class="tooltip-wrapper"
+                >
+                  Ort
+                </span>
+              </label>
+              <input type="text" id="ort" placeholder="Hannover" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="ort" autocomplete="home" @blur="holeAbgeordnete" required />
+            </div>
+          </div>
+
         </div>
 
-        <!-- E-Mail -->
-        <div>
-          <label for="email" class="block text-gray-800 dark:text-gray-300 font-medium">E-Mail</label>
-          <input type="email" id="email" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="email" placeholder="maxine@email.de" required />
+        <!-- Block 2: Abgeordnetenauswahl -->
+        <div class=" bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
+          <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
+            Wen möchtest du erreichen?
+          </h3>
+          <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
+            <p>Wähle hier aus, an wen der Brief gehen soll.</p>
+          </div>
+          <!-- Abgeordnete auswählen -->
+          <div class="mt-6">
+            <label for="abgeordnete" class="block text-gray-800 dark:text-gray-300 font-medium">Abgeordnete auswählen</label>
+            <select id="abgeordnete" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="abgeordnete" required>
+              <option value="">Bitte wählen</option>
+              <template x-for="person in abgeordneteListe" :key="person.id">
+                <option :value="person.id" x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"></option>
+              </template>
+            </select>
+          </div>  
         </div>
 
-        <!-- Straße und Hausnummer -->
-        <div>
-          <label for="strasse" class="block text-gray-800 dark:text-gray-300 font-medium">Straße und Hausnummer</label>
-          <input type="text" id="strasse" placeholder="Musterstraße 1" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="strasse" autocomplete="street-address" required />
-        </div>
 
-        <!-- Postleitzahl (PLZ) -->
-        <div>
-          <label for="plz" class="block text-gray-800 dark:text-gray-300 font-medium">Postleitzahl (PLZ)</label>
-          <input type="text" id="plz" pattern="\d{5}" placeholder="12345" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="plz" autocomplete="postal-code" required />
-          <!--<small class="text-gray-500 dark:text-gray-400">Bitte 5-stellige PLZ eingeben.</small>-->
-        </div>
+        <!-- Block 3: Briefbausteine -->
+        <div class="flex-1 bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
+          <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Deine Botschaft</h3>
 
-        <!-- Ort (Gemeinde) -->
-        <div>
-          <label for="ort" class="block text-gray-800 dark:text-gray-300 font-medium">
-            <span
-              title="Basierend auf deinem Wohnort werden automatisch passende Abgeordnete aus deinem Wahlkreis und Wohnort gefiltert und angezeigt. Dafür wird dein Ort an den Server gesendet, jedoch nicht für die KI-Briefgenerierung verwendet"
-              class="tooltip-wrapper"
-            >
-              Ort
-            </span>
-          </label>
-          <input type="text" id="ort" placeholder="Hannover" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="ort" autocomplete="home" @blur="holeAbgeordnete" required />
-        </div>
-      </div>
+          <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
+            <p>Wähle bis zu 3 Argumente oder schreibe deine eigenen Gedanken dazu. Sie erscheinen später im Brief als Textbausteine oder 
+              <span
+                title="Die ausgewählten Argumente und dein Freitext sind Bausteine deines Briefes. Bei KI-Nutzung werden sie als Teil der Anfrage an die KI übermittelt."
+                class="tooltip-wrapper"
+              >
+              mithilfe der KI.
+              </span>
+            </p>
+          </div>
 
-    </div>
+          <!-- Argumente -->
+          <div>
+            <div class="mt-2 flex flex-wrap gap-4">
+              <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
+                <label class="inline-flex items-center">
+                  <input type="checkbox" 
+                  class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" 
+                  :value="subtopic.id" 
+                  x-model="themen" 
+                  :disabled="!themen.includes(subtopic.id) && themen.length >= 3"
+                  @click="if(themen.length >= 3 && !themen.includes(subtopic.id)) { 
+                          notificationService.showNotification('Bitte wähle maximal 3 Argumente für ein optimales Ergebnis.', 'warning'); 
+                          return false;
+                        }" />
+                  <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
+                </label>
+              </template>
+              <p x-show="availableSubtopics.length === 0" class="text-gray-500 italic">Keine Argument-Vorlagen verfügbar.</p>
+            </div>
+          </div>
 
-    <!-- Block 2: Abgeordnetenauswahl -->
-    <div class=" bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
-      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">
-        Wen möchtest du erreichen?
-      </h3>
-      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wähle hier aus, an wen der Brief gehen soll.</p>
-      </div>
-      <!-- Abgeordnete auswählen -->
-      <div class="mt-6">
-        <label for="abgeordnete" class="block text-gray-800 dark:text-gray-300 font-medium">Abgeordnete auswählen</label>
-        <select id="abgeordnete" class="mt-1 block p-2 w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100" x-model="abgeordnete" required>
-          <option value="">Bitte wählen</option>
-          <template x-for="person in abgeordneteListe" :key="person.id">
-            <option :value="person.id" x-text="`${person.wahlkreis}: ${person.vollerName} (${person.partei}) - Wohnort: ${person.wohnort}`"></option>
-          </template>
-        </select>
-      </div>  
-    </div>
-
-
-    <!-- Block 3: Briefbausteine -->
-    <div class="flex-1 bg-gray-50 dark:bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg transition-colors duration-500">
-      <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Deine Botschaft</h3>
-
-      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Wähle bis zu 3 Argumente oder schreibe deine eigenen Gedanken dazu. Sie erscheinen später im Brief als Textbausteine oder 
-          <span
-            title="Die ausgewählten Argumente und dein Freitext sind Bausteine deines Briefes. Bei KI-Nutzung werden sie als Teil der Anfrage an die KI übermittelt."
-            class="tooltip-wrapper"
-          >
-          mithilfe der KI.
-          </span>
-        </p>
-      </div>
-
-      <!-- Argumente -->
-      <div>
-        <div class="mt-2 flex flex-wrap gap-4">
-          <template x-for="subtopic in availableSubtopics" :key="subtopic.id">
-            <label class="inline-flex items-center">
-              <input type="checkbox" 
-              class="form-checkbox h-5 w-5 text-indigo-600 dark:text-indigo-400" 
-              :value="subtopic.id" 
-              x-model="themen" 
-              :disabled="!themen.includes(subtopic.id) && themen.length >= 3"
-              @click="if(themen.length >= 3 && !themen.includes(subtopic.id)) { 
-                       notificationService.showNotification('Bitte wähle maximal 3 Argumente für ein optimales Ergebnis.', 'warning'); 
-                       return false;
-                     }" />
-              <span class="ml-2 text-gray-800 dark:text-gray-300" x-text="subtopic.name"></span>
+          <!-- Freitext -->
+          <div class="mt-6">
+            <label for="freitext" class="block text-gray-800 dark:text-gray-300 font-medium flex justify-between">
+              <span>Deine Argumente</span>
+              <span class="text-sm" :class="freitext.length > config.textLimits.freitext ? 'text-red-500' : 'text-gray-500'">
+                <span x-text="freitext.length"></span>/<span x-text="config.textLimits.freitext"></span>
+              </span>
             </label>
-          </template>
-          <p x-show="availableSubtopics.length === 0" class="text-gray-500 italic">Keine Argument-Vorlagen verfügbar.</p>
+            <textarea
+              id="freitext"
+              rows="4"
+              class="mt-1 block w-full border-gray-300 p-2 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
+              x-model="freitext"
+              :maxlength="config.textLimits.freitext"
+              placeholder=
+    "Mir ist zusätzlich noch wichtig, dass...
+    Dieser Text wird bei KI-Nutzung an die KI übermittelt."></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap gap-2 mt-6">
+            <button type="submit" class="manual-button bg-indigo-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
+              Brief generieren 🔐ohne KI🔐
+            </button>
+            <button type="submit" class="ai-button bg-teal-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
+              Brief generieren ✨mit KI✨
+            </button>
+          </div>
         </div>
       </div>
+      </form>
 
-      <!-- Freitext -->
-      <div class="mt-6">
-        <label for="freitext" class="block text-gray-800 dark:text-gray-300 font-medium flex justify-between">
-          <span>Deine Argumente</span>
-          <span class="text-sm" :class="freitext.length > config.textLimits.freitext ? 'text-red-500' : 'text-gray-500'">
-            <span x-text="freitext.length"></span>/<span x-text="config.textLimits.freitext"></span>
-          </span>
-        </label>
-        <textarea
-          id="freitext"
-          rows="4"
-          class="mt-1 block w-full border-gray-300 p-2 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-          x-model="freitext"
-          :maxlength="config.textLimits.freitext"
-          placeholder=
-"Mir ist zusätzlich noch wichtig, dass...
-Dieser Text wird bei KI-Nutzung an die KI übermittelt."></textarea>
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex flex-wrap gap-2 mt-6">
-        <button type="submit" class="manual-button bg-indigo-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
-          Brief generieren 🔐ohne KI🔐
-        </button>
-        <button type="submit" class="ai-button bg-teal-600 text-white w-full sm:w-fit px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="isLoading">
-          Brief generieren ✨mit KI✨
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
-
-  <!-- Rechte Spalte: Briefvorschau -->
-  <div id="briefvorschau" class="h-full bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500">
-    <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefvorschau</h3>
-
-
-      <div class="mt-4 mb-6 print:hidden text-sm text-gray-600 dark:text-gray-400">
-        <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten, um ihn noch individueller zu machen.</p>
-      </div>
-
-      <!-- Formatierungsoptionen -->
-      <div class="print:hidden mb-6 flex flex-wrap gap-4">
-        <div>
-          <label for="schriftart" class="block text-sm text-gray-600 dark:text-gray-400">Schriftart</label>
-          <select 
-            id="schriftart" 
-            class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-            x-model="formatierung.schriftart"
-          >
-            <option value="Arial, Helvetica, sans-serif">Arial</option>
-            <option value="Verdana, Geneva, sans-serif">Verdana</option>
-            <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
-            <option value="Trebuchet MS, Helvetica, sans-serif">Trebuchet MS</option>
-            <option value="Segoe UI, Roboto, sans-serif">Segoe UI</option>
-            <option value="Helvetica Neue, Helvetica, Arial, sans-serif">Helvetica Neue</option>
-            <option value="Times New Roman, Times, serif">Times New Roman</option>
-            <option value="Georgia, Times, serif">Georgia</option>
-            <option value="Palatino Linotype, Book Antiqua, Palatino, serif">Palatino Linotype</option>
-            <option value="Cambria, Georgia, serif">Cambria</option>
-            <option value="Calibri, Roboto, sans-serif">Calibri</option>
-            <option value="Century Gothic, Apple Gothic, sans-serif">Century Gothic</option>
-            <option value="Gill Sans, Gill Sans MT, sans-serif">Gill Sans</option>
-            <option value="Courier New, Courier, monospace">Courier New</option>
-            <option value="Lucida Console, Monaco, monospace">Lucida Console</option>
-            <option value="Consolas, Liberation Mono, monospace">Consolas</option>
-            <option value="Comic Sans MS, Comic Sans, cursive">Comic Sans MS</option>
-            <option value="Brush Script MT, Brush Script Std, cursive">Brush Script MT</option>
-            <option value="Papyrus, fantasy">Papyrus</option>
-            <option value="Impact, Charcoal, sans-serif">Impact</option>
-            <option value="Arial Rounded MT Bold, Helvetica Rounded, sans-serif">Arial Rounded MT Bold</option>
-            <option value="Copperplate, Copperplate Gothic Light, fantasy">Copperplate</option>
-            <option value="Lucida Handwriting, cursive">Lucida Handwriting</option>
-          </select>
+      <!-- Rechte Spalte: Briefvorschau -->
+      <div id="briefvorschau" class="h-full bg-gray-50 dark:bg-gray-800 print:p-0 print:shadow-none print:bg-transparent p-8 rounded-lg shadow-lg transition-colors duration-500">
+        <h3 class="print:hidden text-2xl font-semibold mb-6 text-indigo-600">Briefvorschau</h3>
+        <div class="print:hidden mt-4 mb-6 text-sm text-gray-600 dark:text-gray-400">
+          <p>Tipp: Du kannst jeden Teil des Briefs direkt bearbeiten, um ihn noch individueller zu machen.</p>
         </div>
-        <div>
-          <label for="schriftgroesse" class="block text-sm text-gray-600 dark:text-gray-400">Schriftgröße</label>
-          <select 
-            id="schriftgroesse" 
-            class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
-            x-model="formatierung.schriftgroesse"
-          >
-            <option value="klein">Klein (10pt)</option>
-            <option value="mittel">Mittel (11pt)</option>
-            <option value="gross">Groß (12pt)</option>
-          </select>
+        <!-- Formatierungsoptionen -->
+        <div class="print:hidden mb-6 flex flex-wrap gap-4">
+          <div>
+            <label for="schriftart" class="block text-sm text-gray-600 dark:text-gray-400">Schriftart</label>
+            <select 
+              id="schriftart" 
+              class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
+              x-model="formatierung.schriftart"
+            >
+              <option value="Arial, Helvetica, sans-serif">Arial</option>
+              <option value="Verdana, Geneva, sans-serif">Verdana</option>
+              <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+              <option value="Trebuchet MS, Helvetica, sans-serif">Trebuchet MS</option>
+              <option value="Segoe UI, Roboto, sans-serif">Segoe UI</option>
+              <option value="Helvetica Neue, Helvetica, Arial, sans-serif">Helvetica Neue</option>
+              <option value="Times New Roman, Times, serif">Times New Roman</option>
+              <option value="Georgia, Times, serif">Georgia</option>
+              <option value="Palatino Linotype, Book Antiqua, Palatino, serif">Palatino Linotype</option>
+              <option value="Cambria, Georgia, serif">Cambria</option>
+              <option value="Calibri, Roboto, sans-serif">Calibri</option>
+              <option value="Century Gothic, Apple Gothic, sans-serif">Century Gothic</option>
+              <option value="Gill Sans, Gill Sans MT, sans-serif">Gill Sans</option>
+              <option value="Courier New, Courier, monospace">Courier New</option>
+              <option value="Lucida Console, Monaco, monospace">Lucida Console</option>
+              <option value="Consolas, Liberation Mono, monospace">Consolas</option>
+              <option value="Comic Sans MS, Comic Sans, cursive">Comic Sans MS</option>
+              <option value="Brush Script MT, Brush Script Std, cursive">Brush Script MT</option>
+              <option value="Papyrus, fantasy">Papyrus</option>
+              <option value="Impact, Charcoal, sans-serif">Impact</option>
+              <option value="Arial Rounded MT Bold, Helvetica Rounded, sans-serif">Arial Rounded MT Bold</option>
+              <option value="Copperplate, Copperplate Gothic Light, fantasy">Copperplate</option>
+              <option value="Lucida Handwriting, cursive">Lucida Handwriting</option>
+            </select>
+          </div>
+          <div>
+            <label for="schriftgroesse" class="block text-sm text-gray-600 dark:text-gray-400">Schriftgröße</label>
+            <select 
+              id="schriftgroesse" 
+              class="mt-1 block w-full p-2 text-sm border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-100"
+              x-model="formatierung.schriftgroesse"
+            >
+              <option value="klein">Klein (10pt)</option>
+              <option value="mittel">Mittel (11pt)</option>
+              <option value="gross">Groß (12pt)</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <!-- Briefvorschau-Container - flexibles Layout für Bildschirmansicht -->
-      <div id="vorschau-container" class="relative bg-white dark:bg-gray-700 p-6 shadow-sm rounded-sm"
-        :class="{
-          'text-sm': formatierung.schriftgroesse === 'klein',
-          'text-base': formatierung.schriftgroesse === 'mittel',
-          'text-lg': formatierung.schriftgroesse === 'gross'
-        }"
-        :style="`font-family: ${formatierung.schriftart};`"
-      >
-        <!-- Absender (rechtsbündig, kleinere Schrift) -->
-        <div id="brief-absender" contenteditable="true" 
-          class="w-full mb-8 text-right text-gray-700 dark:text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          x-html="briefFelder.absender ? briefFelder.absender.replace(/\n/g, '<br>') : ''"
-          @input="briefFelder.absender = $event.target.innerText">
-        </div>
-        
-        <!-- Empfänger (linksbündig) -->
-        <div id="brief-empfaenger" contenteditable="true" 
-          class="w-full mb-8 text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          x-html="briefFelder.empfaenger ? briefFelder.empfaenger.replace(/\n/g, '<br>') : ''"
-          @input="briefFelder.empfaenger = $event.target.innerText">
-        </div>
-        
-        <!-- Ort und Datum (rechtsbündig) -->
-        <div id="brief-ortdatum" contenteditable="true" 
-          class="w-full mb-8 text-right text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          x-html="briefFelder.ortDatum ? briefFelder.ortDatum.replace(/\n/g, '<br>') : ''"
-          @input="briefFelder.ortDatum = $event.target.innerText">
-        </div>
-        
-        <!-- Betreff (linksbündig, fett) -->
-        <div id="brief-betreff" contenteditable="true" 
-          class="w-full mb-8 text-left font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          x-html="briefFelder.betreff ? briefFelder.betreff.replace(/\n/g, '<br>') : ''"
-          @input="briefFelder.betreff = $event.target.innerText">
-        </div>
-        
-        <!-- Brieftext mit Anrede und Grußformel (Blocksatz) -->
-        <div id="brief-text" contenteditable="true" 
-          class="w-full text-justify text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-          x-html="briefFelder.brieftext ? briefFelder.brieftext.replace(/\n/g, '<br>') : ''"
-          @input="briefFelder.brieftext = $event.target.innerText">
-        </div>
-      </div>
-
-      <div class="mt-8 print:hidden">
-        <button
-          id="save-brief-button"
-          class="bg-indigo-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300"
-          @click="speichereBrief()"
-          disabled
+        <!-- Briefvorschau-Container - flexibles Layout für Bildschirmansicht -->
+        <div id="vorschau-container" class="relative bg-white dark:bg-gray-700 p-6 shadow-sm rounded-sm"
+          :class="{
+            'text-sm': formatierung.schriftgroesse === 'klein',
+            'text-base': formatierung.schriftgroesse === 'mittel',
+            'text-lg': formatierung.schriftgroesse === 'gross'
+          }"
+          :style="`font-family: ${formatierung.schriftart};`"
         >
-          Brief speichern
-        </button>
-        <button
-          id="print-button"
-          class="bg-teal-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300"
-          @click="briefDrucken"
-          disabled
-        >
-          Brief drucken
-        </button>
-      </div>
+          <!-- Absender (rechtsbündig, kleinere Schrift) -->
+          <div id="brief-absender" contenteditable="true" 
+            class="w-full mb-8 text-right text-gray-700 dark:text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            x-html="briefFelder.absender ? briefFelder.absender.replace(/\n/g, '<br>') : ''"
+            @input="briefFelder.absender = $event.target.innerText">
+          </div>
+          
+          <!-- Empfänger (linksbündig) -->
+          <div id="brief-empfaenger" contenteditable="true" 
+            class="w-full mb-8 text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            x-html="briefFelder.empfaenger ? briefFelder.empfaenger.replace(/\n/g, '<br>') : ''"
+            @input="briefFelder.empfaenger = $event.target.innerText">
+          </div>
+          
+          <!-- Ort und Datum (rechtsbündig) -->
+          <div id="brief-ortdatum" contenteditable="true" 
+            class="w-full mb-8 text-right text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            x-html="briefFelder.ortDatum ? briefFelder.ortDatum.replace(/\n/g, '<br>') : ''"
+            @input="briefFelder.ortDatum = $event.target.innerText">
+          </div>
+          
+          <!-- Betreff (linksbündig, fett) -->
+          <div id="brief-betreff" contenteditable="true" 
+            class="w-full mb-8 text-left font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            x-html="briefFelder.betreff ? briefFelder.betreff.replace(/\n/g, '<br>') : ''"
+            @input="briefFelder.betreff = $event.target.innerText">
+          </div>
+          
+          <!-- Brieftext mit Anrede und Grußformel (Blocksatz) -->
+          <div id="brief-text" contenteditable="true" 
+            class="w-full text-justify text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            x-html="briefFelder.brieftext ? briefFelder.brieftext.replace(/\n/g, '<br>') : ''"
+            @input="briefFelder.brieftext = $event.target.innerText">
+          </div>
+        </div>
+
+        <div class="mt-8 print:hidden">
+          <button
+            id="save-brief-button"
+            class="bg-indigo-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-indigo-700 shadow-md transition-colors duration-300"
+            @click="speichereBrief()"
+            disabled
+          >
+            Brief speichern
+          </button>
+          <button
+            id="print-button"
+            class="bg-teal-600 print:hidden disabled:opacity-50 disabled:pointer-events-none text-white px-6 py-2 rounded-md hover:bg-teal-700 shadow-md transition-colors duration-300"
+            @click="briefDrucken"
+            disabled
+          >
+            Brief drucken
+          </button>
+        </div>
       </div>
     </main>
 

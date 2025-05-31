@@ -17,6 +17,6 @@ export const config = {
     
     // Textbegrenzungen
     textLimits: {
-        freitext: 1000 // Maximale Anzahl an Zeichen für Freitext
+        freitext: 500 // Maximale Anzahl an Zeichen für Freitext
     },
   };

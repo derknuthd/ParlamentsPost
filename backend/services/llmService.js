@@ -12,18 +12,24 @@ class LLMService {
       openai: {
         apiUrl: "https://api.openai.com/v1/chat/completions",
         apiKey: process.env.OPENAI_API_KEY,
-        defaultModel: process.env.OPENAI_MODEL || "gpt-4.1-nano",
+        defaultModel: process.env.OPENAI_MODEL || "gpt-4o-mini",
       },
       mistral: {
         apiUrl: "https://api.mistral.ai/v1/chat/completions",
         apiKey: process.env.MISTRAL_API_KEY,
-        defaultModel: process.env.MISTRAL_MODEL || "ministral-3b-latest",
+        defaultModel: process.env.MISTRAL_MODEL || "mistral-small-latest",
       },
       // Hier kannst du weitere Provider hinzufügen
     };
   }
 
-  async generateCompletion(prompt, options = {}) {
+  /**
+   * Generiert eine Completion mit System- und User-Rollen für verbesserte Sicherheit
+   * @param {Object} messages Object mit system und user properties für die unterschiedlichen Nachrichten
+   * @param {Object} options Optionale Konfigurationsparameter
+   * @returns {Promise<string>} Der generierte Text
+   */
+  async generateCompletion(messages, options = {}) {
     const providerConfig = this.config[this.provider];
     
     if (!providerConfig) {
@@ -38,22 +44,68 @@ class LLMService {
     const maxTokens = options.maxTokens || parseInt(process.env.LLM_MAX_TOKENS || "1200", 10);
     const temperature = options.temperature || parseFloat(process.env.LLM_TEMPERATURE || "0.7");
     
+    // Validiere, dass messages ein Objekt mit system und/oder user ist
+    if (!messages || typeof messages !== 'object') {
+      throw new Error("messages muss ein Objekt mit mindestens einer 'system' oder 'user' Eigenschaft sein");
+    }
+    
+    // Erstelle das Nachrichten-Array für die API
+    const messageArray = [];
+    
+    // System-Nachricht hinzufügen, falls vorhanden
+    if (messages.system && messages.system.trim()) {
+      messageArray.push({
+        role: "system",
+        content: messages.system.trim()
+      });
+    }
+    
+    // User-Nachricht hinzufügen, falls vorhanden
+    if (messages.user && messages.user.trim()) {
+      messageArray.push({
+        role: "user",
+        content: messages.user.trim()
+      });
+    }
+    
+    // Sicherheitsvalidierung: Mindestens eine Nachricht muss vorhanden sein
+    if (messageArray.length === 0) {
+      throw new Error("Mindestens eine System- oder User-Nachricht muss vorhanden sein");
+    }
+    
     // Grundlegende Anfrage-Informationen loggen
     logService.debug(`LLM-Anfrage wird vorbereitet`, { 
         provider: this.provider, 
         model: actualModel, 
         maxTokens, 
         temperature,
-        promptLength: prompt.length,
+        messageCount: messageArray.length,
+        systemMsgLength: messages.system ? messages.system.length : 0,
+        userMsgLength: messages.user ? messages.user.length : 0,
+        hasSystemMsg: !!(messages.system && messages.system.trim()),
+        hasUserMsg: !!(messages.user && messages.user.trim()),
         timestamp: new Date().toISOString()
     });
     
-    // Vollständigen Prompt als DEBUG-Level loggen
-    logService.debug(`Vollständiger Prompt:`, prompt);
+    // Sicherheits-Logging: Warnung bei verdächtig langen User-Messages
+    if (messages.user && messages.user.length > 2000) {
+      logService.warn("Sehr lange User-Message erkannt", {
+        userMsgLength: messages.user.length,
+        potentialSecurityRisk: "Possible prompt injection attempt"
+      });
+    }
+    
+    // Vollständigen System-Prompt und User-Prompt als DEBUG-Level loggen
+    if (messages.system) {
+      logService.debug(`System-Prompt (Länge: ${messages.system.length}):`, messages.system);
+    }
+    if (messages.user) {
+      logService.debug(`User-Prompt (Länge: ${messages.user.length}):`, messages.user);
+    }
     
     const requestData = {
         model: actualModel,
-        messages: [{ role: "user", content: prompt }],
+        messages: messageArray,
         max_tokens: maxTokens,
         temperature: temperature,
     };
@@ -91,6 +143,7 @@ class LLMService {
       }
   
       const responseTime = Date.now() - startTime;
+      
       logService.info(`KI-Anfrage erfolgreich mit ${this.provider}`, { 
         provider: this.provider, 
         model: actualModel,
@@ -102,6 +155,7 @@ class LLMService {
           completionTokens: tokenUsage.completion_tokens || 0,
           totalTokens: tokenUsage.total_tokens || 0
         },
+        securityStatus: "input-validated",
         timestamp: new Date().toISOString()
       });
       

@@ -332,37 +332,52 @@ Dieser Text wird bei KI-Nutzung an die KI übermittelt."></textarea>
         >
           <!-- Absender (rechtsbündig, kleinere Schrift) -->
           <div id="brief-absender" contenteditable="true" 
-            class="w-full mb-8 text-right text-gray-700 dark:text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            x-html="briefFelder.absender ? briefFelder.absender.replace(/\n/g, '<br>') : ''"
-            @input="briefFelder.absender = $event.target.innerText">
+            class="w-full mb-8 text-right text-gray-700 dark:text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[3rem] p-2 rounded"
+            @input="briefFelder.absender = $event.target.innerText"
+            @blur="briefFelder.absender = $event.target.innerText"
+            x-init="$el.innerText = briefFelder.absender"
+            x-effect="if (briefFelder.absender !== $el.innerText && document.activeElement !== $el) { $el.innerText = briefFelder.absender }"
+            placeholder="Absender eingeben...">
           </div>
           
           <!-- Empfänger (linksbündig) -->
           <div id="brief-empfaenger" contenteditable="true" 
-            class="w-full mb-8 text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            x-html="briefFelder.empfaenger ? briefFelder.empfaenger.replace(/\n/g, '<br>') : ''"
-            @input="briefFelder.empfaenger = $event.target.innerText">
+            class="w-full mb-8 text-left text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[4rem] p-2 rounded"
+            @input="briefFelder.empfaenger = $event.target.innerText"
+            @blur="briefFelder.empfaenger = $event.target.innerText"
+            x-init="$el.innerText = briefFelder.empfaenger"
+            x-effect="if (briefFelder.empfaenger !== $el.innerText && document.activeElement !== $el) { $el.innerText = briefFelder.empfaenger }"
+            placeholder="Empfänger eingeben...">
           </div>
           
           <!-- Ort und Datum (rechtsbündig) -->
           <div id="brief-ortdatum" contenteditable="true" 
-            class="w-full mb-8 text-right text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            x-html="briefFelder.ortDatum ? briefFelder.ortDatum.replace(/\n/g, '<br>') : ''"
-            @input="briefFelder.ortDatum = $event.target.innerText">
+            class="w-full mb-8 text-right text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[2rem] p-2 rounded"
+            @input="briefFelder.ortDatum = $event.target.innerText"
+            @blur="briefFelder.ortDatum = $event.target.innerText"
+            x-init="$el.innerText = briefFelder.ortDatum"
+            x-effect="if (briefFelder.ortDatum !== $el.innerText && document.activeElement !== $el) { $el.innerText = briefFelder.ortDatum }"
+            placeholder="Ort und Datum eingeben...">
           </div>
           
           <!-- Betreff (linksbündig, fett) -->
           <div id="brief-betreff" contenteditable="true" 
-            class="w-full mb-8 text-left font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            x-html="briefFelder.betreff ? briefFelder.betreff.replace(/\n/g, '<br>') : ''"
-            @input="briefFelder.betreff = $event.target.innerText">
+            class="w-full mb-8 text-left font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[2rem] p-2 rounded"
+            @input="briefFelder.betreff = $event.target.innerText"
+            @blur="briefFelder.betreff = $event.target.innerText"
+            x-init="$el.innerText = briefFelder.betreff"
+            x-effect="if (briefFelder.betreff !== $el.innerText && document.activeElement !== $el) { $el.innerText = briefFelder.betreff }"
+            placeholder="Betreff eingeben...">
           </div>
           
           <!-- Brieftext mit Anrede und Grußformel (Blocksatz) -->
           <div id="brief-text" contenteditable="true" 
-            class="w-full text-justify text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            x-html="briefFelder.brieftext ? briefFelder.brieftext.replace(/\n/g, '<br>') : ''"
-            @input="briefFelder.brieftext = $event.target.innerText">
+            class="w-full text-justify text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[20rem] p-2 rounded"
+            @input="briefFelder.brieftext = $event.target.innerText"
+            @blur="briefFelder.brieftext = $event.target.innerText"
+            x-init="$el.innerText = briefFelder.brieftext"
+            x-effect="if (briefFelder.brieftext !== $el.innerText && document.activeElement !== $el) { $el.innerText = briefFelder.brieftext }"
+            placeholder="Brieftext eingeben...">
           </div>
         </div>
 
